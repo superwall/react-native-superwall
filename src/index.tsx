@@ -1,4 +1,6 @@
 import { NativeModules, Platform } from 'react-native';
+import type { PurchaseController } from './public/PurchaseController';
+import type { SuperwallOptions } from './public/SuperwallOptions';
 
 const LINKING_ERROR =
   `The package 'superwall-react-native' doesn't seem to be linked. Make sure: \n\n` +
@@ -46,3 +48,29 @@ export { PaywallPresentationHandler } from './public/PaywallPresentationHandler'
 export { PaywallPresentationRequestStatus } from './public/PaywallPresentationRequestStatus';
 export { PaywallSkippedReason } from './public/PaywallSkippedReason';
 export { RestoreType } from './public/RestoreType';
+
+export default class Superwall {
+  private purchaseController?: PurchaseController;
+
+
+    /**
+     * 
+    apiKey: String,
+    purchaseController: PurchaseController? = nil,
+    options: SuperwallOptions? = nil,
+    completion: (() -> Void)?
+  ) {
+     * @param options 
+     */
+  configure(apiKey: string, purchaseController: PurchaseController, options: SuperwallOptions): void {
+    SuperwallReactNative.configure(apiKey, options, !!purchaseController);
+  }
+
+
+  // Onlistenre evernt
+  on(eventName: string, listener: (event: any) => void): void {
+    const result = await this.purchaseController?.purchaseFromGooglePlay(...)
+    SuperwallReactNative.purchaseResult(result)
+  }
+
+}
