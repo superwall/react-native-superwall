@@ -80,6 +80,7 @@ android {
 repositories {
   mavenCentral()
   google()
+  maven { url 'https://mvn.superwall.com/release'}
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
@@ -90,5 +91,8 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  implementation "com.superwall.sdk:superwall-android:1.0.0-alpha.45"
+  implementation 'com.android.billingclient:billing:6.1.0'
 }
 

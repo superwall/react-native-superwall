@@ -1,25 +1,46 @@
 package com.superwallreactnative
 
+import android.content.Context
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
-import com.facebook.react.bridge.Promise
+import com.facebook.react.bridge.ReadableMap
+import com.superwall.sdk.Superwall
+import com.superwall.sdk.config.options.SuperwallOptions
+import com.superwall.sdk.misc.ActivityProvider
 
-class SuperwallReactNativeModule(reactContext: ReactApplicationContext) :
+class SuperwallReactNativeModule(private val reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
 
   override fun getName(): String {
-    return NAME
+    return "Superwall"
   }
 
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
   @ReactMethod
-  fun multiply(a: Double, b: Double, promise: Promise) {
-    promise.resolve(a * b)
-  }
+  fun configure(
+    apiKey: String,
+    purchaseController: ReadableMap? = null,
+    options: ReadableMap? = null,
+    activityProvider: ActivityProvider? = null,
+    completion: (() -> Unit)? = null
+  ) {
+    val purchaseController = PurchaseController.fromJson()
+    val purchaseControllerBridge = purchaseController?.let {
+      PurchaseControllerBridge(it)
+    }
+    val options = options?.let {
+      SuperwallOptions.fromJson(options.toJson())
+    }
 
-  companion object {
-    const val NAME = "SuperwallReactNative"
+    Superwall.configure(
+      applicationContext = reactContext,
+      apiKey = apiKey,
+      purchaseController = purchaseControllerBridge,
+      options = options,
+      activityProvider = activityProvider,
+      completion = completion
+    )
+
+    Superwall.instance.setPlatformWrapper("React Native");
   }
 }
