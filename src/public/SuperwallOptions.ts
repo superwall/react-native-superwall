@@ -1,11 +1,11 @@
-import { LogLevel } from "./LogLevel";
-import { LogScope } from "./LogScope";
-import { PaywallOptions } from "./PaywallOptions";
+import { LogLevel } from './LogLevel';
+import { LogScope } from './LogScope';
+import { PaywallOptions } from './PaywallOptions';
 
 export enum NetworkEnvironment {
-  Release = "release",
-  ReleaseCandidate = "releaseCandidate",
-  Developer = "developer",
+  Release = 'release',
+  ReleaseCandidate = 'releaseCandidate',
+  Developer = 'developer',
 }
 
 export class LoggingOptions {
@@ -39,12 +39,12 @@ export class SuperwallOptions {
   toJSON(): object {
     // Method to serialize class instance to a plain object, useful when passing to native code
     return {
-      paywalls: this.paywalls, // Assuming PaywallOptions also has a toJSON method if necessary
+      paywalls: this.paywalls.toJson(),
       networkEnvironment: this.networkEnvironment,
       isExternalDataCollectionEnabled: this.isExternalDataCollectionEnabled,
       localeIdentifier: this.localeIdentifier,
       isGameControllerEnabled: this.isGameControllerEnabled,
-      logging: this.logging,
+      logging: this.logging.toJson(),
     };
   }
 }

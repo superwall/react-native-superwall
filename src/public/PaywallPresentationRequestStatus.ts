@@ -1,4 +1,4 @@
-import { Experiment } from ''./Experiment';
+import { Experiment } from './Experiment';
 
 export enum PaywallPresentationRequestStatusType {
   presentation = 'presentation',
@@ -18,11 +18,17 @@ export class PaywallPresentationRequestStatus {
   }): PaywallPresentationRequestStatus {
     switch (json.status) {
       case 'presentation':
-        return new PaywallPresentationRequestStatus(PaywallPresentationRequestStatusType.presentation);
+        return new PaywallPresentationRequestStatus(
+          PaywallPresentationRequestStatusType.presentation
+        );
       case 'noPresentation':
-        return new PaywallPresentationRequestStatus(PaywallPresentationRequestStatusType.noPresentation);
+        return new PaywallPresentationRequestStatus(
+          PaywallPresentationRequestStatusType.noPresentation
+        );
       case 'timeout':
-        return new PaywallPresentationRequestStatus(PaywallPresentationRequestStatusType.timeout);
+        return new PaywallPresentationRequestStatus(
+          PaywallPresentationRequestStatusType.timeout
+        );
       default:
         throw new Error('Invalid PaywallPresentationRequestStatus type');
     }
@@ -30,15 +36,15 @@ export class PaywallPresentationRequestStatus {
 }
 
 export enum PaywallPresentationRequestStatusReasonType {
-  debuggerPresented = "debuggerPresented",
-  paywallAlreadyPresented = "paywallAlreadyPresented",
-  userIsSubscribed = "userIsSubscribed",
-  holdout = "holdout",
-  noRuleMatch = "noRuleMatch",
-  eventNotFound = "eventNotFound",
-  noPaywallViewController = "noPaywallViewController",
-  noPresenter = "noPresenter",
-  noConfig = "noConfig",
+  debuggerPresented = 'debuggerPresented',
+  paywallAlreadyPresented = 'paywallAlreadyPresented',
+  userIsSubscribed = 'userIsSubscribed',
+  holdout = 'holdout',
+  noRuleMatch = 'noRuleMatch',
+  eventNotFound = 'eventNotFound',
+  noPaywallViewController = 'noPaywallViewController',
+  noPresenter = 'noPresenter',
+  noConfig = 'noConfig',
   subscriptionStatusTimeout = 'subscriptionStatusTimeout',
 }
 
@@ -54,15 +60,23 @@ export class PaywallPresentationRequestStatusReason {
     this.experiment = experiment;
   }
 
-  static fromJson(json: { [key: string]: any }): PaywallPresentationRequestStatusReason {
+  static fromJson(json: {
+    [key: string]: any;
+  }): PaywallPresentationRequestStatusReason {
     switch (json.reason) {
       // Cases here...
       case 'debuggerPresented':
-        return new PaywallPresentationRequestStatusReason(PaywallPresentationRequestStatusReasonType.debuggerPresented);
+        return new PaywallPresentationRequestStatusReason(
+          PaywallPresentationRequestStatusReasonType.debuggerPresented
+        );
       case 'paywallAlreadyPresented':
-        return new PaywallPresentationRequestStatusReason(PaywallPresentationRequestStatusReasonType.paywallAlreadyPresented);
+        return new PaywallPresentationRequestStatusReason(
+          PaywallPresentationRequestStatusReasonType.paywallAlreadyPresented
+        );
       case 'userIsSubscribed':
-        return new PaywallPresentationRequestStatusReason(PaywallPresentationRequestStatusReasonType.userIsSubscribed);
+        return new PaywallPresentationRequestStatusReason(
+          PaywallPresentationRequestStatusReasonType.userIsSubscribed
+        );
       case 'holdout':
         return new PaywallPresentationRequestStatusReason(
           PaywallPresentationRequestStatusReasonType.holdout,

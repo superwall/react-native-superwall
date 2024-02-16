@@ -18,4 +18,12 @@ buildscript {
     }
 }
 
+allprojects {
+  repositories {
+    google()
+    mavenCentral()
+    maven { url 'https://mvn.superwall.com/release' }
+  }
+}
+
 apply plugin: "com.facebook.react.rootproject"

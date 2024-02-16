@@ -18,14 +18,13 @@ export class ComputedPropertyRequest {
   }
 }
 
-
 // TypeScript enum for the types of computed properties
 export enum ComputedPropertyRequestType {
   minutesSince = 'minutesSince',
   hoursSince = 'hoursSince',
-  daysSince = "daysSince",
-  monthsSince = "monthsSince",
-  yearsSince = "yearsSince",
+  daysSince = 'daysSince',
+  monthsSince = 'monthsSince',
+  yearsSince = 'yearsSince',
 }
 
 // Utilizing a namespace to extend the enum with serialization and deserialization functions
@@ -37,7 +36,9 @@ export namespace ComputedPropertyRequestType {
 
   // Parses a JSON string to get the corresponding ComputedPropertyRequestType enum value
   export function fromJson(json: string): ComputedPropertyRequestType {
-    const matchingType = Object.values(ComputedPropertyRequestType).find(value => value === json);
+    const matchingType = Object.values(ComputedPropertyRequestType).find(
+      (value) => value === json
+    );
     if (!matchingType) {
       throw new Error(`Invalid ComputedPropertyRequestType value: ${json}`);
     }

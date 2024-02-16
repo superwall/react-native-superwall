@@ -1,6 +1,12 @@
 import { NativeModules, Platform } from 'react-native';
 import type { PurchaseController } from './public/PurchaseController';
 import type { SuperwallOptions } from './public/SuperwallOptions';
+import { DeviceEventEmitter } from 'react-native';
+import type { PaywallPresentationHandler } from './public/PaywallPresentationHandler';
+import { PaywallInfo } from './public/PaywallInfo';
+import { PaywallSkippedReason } from './public/PaywallSkippedReason';
+import { v4 as uuidv4 } from 'uuid';
+import type { SubscriptionStatus } from './public/SubscriptionStatus';
 
 const LINKING_ERROR =
   `The package 'superwall-react-native' doesn't seem to be linked. Make sure: \n\n` +
@@ -18,10 +24,6 @@ const SuperwallReactNative = NativeModules.SuperwallReactNative
         },
       }
     );
-
-export function multiply(a: number, b: number): Promise<number> {
-  return SuperwallReactNative.multiply(a, b);
-}
 
 export { ComputedPropertyRequest } from './public/ComputedPropertyRequest';
 export { Experiment } from './public/Experiment';
@@ -50,27 +52,128 @@ export { PaywallSkippedReason } from './public/PaywallSkippedReason';
 export { RestoreType } from './public/RestoreType';
 
 export default class Superwall {
-  private purchaseController?: PurchaseController;
+  private static purchaseController?: PurchaseController;
+  private static _superwall = new Superwall();
+  private presentationHandlers: Map<string, PaywallPresentationHandler> =
+    new Map();
 
+  // Getter for the shared instance
+  static get shared(): Superwall {
+    return this._superwall;
+  }
 
     /**
-     * 
     apiKey: String,
     purchaseController: PurchaseController? = nil,
     options: SuperwallOptions? = nil,
     completion: (() -> Void)?
   ) {
-     * @param options 
+     * @param options
      */
-  configure(apiKey: string, purchaseController: PurchaseController, options: SuperwallOptions): void {
-    SuperwallReactNative.configure(apiKey, options, !!purchaseController);
+  static async configure(
+    apiKey: string,
+    options?: SuperwallOptions,
+    purchaseController?: PurchaseController,
+    completion?: () => void
+  ): Promise<Superwall> {
+    this.purchaseController = purchaseController;
+
+    await SuperwallReactNative.configure(
+      apiKey,
+      options,
+      !!purchaseController
+    ).then(() => {
+      if (completion) completion();
+    });
+
+    return this._superwall;
   }
 
+  async register(
+    event: string,
+    params?: Map<String, any>,
+    handler?: PaywallPresentationHandler,
+    feature?: () => void
+  ) {
+    let handlerId: string | null = null;
 
-  // Onlistenre evernt
-  on(eventName: string, listener: (event: any) => void): void {
-    const result = await this.purchaseController?.purchaseFromGooglePlay(...)
-    SuperwallReactNative.purchaseResult(result)
+    if (handler) {
+      const uuid = uuidv4().toString();
+      this.presentationHandlers.set(uuid, handler);
+      handlerId = uuid;
+    }
+
+    await SuperwallReactNative.register(event, params, handlerId).then(() => {
+      if (feature) feature();
+    });
   }
 
+  setSubscriptionStatus(status: SubscriptionStatus) {
+    SuperwallReactNative.setSubscriptionStatus(status.toString());
+  }
+
+  private purchaseListener = DeviceEventEmitter.addListener(
+    'purchaseFromGooglePlay',
+    async (productData) => {
+      var purchaseResult =
+        await Superwall.purchaseController?.purchaseFromGooglePlay(
+          productData.productId,
+          productData.basePlanId,
+          productData.offerId
+        );
+      if (purchaseResult == null) {
+        return;
+      }
+      SuperwallReactNative.didPurchase(purchaseResult.toJSON());
+    }
+  );
+
+  private restoreListener = DeviceEventEmitter.addListener(
+    'restore',
+    async () => {
+      var restorationResult =
+        await Superwall.purchaseController?.restorePurchases();
+      if (restorationResult == null) {
+        return;
+      }
+      SuperwallReactNative.didRestore(restorationResult.toJson());
+    }
+  );
+
+  private paywallPresentationHandlerListener = DeviceEventEmitter.addListener(
+    'paywallPresentationHandler',
+    (data) => {
+      var handler = this.presentationHandlers.get(data.handlerId);
+      if (!handler) {
+        return;
+      }
+      switch (data.method) {
+        case 'onPresent':
+          if (handler.onPresentHandler) {
+            const paywallInfo = PaywallInfo.fromJson(data.paywallInfoJson);
+            handler.onPresentHandler(paywallInfo);
+          }
+          break;
+        case 'onDismiss':
+          if (handler.onDismissHandler) {
+            const paywallInfo = PaywallInfo.fromJson(data.paywallInfoJson);
+            handler.onDismissHandler(paywallInfo);
+          }
+          break;
+        case 'onError':
+          if (handler.onErrorHandler) {
+            handler.onErrorHandler(data.errorString);
+          }
+          break;
+        case 'onSkip':
+          if (handler.onSkipHandler) {
+            const skippedReason = PaywallSkippedReason.fromJson(
+              data.skippedReason
+            );
+            handler.onSkipHandler(skippedReason);
+          }
+          break;
+      }
+    }
+  );
 }

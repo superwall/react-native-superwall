@@ -5,6 +5,22 @@ export abstract class PaywallSkippedReason extends Error {
     super(message);
     this.name = new.target.name;
   }
+
+  static fromJson(json: any): PaywallSkippedReason {
+    switch (json.type) {
+      case 'Holdout':
+        const experiment = Experiment.fromJson(json.experiment);
+        return new Holdout(experiment);
+      case 'NoRuleMatch':
+        return new NoRuleMatch();
+      case 'EventNotFound':
+        return new EventNotFound();
+      case 'UserIsSubscribed':
+        return new UserIsSubscribed();
+      default:
+        throw new Error('Unknown PaywallSkippedReason type');
+    }
+  }
 }
 
 // Derived classes

@@ -1,91 +1,156 @@
 package com.superwallreactnative
 
-import android.content.Context
+import android.os.Debug
+import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.superwall.sdk.Superwall
-import com.superwall.sdk.config.options.SuperwallOptions
-import com.superwall.sdk.delegate.subscription_controller.PurchaseController
 import com.superwall.sdk.misc.ActivityProvider
-
-
-class PurchaseControllerBridge(nativeModule: SuperwallReactNativeModule): PurchaseController {
-
-
-
-  // Implement the PurchaseController interface
-  override suspend fun purchase(
-    activity: Activity,
-    productDetails: ProductDetails,
-    basePlanId: String?,
-    offerId: String?
-  ): PurchaseResult {
-
-
-  }
-
-  override suspend fun restorePurchases(): RestorationResult {
-
-  }
-}
+import com.superwall.sdk.paywall.presentation.PaywallPresentationHandler
+import com.superwall.sdk.paywall.presentation.register
+import com.superwallreactnative.models.PaywallInfo
+import com.superwallreactnative.models.PaywallSkippedReason
+import com.superwallreactnative.models.PurchaseResult
+import com.superwallreactnative.models.RestorationResult
+import com.superwallreactnative.models.SubscriptionStatus
+import com.superwallreactnative.models.SuperwallOptions
 
 class SuperwallReactNativeModule(private val reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
+  private val purchaseController = PurchaseControllerBridge(reactContext)
+  private val activityProvider: ActivityProvider = ReactNativeActivityProvider(reactContext)
 
   override fun getName(): String {
-    return "Superwall"
+    return "SuperwallReactNative"
   }
-
-
-  var purchasePromise?: CompletableFuture<PurchaseResult> = null  
-  fun purchaseFromGooglePlayInRN(
-    productId: String,
-    basePlanId: String?,
-    offerId: String?
-  ): CompletableFuture<PurchaseResult> {
-    purchasePromise = CompletableFuture<PurchaseResult>()
-
-    // Emit event to JS
-
-    return promise
-
-  }
-
-  fun purchaseResult (result: PurchaseResult) {
-    purchasePromise?.complete(result)
-  }
-
 
   @ReactMethod
   fun configure(
     apiKey: String,
-    options: ReadableMap? = null
-    usingPurchaseController: Bool? = null
+    options: ReadableMap? = null,
+    usingPurchaseController: Boolean,
+    completion: Promise
   ) {
     val options = options?.let {
-      SuperwallOptions.fromJson(options.toJson())
+      SuperwallOptions.fromJson(options)
     }
 
     if (usingPurchaseController) {
-      val purchaseController = PurchaseControllerBridge(this)
       Superwall.configure(
         applicationContext = reactContext,
         apiKey = apiKey,
         options = options,
-        purchaseController = purchaseController
+        activityProvider = activityProvider,
+        purchaseController = purchaseController,
+        completion = {
+          completion.resolve(null)
+        }
       )
-
     } else  {
       Superwall.configure(
         applicationContext = reactContext,
         apiKey = apiKey,
-        options = options
+        options = options,
+        activityProvider = activityProvider,
+        completion = {
+          completion.resolve(null)
+        }
       )
     }
 
     Superwall.instance.setPlatformWrapper("React Native");
+  }
+
+  @ReactMethod
+  fun register(
+    event: String,
+    params: ReadableMap?,
+    handlerId: String?,
+    feature: Promise?
+  ) {
+    var handler: PaywallPresentationHandler? = null
+
+    if (handlerId != null) {
+      handler = PaywallPresentationHandler()
+      handler.onPresent {
+        val data = Arguments.createMap().apply {
+          putMap("paywallInfoJson", PaywallInfo.toJson(it)) // Implement this method
+          putString("method", "onPresent")
+          putString("handlerId", handlerId)
+        }
+
+        reactContext
+          .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+          .emit("paywallPresentationHandler", data)
+      }
+
+      handler.onDismiss {
+        val data = Arguments.createMap().apply {
+          putMap("paywallInfoJson", PaywallInfo.toJson(it)) // Implement this method
+          putString("method", "onDismiss")
+          putString("handlerId", handlerId)
+        }
+
+        reactContext
+          .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+          .emit("paywallPresentationHandler", data)
+      }
+
+      handler.onError {
+        val data = Arguments.createMap().apply {
+          putString("method", "onError")
+          putString("errorString", it.message)
+          putString("handlerId", handlerId)
+        }
+
+        reactContext
+          .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+          .emit("paywallPresentationHandler", data)
+      }
+
+      handler.onSkip {
+        val data = Arguments.createMap().apply {
+          putString("method", "onSkip")
+          putMap("skippedReason", PaywallSkippedReason.toJson(it))
+          putString("handlerId", handlerId)
+        }
+
+        reactContext
+          .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+          .emit("paywallPresentationHandler", data)
+      }
+    }
+
+    Superwall.instance.register(
+      event = event,
+      params = params?.toHashMap(),
+      handler = handler,
+      feature = {
+        feature?.resolve(null)
+      }
+    )
+  }
+
+  @ReactMethod
+  fun setSubscriptionStatus(status: String) {
+    val subscriptionStatus = SubscriptionStatus.fromString(status)
+    Superwall.instance.setSubscriptionStatus(subscriptionStatus)
+  }
+
+  @ReactMethod
+  fun didPurchase(result: ReadableMap) {
+    val purchaseResult = PurchaseResult.fromJson(result)
+    purchaseController.purchasePromise?.complete(purchaseResult)
+  }
+
+  @ReactMethod
+  fun didRestore(result: ReadableMap) {
+    val restorationResult = RestorationResult.fromJson(result)
+    purchaseController.restorePromise?.complete(restorationResult)
   }
 
 

@@ -76,7 +76,7 @@ android {
 
     namespace "com.superwallreactnativeexample"
     defaultConfig {
-        applicationId "com.superwallreactnativeexample"
+        applicationId "com.superwall.superapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
