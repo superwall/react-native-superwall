@@ -12,16 +12,18 @@ import com.superwall.sdk.Superwall
 import com.superwall.sdk.misc.ActivityProvider
 import com.superwall.sdk.paywall.presentation.PaywallPresentationHandler
 import com.superwall.sdk.paywall.presentation.register
-import com.superwallreactnative.models.PaywallInfo
+import com.superwallreactnative.bridges.SuperwallDelegateBridge
 import com.superwallreactnative.models.PaywallSkippedReason
 import com.superwallreactnative.models.PurchaseResult
 import com.superwallreactnative.models.RestorationResult
 import com.superwallreactnative.models.SubscriptionStatus
 import com.superwallreactnative.models.SuperwallOptions
+import com.superwallreactnative.models.toJson
 
 class SuperwallReactNativeModule(private val reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
   private val purchaseController = PurchaseControllerBridge(reactContext)
+  private var delegate: SuperwallDelegateBridge? = null
   private val activityProvider: ActivityProvider = ReactNativeActivityProvider(reactContext)
 
   override fun getName(): String {
@@ -66,6 +68,12 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   }
 
   @ReactMethod
+  fun setDelegate(isUndefined: Boolean) {
+    this.delegate = if (isUndefined) null else SuperwallDelegateBridge(reactContext)
+    Superwall.instance.delegate = this.delegate
+  }
+
+  @ReactMethod
   fun register(
     event: String,
     params: ReadableMap?,
@@ -78,7 +86,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
       handler = PaywallPresentationHandler()
       handler.onPresent {
         val data = Arguments.createMap().apply {
-          putMap("paywallInfoJson", PaywallInfo.toJson(it)) // Implement this method
+          putMap("paywallInfoJson", it.toJson()) // Implement this method
           putString("method", "onPresent")
           putString("handlerId", handlerId)
         }
@@ -90,7 +98,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
 
       handler.onDismiss {
         val data = Arguments.createMap().apply {
-          putMap("paywallInfoJson", PaywallInfo.toJson(it)) // Implement this method
+          putMap("paywallInfoJson", it.toJson()) // Implement this method
           putString("method", "onDismiss")
           putString("handlerId", handlerId)
         }

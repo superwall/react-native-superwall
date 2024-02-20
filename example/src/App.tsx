@@ -3,8 +3,11 @@ import * as React from 'react';
 import { StyleSheet, View, Text, Platform, Button } from 'react-native';
 import Superwall from 'superwall-react-native';
 import { RCPurchaseController } from './RCPurchaseController';
+import { MySuperwallDelegate } from './MySuperwallDelegate';
 
 export default function App() {
+  const delegate = new MySuperwallDelegate();
+
   React.useEffect(() => {
     var apiKey =
       Platform.OS === 'ios'
@@ -13,12 +16,13 @@ export default function App() {
 
     var purchaseController = new RCPurchaseController();
     Superwall.configure(apiKey, undefined, purchaseController);
+    Superwall.shared.setDelegate(delegate);
     purchaseController.configureAndSyncSubscriptionStatus();
   }, []);
 
   // Function to call when the button is pressed
   const handlePress = () => {
-    Superwall.shared.register('campaign_trigger');
+    Superwall.shared.register('flutter');
   };
 
   return (

@@ -6,7 +6,9 @@ import type { PaywallPresentationHandler } from './public/PaywallPresentationHan
 import { PaywallInfo } from './public/PaywallInfo';
 import { PaywallSkippedReason } from './public/PaywallSkippedReason';
 import { v4 as uuidv4 } from 'uuid';
-import type { SubscriptionStatus } from './public/SubscriptionStatus';
+import { SubscriptionStatus } from './public/SubscriptionStatus';
+import type { SuperwallDelegate } from './public/SuperwallDelegate';
+import { SuperwallEventInfo } from './public/SuperwallEventInfo';
 
 const LINKING_ERROR =
   `The package 'superwall-react-native' doesn't seem to be linked. Make sure: \n\n` +
@@ -53,6 +55,7 @@ export { RestoreType } from './public/RestoreType';
 
 export default class Superwall {
   private static purchaseController?: PurchaseController;
+  private static delegate?: SuperwallDelegate;
   private static _superwall = new Superwall();
   private presentationHandlers: Map<string, PaywallPresentationHandler> =
     new Map();
@@ -112,6 +115,12 @@ export default class Superwall {
     SuperwallReactNative.setSubscriptionStatus(status.toString());
   }
 
+  setDelegate(delegate: SuperwallDelegate | undefined) {
+    Superwall.delegate = delegate;
+    SuperwallReactNative.setDelegate(delegate === undefined);
+  }
+
+  // MARK: - PurchaseController Listeners
   private purchaseListener = DeviceEventEmitter.addListener(
     'purchaseFromGooglePlay',
     async (productData) => {
@@ -174,6 +183,86 @@ export default class Superwall {
           }
           break;
       }
+    }
+  );
+
+  // MARK: - SuperwallDelegate Listeners
+  private subscriptionStatusDidChangeListener = DeviceEventEmitter.addListener(
+    'subscriptionStatusDidChange',
+    async (data) => {
+      const subscriptionStatus = SubscriptionStatus.fromString(
+        data.subscriptionStatus
+      );
+      Superwall.delegate?.subscriptionStatusDidChange(subscriptionStatus);
+    }
+  );
+
+  private handleSuperwallEventListener = DeviceEventEmitter.addListener(
+    'handleSuperwallEvent',
+    async (data) => {
+      const eventInfo = SuperwallEventInfo.fromJson(data.eventInfo);
+      Superwall.delegate?.handleSuperwallEvent(eventInfo);
+    }
+  );
+
+  private handleCustomPaywallActionListener = DeviceEventEmitter.addListener(
+    'handleCustomPaywallAction',
+    async (data) => {
+      const name = data.name;
+      Superwall.delegate?.handleCustomPaywallAction(name);
+    }
+  );
+
+  private willDismissPaywallListener = DeviceEventEmitter.addListener(
+    'willDismissPaywall',
+    async (data) => {
+      const info = PaywallInfo.fromJson(data.info);
+      Superwall.delegate?.willDismissPaywall(info);
+    }
+  );
+
+  private willPresentPaywallListener = DeviceEventEmitter.addListener(
+    'willPresentPaywall',
+    async (data) => {
+      const info = PaywallInfo.fromJson(data.info);
+      Superwall.delegate?.willPresentPaywall(info);
+    }
+  );
+
+  private didDismissPaywallListener = DeviceEventEmitter.addListener(
+    'didDismissPaywall',
+    async (data) => {
+      const info = PaywallInfo.fromJson(data.info);
+      Superwall.delegate?.didDismissPaywall(info);
+    }
+  );
+
+  private didPresentPaywallListener = DeviceEventEmitter.addListener(
+    'didPresentPaywall',
+    async (data) => {
+      const info = PaywallInfo.fromJson(data.info);
+      Superwall.delegate?.didPresentPaywall(info);
+    }
+  );
+
+  private paywallWillOpenDeepLinkListener = DeviceEventEmitter.addListener(
+    'paywallWillOpenDeepLink',
+    async (data) => {
+      const url = new URL(data.url);
+      Superwall.delegate?.paywallWillOpenDeepLink(url);
+    }
+  );
+
+  private handleLogListener = DeviceEventEmitter.addListener(
+    'handleLog',
+    async (data) => {
+      Superwall.delegate?.handleLog(
+        data.level,
+        data.scope,
+        data.message,
+        data.info,
+        data.error
+      );
     }
   );
 }

@@ -1,6 +1,6 @@
 import { ComputedPropertyRequest } from "./ComputedPropertyRequest";
 import { Experiment } from "./Experiment";
-import { FeatureGatingBehavior } from "./FeatureGatingBehavior";
+import { FeatureGatingBehavior, featureGatingBehaviorFromJson } from "./FeatureGatingBehavior";
 import { LocalNotification } from "./LocalNotification";
 import { PaywallCloseReason } from "./PaywallCloseReason";
 import { Product } from "./Product";
@@ -172,7 +172,7 @@ export class PaywallInfo {
       productsLoadDuration: json.productsLoadDuration,
       paywalljsVersion: json.paywalljsVersion,
       isFreeTrialAvailable: json.isFreeTrialAvailable,
-      featureGatingBehavior: FeatureGatingBehavior.fromJson(
+      featureGatingBehavior: featureGatingBehaviorFromJson(
         json.featureGatingBehavior
       ),
       closeReason: PaywallCloseReason.fromJson(json.closeReason),

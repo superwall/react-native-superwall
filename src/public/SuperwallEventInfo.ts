@@ -133,6 +133,12 @@ export class SuperwallEvent {
           type: eventType,
           deepLinkUrl: json.url,
         });
+      case EventType.triggerFire:
+        return new SuperwallEvent({
+          type: eventType,
+          eventName: eventType,
+          result: TriggerResult.fromJson(json.result),
+        });
       case EventType.paywallOpen:
       case EventType.paywallClose:
       case EventType.paywallDecline:
@@ -143,7 +149,7 @@ export class SuperwallEvent {
       case EventType.paywallWebviewLoadTimeout:
         return new SuperwallEvent({
           type: eventType,
-          paywallInfo: PaywallInfo.fromJson(json.paywallInfo)
+          paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
         });
       case EventType.transactionStart:
       case EventType.transactionAbandon:
@@ -216,7 +222,7 @@ export class SuperwallEvent {
       // Further cases would follow a similar pattern, handling additional properties as needed
       // For complex nested objects like 'result', 'paywallInfo', etc., you would use the corresponding fromJson methods
       default:
-        throw new Error('Invalid event type');
+        throw new Error('Invalid event type', eventType);
     }
   }
 }

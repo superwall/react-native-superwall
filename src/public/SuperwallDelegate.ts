@@ -16,7 +16,7 @@ export abstract class SuperwallDelegate {
     level: string,
     scope: string,
     message?: string,
-    info?: Record<string, any>,
+    info?: Map<string, any>,
     error?: string
   ): void;
 }

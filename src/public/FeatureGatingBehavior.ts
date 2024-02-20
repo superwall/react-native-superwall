@@ -1,21 +1,21 @@
 export enum FeatureGatingBehavior {
-  gated = "gated",
-  nonGated = "nonGated",
+  gated = "GATED",
+  nonGated = "NON_GATED",
 }
 
-export namespace FeatureGatingBehavior {
-  export function toJson(behavior: FeatureGatingBehavior): string {
-    return behavior;
-  }
+// Standalone functions for conversion
+export function featureGatingBehaviorToJson(
+  behavior: FeatureGatingBehavior
+): string {
+  return behavior;
+}
 
-  export function fromJson(json: string): FeatureGatingBehavior {
-    if (
-      !Object.values(FeatureGatingBehavior).includes(
-        json as FeatureGatingBehavior
-      )
-    ) {
-      throw new Error(`Invalid FeatureGatingBehavior value: ${json}`);
-    }
-    return json as FeatureGatingBehavior;
+export function featureGatingBehaviorFromJson(
+  json: string
+): FeatureGatingBehavior {
+  const behavior = Object.values(FeatureGatingBehavior).find(b => b === json);
+  if (!behavior) {
+    throw new Error(`Invalid FeatureGatingBehavior value: ${json}`);
   }
+  return behavior;
 }
