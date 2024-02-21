@@ -66,22 +66,22 @@ export enum EventType {
 }
 
 export class SuperwallEvent {
-  type: EventType;
+  type: EventType | undefined;
   eventName?: string;
   deviceAttributes?: Record<string, any>;
   deepLinkUrl?: string;
-  result?: TriggerResult; // Assuming TriggerResult has a fromJson method
-  paywallInfo?: PaywallInfo; // Assuming PaywallInfo has a fromJson method
-  transaction?: StoreTransaction; // Assuming StoreTransaction has a fromJson method
-  product?: StoreProduct; // Assuming StoreProduct has a fromJson method
+  result?: TriggerResult;
+  paywallInfo?: PaywallInfo;
+  transaction?: StoreTransaction;
+  product?: StoreProduct;
   error?: string;
   triggeredEventName?: string;
-  survey?: Survey; // Assuming Survey has a fromJson method
-  selectedOption?: SurveyOption; // Assuming SurveyOption has a fromJson method
+  survey?: Survey;
+  selectedOption?: SurveyOption;
   customResponse?: string;
-  status?: PaywallPresentationRequestStatus; // Assuming this is an enum or has a fromJson method
-  reason?: PaywallPresentationRequestStatusReason; // Assuming this is an enum or has a fromJson method
-  restoreType?: RestoreType; // Assuming RestoreType has a fromJson method
+  status?: PaywallPresentationRequestStatus;
+  reason?: PaywallPresentationRequestStatusReason;
+  restoreType?: RestoreType;
   userAttributes?: Record<string, any>;
 
   private constructor(options: {
@@ -221,7 +221,7 @@ export class SuperwallEvent {
       // Further cases would follow a similar pattern, handling additional properties as needed
       // For complex nested objects like 'result', 'paywallInfo', etc., you would use the corresponding fromJson methods
       default:
-        throw new Error('Invalid event type', eventType);
+        throw new Error('Invalid event type');
     }
   }
 }

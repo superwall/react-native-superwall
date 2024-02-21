@@ -5,7 +5,7 @@ final class PurchaseControllerBridge: PurchaseController {
   var purchaseCompletion: ((PurchaseResult) -> Void)?
   var restoreCompletion: ((RestorationResult) -> Void)?
 
- func purchase(product: SKProduct) async -> PurchaseResult {
+  func purchase(product: SKProduct) async -> PurchaseResult {
     SuperwallReactNative.emitter.sendEvent(
       withName: "purchaseFromAppStore",
       body: ["productId": product.productIdentifier]

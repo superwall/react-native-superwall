@@ -1,6 +1,6 @@
 {
-  "name": "superwall-react-native",
-  "version": "0.1.0",
+  "name": "react-native-superwall",
+  "version": "0.9.0",
   "description": "The React Native package for Superwall",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -41,14 +41,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/superwall-me/Superwall-React-Native.git"
+    "url": "git+https://github.com/superwall-me/react-native-superwall.git"
   },
   "author": "Superwall <jake@superwall.com> (https://superwall.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/superwall-me/Superwall-React-Native/issues"
+    "url": "https://github.com/superwall-me/react-native-superwall/issues"
   },
-  "homepage": "https://github.com/superwall-me/Superwall-React-Native#readme",
+  "homepage": "https://github.com/superwall-me/react-native-superwall#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -60,6 +60,7 @@
     "@types/jest": "^28.1.2",
     "@types/react": "~17.0.21",
     "@types/react-native": "0.70.0",
+    "@types/uuid": "^9.0.8",
     "commitlint": "^17.0.2",
     "del-cli": "^5.0.0",
     "eslint": "^8.4.1",

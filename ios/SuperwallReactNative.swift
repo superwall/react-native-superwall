@@ -13,6 +13,7 @@ class SuperwallReactNative: RCTEventEmitter {
 
   override func supportedEvents() -> [String]! {
     return [
+      "purchaseFromAppStore",
       "purchaseFromGooglePlay",
       "restore",
       "paywallPresentationHandler",

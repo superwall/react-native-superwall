@@ -1,7 +1,6 @@
 import { NativeModules, Platform } from 'react-native';
 import type { PurchaseController } from './public/PurchaseController';
 import type { SuperwallOptions } from './public/SuperwallOptions';
-import { DeviceEventEmitter } from 'react-native';
 import type { PaywallPresentationHandler } from './public/PaywallPresentationHandler';
 import { PaywallInfo } from './public/PaywallInfo';
 import { PaywallSkippedReason } from './public/PaywallSkippedReason';
@@ -62,6 +61,133 @@ export default class Superwall {
   private presentationHandlers: Map<string, PaywallPresentationHandler> =
     new Map();
 
+  constructor() {
+    this.eventEmitter.addListener('purchaseFromAppStore', async (data) => {
+      var purchaseResult =
+        await Superwall.purchaseController?.purchaseFromAppStore(
+          data.productId
+        );
+      if (purchaseResult == null) {
+        return;
+      }
+      SuperwallReactNative.didPurchase(purchaseResult.toJSON());
+    });
+
+    this.eventEmitter.addListener(
+      'purchaseFromGooglePlay',
+      async (productData) => {
+        var purchaseResult =
+          await Superwall.purchaseController?.purchaseFromGooglePlay(
+            productData.productId,
+            productData.basePlanId,
+            productData.offerId
+          );
+        if (purchaseResult == null) {
+          return;
+        }
+        SuperwallReactNative.didPurchase(purchaseResult.toJSON());
+      }
+    );
+
+    this.eventEmitter.addListener('restore', async () => {
+        var restorationResult =
+          await Superwall.purchaseController?.restorePurchases();
+        if (restorationResult == null) {
+          return;
+        }
+        SuperwallReactNative.didRestore(restorationResult.toJson());
+      });
+
+    this.eventEmitter.addListener('paywallPresentationHandler', (data) => {
+      var handler = this.presentationHandlers.get(data.handlerId);
+      if (!handler) {
+        return;
+      }
+      switch (data.method) {
+        case 'onPresent':
+          if (handler.onPresentHandler) {
+            const paywallInfo = PaywallInfo.fromJson(data.paywallInfoJson);
+            handler.onPresentHandler(paywallInfo);
+          }
+          break;
+        case 'onDismiss':
+          if (handler.onDismissHandler) {
+            const paywallInfo = PaywallInfo.fromJson(data.paywallInfoJson);
+            handler.onDismissHandler(paywallInfo);
+          }
+          break;
+        case 'onError':
+          if (handler.onErrorHandler) {
+            handler.onErrorHandler(data.errorString);
+          }
+          break;
+        case 'onSkip':
+          if (handler.onSkipHandler) {
+            const skippedReason = PaywallSkippedReason.fromJson(
+              data.skippedReason
+            );
+            handler.onSkipHandler(skippedReason);
+          }
+          break;
+      }
+    });
+
+    // MARK: - SuperwallDelegate Listeners
+    this.eventEmitter.addListener(
+      'subscriptionStatusDidChange',
+      async (data) => {
+        const subscriptionStatus = SubscriptionStatus.fromString(
+          data.subscriptionStatus
+        );
+        Superwall.delegate?.subscriptionStatusDidChange(subscriptionStatus);
+      });
+
+    this.eventEmitter.addListener('handleSuperwallEvent', async (data) => {
+      const eventInfo = SuperwallEventInfo.fromJson(data.eventInfo);
+      Superwall.delegate?.handleSuperwallEvent(eventInfo);
+    });
+
+    this.eventEmitter.addListener('handleCustomPaywallAction', async (data) => {
+      const name = data.name;
+      Superwall.delegate?.handleCustomPaywallAction(name);
+    });
+
+    this.eventEmitter.addListener('willDismissPaywall', async (data) => {
+      const info = PaywallInfo.fromJson(data.info);
+      Superwall.delegate?.willDismissPaywall(info);
+    });
+
+    this.eventEmitter.addListener('willPresentPaywall', async (data) => {
+      const info = PaywallInfo.fromJson(data.info);
+      Superwall.delegate?.willPresentPaywall(info);
+    });
+
+    this.eventEmitter.addListener('didDismissPaywall', async (data) => {
+      const info = PaywallInfo.fromJson(data.info);
+      Superwall.delegate?.didDismissPaywall(info);
+    });
+
+    this.eventEmitter.addListener('didPresentPaywall', async (data) => {
+      const info = PaywallInfo.fromJson(data.info);
+      Superwall.delegate?.didPresentPaywall(info);
+    });
+
+    this.eventEmitter.addListener('handleLog', async (data) => {
+      Superwall.delegate?.handleLog(
+        data.level,
+        data.scope,
+        data.message,
+        data.info,
+        data.error
+      );
+    });
+
+    this.eventEmitter.addListener('paywallWillOpenDeepLink', async (data) => {
+      const url = new URL(data.url);
+      Superwall.delegate?.paywallWillOpenDeepLink(url);
+    });
+  }
+
   // Getter for the shared instance
   static get shared(): Superwall {
     return this._superwall;
@@ -121,150 +247,4 @@ export default class Superwall {
     Superwall.delegate = delegate;
     SuperwallReactNative.setDelegate(delegate === undefined);
   }
-
-  // MARK: - PurchaseController Listeners
-  private purchaseListener = this.eventEmitter.addListener(
-    'purchaseFromGooglePlay',
-    async (productData) => {
-      var purchaseResult =
-        await Superwall.purchaseController?.purchaseFromGooglePlay(
-          productData.productId,
-          productData.basePlanId,
-          productData.offerId
-        );
-      if (purchaseResult == null) {
-        return;
-      }
-      SuperwallReactNative.didPurchase(purchaseResult.toJSON());
-    }
-  );
-
-  private restoreListener = this.eventEmitter.addListener(
-    'restore',
-    async () => {
-      var restorationResult =
-        await Superwall.purchaseController?.restorePurchases();
-      if (restorationResult == null) {
-        return;
-      }
-      SuperwallReactNative.didRestore(restorationResult.toJson());
-    }
-  );
-
-  private paywallPresentationHandlerListener = this.eventEmitter.addListener(
-    'paywallPresentationHandler',
-    (data) => {
-      var handler = this.presentationHandlers.get(data.handlerId);
-      if (!handler) {
-        return;
-      }
-      switch (data.method) {
-        case 'onPresent':
-          if (handler.onPresentHandler) {
-            const paywallInfo = PaywallInfo.fromJson(data.paywallInfoJson);
-            handler.onPresentHandler(paywallInfo);
-          }
-          break;
-        case 'onDismiss':
-          if (handler.onDismissHandler) {
-            const paywallInfo = PaywallInfo.fromJson(data.paywallInfoJson);
-            handler.onDismissHandler(paywallInfo);
-          }
-          break;
-        case 'onError':
-          if (handler.onErrorHandler) {
-            handler.onErrorHandler(data.errorString);
-          }
-          break;
-        case 'onSkip':
-          if (handler.onSkipHandler) {
-            const skippedReason = PaywallSkippedReason.fromJson(
-              data.skippedReason
-            );
-            handler.onSkipHandler(skippedReason);
-          }
-          break;
-      }
-    }
-  );
-
-  // MARK: - SuperwallDelegate Listeners
-  private subscriptionStatusDidChangeListener = this.eventEmitter.addListener(
-    'subscriptionStatusDidChange',
-    async (data) => {
-      const subscriptionStatus = SubscriptionStatus.fromString(
-        data.subscriptionStatus
-      );
-      Superwall.delegate?.subscriptionStatusDidChange(subscriptionStatus);
-    }
-  );
-
-  private handleSuperwallEventListener = this.eventEmitter.addListener(
-    'handleSuperwallEvent',
-    async (data) => {
-      const eventInfo = SuperwallEventInfo.fromJson(data.eventInfo);
-      Superwall.delegate?.handleSuperwallEvent(eventInfo);
-    }
-  );
-
-  private handleCustomPaywallActionListener = this.eventEmitter.addListener(
-    'handleCustomPaywallAction',
-    async (data) => {
-      const name = data.name;
-      Superwall.delegate?.handleCustomPaywallAction(name);
-    }
-  );
-
-  private willDismissPaywallListener = this.eventEmitter.addListener(
-    'willDismissPaywall',
-    async (data) => {
-      const info = PaywallInfo.fromJson(data.info);
-      Superwall.delegate?.willDismissPaywall(info);
-    }
-  );
-
-  private willPresentPaywallListener = this.eventEmitter.addListener(
-    'willPresentPaywall',
-    async (data) => {
-      const info = PaywallInfo.fromJson(data.info);
-      Superwall.delegate?.willPresentPaywall(info);
-    }
-  );
-
-  private didDismissPaywallListener = this.eventEmitter.addListener(
-    'didDismissPaywall',
-    async (data) => {
-      const info = PaywallInfo.fromJson(data.info);
-      Superwall.delegate?.didDismissPaywall(info);
-    }
-  );
-
-  private didPresentPaywallListener = this.eventEmitter.addListener(
-    'didPresentPaywall',
-    async (data) => {
-      const info = PaywallInfo.fromJson(data.info);
-      Superwall.delegate?.didPresentPaywall(info);
-    }
-  );
-
-  private paywallWillOpenDeepLinkListener = this.eventEmitter.addListener(
-    'paywallWillOpenDeepLink',
-    async (data) => {
-      const url = new URL(data.url);
-      Superwall.delegate?.paywallWillOpenDeepLink(url);
-    }
-  );
-
-  private handleLogListener = this.eventEmitter.addListener(
-    'handleLog',
-    async (data) => {
-      Superwall.delegate?.handleLog(
-        data.level,
-        data.scope,
-        data.message,
-        data.info,
-        data.error
-      );
-    }
-  );
 }
