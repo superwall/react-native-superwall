@@ -18,6 +18,11 @@ RCT_EXTERN_METHOD(
   withRejecter:(RCTPromiseRejectBlock)reject
 )
 
+RCT_EXTERN_METHOD(
+  identify:(NSString *)userId
+  options:(NSDictionary *)options
+)
+
 RCT_EXTERN_METHOD(setDelegate:(BOOL)isUndefined)
 
 RCT_EXTERN_METHOD(setSubscriptionStatus:(NSString *)status)

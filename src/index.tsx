@@ -9,6 +9,7 @@ import { SubscriptionStatus } from './public/SubscriptionStatus';
 import type { SuperwallDelegate } from './public/SuperwallDelegate';
 import { SuperwallEventInfo } from './public/SuperwallEventInfo';
 import { NativeEventEmitter } from 'react-native';
+import type { IdentityOptions } from './public/IdentityOptions';
 
 const LINKING_ERROR =
   `The package 'superwall-react-native' doesn't seem to be linked. Make sure: \n\n` +
@@ -218,6 +219,10 @@ export default class Superwall {
     });
 
     return this._superwall;
+  }
+
+  identify(userId: string, options?: IdentityOptions) {
+    SuperwallReactNative.identify(userId, options?.toJson());
   }
 
   async register(

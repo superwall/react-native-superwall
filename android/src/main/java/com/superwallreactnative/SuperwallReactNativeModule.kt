@@ -9,10 +9,12 @@ import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.superwall.sdk.Superwall
+import com.superwall.sdk.identity.identify
 import com.superwall.sdk.misc.ActivityProvider
 import com.superwall.sdk.paywall.presentation.PaywallPresentationHandler
 import com.superwall.sdk.paywall.presentation.register
 import com.superwallreactnative.bridges.SuperwallDelegateBridge
+import com.superwallreactnative.models.IdentityOptions
 import com.superwallreactnative.models.PaywallSkippedReason
 import com.superwallreactnative.models.PurchaseResult
 import com.superwallreactnative.models.RestorationResult
@@ -144,6 +146,25 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   }
 
   @ReactMethod
+  fun addListener(eventName: String) {
+    // Keep: Required for RN built in Event Emitter Calls.
+  }
+
+  @ReactMethod
+  fun removeListeners(count: Int) {
+    // Keep: Required for RN built in Event Emitter Calls.
+  }
+
+  @ReactMethod
+  fun identify(userId: String, options: ReadableMap?) {
+    val options = if (options != null) IdentityOptions.fromJson(options) else null
+    Superwall.instance.identify(
+      userId = userId,
+      options = options
+    )
+  }
+
+  @ReactMethod
   fun setSubscriptionStatus(status: String) {
     val subscriptionStatus = SubscriptionStatus.fromString(status)
     Superwall.instance.setSubscriptionStatus(subscriptionStatus)
@@ -160,33 +181,4 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
     val restorationResult = RestorationResult.fromJson(result)
     purchaseController.restorePromise?.complete(restorationResult)
   }
-
-
-  // @ReactMethod
-  // fun configure(
-  //   apiKey: String,
-  //   // purchaseController: ReadableMap? = null,
-  //   options: ReadableMap? = null,
-  //   // activityProvider: ActivityProvider? = null,
-  //   // completion: (() -> Unit)? = null
-  // ) {
-  //   val purchaseController = PurchaseController.fromJson()
-  //   val purchaseControllerBridge = purchaseController?.let {
-  //     PurchaseControllerBridge(it)
-  //   }
-  //   val options = options?.let {
-  //     SuperwallOptions.fromJson(options.toJson())
-  //   }
-
-  //   Superwall.configure(
-  //     applicationContext = reactContext,
-  //     apiKey = apiKey,
-  //     purchaseController = purchaseControllerBridge,
-  //     options = options,
-  //     activityProvider = activityProvider,
-  //     completion = completion
-  //   )
-
-  //   Superwall.instance.setPlatformWrapper("React Native");
-  // }
 }

@@ -54,6 +54,12 @@ class SuperwallReactNative: RCTEventEmitter {
     Superwall.shared.setPlatformWrapper("React Native");
   }
 
+  @objc(identify:options:)
+  func identify(userId: String, options: [String: Any]?) {
+    let options = IdentityOptions.fromJson(options)
+    Superwall.shared.identify(userId: userId, options: options)
+  }
+
   @objc(setDelegate:)
   func setDelegate(isUndefined: Bool) {
     self.delegate = isUndefined ? nil : SuperwallDelegateBridge()

@@ -3,7 +3,7 @@ import {
   SubscriptionStatus,
   SuperwallDelegate,
   SuperwallEventInfo,
-} from 'superwall-react-native';
+} from '@superwall-sdk/react-native-superwall';
 
 export class MySuperwallDelegate extends SuperwallDelegate {
   subscriptionStatusDidChange(newValue: SubscriptionStatus): void {
