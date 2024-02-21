@@ -147,7 +147,6 @@ class SuperwallEvent {
         is SuperwallEvent.PaywallProductsLoadComplete -> {
           map.putString("event", "paywallProductsLoadComplete")
           map.putString("triggeredEventName", superwallEvent.triggeredEventName ?: "")
-          map.putMap("paywallInfo", superwallEvent.paywallInfo.toJson())
         }
         is SuperwallEvent.SurveyResponse -> {
           map.putString("event", "surveyResponse")

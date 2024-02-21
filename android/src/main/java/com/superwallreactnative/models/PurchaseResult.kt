@@ -4,7 +4,7 @@ import com.facebook.react.bridge.ReadableMap
 import com.superwall.sdk.delegate.PurchaseResult
 
 class PurchaseResult {
-  companion object {
+  companion object pa
     fun fromJson(json: ReadableMap): PurchaseResult {
       return when (json.getString("type")) {
         "cancelled" -> PurchaseResult.Cancelled()

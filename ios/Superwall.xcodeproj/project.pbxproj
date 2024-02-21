@@ -1,0 +1,371 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		88A2AF9B2B8660EA0008A7B2 /* Superwall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A2AF9A2B8660EA0008A7B2 /* Superwall.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		88A2AF952B8660EA0008A7B2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		88A2AF782B8660A90008A7B2 /* SuperwallReactNative-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SuperwallReactNative-Bridging-Header.h"; sourceTree = "<group>"; };
+		88A2AF792B8660A90008A7B2 /* SuperwallReactNative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperwallReactNative.swift; sourceTree = "<group>"; };
+		88A2AF7B2B8660A90008A7B2 /* PurchaseControllerBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseControllerBridge.swift; sourceTree = "<group>"; };
+		88A2AF7C2B8660A90008A7B2 /* SuperwallReactNative.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SuperwallReactNative.mm; sourceTree = "<group>"; };
+		88A2AF7E2B8660A90008A7B2 /* RestorationResult+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RestorationResult+Json.swift"; sourceTree = "<group>"; };
+		88A2AF7F2B8660A90008A7B2 /* TransactionProduct+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransactionProduct+Json.swift"; sourceTree = "<group>"; };
+		88A2AF802B8660A90008A7B2 /* PaywallOptions+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaywallOptions+Json.swift"; sourceTree = "<group>"; };
+		88A2AF812B8660A90008A7B2 /* StoreProduct+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoreProduct+Json.swift"; sourceTree = "<group>"; };
+		88A2AF822B8660A90008A7B2 /* RestoreType+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RestoreType+Json.swift"; sourceTree = "<group>"; };
+		88A2AF832B8660A90008A7B2 /* PaywallPresentationRequestStatus+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaywallPresentationRequestStatus+Json.swift"; sourceTree = "<group>"; };
+		88A2AF842B8660A90008A7B2 /* Survey+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Survey+Json.swift"; sourceTree = "<group>"; };
+		88A2AF852B8660A90008A7B2 /* Experiment+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Experiment+Json.swift"; sourceTree = "<group>"; };
+		88A2AF862B8660A90008A7B2 /* LogLevel+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogLevel+Json.swift"; sourceTree = "<group>"; };
+		88A2AF872B8660A90008A7B2 /* LocalNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotification.swift; sourceTree = "<group>"; };
+		88A2AF882B8660A90008A7B2 /* PaywallCloseReason+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaywallCloseReason+Json.swift"; sourceTree = "<group>"; };
+		88A2AF892B8660A90008A7B2 /* SuperwallEventInfo+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuperwallEventInfo+Json.swift"; sourceTree = "<group>"; };
+		88A2AF8A2B8660A90008A7B2 /* StoreTransaction+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoreTransaction+Json.swift"; sourceTree = "<group>"; };
+		88A2AF8B2B8660A90008A7B2 /* Product+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Product+Json.swift"; sourceTree = "<group>"; };
+		88A2AF8C2B8660A90008A7B2 /* PurchaseResult+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PurchaseResult+Json.swift"; sourceTree = "<group>"; };
+		88A2AF8D2B8660A90008A7B2 /* TriggerResult+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TriggerResult+Json.swift"; sourceTree = "<group>"; };
+		88A2AF8E2B8660A90008A7B2 /* IdentityOptions+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityOptions+Json.swift"; sourceTree = "<group>"; };
+		88A2AF8F2B8660A90008A7B2 /* ComputedPropertyRequest+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComputedPropertyRequest+Json.swift"; sourceTree = "<group>"; };
+		88A2AF902B8660A90008A7B2 /* SuperwallOptions+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuperwallOptions+Json.swift"; sourceTree = "<group>"; };
+		88A2AF912B8660A90008A7B2 /* LogScope+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogScope+Json.swift"; sourceTree = "<group>"; };
+		88A2AF922B8660A90008A7B2 /* FeatureGatingBehavior+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeatureGatingBehavior+Json.swift"; sourceTree = "<group>"; };
+		88A2AF972B8660EA0008A7B2 /* libSuperwall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSuperwall.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		88A2AF9A2B8660EA0008A7B2 /* Superwall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Superwall.swift; sourceTree = "<group>"; };
+		88A2AF9F2B8661530008A7B2 /* PaywallInfo+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaywallInfo+Json.swift"; sourceTree = "<group>"; };
+		88A2AFA02B8666610008A7B2 /* SuperwallDelegateBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperwallDelegateBridge.swift; sourceTree = "<group>"; };
+		88A2AFA32B866BAB0008A7B2 /* SubscriptionStatus+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubscriptionStatus+Json.swift"; sourceTree = "<group>"; };
+		88A2AFA42B8679320008A7B2 /* PaywallSkippedReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallSkippedReason.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		88A2AF942B8660EA0008A7B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		88A2AF6C2B8660690008A7B2 = {
+			isa = PBXGroup;
+			children = (
+				88A2AF7A2B8660A90008A7B2 /* Bridges */,
+				88A2AF7D2B8660A90008A7B2 /* Json */,
+				88A2AF782B8660A90008A7B2 /* SuperwallReactNative-Bridging-Header.h */,
+				88A2AF7C2B8660A90008A7B2 /* SuperwallReactNative.mm */,
+				88A2AF792B8660A90008A7B2 /* SuperwallReactNative.swift */,
+				88A2AF992B8660EA0008A7B2 /* Superwall */,
+				88A2AF982B8660EA0008A7B2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		88A2AF7A2B8660A90008A7B2 /* Bridges */ = {
+			isa = PBXGroup;
+			children = (
+				88A2AF7B2B8660A90008A7B2 /* PurchaseControllerBridge.swift */,
+				88A2AFA02B8666610008A7B2 /* SuperwallDelegateBridge.swift */,
+			);
+			path = Bridges;
+			sourceTree = "<group>";
+		};
+		88A2AF7D2B8660A90008A7B2 /* Json */ = {
+			isa = PBXGroup;
+			children = (
+				88A2AF7E2B8660A90008A7B2 /* RestorationResult+Json.swift */,
+				88A2AF7F2B8660A90008A7B2 /* TransactionProduct+Json.swift */,
+				88A2AF802B8660A90008A7B2 /* PaywallOptions+Json.swift */,
+				88A2AF812B8660A90008A7B2 /* StoreProduct+Json.swift */,
+				88A2AF822B8660A90008A7B2 /* RestoreType+Json.swift */,
+				88A2AF832B8660A90008A7B2 /* PaywallPresentationRequestStatus+Json.swift */,
+				88A2AF842B8660A90008A7B2 /* Survey+Json.swift */,
+				88A2AF852B8660A90008A7B2 /* Experiment+Json.swift */,
+				88A2AF9F2B8661530008A7B2 /* PaywallInfo+Json.swift */,
+				88A2AFA32B866BAB0008A7B2 /* SubscriptionStatus+Json.swift */,
+				88A2AF862B8660A90008A7B2 /* LogLevel+Json.swift */,
+				88A2AF872B8660A90008A7B2 /* LocalNotification.swift */,
+				88A2AF882B8660A90008A7B2 /* PaywallCloseReason+Json.swift */,
+				88A2AF892B8660A90008A7B2 /* SuperwallEventInfo+Json.swift */,
+				88A2AF8A2B8660A90008A7B2 /* StoreTransaction+Json.swift */,
+				88A2AF8B2B8660A90008A7B2 /* Product+Json.swift */,
+				88A2AF8C2B8660A90008A7B2 /* PurchaseResult+Json.swift */,
+				88A2AF8D2B8660A90008A7B2 /* TriggerResult+Json.swift */,
+				88A2AF8E2B8660A90008A7B2 /* IdentityOptions+Json.swift */,
+				88A2AF8F2B8660A90008A7B2 /* ComputedPropertyRequest+Json.swift */,
+				88A2AF902B8660A90008A7B2 /* SuperwallOptions+Json.swift */,
+				88A2AF912B8660A90008A7B2 /* LogScope+Json.swift */,
+				88A2AF922B8660A90008A7B2 /* FeatureGatingBehavior+Json.swift */,
+				88A2AFA42B8679320008A7B2 /* PaywallSkippedReason.swift */,
+			);
+			path = Json;
+			sourceTree = "<group>";
+		};
+		88A2AF982B8660EA0008A7B2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				88A2AF972B8660EA0008A7B2 /* libSuperwall.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		88A2AF992B8660EA0008A7B2 /* Superwall */ = {
+			isa = PBXGroup;
+			children = (
+				88A2AF9A2B8660EA0008A7B2 /* Superwall.swift */,
+			);
+			path = Superwall;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		88A2AF962B8660EA0008A7B2 /* Superwall */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88A2AF9C2B8660EA0008A7B2 /* Build configuration list for PBXNativeTarget "Superwall" */;
+			buildPhases = (
+				88A2AF932B8660EA0008A7B2 /* Sources */,
+				88A2AF942B8660EA0008A7B2 /* Frameworks */,
+				88A2AF952B8660EA0008A7B2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Superwall;
+			productName = Superwall;
+			productReference = 88A2AF972B8660EA0008A7B2 /* libSuperwall.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		88A2AF6D2B8660690008A7B2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					88A2AF962B8660EA0008A7B2 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = 88A2AF702B8660690008A7B2 /* Build configuration list for PBXProject "Superwall" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 88A2AF6C2B8660690008A7B2;
+			productRefGroup = 88A2AF982B8660EA0008A7B2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				88A2AF962B8660EA0008A7B2 /* Superwall */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		88A2AF932B8660EA0008A7B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88A2AF9B2B8660EA0008A7B2 /* Superwall.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		88A2AF712B8660690008A7B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		88A2AF722B8660690008A7B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		88A2AF9D2B8660EA0008A7B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		88A2AF9E2B8660EA0008A7B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		88A2AF702B8660690008A7B2 /* Build configuration list for PBXProject "Superwall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88A2AF712B8660690008A7B2 /* Debug */,
+				88A2AF722B8660690008A7B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88A2AF9C2B8660EA0008A7B2 /* Build configuration list for PBXNativeTarget "Superwall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88A2AF9D2B8660EA0008A7B2 /* Debug */,
+				88A2AF9E2B8660EA0008A7B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 88A2AF6D2B8660690008A7B2 /* Project object */;
+}

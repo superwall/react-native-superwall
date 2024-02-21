@@ -7,7 +7,6 @@ import com.superwall.sdk.paywall.presentation.PaywallInfo
 fun PaywallInfo.toJson(): ReadableMap {
   val map = Arguments.createMap()
 
-  map.putString("databaseId", this.databaseId)
   map.putString("identifier", this.identifier)
   map.putString("name", this.name)
   map.putString("url", this.url.toString())

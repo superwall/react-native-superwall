@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { SubscriptionStatus } from './public/SubscriptionStatus';
 import type { SuperwallDelegate } from './public/SuperwallDelegate';
 import { SuperwallEventInfo } from './public/SuperwallEventInfo';
+import { NativeEventEmitter } from 'react-native';
 
 const LINKING_ERROR =
   `The package 'superwall-react-native' doesn't seem to be linked. Make sure: \n\n` +
@@ -57,6 +58,7 @@ export default class Superwall {
   private static purchaseController?: PurchaseController;
   private static delegate?: SuperwallDelegate;
   private static _superwall = new Superwall();
+  private eventEmitter = new NativeEventEmitter(SuperwallReactNative);
   private presentationHandlers: Map<string, PaywallPresentationHandler> =
     new Map();
 
@@ -83,7 +85,7 @@ export default class Superwall {
 
     await SuperwallReactNative.configure(
       apiKey,
-      options,
+      options?.toJSON(),
       !!purchaseController
     ).then(() => {
       if (completion) completion();
@@ -121,7 +123,7 @@ export default class Superwall {
   }
 
   // MARK: - PurchaseController Listeners
-  private purchaseListener = DeviceEventEmitter.addListener(
+  private purchaseListener = this.eventEmitter.addListener(
     'purchaseFromGooglePlay',
     async (productData) => {
       var purchaseResult =
@@ -137,7 +139,7 @@ export default class Superwall {
     }
   );
 
-  private restoreListener = DeviceEventEmitter.addListener(
+  private restoreListener = this.eventEmitter.addListener(
     'restore',
     async () => {
       var restorationResult =
@@ -149,7 +151,7 @@ export default class Superwall {
     }
   );
 
-  private paywallPresentationHandlerListener = DeviceEventEmitter.addListener(
+  private paywallPresentationHandlerListener = this.eventEmitter.addListener(
     'paywallPresentationHandler',
     (data) => {
       var handler = this.presentationHandlers.get(data.handlerId);
@@ -187,7 +189,7 @@ export default class Superwall {
   );
 
   // MARK: - SuperwallDelegate Listeners
-  private subscriptionStatusDidChangeListener = DeviceEventEmitter.addListener(
+  private subscriptionStatusDidChangeListener = this.eventEmitter.addListener(
     'subscriptionStatusDidChange',
     async (data) => {
       const subscriptionStatus = SubscriptionStatus.fromString(
@@ -197,7 +199,7 @@ export default class Superwall {
     }
   );
 
-  private handleSuperwallEventListener = DeviceEventEmitter.addListener(
+  private handleSuperwallEventListener = this.eventEmitter.addListener(
     'handleSuperwallEvent',
     async (data) => {
       const eventInfo = SuperwallEventInfo.fromJson(data.eventInfo);
@@ -205,7 +207,7 @@ export default class Superwall {
     }
   );
 
-  private handleCustomPaywallActionListener = DeviceEventEmitter.addListener(
+  private handleCustomPaywallActionListener = this.eventEmitter.addListener(
     'handleCustomPaywallAction',
     async (data) => {
       const name = data.name;
@@ -213,7 +215,7 @@ export default class Superwall {
     }
   );
 
-  private willDismissPaywallListener = DeviceEventEmitter.addListener(
+  private willDismissPaywallListener = this.eventEmitter.addListener(
     'willDismissPaywall',
     async (data) => {
       const info = PaywallInfo.fromJson(data.info);
@@ -221,7 +223,7 @@ export default class Superwall {
     }
   );
 
-  private willPresentPaywallListener = DeviceEventEmitter.addListener(
+  private willPresentPaywallListener = this.eventEmitter.addListener(
     'willPresentPaywall',
     async (data) => {
       const info = PaywallInfo.fromJson(data.info);
@@ -229,7 +231,7 @@ export default class Superwall {
     }
   );
 
-  private didDismissPaywallListener = DeviceEventEmitter.addListener(
+  private didDismissPaywallListener = this.eventEmitter.addListener(
     'didDismissPaywall',
     async (data) => {
       const info = PaywallInfo.fromJson(data.info);
@@ -237,7 +239,7 @@ export default class Superwall {
     }
   );
 
-  private didPresentPaywallListener = DeviceEventEmitter.addListener(
+  private didPresentPaywallListener = this.eventEmitter.addListener(
     'didPresentPaywall',
     async (data) => {
       const info = PaywallInfo.fromJson(data.info);
@@ -245,7 +247,7 @@ export default class Superwall {
     }
   );
 
-  private paywallWillOpenDeepLinkListener = DeviceEventEmitter.addListener(
+  private paywallWillOpenDeepLinkListener = this.eventEmitter.addListener(
     'paywallWillOpenDeepLink',
     async (data) => {
       const url = new URL(data.url);
@@ -253,7 +255,7 @@ export default class Superwall {
     }
   );
 
-  private handleLogListener = DeviceEventEmitter.addListener(
+  private handleLogListener = this.eventEmitter.addListener(
     'handleLog',
     async (data) => {
       Superwall.delegate?.handleLog(

@@ -7,7 +7,6 @@ import { Product } from "./Product";
 import { Survey } from "./Survey";
 
 export class PaywallInfo {
-  databaseId: string;
   identifier: string;
   name: string;
   url: string;
@@ -41,7 +40,6 @@ export class PaywallInfo {
   surveys: Survey[]; // Assuming Survey is defined elsewhere
 
   constructor({
-    databaseId,
     identifier,
     name,
     url,
@@ -74,7 +72,6 @@ export class PaywallInfo {
     computedPropertyRequests,
     surveys,
   }: {
-    databaseId: string,
     identifier: string,
     name: string,
     url: string,
@@ -107,7 +104,6 @@ export class PaywallInfo {
     computedPropertyRequests: ComputedPropertyRequest[],
     surveys: Survey[],
   }) {
-    this.databaseId = databaseId;
     this.identifier = identifier;
     this.name = name;
     this.url = url;
@@ -143,7 +139,6 @@ export class PaywallInfo {
 
   static fromJson(json: any): PaywallInfo {
     return new PaywallInfo({
-      databaseId: json.databaseId,
       identifier: json.identifier,
       name: json.name,
       url: json.url,

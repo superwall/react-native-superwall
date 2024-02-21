@@ -201,7 +201,6 @@ export class SuperwallEvent {
         return new SuperwallEvent({
           type: eventType,
           triggeredEventName: json.triggeredEventName,
-          paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
         });
       case EventType.surveyResponse:
         return new SuperwallEvent({

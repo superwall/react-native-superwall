@@ -1,9 +1,9 @@
 export enum PaywallCloseReason {
-  SystemLogic = "SystemLogic",
-  ForNextPaywall = "ForNextPaywall",
-  WebViewFailedToLoad = "WebViewFailedToLoad",
-  ManualClose = "ManualClose",
-  None = "None",
+  SystemLogic = "systemLogic",
+  ForNextPaywall = "forNextPaywall",
+  WebViewFailedToLoad = "webViewFailedToLoad",
+  ManualClose = "manualClose",
+  None = "none",
 }
 
 export namespace PaywallCloseReason {
@@ -13,15 +13,15 @@ export namespace PaywallCloseReason {
 
   export function fromJson(json: string): PaywallCloseReason {
     switch (json) {
-      case "SystemLogic":
+      case "systemLogic":
         return PaywallCloseReason.SystemLogic;
-      case "ForNextPaywall":
+      case "forNextPaywall":
         return PaywallCloseReason.ForNextPaywall;
-      case "WebViewFailedToLoad":
+      case "webViewFailedToLoad":
         return PaywallCloseReason.WebViewFailedToLoad;
-      case "ManualClose":
+      case "manualClose":
         return PaywallCloseReason.ManualClose;
-      case "None":
+      case "none":
         return PaywallCloseReason.None;
       default:
         throw new Error(`Invalid PaywallCloseReason value: ${json}`);

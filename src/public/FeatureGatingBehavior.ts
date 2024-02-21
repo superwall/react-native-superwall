@@ -1,6 +1,6 @@
 export enum FeatureGatingBehavior {
-  gated = "GATED",
-  nonGated = "NON_GATED",
+  gated = "gated",
+  nonGated = "nonGated",
 }
 
 // Standalone functions for conversion
