@@ -23,6 +23,8 @@ RCT_EXTERN_METHOD(
   options:(NSDictionary *)options
 )
 
+RCT_EXTERN_METHOD(reset)
+
 RCT_EXTERN_METHOD(setDelegate:(BOOL)isUndefined)
 
 RCT_EXTERN_METHOD(setSubscriptionStatus:(NSString *)status)

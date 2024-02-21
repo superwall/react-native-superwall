@@ -225,6 +225,10 @@ export default class Superwall {
     SuperwallReactNative.identify(userId, options?.toJson());
   }
 
+  reset() {
+    SuperwallReactNative.reset();
+  }
+
   async register(
     event: string,
     params?: Map<String, any>,

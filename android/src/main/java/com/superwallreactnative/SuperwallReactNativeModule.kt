@@ -165,6 +165,11 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   }
 
   @ReactMethod
+  fun reset() {
+    Superwall.instance.reset()
+  }
+
+  @ReactMethod
   fun setSubscriptionStatus(status: String) {
     val subscriptionStatus = SubscriptionStatus.fromString(status)
     Superwall.instance.setSubscriptionStatus(subscriptionStatus)

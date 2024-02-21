@@ -21,14 +21,23 @@ export default function App() {
     //purchaseController.configureAndSyncSubscriptionStatus();
   }, []);
 
-  // Function to call when the button is pressed
-  const handlePress = () => {
+  const register = () => {
     Superwall.shared.register('flutter');
+  };
+
+  const identify = () => {
+    Superwall.shared.identify('abc');
+  };
+
+  const reset = () => {
+    Superwall.shared.reset();
   };
 
   return (
     <View style={styles.container}>
-      <Button title="Register Event" onPress={handlePress} />
+      <Button title="Register Event" onPress={register} />
+      <Button title="Identify" onPress={identify} />
+      <Button title="Reset" onPress={reset} />
     </View>
   );
 }

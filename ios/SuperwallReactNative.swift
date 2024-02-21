@@ -60,6 +60,11 @@ class SuperwallReactNative: RCTEventEmitter {
     Superwall.shared.identify(userId: userId, options: options)
   }
 
+  @objc(reset)
+  func reset() {
+    Superwall.shared.reset()
+  }
+
   @objc(setDelegate:)
   func setDelegate(isUndefined: Bool) {
     self.delegate = isUndefined ? nil : SuperwallDelegateBridge()
