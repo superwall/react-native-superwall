@@ -4,6 +4,7 @@ import type { SuperwallOptions } from './public/SuperwallOptions';
 import type { PaywallPresentationHandler } from './public/PaywallPresentationHandler';
 import { PaywallInfo } from './public/PaywallInfo';
 import { PaywallSkippedReason } from './public/PaywallSkippedReason';
+import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import { SubscriptionStatus } from './public/SubscriptionStatus';
 import type { SuperwallDelegate } from './public/SuperwallDelegate';
@@ -51,7 +52,13 @@ export { TriggerResult } from './public/TriggerResult';
 export { PaywallOptions } from './public/PaywallOptions';
 export { PaywallPresentationHandler } from './public/PaywallPresentationHandler';
 export { PaywallPresentationRequestStatus } from './public/PaywallPresentationRequestStatus';
-export { PaywallSkippedReason } from './public/PaywallSkippedReason';
+export {
+  PaywallSkippedReason,
+  PaywallSkippedReasonEventNotFound,
+  PaywallSkippedReasonHoldout,
+  PaywallSkippedReasonNoRuleMatch,
+  PaywallSkippedReasonUserIsSubscribed,
+} from './public/PaywallSkippedReason';
 export { RestoreType } from './public/RestoreType';
 
 export default class Superwall {

@@ -1,6 +1,6 @@
 {
   "name": "@superwall/react-native-superwall",
-  "version": "0.9.3",
+  "version": "0.9.5",
   "description": "The React Native package for Superwall",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -164,6 +164,7 @@
     ]
   },
   "dependencies": {
+    "react-native-get-random-values": "^1.10.0",
     "uuid": "^9.0.1"
   }
 }
