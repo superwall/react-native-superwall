@@ -4,7 +4,7 @@ import Superwall, {
   PurchaseResult,
   RestorationResult,
   SubscriptionStatus,
-} from '@superwall-sdk/react-native-superwall';
+} from '@superwall/react-native-superwall';
 import Purchases, {
   type CustomerInfo,
   PRODUCT_CATEGORY,
