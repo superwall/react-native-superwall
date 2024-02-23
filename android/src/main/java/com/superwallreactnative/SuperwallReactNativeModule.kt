@@ -170,6 +170,11 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   }
 
   @ReactMethod
+  fun getSubscriptionStatus(promise: Promise) {
+    promise.resolve(Superwall.instance.subscriptionStatus.value.toString())
+  }
+
+  @ReactMethod
   fun setSubscriptionStatus(status: String) {
     val subscriptionStatus = SubscriptionStatus.fromString(status)
     Superwall.instance.setSubscriptionStatus(subscriptionStatus)

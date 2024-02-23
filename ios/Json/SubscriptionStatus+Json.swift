@@ -20,4 +20,17 @@ extension SubscriptionStatus {
       return .unknown
     }
   }
+
+  func toString() -> String {
+    switch self {
+    case .active:
+      return "ACTIVE"
+    case .inactive:
+      return "INACTIVE"
+    case .unknown:
+      return "UNKNOWN"
+    default:
+      return "UNKNOWN"
+    }
+  }
 }

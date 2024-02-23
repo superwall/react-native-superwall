@@ -27,6 +27,11 @@ RCT_EXTERN_METHOD(reset)
 
 RCT_EXTERN_METHOD(setDelegate:(BOOL)isUndefined)
 
+RCT_EXTERN_METHOD(
+  getSubscriptionStatus:(RCTPromiseResolveBlock)resolve
+  withRejecter:(RCTPromiseRejectBlock)reject
+)
+
 RCT_EXTERN_METHOD(setSubscriptionStatus:(NSString *)status)
 
 RCT_EXTERN_METHOD(didPurchase:(NSDictionary *)result)

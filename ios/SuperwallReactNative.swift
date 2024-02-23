@@ -42,7 +42,7 @@ class SuperwallReactNative: RCTEventEmitter {
     if let options = options {
       superwallOptions = SuperwallOptions.fromJson(options)
     }
-    
+
     Superwall.configure(
       apiKey: apiKey,
       purchaseController: usingPurchaseController ? purchaseController : nil,
@@ -128,6 +128,15 @@ class SuperwallReactNative: RCTEventEmitter {
     ) {
       resolve?(nil)
     }
+  }
+
+  @objc(getSubscriptionStatus:withRejecter:)
+  func getSubscriptionStatus(
+    resolve: @escaping RCTPromiseResolveBlock,
+    reject: @escaping RCTPromiseRejectBlock
+  ) {
+    let subscriptionStatus = Superwall.shared.subscriptionStatus.toString()
+    resolve(subscriptionStatus)
   }
 
   @objc(setSubscriptionStatus:)

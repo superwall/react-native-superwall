@@ -4,8 +4,6 @@ import type { SuperwallOptions } from './public/SuperwallOptions';
 import type { PaywallPresentationHandler } from './public/PaywallPresentationHandler';
 import { PaywallInfo } from './public/PaywallInfo';
 import { PaywallSkippedReason } from './public/PaywallSkippedReason';
-import 'react-native-get-random-values';
-import { v4 as uuidv4 } from 'uuid';
 import { SubscriptionStatus } from './public/SubscriptionStatus';
 import type { SuperwallDelegate } from './public/SuperwallDelegate';
 import { SuperwallEventInfo } from './public/SuperwallEventInfo';
@@ -223,7 +221,7 @@ export default class Superwall {
       !!purchaseController
     ).then(() => {
       if (completion) completion();
-    });
+    })  ;
 
     return this._superwall;
   }
@@ -245,7 +243,7 @@ export default class Superwall {
     let handlerId: string | null = null;
 
     if (handler) {
-      const uuid = uuidv4().toString();
+      const uuid = (+new Date() * Math.random()).toString(36);
       this.presentationHandlers.set(uuid, handler);
       handlerId = uuid;
     }
@@ -253,6 +251,12 @@ export default class Superwall {
     await SuperwallReactNative.register(event, params, handlerId).then(() => {
       if (feature) feature();
     });
+  }
+
+  async getSubscriptionStatus(): Promise<SubscriptionStatus> {
+    const subscriptionStatusString =
+      await SuperwallReactNative.getSubscriptionStatus();
+    return SubscriptionStatus.fromString(subscriptionStatusString);
   }
 
   setSubscriptionStatus(status: SubscriptionStatus) {
