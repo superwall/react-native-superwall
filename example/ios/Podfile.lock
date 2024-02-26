@@ -73,8 +73,8 @@ PODS:
   - hermes-engine/Pre-built (0.73.4)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
-  - PurchasesHybridCommon (9.7.1):
-    - RevenueCat (= 4.36.2)
+  - PurchasesHybridCommon (9.7.2):
+    - RevenueCat (= 4.36.3)
   - RCT-Folly (2022.05.16.00):
     - boost
     - DoubleConversion
@@ -1113,17 +1113,17 @@ PODS:
     - React-jsi (= 0.73.4)
     - React-logger (= 0.73.4)
     - React-perflogger (= 0.73.4)
-  - RevenueCat (4.36.2)
-  - RNPurchases (7.20.0):
-    - PurchasesHybridCommon (= 9.7.1)
+  - RevenueCat (4.36.3)
+  - RNPurchases (7.21.1):
+    - PurchasesHybridCommon (= 9.7.2)
     - React-Core
   - SocketRocket (0.6.1)
-  - superwall-react-native (0.1.0):
+  - superwall-react-native (0.9.9):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-    - SuperwallKit (~> 3.4.8)
-  - SuperwallKit (3.4.8)
+    - SuperwallKit (~> 3.5.0-rc.3)
+  - SuperwallKit (3.5.0-rc.3)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -1344,7 +1344,7 @@ SPEC CHECKSUMS:
   hermes-engine: b2669ce35fc4ac14f523b307aff8896799829fe2
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
-  PurchasesHybridCommon: 76ea82671cfb30f921c5697362b56d86b341da04
+  PurchasesHybridCommon: 9250db8073ad8ad7e84e4544c1f7b8ef6cd969af
   RCT-Folly: 7169b2b1c44399c76a47b5deaaba715eeeb476c0
   RCTRequired: ab7f915c15569f04a49669e573e6e319a53f9faa
   RCTTypeSafety: 63b97ced7b766865057e7154db0e81ce4ee6cf1e
@@ -1386,11 +1386,11 @@ SPEC CHECKSUMS:
   React-runtimescheduler: ed48e5faac6751e66ee1261c4bd01643b436f112
   React-utils: 6e5ad394416482ae21831050928ae27348f83487
   ReactCommon: 840a955d37b7f3358554d819446bffcf624b2522
-  RevenueCat: 991b09e19835c2e7344f3cdda6921c2a5f2da47a
-  RNPurchases: 383b30500449d7c06135155c255cdcab0baf99ef
+  RevenueCat: 7be0d7bde9efb2fc1ebd1888522c55bb4f9feb18
+  RNPurchases: 06957eb2f35bd7bb336d32fccf3534d45a3fda8a
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  superwall-react-native: 5457b8de4b8779e108f62f246de567fbe8874162
-  SuperwallKit: 1a7221bdb87cc070097ae305ff48060af8660be9
+  superwall-react-native: d65380020b950fa9e93e89cc6c5dadd6ecbbf6b1
+  SuperwallKit: db97d461725a82e20695d6df70f375f1236f6db4
   Yoga: 1b901a6d6eeba4e8a2e8f308f708691cdb5db312
 
 PODFILE CHECKSUM: ef933d85d2e37cf2166eefe876125fde9d6d2a1e
