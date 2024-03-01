@@ -1,10 +1,10 @@
 package com.superwallreactnative.models
 
-import LogLevel
-import LogScope
 import com.facebook.react.bridge.ReadableMap
 import com.superwall.sdk.config.options.PaywallOptions
 import com.superwall.sdk.config.options.SuperwallOptions
+import com.superwall.sdk.logger.LogLevel
+import com.superwall.sdk.logger.LogScope
 import java.util.EnumSet
 
 class SuperwallOptions {
