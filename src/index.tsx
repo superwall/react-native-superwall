@@ -1,14 +1,14 @@
 import { NativeModules, Platform } from 'react-native';
-import type { PurchaseController } from './public/PurchaseController';
-import type { SuperwallOptions } from './public/SuperwallOptions';
-import type { PaywallPresentationHandler } from './public/PaywallPresentationHandler';
+import { PurchaseController } from './public/PurchaseController';
+import { SuperwallOptions } from './public/SuperwallOptions';
+import { PaywallPresentationHandler } from './public/PaywallPresentationHandler';
 import { PaywallInfo } from './public/PaywallInfo';
 import { PaywallSkippedReason } from './public/PaywallSkippedReason';
 import { SubscriptionStatus } from './public/SubscriptionStatus';
-import type { SuperwallDelegate } from './public/SuperwallDelegate';
+import { SuperwallDelegate } from './public/SuperwallDelegate';
 import { SuperwallEventInfo } from './public/SuperwallEventInfo';
 import { NativeEventEmitter } from 'react-native';
-import type { IdentityOptions } from './public/IdentityOptions';
+import { IdentityOptions } from './public/IdentityOptions';
 import { EventEmitter } from 'events';
 
 const LINKING_ERROR =
@@ -109,7 +109,7 @@ export default class Superwall {
       if (purchaseResult == null) {
         return;
       }
-      SuperwallReactNative.didPurchase(purchaseResult.toJSON());
+      await SuperwallReactNative.didPurchase(purchaseResult.toJSON());
     });
 
     this.eventEmitter.addListener(
@@ -124,7 +124,7 @@ export default class Superwall {
         if (purchaseResult == null) {
           return;
         }
-        SuperwallReactNative.didPurchase(purchaseResult.toJSON());
+        await SuperwallReactNative.didPurchase(purchaseResult.toJSON());
       }
     );
 
@@ -134,7 +134,7 @@ export default class Superwall {
         if (restorationResult == null) {
           return;
         }
-        SuperwallReactNative.didRestore(restorationResult.toJson());
+        await SuperwallReactNative.didRestore(restorationResult.toJson());
       });
 
     this.eventEmitter.addListener('paywallPresentationHandler', (data) => {
@@ -250,7 +250,7 @@ export default class Superwall {
 
     await SuperwallReactNative.configure(
       apiKey,
-      options?.toJSON(),
+      options?.toJson(),
       !!purchaseController
     ).then(() => {
       if (completion) completion();
@@ -263,12 +263,15 @@ export default class Superwall {
 
   async identify(userId: string, options?: IdentityOptions) {
     await this.awaitConfig();
-    SuperwallReactNative.identify(userId, options?.toJson());
+
+    const serializedOptions = options ? options.toJson() : null;
+
+    await SuperwallReactNative.identify(userId, serializedOptions);
   }
 
   async reset() {
     await this.awaitConfig();
-    SuperwallReactNative.reset();
+    await SuperwallReactNative.reset();
   }
 
   async register(
@@ -300,12 +303,12 @@ export default class Superwall {
 
   async setSubscriptionStatus(status: SubscriptionStatus) {
     await this.awaitConfig();
-    SuperwallReactNative.setSubscriptionStatus(status.toString());
+    await SuperwallReactNative.setSubscriptionStatus(status.toString());
   }
 
   async setDelegate(delegate: SuperwallDelegate | undefined) {
     await this.awaitConfig();
     Superwall.delegate = delegate;
-    SuperwallReactNative.setDelegate(delegate === undefined);
+    await SuperwallReactNative.setDelegate(delegate === undefined);
   }
 }

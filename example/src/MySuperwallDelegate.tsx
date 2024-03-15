@@ -26,13 +26,8 @@ export class MySuperwallDelegate extends SuperwallDelegate {
         console.log(`paywallOpen event: ${paywallInfo}`);
 
         if (paywallInfo !== null) {
-          paywallInfo.identifier().then((identifier: string) => {
-            console.log(`paywallInfo.identifier: ${identifier}`);
-          });
-
-          paywallInfo.productIds().then((productIds: string[]) => {
-            console.log(`paywallInfo.productIds: ${productIds}`);
-          });
+          console.log(`paywallInfo.identifier: ${paywallInfo.identifier}`);
+          console.log(`paywallInfo.productIds: ${paywallInfo.productIds}`);
         }
         break;
       default:

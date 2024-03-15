@@ -106,7 +106,6 @@ export class SuperwallEvent {
     Object.assign(this, options);
   }
 
-
   static fromJson(json: any): SuperwallEvent {
     let eventType = EventType[json.event as keyof typeof EventType];
 
@@ -156,16 +155,16 @@ export class SuperwallEvent {
       case EventType.subscriptionStart:
       case EventType.freeTrialStart:
       case EventType.nonRecurringProductPurchase:
-          return new SuperwallEvent({
-            type: eventType,
-            product: StoreProduct.fromJson(json.product),
-            paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
-          });
+        return new SuperwallEvent({
+          type: eventType,
+          product: StoreProduct.fromJson(json.product),
+          paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
+        });
       case EventType.transactionFail:
         return new SuperwallEvent({
           type: eventType,
           error: json.error,
-          paywallInfo: PaywallInfo.fromJson(json.paywallInfo)
+          paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
         });
       case EventType.transactionComplete:
         return new SuperwallEvent({
@@ -185,14 +184,14 @@ export class SuperwallEvent {
       case EventType.userAttributes:
         return new SuperwallEvent({
           type: eventType,
-          userAttributes: json.attributes
+          userAttributes: json.attributes,
         });
       case EventType.paywallResponseLoadStart:
       case EventType.paywallResponseLoadNotFound:
       case EventType.paywallResponseLoadFail:
         return new SuperwallEvent({
           type: eventType,
-          triggeredEventName: json.triggeredEventName
+          triggeredEventName: json.triggeredEventName,
         });
       case EventType.paywallResponseLoadComplete:
       case EventType.paywallProductsLoadStart:

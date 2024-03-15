@@ -19,7 +19,7 @@ import Purchases, {
   type MakePurchaseResult,
 } from 'react-native-purchases';
 
-export class RCPurchaseController implements PurchaseController {
+export class RCPurchaseController extends PurchaseController {
   configureAndSyncSubscriptionStatus() {
     // Configure RevenueCat
     Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
@@ -50,8 +50,7 @@ export class RCPurchaseController implements PurchaseController {
     // Assuming an equivalent for Dart's firstOrNull is not directly available in TypeScript,
     // so using a simple conditional check
     const storeProduct = products.length > 0 ? products[0] : null;
-    console.log('!!! FOUND PRODUCT');
-    console.log(storeProduct);
+
     if (!storeProduct) {
       return new PurchaseResultFailed(
         'Failed to find store product for $productId'

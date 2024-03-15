@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Platform, Button } from 'react-native';
-import Superwall from '@superwall/react-native-superwall';
+import Superwall, { SuperwallOptions } from '@superwall/react-native-superwall';
 import { RCPurchaseController } from './RCPurchaseController';
 import { MySuperwallDelegate } from './MySuperwallDelegate';
 
@@ -15,10 +15,10 @@ export default function App() {
         : 'pk_d1f0959f70c761b1d55bb774a03e22b2b6ed290ce6561f85';
 
     const purchaseController = new RCPurchaseController();
-    const options = new SuperwallOption();
+    const options = new SuperwallOptions();
     options.isExternalDataCollectionEnabled = false;
 
-    Superwall.configure(apiKey, purchaseController);
+    Superwall.configure(apiKey, options, purchaseController);
     Superwall.shared.identify('abc');
     Superwall.shared.setDelegate(delegate);
     purchaseController.configureAndSyncSubscriptionStatus();
