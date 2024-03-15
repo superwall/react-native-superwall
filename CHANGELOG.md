@@ -7,7 +7,7 @@ The changelog for `Superwall`. Also see the [releases](https://github.com/superw
 ### Fixes
 
 - Providing your own `PurchaseController` now works as expected.
-- Publicly exposes `EventType`.
+- Publicly exposes `EventType`, `PurchaseResultCancelled`, `PurchaseResultFailed`, `PurchaseResultPending`, `PurchaseResultPurchased`, `PurchaseResultRestored`, `TransactionBackgroundView`.
 
 ## 1.0.2
 
