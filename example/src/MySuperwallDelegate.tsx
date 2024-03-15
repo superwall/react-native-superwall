@@ -4,14 +4,40 @@ import {
   SuperwallDelegate,
   SuperwallEventInfo,
 } from '@superwall/react-native-superwall';
+import { EventType } from '../../src/public/SuperwallEventInfo';
 
 export class MySuperwallDelegate extends SuperwallDelegate {
   subscriptionStatusDidChange(newValue: SubscriptionStatus): void {
     console.log('Subscription status changed to', newValue);
   }
 
-  handleSuperwallEvent(eventInfo: SuperwallEventInfo): void {
+  handleSuperwallEvent(eventInfo: SuperwallEventInfo) {
     console.log('Handling Superwall event:', eventInfo);
+
+    switch (eventInfo.event.type) {
+      case EventType.appOpen:
+        console.log("appOpen event");
+        break; // Don't forget to add break statements to prevent fall-through
+      case EventType.deviceAttributes:
+        console.log(`deviceAttributes event: ${eventInfo.event.deviceAttributes}`);
+        break;
+      case EventType.paywallOpen:
+        const paywallInfo = eventInfo.event.paywallInfo;
+        console.log(`paywallOpen event: ${paywallInfo}`);
+
+        if (paywallInfo !== null) {
+          paywallInfo.identifier().then((identifier: string) => {
+            console.log(`paywallInfo.identifier: ${identifier}`);
+          });
+
+          paywallInfo.productIds().then((productIds: string[]) => {
+            console.log(`paywallInfo.productIds: ${productIds}`);
+          });
+        }
+        break;
+      default:
+        break;
+    }
   }
 
   handleCustomPaywallAction(name: string): void {

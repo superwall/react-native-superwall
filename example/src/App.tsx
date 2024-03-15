@@ -14,11 +14,14 @@ export default function App() {
         ? 'pk_5f6d9ae96b889bc2c36ca0f2368de2c4c3d5f6119aacd3d2'
         : 'pk_d1f0959f70c761b1d55bb774a03e22b2b6ed290ce6561f85';
 
-    //var purchaseController = new RCPurchaseController();
-    Superwall.configure(apiKey);
+    const purchaseController = new RCPurchaseController();
+    const options = new SuperwallOption();
+    options.isExternalDataCollectionEnabled = false;
+
+    Superwall.configure(apiKey, purchaseController);
     Superwall.shared.identify('abc');
     Superwall.shared.setDelegate(delegate);
-    //purchaseController.configureAndSyncSubscriptionStatus();
+    purchaseController.configureAndSyncSubscriptionStatus();
   }, []);
 
   const register = () => {
