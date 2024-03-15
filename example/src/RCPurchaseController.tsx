@@ -4,6 +4,11 @@ import Superwall, {
   PurchaseResult,
   RestorationResult,
   SubscriptionStatus,
+  PurchaseResultCancelled,
+  PurchaseResultFailed,
+  PurchaseResultPending,
+  PurchaseResultPurchased,
+  PurchaseResultRestored,
 } from '@superwall/react-native-superwall';
 import Purchases, {
   type CustomerInfo,
@@ -13,15 +18,8 @@ import Purchases, {
   PURCHASES_ERROR_CODE,
   type MakePurchaseResult,
 } from 'react-native-purchases';
-import {
-  PurchaseResultCancelled,
-  PurchaseResultFailed,
-  PurchaseResultPending,
-  PurchaseResultPurchased,
-  PurchaseResultRestored,
-} from '../../src/public/PurchaseResult';
 
-export class RCPurchaseController implements PurchaseController {
+export class RCPurchaseController extends PurchaseController {
   configureAndSyncSubscriptionStatus() {
     // Configure RevenueCat
     Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
@@ -52,8 +50,7 @@ export class RCPurchaseController implements PurchaseController {
     // Assuming an equivalent for Dart's firstOrNull is not directly available in TypeScript,
     // so using a simple conditional check
     const storeProduct = products.length > 0 ? products[0] : null;
-    console.log('!!! FOUND PRODUCT');
-    console.log(storeProduct);
+
     if (!storeProduct) {
       return new PurchaseResultFailed(
         'Failed to find store product for $productId'
@@ -220,7 +217,6 @@ export class RCPurchaseController implements PurchaseController {
       // Perform the purchase using the function provided
       const makePurchaseResult = await performPurchase();
 
-      console.log('!!! Purhchase result', makePurchaseResult);
       // Handle the results
       if (
         this.hasActiveEntitlementOrSubscription(makePurchaseResult.customerInfo)
@@ -243,11 +239,9 @@ export class RCPurchaseController implements PurchaseController {
           return new PurchaseResultPurchased();
         }
       } else {
-        console.log('!!! NOPE');
         return new PurchaseResultFailed('No active subscriptions found.');
       }
     } catch (e: any) {
-      console.log('!!! errorrr', e);
       // Catch block to handle exceptions, adjusted for TypeScript
       if (e.userCancelled) {
         return new PurchaseResultCancelled();

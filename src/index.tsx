@@ -1,14 +1,15 @@
 import { NativeModules, Platform } from 'react-native';
-import type { PurchaseController } from './public/PurchaseController';
-import type { SuperwallOptions } from './public/SuperwallOptions';
-import type { PaywallPresentationHandler } from './public/PaywallPresentationHandler';
+import { PurchaseController } from './public/PurchaseController';
+import { SuperwallOptions } from './public/SuperwallOptions';
+import { PaywallPresentationHandler } from './public/PaywallPresentationHandler';
 import { PaywallInfo } from './public/PaywallInfo';
 import { PaywallSkippedReason } from './public/PaywallSkippedReason';
 import { SubscriptionStatus } from './public/SubscriptionStatus';
-import type { SuperwallDelegate } from './public/SuperwallDelegate';
+import { SuperwallDelegate } from './public/SuperwallDelegate';
 import { SuperwallEventInfo } from './public/SuperwallEventInfo';
 import { NativeEventEmitter } from 'react-native';
-import type { IdentityOptions } from './public/IdentityOptions';
+import { IdentityOptions } from './public/IdentityOptions';
+import { EventEmitter } from 'events';
 
 const LINKING_ERROR =
   `The package 'superwall-react-native' doesn't seem to be linked. Make sure: \n\n` +
@@ -39,15 +40,25 @@ export { PaywallInfo } from './public/PaywallInfo';
 export { Product } from './public/Product';
 export { PurchaseController } from './public/PurchaseController';
 export { PurchaseResult } from './public/PurchaseResult';
+export {
+  PurchaseResultPurchased,
+  PurchaseResultPending,
+  PurchaseResultCancelled,
+  PurchaseResultFailed,
+  PurchaseResultRestored,
+} from './public/PurchaseResult';
 export { RestorationResult } from './public/RestorationResult';
 export { SubscriptionStatus } from './public/SubscriptionStatus';
 //export { Superwall } from './Superwall';
 export { SuperwallDelegate } from './public/SuperwallDelegate';
-export { SuperwallEventInfo } from './public/SuperwallEventInfo';
+export { SuperwallEventInfo, EventType } from './public/SuperwallEventInfo';
 export { SuperwallOptions } from './public/SuperwallOptions';
 export { Survey } from './public/Survey';
 export { TriggerResult } from './public/TriggerResult';
-export { PaywallOptions } from './public/PaywallOptions';
+export {
+  PaywallOptions,
+  TransactionBackgroundView,
+} from './public/PaywallOptions';
 export { PaywallPresentationHandler } from './public/PaywallPresentationHandler';
 export { PaywallPresentationRequestStatus } from './public/PaywallPresentationRequestStatus';
 export {
@@ -64,8 +75,30 @@ export default class Superwall {
   private static delegate?: SuperwallDelegate;
   private static _superwall = new Superwall();
   private eventEmitter = new NativeEventEmitter(SuperwallReactNative);
+  private static configEmitter = new EventEmitter();
+  private static didConfigure = false;
   private presentationHandlers: Map<string, PaywallPresentationHandler> =
     new Map();
+
+  private static setDidConfigure(didConfigure: boolean) {
+    this.didConfigure = didConfigure;
+    // Emit an event when the bridged state is true
+    if (didConfigure) {
+      this.configEmitter.emit('configured', didConfigure);
+    }
+  }
+
+  async awaitConfig(): Promise<void> {
+    if (Superwall.didConfigure) {
+      return;
+    }
+
+    await new Promise<void>((resolve) => {
+      Superwall.configEmitter.once('configured', () => {
+        resolve();
+      });
+    });
+  }
 
   constructor() {
     this.eventEmitter.addListener('purchaseFromAppStore', async (data) => {
@@ -76,7 +109,7 @@ export default class Superwall {
       if (purchaseResult == null) {
         return;
       }
-      SuperwallReactNative.didPurchase(purchaseResult.toJSON());
+      await SuperwallReactNative.didPurchase(purchaseResult.toJSON());
     });
 
     this.eventEmitter.addListener(
@@ -91,7 +124,7 @@ export default class Superwall {
         if (purchaseResult == null) {
           return;
         }
-        SuperwallReactNative.didPurchase(purchaseResult.toJSON());
+        await SuperwallReactNative.didPurchase(purchaseResult.toJSON());
       }
     );
 
@@ -101,7 +134,7 @@ export default class Superwall {
         if (restorationResult == null) {
           return;
         }
-        SuperwallReactNative.didRestore(restorationResult.toJson());
+        await SuperwallReactNative.didRestore(restorationResult.toJson());
       });
 
     this.eventEmitter.addListener('paywallPresentationHandler', (data) => {
@@ -217,21 +250,28 @@ export default class Superwall {
 
     await SuperwallReactNative.configure(
       apiKey,
-      options?.toJSON(),
+      options?.toJson(),
       !!purchaseController
     ).then(() => {
       if (completion) completion();
-    })  ;
+    });
+
+    this.setDidConfigure(true);
 
     return this._superwall;
   }
 
-  identify(userId: string, options?: IdentityOptions) {
-    SuperwallReactNative.identify(userId, options?.toJson());
+  async identify(userId: string, options?: IdentityOptions) {
+    await this.awaitConfig();
+
+    const serializedOptions = options ? options.toJson() : null;
+
+    await SuperwallReactNative.identify(userId, serializedOptions);
   }
 
-  reset() {
-    SuperwallReactNative.reset();
+  async reset() {
+    await this.awaitConfig();
+    await SuperwallReactNative.reset();
   }
 
   async register(
@@ -240,6 +280,7 @@ export default class Superwall {
     handler?: PaywallPresentationHandler,
     feature?: () => void
   ) {
+    await this.awaitConfig();
     let handlerId: string | null = null;
 
     if (handler) {
@@ -254,17 +295,20 @@ export default class Superwall {
   }
 
   async getSubscriptionStatus(): Promise<SubscriptionStatus> {
+    await this.awaitConfig();
     const subscriptionStatusString =
       await SuperwallReactNative.getSubscriptionStatus();
     return SubscriptionStatus.fromString(subscriptionStatusString);
   }
 
-  setSubscriptionStatus(status: SubscriptionStatus) {
-    SuperwallReactNative.setSubscriptionStatus(status.toString());
+  async setSubscriptionStatus(status: SubscriptionStatus) {
+    await this.awaitConfig();
+    await SuperwallReactNative.setSubscriptionStatus(status.toString());
   }
 
-  setDelegate(delegate: SuperwallDelegate | undefined) {
+  async setDelegate(delegate: SuperwallDelegate | undefined) {
+    await this.awaitConfig();
     Superwall.delegate = delegate;
-    SuperwallReactNative.setDelegate(delegate === undefined);
+    await SuperwallReactNative.setDelegate(delegate === undefined);
   }
 }

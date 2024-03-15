@@ -36,7 +36,7 @@ export class SuperwallOptions {
   }
 
   // You can add methods to this class if needed
-  toJSON(): object {
+  toJson(): object {
     // Method to serialize class instance to a plain object, useful when passing to native code
     return {
       paywalls: this.paywalls.toJson(),
