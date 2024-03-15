@@ -51,7 +51,7 @@ export { RestorationResult } from './public/RestorationResult';
 export { SubscriptionStatus } from './public/SubscriptionStatus';
 //export { Superwall } from './Superwall';
 export { SuperwallDelegate } from './public/SuperwallDelegate';
-export { SuperwallEventInfo } from './public/SuperwallEventInfo';
+export { SuperwallEventInfo, EventType } from './public/SuperwallEventInfo';
 export { SuperwallOptions } from './public/SuperwallOptions';
 export { Survey } from './public/Survey';
 export { TriggerResult } from './public/TriggerResult';
