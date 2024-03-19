@@ -20,15 +20,18 @@ import Purchases, {
 } from 'react-native-purchases';
 
 export class RCPurchaseController extends PurchaseController {
-  configureAndSyncSubscriptionStatus() {
-    // Configure RevenueCat
+  constructor() {
+    super();
+
     Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
     const apiKey =
       Platform.OS === 'ios'
         ? 'appl_XmYQBWbTAFiwLeWrBJOeeJJtTql'
         : 'goog_DCSOujJzRNnPmxdgjOwdOOjwilC';
     Purchases.configure({ apiKey });
+  }
 
+  syncSubscriptionStatus() {
     // Listen for changes
     Purchases.addCustomerInfoUpdateListener((customerInfo) => {
       const hasActiveEntitlementOrSubscription =

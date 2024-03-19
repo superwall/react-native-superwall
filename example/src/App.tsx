@@ -21,7 +21,7 @@ export default function App() {
     Superwall.configure(apiKey, options, purchaseController);
     Superwall.shared.identify('abc');
     Superwall.shared.setDelegate(delegate);
-    purchaseController.configureAndSyncSubscriptionStatus();
+    purchaseController.syncSubscriptionStatus();
   }, []);
 
   const register = () => {
