@@ -64,7 +64,6 @@ export class PaywallPresentationRequestStatusReason {
     [key: string]: any;
   }): PaywallPresentationRequestStatusReason {
     switch (json.reason) {
-      // Cases here...
       case 'debuggerPresented':
         return new PaywallPresentationRequestStatusReason(
           PaywallPresentationRequestStatusReasonType.debuggerPresented
@@ -82,7 +81,30 @@ export class PaywallPresentationRequestStatusReason {
           PaywallPresentationRequestStatusReasonType.holdout,
           Experiment.fromJson(json.experiment)
         );
-      // Continue with other cases...
+      case 'noRuleMatch':
+        return new PaywallPresentationRequestStatusReason(
+          PaywallPresentationRequestStatusReasonType.noRuleMatch
+        );
+      case 'eventNotFound':
+        return new PaywallPresentationRequestStatusReason(
+          PaywallPresentationRequestStatusReasonType.eventNotFound
+        );
+      case 'noPaywallViewController':
+        return new PaywallPresentationRequestStatusReason(
+          PaywallPresentationRequestStatusReasonType.noPaywallViewController
+        );
+      case 'noPresenter':
+        return new PaywallPresentationRequestStatusReason(
+          PaywallPresentationRequestStatusReasonType.noPresenter
+        );
+      case 'noConfig':
+        return new PaywallPresentationRequestStatusReason(
+          PaywallPresentationRequestStatusReasonType.noConfig
+        );
+      case 'subscriptionStatusTimeout':
+        return new PaywallPresentationRequestStatusReason(
+          PaywallPresentationRequestStatusReasonType.subscriptionStatusTimeout
+        );
       default:
         throw new Error('Invalid PaywallPresentationRequestStatusReason type');
     }

@@ -289,9 +289,16 @@ export default class Superwall {
       handlerId = uuid;
     }
 
-    await SuperwallReactNative.register(event, params, handlerId).then(() => {
-      if (feature) feature();
-    });
+    let paramsObject = {};
+    if (params) {
+      paramsObject = Object.fromEntries(params);
+    }
+
+    await SuperwallReactNative.register(event, paramsObject, handlerId).then(
+      () => {
+        if (feature) feature();
+      }
+    );
   }
 
   async getSubscriptionStatus(): Promise<SubscriptionStatus> {

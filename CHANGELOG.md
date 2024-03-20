@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 1.0.5
+
+### Fixes
+
+- Fixes issue where params sent via register were being dropped.
+
 ## 1.0.4
 
 ### Enhancements
