@@ -6,10 +6,10 @@ struct RestorationResultError: Error {
 
 extension RestorationResult {
   static func fromJson(_ dictionary: [String: Any]) -> RestorationResult? {
-    guard let type = dictionary["type"] as? String else {
+    guard let result = dictionary["result"] as? String else {
       return nil
     }
-    switch type {
+    switch result {
     case "restored":
       return RestorationResult.restored
     case "failed":

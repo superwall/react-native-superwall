@@ -1,6 +1,6 @@
 export enum SurveyShowCondition {
-  onManualClose = 'onManualClose',
-  onPurchase = 'onPurchase',
+  onManualClose = 'ON_MANUAL_CLOSE',
+  onPurchase = 'ON_PURCHASE',
 }
 
 // Extending the enum functionality using a namespace

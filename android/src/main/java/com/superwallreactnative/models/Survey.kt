@@ -39,7 +39,7 @@ fun SurveyOption.toJson(): ReadableMap {
 
 fun SurveyShowCondition.toJson(): String {
   return when (this) {
-    SurveyShowCondition.ON_MANUAL_CLOSE -> "onManualClose"
-    SurveyShowCondition.ON_PURCHASE -> "onPurchase"
+    SurveyShowCondition.ON_MANUAL_CLOSE -> "ON_MANUAL_CLOSE"
+    SurveyShowCondition.ON_PURCHASE -> "ON_PURCHASE"
   }
 }

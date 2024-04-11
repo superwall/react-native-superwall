@@ -29,9 +29,9 @@ extension SurveyShowCondition {
   func toJson() -> String {
     switch self {
       case .onManualClose:
-        return "onManualClose"
+        return "ON_MANUAL_CLOSE"
       case .onPurchase:
-        return "onPurchase"
+        return "ON_PURCHASE"
     }
   }
 }
