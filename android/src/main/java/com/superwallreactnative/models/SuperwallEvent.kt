@@ -13,6 +13,7 @@ class SuperwallEvent {
         is SuperwallEvent.FirstSeen -> map.putString("event", "firstSeen")
         is SuperwallEvent.AppOpen -> map.putString("event", "appOpen")
         is SuperwallEvent.AppLaunch -> map.putString("event", "appLaunch")
+        is SuperwallEvent.IdentityAlias -> map.putString("event", "identityAlias")
         is SuperwallEvent.AppInstall -> map.putString("event", "appInstall")
         is SuperwallEvent.SessionStart -> map.putString("event", "sessionStart")
         is SuperwallEvent.DeviceAttributes -> {

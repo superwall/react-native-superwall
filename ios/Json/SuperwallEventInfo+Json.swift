@@ -18,6 +18,8 @@ extension SuperwallEvent {
         return ["event": "appOpen"]
       case .appLaunch:
         return ["event": "appLaunch"]
+      case .identityAlias:
+        return ["event": "identityAlias"]
       case .appInstall:
         return ["event": "appInstall"]
       case .sessionStart:

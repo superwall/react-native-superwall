@@ -2,6 +2,17 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 1.1.2
+
+### Enhancements
+
+- Upgrades Android SDK to 1.1.4. [View Android SDK release notes](https://github.com/superwall-me/Superwall-Android/releases/tag/1.1.4)
+- Upgrades iOS SDK to 3.6.2. [View iOS SDK release notes](https://github.com/superwall-me/Superwall-iOS/releases/tag/3.6.2)
+
+### Fixes
+
+- Fixes issue where the React Native `SuperwallEvent` hadn't been updated to include `identityAlias`.
+
 ## 1.1.1
 
 ### Enhancements

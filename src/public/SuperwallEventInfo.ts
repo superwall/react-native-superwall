@@ -27,6 +27,7 @@ export enum EventType {
   firstSeen = "firstSeen",
   appOpen = "appOpen",
   appLaunch = "appLaunch",
+  identityAlias = "identityAlias",
   appInstall = "appInstall",
   sessionStart = "sessionStart",
   deviceAttributes = "deviceAttributes",
@@ -114,6 +115,7 @@ export class SuperwallEvent {
       case EventType.firstSeen:
       case EventType.appOpen:
       case EventType.appLaunch:
+      case EventType.identityAlias:
       case EventType.appInstall:
       case EventType.sessionStart:
       case EventType.subscriptionStatusDidChange:
