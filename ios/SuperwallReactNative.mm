@@ -34,6 +34,19 @@ RCT_EXTERN_METHOD(
 
 RCT_EXTERN_METHOD(setSubscriptionStatus:(NSString *)status)
 
+RCT_EXTERN_METHOD(
+  getUserAttributes:(RCTPromiseResolveBlock)resolve
+  withRejecter:(RCTPromiseRejectBlock)reject
+)
+
+RCT_EXTERN_METHOD(setUserAttributes:(NSDictionary)userAttributes)
+
+RCT_EXTERN_METHOD(
+  handleDeepLink:(NSString *)url
+  withResolver:(RCTPromiseResolveBlock)resolve
+  withRejecter:(RCTPromiseRejectBlock)reject
+)
+
 RCT_EXTERN_METHOD(didPurchase:(NSDictionary *)result)
 
 RCT_EXTERN_METHOD(didRestore:(NSDictionary *)result)

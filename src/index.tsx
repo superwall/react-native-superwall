@@ -70,6 +70,10 @@ export {
 } from './public/PaywallSkippedReason';
 export { RestoreType } from './public/RestoreType';
 
+interface UserAttributes {
+  [key: string]: any;
+}
+
 export default class Superwall {
   private static purchaseController?: PurchaseController;
   private static delegate?: SuperwallDelegate;
@@ -274,6 +278,11 @@ export default class Superwall {
     await SuperwallReactNative.reset();
   }
 
+  async handleDeepLink(url: string): Promise<Boolean> {
+    await this.awaitConfig();
+    return await SuperwallReactNative.handleDeepLink(url);
+  }
+
   async register(
     event: string,
     params?: Map<String, any>,
@@ -317,5 +326,17 @@ export default class Superwall {
     await this.awaitConfig();
     Superwall.delegate = delegate;
     await SuperwallReactNative.setDelegate(delegate === undefined);
+  }
+
+  async getUserAttributes(): Promise<UserAttributes> {
+    await this.awaitConfig();
+    const userAttributes: UserAttributes =
+      await SuperwallReactNative.getUserAttributes();
+    return userAttributes;
+  }
+
+  async setUserAttributes(userAttributes: UserAttributes) {
+    await this.awaitConfig();
+    await SuperwallReactNative.setUserAttributes(userAttributes);
   }
 }

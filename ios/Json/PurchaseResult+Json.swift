@@ -1,7 +1,11 @@
 import SuperwallKit
 
-struct PurchaseResultError: Error {
+struct PurchaseResultError: LocalizedError {
   let message: String
+
+  var errorDescription: String? {
+    return message
+  }
 }
 
 extension PurchaseResult {
