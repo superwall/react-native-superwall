@@ -1,6 +1,6 @@
 package com.superwallreactnative
 
-import android.os.Debug
+import android.net.Uri
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
@@ -10,6 +10,7 @@ import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.superwall.sdk.Superwall
 import com.superwall.sdk.identity.identify
+import com.superwall.sdk.identity.setUserAttributes
 import com.superwall.sdk.misc.ActivityProvider
 import com.superwall.sdk.paywall.presentation.PaywallPresentationHandler
 import com.superwall.sdk.paywall.presentation.register
@@ -20,6 +21,8 @@ import com.superwallreactnative.models.PurchaseResult
 import com.superwallreactnative.models.RestorationResult
 import com.superwallreactnative.models.SubscriptionStatus
 import com.superwallreactnative.models.SuperwallOptions
+import com.superwallreactnative.models.convertMapToReadableMap
+import com.superwallreactnative.models.convertReadableMapToMap
 import com.superwallreactnative.models.toJson
 
 class SuperwallReactNativeModule(private val reactContext: ReactApplicationContext) :
@@ -168,7 +171,6 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   fun reset() {
     Superwall.instance.reset()
   }
-
   @ReactMethod
   fun getSubscriptionStatus(promise: Promise) {
     promise.resolve(Superwall.instance.subscriptionStatus.value.toString())
@@ -178,6 +180,27 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   fun setSubscriptionStatus(status: String) {
     val subscriptionStatus = SubscriptionStatus.fromString(status)
     Superwall.instance.setSubscriptionStatus(subscriptionStatus)
+  }
+
+  @ReactMethod
+  fun getUserAttributes(promise: Promise) {
+    val attributes = convertMapToReadableMap(Superwall.instance.userAttributes)
+    promise.resolve(attributes)
+  }
+
+  @ReactMethod
+  fun setUserAttributes(userAttributes: ReadableMap) {
+    val attributesMap = convertReadableMapToMap(userAttributes)
+    Superwall.instance.setUserAttributes(attributesMap)
+  }
+
+  @ReactMethod
+  fun handleDeepLink(
+    url: String,
+    promise: Promise
+  ) {
+    val url = Uri.parse(url)
+    promise.resolve(Superwall.instance.handleDeepLink(url))
   }
 
   @ReactMethod

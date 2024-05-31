@@ -2,6 +2,7 @@ package com.superwallreactnative.models
 
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.bridge.ReadableType
 import com.superwall.sdk.analytics.superwall.SuperwallEvent
 import com.superwall.sdk.store.abstractions.transactions.StoreTransaction
 
@@ -174,7 +175,6 @@ class SuperwallEvent {
   }
 }
 
-
 fun convertMapToReadableMap(map: Map<String, Any?>): ReadableMap {
   val readableMap = Arguments.createMap()
   map.forEach { (key, value) ->
@@ -187,8 +187,27 @@ fun convertMapToReadableMap(map: Map<String, Any?>): ReadableMap {
         @Suppress("UNCHECKED_CAST")
         readableMap.putMap(key, convertMapToReadableMap(value as Map<String, Any?>))
       }
-      else -> {} // Ignore null or unknown types
+      else -> if (value == null) {
+        readableMap.putNull(key)
+      } // You can handle other types here if necessary
     }
   }
   return readableMap
+}
+
+fun convertReadableMapToMap(readableMap: ReadableMap): Map<String, Any?> {
+  val map: MutableMap<String, Any?> = HashMap()
+  val iterator = readableMap.keySetIterator()
+  while (iterator.hasNextKey()) {
+    val key = iterator.nextKey()
+    when (val value = readableMap.getType(key)) {
+      ReadableType.String -> map[key] = readableMap.getString(key)
+      ReadableType.Boolean -> map[key] = readableMap.getBoolean(key)
+      ReadableType.Number -> map[key] = readableMap.getDouble(key)
+      ReadableType.Map -> map[key] = convertReadableMapToMap(readableMap.getMap(key)!!)
+      ReadableType.Null -> map[key] = null
+      else -> {}
+    }
+  }
+  return map
 }

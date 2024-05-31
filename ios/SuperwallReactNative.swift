@@ -145,6 +145,39 @@ class SuperwallReactNative: RCTEventEmitter {
     Superwall.shared.subscriptionStatus = subscriptionStatus
   }
 
+  @objc(getUserAttributes:withRejecter:)
+  func getUserAttributes(
+    resolve: @escaping RCTPromiseResolveBlock,
+    reject: @escaping RCTPromiseRejectBlock
+  ) {
+    let attributes = Superwall.shared.userAttributes
+    resolve(attributes)
+  }
+
+  @objc(setUserAttributes:)
+  func setUserAttributes(userAttributes: NSDictionary) {
+    var swiftDictionary: [String: Any?] = [:]
+    let keys = userAttributes.allKeys.compactMap { $0 as? String }
+    for key in keys {
+      let keyValue = userAttributes.value(forKey: key) as Any?
+      swiftDictionary[key] = keyValue
+    }
+    Superwall.shared.setUserAttributes(swiftDictionary)
+  }
+
+  @objc(handleDeepLink:withResolver:withRejecter:)
+  func handleDeepLink(
+    url: String,
+    resolve: @escaping RCTPromiseResolveBlock,
+    reject: @escaping RCTPromiseRejectBlock
+  ) {
+    guard let url = URL(string: url) else {
+      return resolve(false)
+    }
+    let result = Superwall.shared.handleDeepLink(url)
+    resolve(result)
+  }
+
   @objc(didPurchase:)
   func didPurchase(result: [String: Any]) {
     guard let purchaseResult = PurchaseResult.fromJson(result) else {

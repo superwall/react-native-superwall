@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Platform, Button } from 'react-native';
+import { StyleSheet, View, Platform, Button, Linking } from 'react-native';
 import Superwall, { SuperwallOptions } from '@superwall/react-native-superwall';
 import { RCPurchaseController } from './RCPurchaseController';
 import { MySuperwallDelegate } from './MySuperwallDelegate';
@@ -9,19 +9,41 @@ export default function App() {
   const delegate = new MySuperwallDelegate();
 
   React.useEffect(() => {
-    const apiKey =
-      Platform.OS === 'ios'
-        ? 'pk_5f6d9ae96b889bc2c36ca0f2368de2c4c3d5f6119aacd3d2'
-        : 'pk_d1f0959f70c761b1d55bb774a03e22b2b6ed290ce6561f85';
+    const setupSuperwall = async () => {
+      const apiKey =
+        Platform.OS === 'ios'
+          ? 'pk_5f6d9ae96b889bc2c36ca0f2368de2c4c3d5f6119aacd3d2'
+          : 'pk_d1f0959f70c761b1d55bb774a03e22b2b6ed290ce6561f85';
 
-    const purchaseController = new RCPurchaseController();
-    const options = new SuperwallOptions();
-    options.isExternalDataCollectionEnabled = false;
+      const purchaseController = new RCPurchaseController();
+      const options = new SuperwallOptions();
+      options.isExternalDataCollectionEnabled = false;
 
-    Superwall.configure(apiKey, options, purchaseController);
-    Superwall.shared.identify('abc');
-    Superwall.shared.setDelegate(delegate);
-    purchaseController.syncSubscriptionStatus();
+      Superwall.configure(apiKey, options, purchaseController);
+      Superwall.shared.identify('abc');
+      Superwall.shared.setDelegate(delegate);
+      Superwall.shared.setUserAttributes({ test: "abc" });
+      purchaseController.syncSubscriptionStatus();
+    };
+
+    setupSuperwall();
+
+    // Get the initial URL if the app was launched from a link
+    Linking.getInitialURL().then((url) => {
+      if (url) {
+        Superwall.shared.handleDeepLink(url);
+      }
+    });
+
+    // Listen for URL events
+    const linkingListener = Linking.addEventListener('url', (event) => {
+      Superwall.shared.handleDeepLink(event.url);
+    });
+
+    // Clean up the event listener
+    return () => {
+      linkingListener.remove();
+    };
   }, []);
 
   const register = () => {

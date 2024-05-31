@@ -2,6 +2,18 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 1.2.0
+
+### Enhancements
+
+- Adds `handleDeepLink(url:)`.
+- Adds `setUserAttributes(userAttributes:)` and `getUserAttributes()`.
+- Upgrades iOS SDK to 3.6.5. [View iOS SDK release notes](https://github.com/superwall-me/Superwall-iOS/releases/tag/3.6.5)
+
+### Fixes
+
+- Transaction error alerts now display the intended error message rather than a generic `PurchaseResultError`.
+
 ## 1.1.3
 
 ### Enhancements
