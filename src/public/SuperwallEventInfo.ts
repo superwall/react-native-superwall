@@ -64,6 +64,9 @@ export enum EventType {
   touchesBegan = "touchesBegan",
   surveyClose = "surveyClose",
   reset = "reset",
+  restoreStart = "restoreStart",
+  restoreComplete = "restoreComplete",
+  restoreFail = "restoreFail"
 }
 
 export class SuperwallEvent {
@@ -76,6 +79,7 @@ export class SuperwallEvent {
   transaction?: StoreTransaction;
   product?: StoreProduct;
   error?: string;
+  message?: string;
   triggeredEventName?: string;
   survey?: Survey;
   selectedOption?: SurveyOption;
@@ -95,6 +99,7 @@ export class SuperwallEvent {
     transaction?: StoreTransaction;
     product?: StoreProduct;
     error?: string;
+    message?: string;
     triggeredEventName?: string;
     survey?: Survey;
     selectedOption?: SurveyOption;
@@ -123,7 +128,14 @@ export class SuperwallEvent {
       case EventType.touchesBegan:
       case EventType.surveyClose:
       case EventType.reset:
+      case EventType.restoreStart:
+      case EventType.restoreComplete:
         return new SuperwallEvent({ type: eventType });
+      case EventType.restoreFail:
+        return new SuperwallEvent({
+          type: eventType,
+          message: json.message,
+        });
       case EventType.deviceAttributes:
         return new SuperwallEvent({
           type: eventType,

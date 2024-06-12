@@ -12,6 +12,12 @@ class SuperwallEvent {
       val map = Arguments.createMap()
       when (superwallEvent) {
         is SuperwallEvent.FirstSeen -> map.putString("event", "firstSeen")
+        is SuperwallEvent.Restore.Start -> map.putString("event", "restoreStart")
+        is SuperwallEvent.Restore.Complete -> map.putString("event", "restoreComplete")
+        is SuperwallEvent.Restore.Fail -> {
+          map.putString("event", "restoreFail")
+          map.putString("message", superwallEvent.reason)
+        }
         is SuperwallEvent.AppOpen -> map.putString("event", "appOpen")
         is SuperwallEvent.AppLaunch -> map.putString("event", "appLaunch")
         is SuperwallEvent.IdentityAlias -> map.putString("event", "identityAlias")

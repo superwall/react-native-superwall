@@ -102,6 +102,12 @@ extension SuperwallEvent {
         return ["event": "surveyClose"]
       case .reset:
         return ["event": "reset"]
+    case .restoreStart:
+      return ["event": "restoreStart"]
+    case .restoreComplete:
+      return ["event": "restoreComplete"]
+    case .restoreFail(message: let message):
+      return ["event": "restoreFail", "message": message]
     }
   }
 }
