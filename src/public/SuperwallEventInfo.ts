@@ -25,6 +25,7 @@ export class SuperwallEventInfo {
 
 export enum EventType {
   firstSeen = "firstSeen",
+  configRefresh = "configRefresh",
   appOpen = "appOpen",
   appLaunch = "appLaunch",
   identityAlias = "identityAlias",
@@ -117,6 +118,7 @@ export class SuperwallEvent {
 
     // Example for one case, replicate logic for other cases as needed
     switch (eventType) {
+      case EventType.configRefresh:
       case EventType.firstSeen:
       case EventType.appOpen:
       case EventType.appLaunch:

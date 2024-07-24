@@ -14,6 +14,8 @@ extension SuperwallEvent {
     switch self {
       case .firstSeen:
         return ["event": "firstSeen"]
+      case .reset:
+        return ["event": "reset"]
       case .appOpen:
         return ["event": "appOpen"]
       case .appLaunch:

@@ -51,6 +51,11 @@ RCT_EXTERN_METHOD(didPurchase:(NSDictionary *)result)
 
 RCT_EXTERN_METHOD(didRestore:(NSDictionary *)result)
 
+RCT_EXTERN_METHOD(
+  dismiss:(RCTPromiseResolveBlock)resolve
+  withRejecter:(RCTPromiseRejectBlock)reject
+)
+
 + (BOOL)requiresMainQueueSetup
 {
   return NO;

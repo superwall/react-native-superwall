@@ -339,4 +339,8 @@ export default class Superwall {
     await this.awaitConfig();
     await SuperwallReactNative.setUserAttributes(userAttributes);
   }
+
+  async dismiss() {
+    await SuperwallReactNative.dismiss();
+  }
 }

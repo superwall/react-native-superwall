@@ -51,7 +51,7 @@ class SuperwallReactNative: RCTEventEmitter {
       resolve(nil)
     }
 
-    Superwall.shared.setPlatformWrapper("React Native");
+    Superwall.shared.setPlatformWrapper("React Native")
   }
 
   @objc(identify:options:)
@@ -192,5 +192,15 @@ class SuperwallReactNative: RCTEventEmitter {
       return
     }
     purchaseController.restoreCompletion?(restorationResult)
+  }
+
+  @objc(dismiss:withRejecter:)
+  func dismiss(
+    resolve: @escaping RCTPromiseResolveBlock,
+    reject: @escaping RCTPromiseRejectBlock
+  ) {
+    Superwall.shared.dismiss {
+      resolve(nil)
+    }
   }
 }

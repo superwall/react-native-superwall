@@ -13,6 +13,7 @@ import com.superwall.sdk.identity.identify
 import com.superwall.sdk.identity.setUserAttributes
 import com.superwall.sdk.misc.ActivityProvider
 import com.superwall.sdk.paywall.presentation.PaywallPresentationHandler
+import com.superwall.sdk.paywall.presentation.dismiss
 import com.superwall.sdk.paywall.presentation.register
 import com.superwallreactnative.bridges.SuperwallDelegateBridge
 import com.superwallreactnative.models.IdentityOptions
@@ -24,6 +25,9 @@ import com.superwallreactnative.models.SuperwallOptions
 import com.superwallreactnative.models.convertMapToReadableMap
 import com.superwallreactnative.models.convertReadableMapToMap
 import com.superwallreactnative.models.toJson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SuperwallReactNativeModule(private val reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
@@ -213,5 +217,13 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   fun didRestore(result: ReadableMap) {
     val restorationResult = RestorationResult.fromJson(result)
     purchaseController.restorePromise?.complete(restorationResult)
+  }
+
+  @ReactMethod
+  fun dismiss(promise: Promise) {
+    CoroutineScope(Dispatchers.Main).launch {
+      Superwall.instance.dismiss()
+      promise.resolve(null)
+    }
   }
 }
