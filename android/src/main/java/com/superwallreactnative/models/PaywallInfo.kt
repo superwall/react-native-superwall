@@ -96,7 +96,7 @@ fun PaywallInfo.toJson(): ReadableMap {
     notificationsMap.putInt("id", notification.id)
     notificationsMap.putString("title", notification.title)
     notificationsMap.putString("body", notification.body)
-    notificationsMap.putString("type", notification.type.toString())
+    notificationsMap.putString("type", notification.type.toJson())
     notificationsMap.putDouble("delay", notification.delay.toDouble())
     localNotificationsArray.pushMap(notificationsMap)
   }

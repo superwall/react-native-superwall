@@ -2,12 +2,22 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 1.2.4
+
+### Enhancements
+
+- Upgrades iOS SDK to 3.7.0. [View iOS SDK release notes](https://github.com/superwall-me/Superwall-iOS/releases/tag/3.7.0)
+
+### Fixes
+
+- Fixes an error `Invalid LocalNotificationType value`.
+
 ## 1.2.3
 
 ### Enhancements
 
 - Adds `Superwall.shared.dismiss()` to be able to dismiss a paywall programmatically.
-- Upgrades Android SDK to 1.2.1. [View Android SDK release notes](https://github.com/superwall-me/Superwall-Android/releases/tag/1.1.7)
+- Upgrades Android SDK to 1.2.1. [View Android SDK release notes](https://github.com/superwall-me/Superwall-Android/releases/tag/1.2.1)
 
 ## 1.2.2
 
