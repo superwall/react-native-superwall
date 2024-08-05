@@ -57,9 +57,11 @@ export enum EventType {
   paywallWebviewLoadFail = "paywallWebviewLoadFail",
   paywallWebviewLoadComplete = "paywallWebviewLoadComplete",
   paywallWebviewLoadTimeout = "paywallWebviewLoadTimeout",
+  paywallWebviewLoadFallback = "paywallWebviewLoadFallback",
   paywallProductsLoadStart = "paywallProductsLoadStart",
   paywallProductsLoadFail = "paywallProductsLoadFail",
   paywallProductsLoadComplete = "paywallProductsLoadComplete",
+  paywallProductsLoadRetry = "paywallProductsLoadRetry",
   surveyResponse = "surveyResponse",
   paywallPresentationRequest = "paywallPresentationRequest",
   touchesBegan = "touchesBegan",
@@ -109,6 +111,7 @@ export class SuperwallEvent {
     reason?: PaywallPresentationRequestStatusReason;
     restoreType?: RestoreType;
     userAttributes?: Record<string, any>;
+    attempt?: number;
   }) {
     Object.assign(this, options);
   }
@@ -162,6 +165,7 @@ export class SuperwallEvent {
       case EventType.paywallWebviewLoadFail:
       case EventType.paywallWebviewLoadComplete:
       case EventType.paywallWebviewLoadTimeout:
+      case EventType.paywallWebviewLoadFallback:
         return new SuperwallEvent({
           type: eventType,
           paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
@@ -216,6 +220,13 @@ export class SuperwallEvent {
         return new SuperwallEvent({
           type: eventType,
           triggeredEventName: json.triggeredEventName,
+        });
+      case EventType.paywallProductsLoadRetry:
+        return new SuperwallEvent({
+          type: eventType,
+          paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
+          triggeredEventName: json.triggeredEventName,
+          attempt: json.attempt,
         });
       case EventType.surveyResponse:
         return new SuperwallEvent({

@@ -17,9 +17,7 @@ extension PaywallInfo {
     if let experiment = self.experiment {
       map["experiment"] = Experiment.toJson(experiment)
     }
-    if let triggerSessionId = self.triggerSessionId {
-      map["triggerSessionId"] = triggerSessionId
-    }
+    map["triggerSessionId"] = triggerSessionId
 
     let productsArray: [[String: Any]] = self.products.map { product in
       [

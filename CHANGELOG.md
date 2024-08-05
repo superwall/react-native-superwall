@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 1.2.5
+
+### Fixes
+
+- Fixes `Switch must be exhaustive` error caused by the upgrade of the iOS SDK.
+
 ## 1.2.4
 
 ### Enhancements
