@@ -12,6 +12,7 @@ import com.superwall.sdk.Superwall
 import com.superwall.sdk.identity.identify
 import com.superwall.sdk.identity.setUserAttributes
 import com.superwall.sdk.misc.ActivityProvider
+import com.superwall.sdk.misc.sdkVersion
 import com.superwall.sdk.paywall.presentation.PaywallPresentationHandler
 import com.superwall.sdk.paywall.presentation.dismiss
 import com.superwall.sdk.paywall.presentation.register
@@ -44,6 +45,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
     apiKey: String,
     options: ReadableMap? = null,
     usingPurchaseController: Boolean,
+    platformVersion: String,
     completion: Promise
   ) {
     val options = options?.let {
@@ -73,7 +75,10 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
       )
     }
 
-    Superwall.instance.setPlatformWrapper("React Native");
+    Superwall.instance.setPlatformWrapper(
+      "React Native",
+      version = sdkVersion
+    );
   }
 
   @ReactMethod

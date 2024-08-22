@@ -6,6 +6,7 @@ RCT_EXTERN_METHOD(
   configure:(NSString *)apiKey
   options:(NSDictionary *)options
   usingPurchaseController:(BOOL)usingPurchaseController
+  sdkVersion:(NSString *)sdkVersion
   withResolver:(RCTPromiseResolveBlock)resolve
   withRejecter:(RCTPromiseRejectBlock)reject
 )

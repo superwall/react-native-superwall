@@ -10,6 +10,7 @@ import { SuperwallEventInfo } from './public/SuperwallEventInfo';
 import { NativeEventEmitter } from 'react-native';
 import { IdentityOptions } from './public/IdentityOptions';
 import { EventEmitter } from 'events';
+const { version } = require('../package.json');
 
 const LINKING_ERROR =
   `The package 'superwall-react-native' doesn't seem to be linked. Make sure: \n\n` +
@@ -255,7 +256,8 @@ export default class Superwall {
     await SuperwallReactNative.configure(
       apiKey,
       options?.toJson(),
-      !!purchaseController
+      !!purchaseController,
+      version
     ).then(() => {
       if (completion) completion();
     });

@@ -29,11 +29,12 @@ class SuperwallReactNative: RCTEventEmitter {
     ]
   }
 
-  @objc(configure:options:usingPurchaseController:withResolver:withRejecter:)
+  @objc(configure:options:usingPurchaseController:sdkVersion:withResolver:withRejecter:)
   func configure(
     apiKey: String,
     options: [String: Any]?,
     usingPurchaseController: Bool,
+    sdkVersion: String,
     resolve: @escaping RCTPromiseResolveBlock,
     reject: @escaping RCTPromiseRejectBlock
   ) {
@@ -51,7 +52,7 @@ class SuperwallReactNative: RCTEventEmitter {
       resolve(nil)
     }
 
-    Superwall.shared.setPlatformWrapper("React Native")
+    Superwall.shared.setPlatformWrapper("React Native", version: sdkVersion)
   }
 
   @objc(identify:options:)

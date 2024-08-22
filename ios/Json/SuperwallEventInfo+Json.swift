@@ -119,6 +119,15 @@ extension SuperwallEvent {
       return ["event": "restoreComplete"]
     case .restoreFail(message: let message):
       return ["event": "restoreFail", "message": message]
+    case .customPlacement(name: let name, params: let params, paywallInfo: let paywallInfo):
+      return [
+        "event": "customPlacement",
+        "name": name,
+        "params": params,
+        "paywallInfo": paywallInfo.toJson()
+      ]
+    case .configAttributes:
+      return ["event": "configAttributes"]
     }
   }
 }

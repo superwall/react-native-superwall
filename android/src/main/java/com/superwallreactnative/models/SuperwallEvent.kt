@@ -177,6 +177,22 @@ class SuperwallEvent {
         is SuperwallEvent.SurveyClose -> {
           map.putString("event", "surveyClose")
         }
+        is SuperwallEvent.ConfigAttributes -> {
+          map.putString("event", "configAttributes")
+        }
+        is SuperwallEvent.CustomPlacement -> {
+          map.putString("event", "customPlacement")
+          map.putString("name", superwallEvent.placementName)
+          map.putMap("params", convertMapToReadableMap(superwallEvent.params))
+          map.putMap("paywallInfo", superwallEvent.paywallInfo.toJson())
+        }
+        is SuperwallEvent.PaywallWebviewLoadFallback -> {
+          map.putString("event", "paywallWebviewLoadFallback")
+          map.putMap("paywallInfo", superwallEvent.paywallInfo.toJson())
+        }
+        is SuperwallEvent.ErrorThrown -> {
+          map.putString("event", "errorThrown")
+        }
       }
       return map
     }
