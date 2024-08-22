@@ -69,7 +69,10 @@ export enum EventType {
   reset = "reset",
   restoreStart = "restoreStart",
   restoreComplete = "restoreComplete",
-  restoreFail = "restoreFail"
+  restoreFail = "restoreFail",
+  configAttributes = "configAttributes",
+  customPlacement = "customPlacement",
+  errorThrown = "errorThrown"
 }
 
 export class SuperwallEvent {
@@ -112,6 +115,8 @@ export class SuperwallEvent {
     restoreType?: RestoreType;
     userAttributes?: Record<string, any>;
     attempt?: number;
+    name?: string;
+    params?: Record<string, any>;
   }) {
     Object.assign(this, options);
   }
@@ -135,6 +140,8 @@ export class SuperwallEvent {
       case EventType.reset:
       case EventType.restoreStart:
       case EventType.restoreComplete:
+      case EventType.configAttributes:
+      case EventType.errorThrown:
         return new SuperwallEvent({ type: eventType });
       case EventType.restoreFail:
         return new SuperwallEvent({
@@ -243,6 +250,13 @@ export class SuperwallEvent {
           reason: json.reason
             ? PaywallPresentationRequestStatusReason.fromJson(json.reason)
             : undefined,
+        });
+      case EventType.customPlacement:
+        return new SuperwallEvent({
+          type: eventType,
+          name: json.name,
+          params: json.params,
+          paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
         });
       // Further cases would follow a similar pattern, handling additional properties as needed
       // For complex nested objects like 'result', 'paywallInfo', etc., you would use the corresponding fromJson methods
