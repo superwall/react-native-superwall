@@ -72,7 +72,12 @@ export enum EventType {
   restoreFail = "restoreFail",
   configAttributes = "configAttributes",
   customPlacement = "customPlacement",
-  errorThrown = "errorThrown"
+  errorThrown = "errorThrown",
+  confirmAllAssignments = "confirmAllAssignments",
+  configFail = "configFail",
+  adServicesTokenRequestStart = "adServicesTokenRequestStart",
+  adServicesTokenRequestFail = "adServicesTokenRequestFail",
+  adServicesTokenRequestComplete = "adServicesTokenRequestComplete"
 }
 
 export class SuperwallEvent {
@@ -117,6 +122,7 @@ export class SuperwallEvent {
     attempt?: number;
     name?: string;
     params?: Record<string, any>;
+    token?: string;
   }) {
     Object.assign(this, options);
   }
@@ -141,7 +147,10 @@ export class SuperwallEvent {
       case EventType.restoreStart:
       case EventType.restoreComplete:
       case EventType.configAttributes:
+      case EventType.configFail:
+      case EventType.adServicesTokenRequestStart:
       case EventType.errorThrown:
+      case EventType.confirmAllAssignments:
         return new SuperwallEvent({ type: eventType });
       case EventType.restoreFail:
         return new SuperwallEvent({
@@ -256,6 +265,21 @@ export class SuperwallEvent {
           type: eventType,
           name: json.name,
           params: json.params,
+          paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
+        });
+      case EventType.adServicesTokenRequestFail:
+        return new SuperwallEvent({
+          type: eventType,
+          error: json.error,
+        });
+      case EventType.adServicesTokenRequestComplete:
+        return new SuperwallEvent({
+          type: eventType,
+          token: json.token,
+        });
+      case EventType.transactionTimeout:
+        return new SuperwallEvent({
+          type: eventType,
           paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
         });
       // Further cases would follow a similar pattern, handling additional properties as needed

@@ -10,6 +10,7 @@ import { SuperwallEventInfo } from './public/SuperwallEventInfo';
 import { NativeEventEmitter } from 'react-native';
 import { IdentityOptions } from './public/IdentityOptions';
 import { EventEmitter } from 'events';
+import { ConfigurationStatus } from './public/ConfigurationStatus';
 const { version } = require('../package.json');
 
 const LINKING_ERROR =
@@ -50,6 +51,7 @@ export {
 } from './public/PurchaseResult';
 export { RestorationResult } from './public/RestorationResult';
 export { SubscriptionStatus } from './public/SubscriptionStatus';
+export { ConfigurationStatus } from './public/ConfigurationStatus';
 //export { Superwall } from './Superwall';
 export { SuperwallDelegate } from './public/SuperwallDelegate';
 export { SuperwallEventInfo, EventType } from './public/SuperwallEventInfo';
@@ -230,6 +232,11 @@ export default class Superwall {
       const url = new URL(data.url);
       Superwall.delegate?.paywallWillOpenDeepLink(url);
     });
+
+    this.eventEmitter.addListener('paywallWillOpenURL', async (data) => {
+      const url = new URL(data.url);
+      Superwall.delegate?.paywallWillOpenURL(url);
+    });
   }
 
   // Getter for the shared instance
@@ -310,6 +317,12 @@ export default class Superwall {
         if (feature) feature();
       }
     );
+  }
+
+  async getConfigurationStatus(): Promise<ConfigurationStatus> {
+    const configurationStatusString =
+      await SuperwallReactNative.getConfigurationStatus();
+    return ConfigurationStatus.fromString(configurationStatusString);
   }
 
   async getSubscriptionStatus(): Promise<SubscriptionStatus> {

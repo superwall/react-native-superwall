@@ -15,6 +15,7 @@ class SuperwallReactNative: RCTEventEmitter {
     return [
       "purchaseFromAppStore",
       "purchaseFromGooglePlay",
+      "paywallWillOpenURL",
       "restore",
       "paywallPresentationHandler",
       "subscriptionStatusDidChange",
@@ -129,6 +130,15 @@ class SuperwallReactNative: RCTEventEmitter {
     ) {
       resolve?(nil)
     }
+  }
+
+  @objc(getConfigurationStatus:withRejecter:)
+  func getConfigurationStatus(
+    resolve: @escaping RCTPromiseResolveBlock,
+    reject: @escaping RCTPromiseRejectBlock
+  ) {
+    let configurationStatus = Superwall.shared.configurationStatus.toString()
+    resolve(configurationStatus)
   }
 
   @objc(getSubscriptionStatus:withRejecter:)
