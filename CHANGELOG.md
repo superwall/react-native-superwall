@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+
+## 1.3.1
+
+### Enhancements
+- Upgrades Android SDK to 1.2.8 [View Android SDK release notes](https://github.com/superwall-me/Superwall-Android/releases/tag/1.2.8)
+
 ## 1.3.0
 
 ### Enhancements
