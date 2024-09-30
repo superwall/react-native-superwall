@@ -193,6 +193,9 @@ class SuperwallEvent {
         is SuperwallEvent.ErrorThrown -> {
           map.putString("event", "errorThrown")
         }
+        is SuperwallEvent.ConfigFail -> {
+          map.putString("event", "configFail")
+        }
       }
       return map
     }

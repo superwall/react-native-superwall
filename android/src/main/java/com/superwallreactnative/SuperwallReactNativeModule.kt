@@ -183,7 +183,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
 
   @ReactMethod
   fun getConfigurationStatus(promise: Promise) {
-    promise.resolve(Superwall.instance.configurationStatus.value.toString())
+    promise.resolve(Superwall.instance.configurationState.toString())
   }
 
   @ReactMethod
