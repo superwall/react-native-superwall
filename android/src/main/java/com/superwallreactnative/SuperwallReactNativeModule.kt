@@ -180,6 +180,12 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   fun reset() {
     Superwall.instance.reset()
   }
+
+  @ReactMethod
+  fun getConfigurationStatus(promise: Promise) {
+    promise.resolve(Superwall.instance.configurationState.toString())
+  }
+
   @ReactMethod
   fun getSubscriptionStatus(promise: Promise) {
     promise.resolve(Superwall.instance.subscriptionStatus.value.toString())

@@ -2,10 +2,28 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 1.3.0
+
+### Enhancements
+
+- Upgrades iOS SDK to 3.9.1. [View iOS SDK release notes](https://github.com/superwall-me/Superwall-iOS/releases/tag/3.9.1)
+- Upgrades Android SDK to 1.2.7 [View Android SDK release notes](https://github.com/superwall-me/Superwall-Android/releases/tag/1.2.7)
+- Exposes the `SuperwallOption` `collectAdServicesAttribution` for iOS. When `true`, this collects the AdServices attribute token, which will be process by our backend. This adds `adServicesTokenRequest_start`, `adServicesTokenRequest_complete`, and `adServicesTokenRequest_fail` events.
+- Exposes `getConfigurationStatus()`. This returns either `PENDING`, `CONFIGURED`, or `FAILED`.
+
+## 1.2.7
+
+### Fixes
+
+// TODO: Update iOS to latest version before releasing.
+
+- Fixes issue where the `paywallWillOpenURL` wasn't being called.
+
 ## 1.2.6
 
 ### Enhancements
 
+- Adds an expo example project.
 - Upgrades iOS SDK to 3.7.3. [View iOS SDK release notes](https://github.com/superwall-me/Superwall-iOS/releases/tag/3.7.3)
 - Upgrades Android SDK to 1.2.4. [View Android SDK release notes](https://github.com/superwall-me/Superwall-Android/releases/tag/1.2.4)
 

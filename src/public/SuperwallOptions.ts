@@ -27,6 +27,7 @@ export class SuperwallOptions {
   localeIdentifier?: string;
   isGameControllerEnabled: boolean = false;
   logging: LoggingOptions = new LoggingOptions();
+  collectAdServicesAttribution: boolean = false;
 
   // Optionally, add a constructor for customization or methods for manipulation
   constructor(init?: Partial<SuperwallOptions>) {
@@ -45,6 +46,7 @@ export class SuperwallOptions {
       localeIdentifier: this.localeIdentifier,
       isGameControllerEnabled: this.isGameControllerEnabled,
       logging: this.logging.toJson(),
+      collectAdServicesAttribution: this.collectAdServicesAttribution,
     };
   }
 }

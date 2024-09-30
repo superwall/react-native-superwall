@@ -16,10 +16,7 @@ export default function App() {
           : 'pk_d1f0959f70c761b1d55bb774a03e22b2b6ed290ce6561f85';
 
       const purchaseController = new RCPurchaseController();
-      const options = new SuperwallOptions();
-      options.isExternalDataCollectionEnabled = false;
-
-      Superwall.configure(apiKey, options, purchaseController);
+      Superwall.configure(apiKey, null, purchaseController);
       Superwall.shared.identify('abc');
       Superwall.shared.setDelegate(delegate);
       Superwall.shared.setUserAttributes({ test: "abc" });

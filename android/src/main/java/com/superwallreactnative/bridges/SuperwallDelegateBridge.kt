@@ -11,6 +11,7 @@ import com.superwallreactnative.models.SuperwallEvent
 import com.superwallreactnative.models.convertMapToReadableMap
 import com.superwallreactnative.models.toJson
 import java.net.URL
+import android.net.Uri
 
 class SuperwallDelegateBridge(
   private val reactContext: ReactContext
@@ -95,7 +96,7 @@ class SuperwallDelegateBridge(
       .emit("paywallWillOpenURL", data)
   }
 
-  override fun paywallWillOpenDeepLink(url: URL) {
+  override fun paywallWillOpenDeepLink(url: Uri) {
     val data = Arguments.createMap().apply {
       putString("url", url.toString())
     }
