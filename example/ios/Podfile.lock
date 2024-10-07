@@ -1118,7 +1118,7 @@ PODS:
     - PurchasesHybridCommon (= 9.7.2)
     - React-Core
   - SocketRocket (0.6.1)
-  - superwall-react-native (1.3.1):
+  - superwall-react-native (1.3.2):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
@@ -1389,7 +1389,7 @@ SPEC CHECKSUMS:
   RevenueCat: 7be0d7bde9efb2fc1ebd1888522c55bb4f9feb18
   RNPurchases: 06957eb2f35bd7bb336d32fccf3534d45a3fda8a
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  superwall-react-native: f772efe4cdff6b365bfa425bb2e62fc81d986420
+  superwall-react-native: 056b4dde47a30405c1c688bee51aa374a21ca552
   SuperwallKit: e2d162d30c5e0a464f111b32950d54dc827a9d1b
   Yoga: 1b901a6d6eeba4e8a2e8f308f708691cdb5db312
 
