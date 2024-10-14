@@ -330,7 +330,7 @@ export default class Superwall {
 
   async getConfigurationStatus(): Promise<ConfigurationStatus> {
     const configurationStatusString =
-      await SuperwallReactNative.confirmAllAssignments();
+      await SuperwallReactNative.getConfigurationStatus();
     return ConfigurationStatus.fromString(configurationStatusString);
   }
 
