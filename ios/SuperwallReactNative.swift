@@ -26,7 +26,7 @@ class SuperwallReactNative: RCTEventEmitter {
       "didDismissPaywall",
       "didPresentPaywall",
       "paywallWillOpenDeepLink",
-      "handleLog"
+      "handleLog",
     ]
   }
 
@@ -87,38 +87,42 @@ class SuperwallReactNative: RCTEventEmitter {
       handler = PaywallPresentationHandler()
 
       handler?.onPresent { [weak self] paywallInfo in
-        let data = [
-          "paywallInfoJson": paywallInfo.toJson(),
-          "method": "onPresent",
-          "handlerId": handlerId
-        ] as [String : Any]
+        let data =
+          [
+            "paywallInfoJson": paywallInfo.toJson(),
+            "method": "onPresent",
+            "handlerId": handlerId,
+          ] as [String: Any]
         self?.sendEvent(withName: "paywallPresentationHandler", body: data)
       }
 
       handler?.onDismiss { [weak self] paywallInfo in
-        let data = [
-          "paywallInfoJson": paywallInfo.toJson(),
-          "method": "onDismiss",
-          "handlerId": handlerId
-        ] as [String : Any]
+        let data =
+          [
+            "paywallInfoJson": paywallInfo.toJson(),
+            "method": "onDismiss",
+            "handlerId": handlerId,
+          ] as [String: Any]
         self?.sendEvent(withName: "paywallPresentationHandler", body: data)
       }
 
       handler?.onError { [weak self] error in
-        let data = [
-          "method": "onError",
-          "errorString": error.localizedDescription,
-          "handlerId": handlerId
-        ] as [String : Any]
+        let data =
+          [
+            "method": "onError",
+            "errorString": error.localizedDescription,
+            "handlerId": handlerId,
+          ] as [String: Any]
         self?.sendEvent(withName: "paywallPresentationHandler", body: data)
       }
 
       handler?.onSkip { [weak self] reason in
-        let data = [
-          "method": "onSkip",
-          "skippedReason": reason.toJson(),
-          "handlerId": handlerId
-        ] as [String : Any]
+        let data =
+          [
+            "method": "onSkip",
+            "skippedReason": reason.toJson(),
+            "handlerId": handlerId,
+          ] as [String: Any]
         self?.sendEvent(withName: "paywallPresentationHandler", body: data)
       }
     }
@@ -212,6 +216,16 @@ class SuperwallReactNative: RCTEventEmitter {
   ) {
     Superwall.shared.dismiss {
       resolve(nil)
+    }
+  }
+
+  @objc(confirmAllAssignments:withRejecter:)
+  func confirmAllAssignments(
+    resolve: @escaping RCTPromiseResolveBlock,
+    reject: @escaping RCTPromiseRejectBlock
+  ) {
+    Superwall.shared.confirmAllAssignments { assignments in
+      resolve(assignments.map { $0.toJson() })
     }
   }
 }

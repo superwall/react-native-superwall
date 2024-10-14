@@ -28,6 +28,7 @@ export class SuperwallOptions {
   isGameControllerEnabled: boolean = false;
   logging: LoggingOptions = new LoggingOptions();
   collectAdServicesAttribution: boolean = false;
+  passIdentifiersToPlayStore: boolean = false;
 
   // Optionally, add a constructor for customization or methods for manipulation
   constructor(init?: Partial<SuperwallOptions>) {
@@ -47,6 +48,7 @@ export class SuperwallOptions {
       isGameControllerEnabled: this.isGameControllerEnabled,
       logging: this.logging.toJson(),
       collectAdServicesAttribution: this.collectAdServicesAttribution,
+      passIdentifiersToPlayStore: this.passIdentifiersToPlayStore,
     };
   }
 }

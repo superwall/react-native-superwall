@@ -14,6 +14,7 @@ class SuperwallOptions {
       options.localeIdentifier = json.getString("localeIdentifier")
       options.isExternalDataCollectionEnabled = json.getBoolean("isExternalDataCollectionEnabled")
       options.isGameControllerEnabled = json.getBoolean("isGameControllerEnabled")
+      options.passIdentifiersToPlayStore = json.getBoolean("passIdentifiersToPlayStore")
 
       val networkEnvironment = when (json.getString("networkEnvironment")) {
         "release" -> SuperwallOptions.NetworkEnvironment.Release()

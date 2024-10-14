@@ -11,6 +11,7 @@ import { NativeEventEmitter } from 'react-native';
 import { IdentityOptions } from './public/IdentityOptions';
 import { EventEmitter } from 'events';
 import { ConfigurationStatus } from './public/ConfigurationStatus';
+import { ConfirmedAssignment } from './public/ConfirmedAssigments';
 const { version } = require('../package.json');
 
 const LINKING_ERROR =
@@ -316,6 +317,14 @@ export default class Superwall {
       () => {
         if (feature) feature();
       }
+    );
+  }
+
+  async confirmAllAssignments(): Promise<ConfirmedAssignment[]> {
+    await this.awaitConfig();
+    const assignments = await SuperwallReactNative.confirmAllAssignments();
+    return assignments.map((assignment: any) =>
+      ConfirmedAssignment.fromJson(assignment)
     );
   }
 
