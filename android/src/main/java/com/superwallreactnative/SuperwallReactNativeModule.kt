@@ -237,4 +237,18 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
       promise.resolve(null)
     }
   }
+
+  @ReactMethod
+  fun confirmAllAssignments(promise: Promise) {
+    CoroutineScope(Dispatchers.IO).launch {
+      val result = Superwall.instance.confirmAllAssignments()
+      val array = Arguments.createArray()
+      result.forEach { assignment ->
+        array.pushMap(assignment.toJson())
+      }
+      launch(Dispatchers.Main) {
+        promise.resolve(array)
+      }
+    }
+  }
 }

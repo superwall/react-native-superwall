@@ -214,4 +214,14 @@ class SuperwallReactNative: RCTEventEmitter {
       resolve(nil)
     }
   }
+
+  @objc(confirmAllAssignments:withRejecter:)
+  func confirmAllAssignments(
+    resolve: @escaping RCTPromiseResolveBlock,
+    reject: @escaping RCTPromiseRejectBlock
+  ) {
+      Superwall.shared.confirmAllAssignments() { assignments in
+        resolve(assignments.map { $0.toJson() })
+      }
+  }
 }

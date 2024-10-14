@@ -1122,8 +1122,8 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-    - SuperwallKit (= 3.10.0)
-  - SuperwallKit (3.10.0)
+    - SuperwallKit (= 3.10.1)
+  - SuperwallKit (3.10.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
