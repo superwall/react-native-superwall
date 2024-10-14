@@ -8,10 +8,7 @@ import com.superwall.sdk.paywall.presentation.internal.state.PaywallSkippedReaso
 class Experiment {
   companion object {
     fun toJson(experiment: Experiment): ReadableMap {
-      val variantMap = Arguments.createMap()
-      variantMap.putString("id",experiment.variant.id)
-      variantMap.putString("type", experiment.variant.type.toString())
-      variantMap.putString("paywallId", experiment.variant.paywallId)
+      val variantMap = experiment.variant.toJson()
 
       val experimentMap = Arguments.createMap()
       experimentMap.putString("id", experiment.id)

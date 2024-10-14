@@ -4,7 +4,7 @@ export class ConfirmedAssignment {
   experimentId: String;
   variant: Variant;
 
-  constructor(experimentId: String, variant: VariantType) {
+  constructor(experimentId: String, variant: Variant) {
     this.experimentId = experimentId;
     this.variant = variant;
   }
