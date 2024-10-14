@@ -13,7 +13,7 @@ The changelog for `Superwall`. Also see the [releases](https://github.com/superw
 
 ### Fixes
 
-- Fixes issue with the `Experiment` inside `PaywallInfo` being `null` in the `handleSuperwallEvent` delegate.
+- Fixes issue with the `Experiment` inside `PaywallInfo` being `null` in the `handleSuperwallEvent` delegate for iOS.
 
 ## 1.3.2
 
