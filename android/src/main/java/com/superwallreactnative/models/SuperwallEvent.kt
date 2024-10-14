@@ -196,6 +196,9 @@ class SuperwallEvent {
         is SuperwallEvent.ConfigFail -> {
           map.putString("event", "configFail")
         }
+        is SuperwallEvent.ConfirmAllAssignments -> {
+          map.putString("event", "confirmAllAssignments")
+        }
       }
       return map
     }
