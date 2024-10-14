@@ -15,7 +15,7 @@ extension PaywallInfo {
     map["name"] = self.name
     map["url"] = self.url.absoluteString
     if let experiment = self.experiment {
-      map["experiment"] = Experiment.toJson(experiment)
+      map["experiment"] = experiment.toJson()
     }
     map["triggerSessionId"] = triggerSessionId
 

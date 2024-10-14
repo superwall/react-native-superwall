@@ -11,6 +11,10 @@ The changelog for `Superwall`. Also see the [releases](https://github.com/superw
 - Adds `passIdentifiersToPlayStore` to `SuperwallOptions` which allows you to pass user identifiers to the Play Store purchases as account identifiers. This is useful for tracking user purchases in the Play Store console.
 - Adds `confirmAllAssignments` method to `Superwall` which confirms assignments for all placements and returns an array of all confirmed experiment assignments. Note that the assignments may be different when a placement is registered due to changes in user, placement, or device parameters used in audience filters.
 
+### Fixes
+
+- Fixes issue with the `Experiment` inside `PaywallInfo` being `null` in the `handleSuperwallEvent` delegate.
+
 ## 1.3.2
 
 ### Enhancements
