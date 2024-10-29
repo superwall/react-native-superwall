@@ -228,4 +228,14 @@ class SuperwallReactNative: RCTEventEmitter {
       resolve(assignments.map { $0.toJson() })
     }
   }
+
+  @objc(preloadPaywalls:)
+  func preloadPaywalls(forEvents eventNames: [String]) {
+    Superwall.shared.preloadPaywalls(forEvents: Set(eventNames))
+  }
+
+  @objc(preloadAllPaywalls)
+  func preloadAllPaywalls() {
+    Superwall.shared.preloadAllPaywalls()
+  }
 }

@@ -1118,12 +1118,14 @@ PODS:
     - PurchasesHybridCommon (= 9.7.2)
     - React-Core
   - SocketRocket (0.6.1)
-  - superwall-react-native (1.3.2):
+  - Superscript (0.1.12)
+  - superwall-react-native (1.3.4):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-    - SuperwallKit (= 3.10.1)
-  - SuperwallKit (3.10.1)
+    - SuperwallKit (= 3.11.1)
+  - SuperwallKit (3.11.1):
+    - Superscript (= 0.1.12)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -1220,6 +1222,7 @@ SPEC REPOS:
     - PurchasesHybridCommon
     - RevenueCat
     - SocketRocket
+    - Superscript
     - SuperwallKit
 
 EXTERNAL SOURCES:
@@ -1389,8 +1392,9 @@ SPEC CHECKSUMS:
   RevenueCat: 7be0d7bde9efb2fc1ebd1888522c55bb4f9feb18
   RNPurchases: 06957eb2f35bd7bb336d32fccf3534d45a3fda8a
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  superwall-react-native: 9092fa4e0d385c480e835a032132b46a3c13b2bc
-  SuperwallKit: 89cfaba57c139f97a578efc6bbb1f3963d2aa6b2
+  Superscript: 1ed1b4364f93bd16be05d085bba7357dbab95c83
+  superwall-react-native: be4cd6ea0670a4f2f08986309a7ca27ee5f0e684
+  SuperwallKit: ff739c94ebc351ae210c8b0f0b3931e930d74053
   Yoga: 1b901a6d6eeba4e8a2e8f308f708691cdb5db312
 
 PODFILE CHECKSUM: 76fced934770e056b70a3087a2bc377b3556bae1

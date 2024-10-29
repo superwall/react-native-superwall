@@ -67,6 +67,10 @@ RCT_EXTERN_METHOD(
   withRejecter:(RCTPromiseRejectBlock)reject
 )
 
+RCT_EXTERN_METHOD(preloadAllPaywalls)
+
+RCT_EXTERN_METHOD(preloadPaywalls:(NSArray<NSString *> *)eventNames)
+
 + (BOOL)requiresMainQueueSetup
 {
   return NO;
