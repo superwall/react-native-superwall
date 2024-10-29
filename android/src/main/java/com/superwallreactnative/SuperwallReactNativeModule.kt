@@ -7,6 +7,7 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.superwall.sdk.Superwall
 import com.superwall.sdk.identity.identify
@@ -250,5 +251,17 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
         promise.resolve(array)
       }
     }
+  }
+
+  @ReactMethod
+  fun preloadPaywalls(eventNames: ReadableArray) {
+    val eventNames = eventNames.toArrayList().toSet() as Set<String>
+    Superwall.instance.preloadPaywalls(eventNames)
+  }
+
+  @ReactMethod
+  fun preloadAllPaywalls(promise: Promise) {
+    Superwall.instance.preloadAllPaywalls()
+    promise.resolve(null)
   }
 }

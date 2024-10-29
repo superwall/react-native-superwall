@@ -2,6 +2,17 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 1.3.4
+
+### Enhancements
+
+- Upgrades Android SDK to 1.3.1 [View Android SDK release notes](https://github.com/superwall-me/Superwall-Android/releases/tag/1.3.1)
+- Adds `preloadAllPaywalls` and `preloadPaywalls(eventNames: Set<String>)` method to `Superwall` which preloads all paywalls or paywalls for the event names passed in the argument.
+
+### Fixes
+
+- Fixes issue with the `Experiment` inside `PaywallInfo` being `null` in the `handleSuperwallEvent` delegate for iOS.
+
 ## 1.3.3
 
 ### Enhancements
