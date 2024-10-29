@@ -230,16 +230,12 @@ class SuperwallReactNative: RCTEventEmitter {
   }
 
   @objc(preloadPaywalls:)
-  func preloadPaywalls(eventNames: [String]) {
-    Superwall.shared.preloadPaywalls(eventNames)
+  func preloadPaywalls(forEvents eventNames: [String]) {
+    Superwall.shared.preloadPaywalls(forEvents: Set(eventNames))
   }
 
-  @objc(preloadAllPaywalls:withRejecter:)
-  func preloadAllPaywalls(
-    resolve: @escaping RCTPromiseResolveBlock,
-    reject: @escaping RCTPromiseRejectBlock
-  ) {
+  @objc(preloadAllPaywalls)
+  func preloadAllPaywalls() {
     Superwall.shared.preloadAllPaywalls()
-    resolve(nil)
   }
 }

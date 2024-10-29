@@ -7,6 +7,7 @@ The changelog for `Superwall`. Also see the [releases](https://github.com/superw
 ### Enhancements
 
 - Upgrades Android SDK to 1.3.1 [View Android SDK release notes](https://github.com/superwall-me/Superwall-Android/releases/tag/1.3.1)
+- Upgrades iOS SDK to 3.11.1 [View iOS SDK release notes](https://github.com/superwall-me/Superwall-iOS/releases/tag/3.11.1)
 - Adds `preloadAllPaywalls` and `preloadPaywalls(eventNames: Set<String>)` method to `Superwall` which preloads all paywalls or paywalls for the event names passed in the argument.
 
 ### Fixes

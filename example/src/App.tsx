@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Platform, Button, Linking } from 'react-native';
-import Superwall, { SuperwallOptions } from '@superwall/react-native-superwall';
+import Superwall from '@superwall/react-native-superwall';
 import { RCPurchaseController } from './RCPurchaseController';
 import { MySuperwallDelegate } from './MySuperwallDelegate';
 
