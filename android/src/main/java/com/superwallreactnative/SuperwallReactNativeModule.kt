@@ -26,6 +26,7 @@ import com.superwallreactnative.models.SubscriptionStatus
 import com.superwallreactnative.models.SuperwallOptions
 import com.superwallreactnative.models.convertMapToReadableMap
 import com.superwallreactnative.models.convertReadableMapToMap
+import com.superwallreactnative.models.toRNString
 import com.superwallreactnative.models.toJson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -184,7 +185,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
 
   @ReactMethod
   fun getConfigurationStatus(promise: Promise) {
-    promise.resolve(Superwall.instance.configurationState.toString())
+    promise.resolve(Superwall.instance.configurationState.toRNString())
   }
 
   @ReactMethod
