@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
 
 class SuperwallReactNativeModule(private val reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
-  private val purchaseController = PurchaseControllerBridge(reactContext)
+  private val purchaseController: PurchaseControllerBridge = PurchaseControllerProvider.getInstance(reactContext)
   private var delegate: SuperwallDelegateBridge? = null
   private val activityProvider: ActivityProvider = ReactNativeActivityProvider(reactContext)
 
