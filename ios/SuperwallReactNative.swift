@@ -3,7 +3,7 @@ import SuperwallKit
 @objc(SuperwallReactNative)
 class SuperwallReactNative: RCTEventEmitter {
   static var emitter: RCTEventEmitter!
-  private var purchaseController = PurchaseControllerBridge()
+  private let purchaseController = PurchaseControllerBridge.shared
   private var delegate: SuperwallDelegateBridge?
 
   override init() {

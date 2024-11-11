@@ -2,8 +2,12 @@ import StoreKit
 import SuperwallKit
 
 final class PurchaseControllerBridge: PurchaseController {
+  static let shared = PurchaseControllerBridge()
+
   var purchaseCompletion: ((PurchaseResult) -> Void)?
   var restoreCompletion: ((RestorationResult) -> Void)?
+
+  private init() {}
 
   func purchase(product: SKProduct) async -> PurchaseResult {
     SuperwallReactNative.emitter.sendEvent(
