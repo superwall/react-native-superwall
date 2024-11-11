@@ -11,7 +11,7 @@ import kotlinx.coroutines.future.await
 import java.util.concurrent.CompletableFuture
 
 class PurchaseControllerBridge(
-  private val reactContext: ReactContext
+  var reactContext: ReactContext
 ): PurchaseController {
   var purchasePromise: CompletableFuture<PurchaseResult>? = null
   var restorePromise: CompletableFuture<RestorationResult>? = null

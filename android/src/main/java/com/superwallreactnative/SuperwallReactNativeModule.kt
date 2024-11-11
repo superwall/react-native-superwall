@@ -26,7 +26,7 @@ import com.superwallreactnative.models.SubscriptionStatus
 import com.superwallreactnative.models.SuperwallOptions
 import com.superwallreactnative.models.convertMapToReadableMap
 import com.superwallreactnative.models.convertReadableMapToMap
-import com.superwallreactnative.models.toRNString
+import com.superwallreactnative.models.asString
 import com.superwallreactnative.models.toJson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 
 class SuperwallReactNativeModule(private val reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
-  private val purchaseController = PurchaseControllerBridge(reactContext)
+  private val purchaseController: PurchaseControllerBridge = PurchaseControllerProvider.getInstance(reactContext)
   private var delegate: SuperwallDelegateBridge? = null
   private val activityProvider: ActivityProvider = ReactNativeActivityProvider(reactContext)
 
@@ -185,7 +185,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
 
   @ReactMethod
   fun getConfigurationStatus(promise: Promise) {
-    promise.resolve(Superwall.instance.configurationState.toRNString())
+    promise.resolve(Superwall.instance.configurationState.asString())
   }
 
   @ReactMethod

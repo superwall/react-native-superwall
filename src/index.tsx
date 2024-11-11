@@ -366,7 +366,7 @@ export default class Superwall {
 
   async preloadPaywalls(eventNames: Set<string>) {
     await this.awaitConfig();
-    await SuperwallReactNative.preloadPaywalls(eventNames);
+    await SuperwallReactNative.preloadPaywalls(Array.from(eventNames));
   }
 
   async setUserAttributes(userAttributes: UserAttributes) {

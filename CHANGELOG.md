@@ -2,6 +2,14 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 1.3.5
+
+### Fixes
+
+- Fixes issue where the `PurchaseController` functions wouldn't get called on hot restart of the app.
+- Fixes issue with configuration status serialization on Android.
+- Fixes issue with preloading paywalls on Android.
+
 ## 1.3.4
 
 ### Enhancements
