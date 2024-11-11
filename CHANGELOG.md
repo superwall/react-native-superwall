@@ -7,6 +7,8 @@ The changelog for `Superwall`. Also see the [releases](https://github.com/superw
 ### Fixes
 
 - Fixes issue where the `PurchaseController` functions wouldn't get called on hot restart of the app.
+- Fixes issue with configuration status serialization on Android.
+- Fixes issue with preloading paywalls on Android.
 
 ## 1.3.4
 
