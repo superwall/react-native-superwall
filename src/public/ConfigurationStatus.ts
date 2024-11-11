@@ -17,4 +17,15 @@ export namespace ConfigurationStatus {
         return ConfigurationStatus.PENDING;
     }
   }
+
+  export function toString(value: ConfigurationStatus): string {
+    switch (value) {
+      case ConfigurationStatus.FAILED:
+        return 'FAILED';
+      case ConfigurationStatus.PENDING:
+        return 'PENDING';
+      case ConfigurationStatus.CONFIGURED:
+        return 'CONFIGURED';
+    }
+  }
 }
