@@ -7,9 +7,11 @@ import com.superwall.sdk.delegate.subscription_controller.PurchaseController
 object PurchaseControllerProvider {
   private var instance: PurchaseControllerBridge? = null
 
-  fun getInstance(context: Context): PurchaseControllerBridge {
+  fun getInstance(context: ReactApplicationContext): PurchaseControllerBridge {
     if (instance == null) {
-      instance = PurchaseControllerBridge(context as ReactApplicationContext)
+      instance = PurchaseControllerBridge(context)
+    } else {
+      instance?.reactContext = context
     }
     return instance!!
   }
