@@ -23,6 +23,7 @@ import com.superwallreactnative.models.PaywallSkippedReason
 import com.superwallreactnative.models.PurchaseResult
 import com.superwallreactnative.models.RestorationResult
 import com.superwallreactnative.models.SubscriptionStatus
+import com.superwallreactnative.models.InterfaceStyle
 import com.superwallreactnative.models.SuperwallOptions
 import com.superwallreactnative.models.convertMapToReadableMap
 import com.superwallreactnative.models.convertReadableMapToMap
@@ -218,6 +219,14 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   ) {
     val url = Uri.parse(url)
     promise.resolve(Superwall.instance.handleDeepLink(url))
+  }
+
+  @ReactMethod
+  fun setInterfaceStyle(
+    interfaceStyle: String
+  ) {
+    val interfaceStyle = InterfaceStyle.fromString(status)
+    Superwall.instance.setInterfaceStyle(interfaceStyle)
   }
 
   @ReactMethod

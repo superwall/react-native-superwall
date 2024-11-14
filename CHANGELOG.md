@@ -2,6 +2,10 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 1.4.0
+
+- Adds `setInterfaceStyle(style:)` to Superwall, which you can use to set the interface style as `LIGHT` or `DARK`.
+
 ## 1.3.5
 
 ### Fixes

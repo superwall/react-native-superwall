@@ -4,6 +4,7 @@ import { StyleSheet, View, Platform, Button, Linking } from 'react-native';
 import Superwall from '@superwall/react-native-superwall';
 import { RCPurchaseController } from './RCPurchaseController';
 import { MySuperwallDelegate } from './MySuperwallDelegate';
+import { InterfaceStyle } from '@superwall/react-native-superwall';
 
 export default function App() {
   const delegate = new MySuperwallDelegate();

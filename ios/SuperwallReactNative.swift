@@ -160,6 +160,15 @@ class SuperwallReactNative: RCTEventEmitter {
     Superwall.shared.subscriptionStatus = subscriptionStatus
   }
 
+  @objc(setInterfaceStyle:)
+  func setInterfaceStyle(style: String?) {
+    var interfaceStyle: InterfaceStyle?
+    if let style = style {
+      interfaceStyle = InterfaceStyle.fromString(style: style)
+    }
+    Superwall.shared.setInterfaceStyle(to: interfaceStyle)
+  }
+
   @objc(getUserAttributes:withRejecter:)
   func getUserAttributes(
     resolve: @escaping RCTPromiseResolveBlock,

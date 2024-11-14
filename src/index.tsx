@@ -5,6 +5,7 @@ import { PaywallPresentationHandler } from './public/PaywallPresentationHandler'
 import { PaywallInfo } from './public/PaywallInfo';
 import { PaywallSkippedReason } from './public/PaywallSkippedReason';
 import { SubscriptionStatus } from './public/SubscriptionStatus';
+import { InterfaceStyle } from './public/InterfaceStyle';
 import { SuperwallDelegate } from './public/SuperwallDelegate';
 import { SuperwallEventInfo } from './public/SuperwallEventInfo';
 import { NativeEventEmitter } from 'react-native';
@@ -52,6 +53,7 @@ export {
 } from './public/PurchaseResult';
 export { RestorationResult } from './public/RestorationResult';
 export { SubscriptionStatus } from './public/SubscriptionStatus';
+export { InterfaceStyle } from './public/InterfaceStyle';
 export { ConfigurationStatus } from './public/ConfigurationStatus';
 //export { Superwall } from './Superwall';
 export { SuperwallDelegate } from './public/SuperwallDelegate';
@@ -344,6 +346,10 @@ export default class Superwall {
   async setSubscriptionStatus(status: SubscriptionStatus) {
     await this.awaitConfig();
     await SuperwallReactNative.setSubscriptionStatus(status.toString());
+  }
+
+  async setInterfaceStyle(style: InterfaceStyle) {
+    await SuperwallReactNative.setInterfaceStyle(style.toString());
   }
 
   async setDelegate(delegate: SuperwallDelegate | undefined) {
