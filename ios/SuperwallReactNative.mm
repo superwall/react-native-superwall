@@ -40,6 +40,8 @@ RCT_EXTERN_METHOD(
 
 RCT_EXTERN_METHOD(setSubscriptionStatus:(NSString *)status)
 
+RCT_EXTERN_METHOD(setInterfaceStyle:(NSString *)style)
+
 RCT_EXTERN_METHOD(
   getUserAttributes:(RCTPromiseResolveBlock)resolve
   withRejecter:(RCTPromiseRejectBlock)reject
