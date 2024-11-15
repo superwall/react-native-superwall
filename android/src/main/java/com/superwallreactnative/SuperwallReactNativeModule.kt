@@ -225,7 +225,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   fun setInterfaceStyle(
     interfaceStyle: String
   ) {
-    val interfaceStyle = InterfaceStyle.fromString(status)
+    val interfaceStyle = InterfaceStyle.fromString(interfaceStyle)
     Superwall.instance.setInterfaceStyle(interfaceStyle)
   }
 

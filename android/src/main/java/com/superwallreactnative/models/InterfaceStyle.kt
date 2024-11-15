@@ -1,6 +1,6 @@
 package com.superwallreactnative.models
 
-import com.superwall.sdk.delegate.InterfaceStyle
+import com.superwall.sdk.network.device.InterfaceStyle
 
 class InterfaceStyle {
   companion object {
