@@ -4,6 +4,8 @@ The changelog for `Superwall`. Also see the [releases](https://github.com/superw
 
 ## 1.4.0
 
+### Enhancements
+
 - Adds `setInterfaceStyle(style:)` to Superwall, which you can use to set the interface style as `LIGHT` or `DARK`.
 
 ## 1.3.5
