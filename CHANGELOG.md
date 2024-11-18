@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 1.4.1
+
+### Enhancements
+
+- Exposes `getPresentationResult(forEvent:params:)`. This returns a `PresentationResult`, which preemptively gets the result of registering an event. This helps you determine whether a particular event will present a paywall in the future.
+
 ## 1.4.0
 
 ### Enhancements

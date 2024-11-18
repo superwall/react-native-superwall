@@ -16,6 +16,7 @@ import com.superwall.sdk.misc.ActivityProvider
 import com.superwall.sdk.misc.sdkVersion
 import com.superwall.sdk.paywall.presentation.PaywallPresentationHandler
 import com.superwall.sdk.paywall.presentation.dismiss
+import com.superwall.sdk.paywall.presentation.get_presentation_result.getPresentationResult
 import com.superwall.sdk.paywall.presentation.register
 import com.superwallreactnative.bridges.SuperwallDelegateBridge
 import com.superwallreactnative.models.IdentityOptions
@@ -28,6 +29,7 @@ import com.superwallreactnative.models.SuperwallOptions
 import com.superwallreactnative.models.convertMapToReadableMap
 import com.superwallreactnative.models.convertReadableMapToMap
 import com.superwallreactnative.models.asString
+import com.superwallreactnative.models.convertReadableMapToCompactMap
 import com.superwallreactnative.models.toJson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -259,6 +261,21 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
       }
       launch(Dispatchers.Main) {
         promise.resolve(array)
+      }
+    }
+  }
+
+  @ReactMethod
+  fun getPresentationResult(
+    event: String,
+    params: ReadableMap?,
+    promise: Promise
+  ) {
+    CoroutineScope(Dispatchers.IO).launch {
+      val paramsMap = params?.let { convertReadableMapToCompactMap(it) }
+      val result = Superwall.instance.getPresentationResult(event, paramsMap)
+      launch(Dispatchers.Main) {
+        promise.resolve(result.toJson())
       }
     }
   }

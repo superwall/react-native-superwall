@@ -69,6 +69,13 @@ RCT_EXTERN_METHOD(
   withRejecter:(RCTPromiseRejectBlock)reject
 )
 
+RCT_EXTERN_METHOD(
+  getPresentationResult:(NSString *)event
+  params:(NSDictionary *)options
+  withResolver:(RCTPromiseResolveBlock)resolve
+  withRejecter:(RCTPromiseRejectBlock)reject
+)
+
 RCT_EXTERN_METHOD(preloadAllPaywalls)
 
 RCT_EXTERN_METHOD(preloadPaywalls:(NSArray<NSString *> *)eventNames)

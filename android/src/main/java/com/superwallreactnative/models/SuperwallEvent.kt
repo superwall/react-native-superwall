@@ -241,3 +241,20 @@ fun convertReadableMapToMap(readableMap: ReadableMap): Map<String, Any?> {
   }
   return map
 }
+
+fun convertReadableMapToCompactMap(readableMap: ReadableMap): Map<String, Any> {
+  val map: MutableMap<String, Any> = HashMap()
+  val iterator = readableMap.keySetIterator()
+  while (iterator.hasNextKey()) {
+    val key = iterator.nextKey()
+    when (val value = readableMap.getType(key)) {
+      ReadableType.String -> map[key] = readableMap.getString(key) ?: continue
+      ReadableType.Boolean -> map[key] = readableMap.getBoolean(key)
+      ReadableType.Number -> map[key] = readableMap.getDouble(key)
+      ReadableType.Map -> map[key] = convertReadableMapToMap(readableMap.getMap(key)!!)
+      ReadableType.Null -> continue
+      else -> {}
+    }
+  }
+  return map
+}
