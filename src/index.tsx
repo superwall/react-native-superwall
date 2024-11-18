@@ -13,6 +13,7 @@ import { IdentityOptions } from './public/IdentityOptions';
 import { EventEmitter } from 'events';
 import { ConfigurationStatus } from './public/ConfigurationStatus';
 import { ConfirmedAssignment } from './public/ConfirmedAssigments';
+import type { PresentationResult } from './public/PresentationResult';
 const { version } = require('../package.json');
 
 const LINKING_ERROR =
@@ -328,6 +329,14 @@ export default class Superwall {
     return assignments.map((assignment: any) =>
       ConfirmedAssignment.fromJson(assignment)
     );
+  }
+
+  async getPresentationResult(
+    event: String,
+    params?: Map<String, any>
+  ): Promise<PresentationResult> {
+    await this.awaitConfig();
+    return await SuperwallReactNative.getPresentationResult(event, params);
   }
 
   async getConfigurationStatus(): Promise<ConfigurationStatus> {
