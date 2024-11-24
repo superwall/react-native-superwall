@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 1.4.2
+
+### Fixes
+
+- Fixes an issue where params that were passed with `getPresentationResult(event:params:)` were being dropped.
+
 ## 1.4.1
 
 ### Enhancements

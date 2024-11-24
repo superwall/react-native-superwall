@@ -336,7 +336,14 @@ export default class Superwall {
     params?: Map<String, any>
   ): Promise<PresentationResult> {
     await this.awaitConfig();
-    return await SuperwallReactNative.getPresentationResult(event, params);
+    let paramsObject = {};
+    if (params) {
+      paramsObject = Object.fromEntries(params);
+    }
+    return await SuperwallReactNative.getPresentationResult(
+      event,
+      paramsObject
+    );
   }
 
   async getConfigurationStatus(): Promise<ConfigurationStatus> {
