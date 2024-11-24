@@ -241,7 +241,7 @@ class SuperwallReactNative: RCTEventEmitter {
   @objc(getPresentationResult:params:withResolver:withRejecter:)
   func getPresentationResult(
     event: String,
-    params: [String: Any],
+    params: [String: Any]?,
     resolve: @escaping RCTPromiseResolveBlock,
     reject: @escaping RCTPromiseRejectBlock
   ) {
