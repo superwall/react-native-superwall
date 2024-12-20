@@ -33,6 +33,7 @@ import com.superwallreactnative.models.toJson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.first
 
 class SuperwallReactNativeModule(private val reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
@@ -187,7 +188,10 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
 
   @ReactMethod
   fun getConfigurationStatus(promise: Promise) {
-    promise.resolve(Superwall.instance.configurationState.asString())
+    CoroutineScope(Dispatchers.IO).launch {
+      Superwall.hasInitialized.first { it }
+      promise.resolve(Superwall.instance.configurationState.asString())
+    }
   }
 
   @ReactMethod
@@ -253,14 +257,17 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   @ReactMethod
   fun confirmAllAssignments(promise: Promise) {
     CoroutineScope(Dispatchers.IO).launch {
-      val result = Superwall.instance.confirmAllAssignments()
-      val array = Arguments.createArray()
-      result.forEach { assignment ->
-        array.pushMap(assignment.toJson())
-      }
-      launch(Dispatchers.Main) {
-        promise.resolve(array)
-      }
+      Superwall.instance.confirmAllAssignments().fold({
+        launch(Dispatchers.Main) {
+          val array = Arguments.createArray()
+          it.forEach { assignment ->
+            array.pushMap(assignment.toJson())
+          }
+          promise.resolve(array)
+        }
+      },{
+        promise.reject("Error", it.message)
+      })
     }
   }
 
@@ -271,10 +278,13 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
     promise: Promise
   ) {
     CoroutineScope(Dispatchers.IO).launch {
-      val result = Superwall.instance.getPresentationResult(event, params?.toHashMap())
-      launch(Dispatchers.Main) {
-        promise.resolve(result.toJson())
-      }
+      Superwall.instance.getPresentationResult(event, params?.toHashMap()).fold({
+        launch(Dispatchers.Main) {
+          promise.resolve(it.toJson())
+        }
+      },{
+        promise.reject("Error", it.message)
+      })
     }
   }
 

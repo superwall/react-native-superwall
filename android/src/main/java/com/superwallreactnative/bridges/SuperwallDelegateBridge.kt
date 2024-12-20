@@ -10,7 +10,7 @@ import com.superwall.sdk.paywall.presentation.PaywallInfo
 import com.superwallreactnative.models.SuperwallEvent
 import com.superwallreactnative.models.convertMapToReadableMap
 import com.superwallreactnative.models.toJson
-import java.net.URL
+import java.net.URI
 import android.net.Uri
 
 class SuperwallDelegateBridge(
@@ -86,7 +86,7 @@ class SuperwallDelegateBridge(
       .emit("didPresentPaywall", data)
   }
 
-  override fun paywallWillOpenURL(url: URL) {
+  override fun paywallWillOpenURL(url: URI) {
     val data = Arguments.createMap().apply {
       putString("url", url.toString())
     }
