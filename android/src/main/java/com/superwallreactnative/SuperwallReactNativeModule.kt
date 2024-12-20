@@ -34,6 +34,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.first
+import com.superwall.sdk.config.models.ConfigurationStatus
 
 class SuperwallReactNativeModule(private val reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
@@ -189,8 +190,10 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   @ReactMethod
   fun getConfigurationStatus(promise: Promise) {
     CoroutineScope(Dispatchers.IO).launch {
-      Superwall.hasInitialized.first { it }
-      promise.resolve(Superwall.instance.configurationState.asString())
+      if(!Superwall.hasInitialized.first())
+        promise.resolve(ConfigurationStatus.Pending.asString())
+      else
+        promise.resolve(Superwall.instance.configurationState.asString())
     }
   }
 
