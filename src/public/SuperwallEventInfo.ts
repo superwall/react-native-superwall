@@ -78,6 +78,8 @@ export enum EventType {
   adServicesTokenRequestStart = "adServicesTokenRequestStart",
   adServicesTokenRequestFail = "adServicesTokenRequestFail",
   adServicesTokenRequestComplete = "adServicesTokenRequestComplete"
+  shimmerViewStart = "shimmerViewStart"
+  shimmerViewComplete = "shimmerViewComplete"
 }
 
 export class SuperwallEvent {
@@ -151,6 +153,8 @@ export class SuperwallEvent {
       case EventType.adServicesTokenRequestStart:
       case EventType.errorThrown:
       case EventType.confirmAllAssignments:
+      case EventType.shimmerViewStart:
+      case EventType.shimmerViewComplete:
         return new SuperwallEvent({ type: eventType });
       case EventType.restoreFail:
         return new SuperwallEvent({

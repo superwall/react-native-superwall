@@ -9,8 +9,7 @@ extension SuperwallOptions {
       let networkEnvironment = NetworkEnvironment.fromJson(networkEnvironmentValue),
       let isExternalDataCollectionEnabled = dictionary["isExternalDataCollectionEnabled"] as? Bool,
       let loggingValue = dictionary["logging"] as? [String: Any],
-      let logging = Logging.fromJson(loggingValue),
-      let collectAdServicesAttribution = dictionary["collectAdServicesAttribution"] as? Bool
+      let logging = Logging.fromJson(loggingValue)
     else {
       return nil
     }
@@ -25,7 +24,6 @@ extension SuperwallOptions {
     superwallOptions.localeIdentifier = localeIdentifier
     superwallOptions.isGameControllerEnabled = isGameControllerEnabled
     superwallOptions.logging = logging
-    superwallOptions.collectAdServicesAttribution = collectAdServicesAttribution
 
     return superwallOptions
   }

@@ -190,15 +190,24 @@ class SuperwallEvent {
           map.putString("event", "paywallWebviewLoadFallback")
           map.putMap("paywallInfo", superwallEvent.paywallInfo.toJson())
         }
-        is SuperwallEvent.ErrorThrown -> {
-          map.putString("event", "errorThrown")
-        }
         is SuperwallEvent.ConfigFail -> {
           map.putString("event", "configFail")
         }
         is SuperwallEvent.ConfirmAllAssignments -> {
           map.putString("event", "confirmAllAssignments")
         }
+        is SuperwallEvent.PaywallResourceLoadFail -> {
+          map.putString("event", "paywallResourceLoadFail")
+          map.putString("url", superwallEvent.url.toString())
+          map.putString("error", superwallEvent.error)
+        }
+        is SuperwallEvent.ShimmerViewComplete -> {
+          map.putString("event", "shimmerViewComplete")
+        }
+        is SuperwallEvent.ShimmerViewStart -> {
+          map.putString("event", "shimmerViewStart")
+        }
+        else -> {}
       }
       return map
     }
