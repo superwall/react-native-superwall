@@ -4,8 +4,13 @@ The changelog for `Superwall`. Also see the [releases](https://github.com/superw
 
 ## 1.4.3
 
+### Enhancements
+
 - Upgrades Android SDK to 1.5.1 [View Android SDK release notes](https://github.com/superwall-me/Superwall-Android/releases/tag/1.5.1)
 - Upgrades iOS SDK to 3.12.0 [View iOS SDK release notes](https://github.com/superwall-me/Superwall-iOS/releases/tag/3.12.0)
+
+### Fixes
+
 - Fixes issue where accessing configuration state before configuring would cause a crash.
 
 ## 1.4.2
