@@ -138,6 +138,10 @@ extension SuperwallEvent {
       return ["event": "adServicesTokenRequestFail", "error": error.localizedDescription]
     case .adServicesTokenRequestComplete(token: let token):
       return ["event": "adServicesTokenRequestComplete", "token": token]
+    case .shimmerViewStart:
+      return ["event": "shimmerViewStart"]
+    case .shimmerViewComplete:
+      return ["event": "shimmerViewComplete"]
     }
   }
 }

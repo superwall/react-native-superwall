@@ -3,9 +3,11 @@
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
 ## 1.4.3
+
 - Upgrades Android SDK to 1.5.1 [View Android SDK release notes](https://github.com/superwall-me/Superwall-Android/releases/tag/1.5.1)
-- Fixes issue where accesing coniguration state before configuring would cause a crash.
-  
+- Upgrades iOS SDK to 3.12.0 [View iOS SDK release notes](https://github.com/superwall-me/Superwall-iOS/releases/tag/3.12.0)
+- Fixes issue where accessing configuration state before configuring would cause a crash.
+
 ## 1.4.2
 
 ### Fixes
