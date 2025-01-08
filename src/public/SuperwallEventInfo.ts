@@ -77,8 +77,8 @@ export enum EventType {
   configFail = "configFail",
   adServicesTokenRequestStart = "adServicesTokenRequestStart",
   adServicesTokenRequestFail = "adServicesTokenRequestFail",
-  adServicesTokenRequestComplete = "adServicesTokenRequestComplete"
-  shimmerViewStart = "shimmerViewStart"
+  adServicesTokenRequestComplete = "adServicesTokenRequestComplete",
+  shimmerViewStart = "shimmerViewStart",
   shimmerViewComplete = "shimmerViewComplete"
 }
 
