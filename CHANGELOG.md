@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 1.4.5
+
+### Fixes
+
+- Removes unnecessary date comparison from PurchaseController example code.
+
 ## 1.4.4
 
 ### Enhancements
