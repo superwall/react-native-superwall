@@ -13,7 +13,6 @@ fun PaywallInfo.toJson(): ReadableMap {
   this.experiment?.let {
     map.putMap("experiment", Experiment.toJson(it))
   }
-  this.triggerSessionId?.let { map.putString("triggerSessionId", it) }
 
   val productsArray = Arguments.createArray()
   this.products.forEach { product ->

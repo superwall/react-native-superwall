@@ -19,12 +19,12 @@ fun PresentationResult.toJson(): ReadableMap {
       map.putMap("experiment", Experiment.toJson(experiment))
     }
 
-    is PresentationResult.NoRuleMatch -> {
-      map.putString("type", "NoRuleMatch")
+    is PresentationResult.NoAudienceMatch -> {
+      map.putString("type", "NoAudienceMatch")
     }
 
-    is PresentationResult.EventNotFound -> {
-      map.putString("type", "EventNotFound")
+    is PresentationResult.PlacementNotFound -> {
+      map.putString("type", "PlacementNotFound")
     }
 
     is PresentationResult.UserIsSubscribed -> {

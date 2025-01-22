@@ -203,9 +203,24 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   }
 
   @ReactMethod
-  fun setSubscriptionStatus(status: String) {
-    val subscriptionStatus = SubscriptionStatus.fromString(status)
-    Superwall.instance.setSubscriptionStatus(subscriptionStatus)
+  fun setEntitlementsStatus(
+    status: String,
+    entitlements: List<Map<String, Any>>
+  ) {
+    val entitlementStatus: EntitlementStatus = when (status.uppercase()) {
+      "UNKNOWN" -> EntitlementStatus.UNKNOWN
+      "INACTIVE" -> EntitlementStatus.INACTIVE
+      "ACTIVE" -> {
+        val entitlementsSet = entitlements.mapNotNull { dict ->
+          val id = dict["id"] as? String
+          id?.let { Entitlement(it) }
+        }.toSet()
+        EntitlementStatus.ACTIVE(entitlementsSet)
+      }
+      else -> EntitlementStatus.UNKNOWN
+    }
+
+    Superwall.instance.entitlements.status = entitlementStatus
   }
 
   @ReactMethod

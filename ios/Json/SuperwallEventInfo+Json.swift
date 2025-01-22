@@ -1,147 +1,198 @@
 import SuperwallKit
 
-extension SuperwallEventInfo {
+extension SuperwallPlacementInfo {
   func toJson() -> [String: Any] {
     return [
-      "event": event.toJson(),
-      "params": params
+      "placement": placement.toJson(),
+      "params": params,
     ]
   }
 }
 
-extension SuperwallEvent {
+extension SuperwallPlacement {
   func toJson() -> [String: Any] {
     switch self {
     case .firstSeen:
-      return ["event": "firstSeen"]
+      return ["placement": "firstSeen"]
     case .reset:
-      return ["event": "reset"]
+      return ["placement": "reset"]
     case .configRefresh:
-      return ["event": "configRefresh"]
+      return ["placement": "configRefresh"]
     case .appOpen:
-      return ["event": "appOpen"]
+      return ["placement": "appOpen"]
     case .appLaunch:
-      return ["event": "appLaunch"]
+      return ["placement": "appLaunch"]
     case .identityAlias:
-      return ["event": "identityAlias"]
+      return ["placement": "identityAlias"]
     case .appInstall:
-      return ["event": "appInstall"]
+      return ["placement": "appInstall"]
     case .sessionStart:
-      return ["event": "sessionStart"]
+      return ["placement": "sessionStart"]
     case .deviceAttributes(let attributes):
-      return ["event": "deviceAttributes", "attributes": attributes]
-    case .subscriptionStatusDidChange:
-      return ["event": "subscriptionStatusDidChange"]
+      return ["placement": "deviceAttributes", "attributes": attributes]
+    case .entitlementStatusDidChange:
+      return ["placement": "entitlementStatusDidChange"]
     case .appClose:
-      return ["event": "appClose"]
+      return ["placement": "appClose"]
     case .deepLink(let url):
-      return ["event": "deepLink", "url": url.absoluteString]
-    case .triggerFire(let eventName, let result):
-      return ["event": "triggerFire", "eventName": eventName, "result": result.toJson()]
+      return ["placement": "deepLink", "url": url.absoluteString]
+    case .triggerFire(let placementName, let result):
+      return [
+        "placement": "triggerFire", "placementName": placementName, "result": result.toJson(),
+      ]
     case .paywallOpen(let paywallInfo):
-      return ["event": "paywallOpen", "paywallInfo": paywallInfo.toJson()]
+      return ["placement": "paywallOpen", "paywallInfo": paywallInfo.toJson()]
     case .paywallClose(let paywallInfo):
-      return ["event": "paywallClose", "paywallInfo": paywallInfo.toJson()]
+      return ["placement": "paywallClose", "paywallInfo": paywallInfo.toJson()]
     case .paywallDecline(let paywallInfo):
-      return ["event": "paywallDecline", "paywallInfo": paywallInfo.toJson()]
+      return ["placement": "paywallDecline", "paywallInfo": paywallInfo.toJson()]
     case .transactionStart(let product, let paywallInfo):
-      return ["event": "transactionStart", "product": product.toJson(), "paywallInfo": paywallInfo.toJson()]
+      return [
+        "placement": "transactionStart", "product": product.toJson(),
+        "paywallInfo": paywallInfo.toJson(),
+      ]
     case .transactionFail(let error, let paywallInfo):
-      return ["event": "transactionFail", "error": error.localizedDescription, "paywallInfo": paywallInfo.toJson()]
+      return [
+        "placement": "transactionFail", "error": error.localizedDescription,
+        "paywallInfo": paywallInfo.toJson(),
+      ]
     case .transactionAbandon(let product, let paywallInfo):
-      return ["event": "transactionAbandon", "product": product.toJson(), "paywallInfo": paywallInfo.toJson()]
-    case .transactionComplete(let transaction, let product, let paywallInfo):
-      var json: [String: Any] = ["event": "transactionComplete", "product": product.toJson(), "paywallInfo": paywallInfo.toJson()]
+      return [
+        "placement": "transactionAbandon", "product": product.toJson(),
+        "paywallInfo": paywallInfo.toJson(),
+      ]
+    case .transactionComplete(let transaction, let product, let type, let paywallInfo):
+      var json: [String: Any] = [
+        "placement": "transactionComplete",
+        "product": product.toJson(),
+        "type": type.description,
+        "paywallInfo": paywallInfo.toJson(),
+      ]
       let transactionJson = transaction?.toJson()
       if let transactionJson {
         json["transaction"] = transactionJson
       }
       return json
     case .subscriptionStart(let product, let paywallInfo):
-      return ["event": "subscriptionStart", "product": product.toJson(), "paywallInfo": paywallInfo.toJson()]
+      return [
+        "placement": "subscriptionStart", "product": product.toJson(),
+        "paywallInfo": paywallInfo.toJson(),
+      ]
     case .freeTrialStart(let product, let paywallInfo):
-      return ["event": "freeTrialStart", "product": product.toJson(), "paywallInfo": paywallInfo.toJson()]
+      return [
+        "placement": "freeTrialStart", "product": product.toJson(),
+        "paywallInfo": paywallInfo.toJson(),
+      ]
     case .transactionRestore(let restoreType, let paywallInfo):
-      return ["event": "transactionRestore", "restoreType": restoreType.toJson(), "paywallInfo": paywallInfo.toJson()]
+      return [
+        "placement": "transactionRestore", "restoreType": restoreType.toJson(),
+        "paywallInfo": paywallInfo.toJson(),
+      ]
     case .transactionTimeout(let paywallInfo):
-      return ["event": "transactionTimeout", "paywallInfo": paywallInfo.toJson()]
+      return ["placement": "transactionTimeout", "paywallInfo": paywallInfo.toJson()]
     case .userAttributes(let attributes):
-      return ["event": "userAttributes", "attributes": attributes]
+      return ["placement": "userAttributes", "attributes": attributes]
     case .nonRecurringProductPurchase(let product, let paywallInfo):
-      return ["event": "nonRecurringProductPurchase", "product": product.toJson(), "paywallInfo": paywallInfo.toJson()]
+      return [
+        "placement": "nonRecurringProductPurchase", "product": product.toJson(),
+        "paywallInfo": paywallInfo.toJson(),
+      ]
     case .paywallResponseLoadStart(let triggeredEventName):
-      return ["event": "paywallResponseLoadStart", "triggeredEventName": triggeredEventName ?? ""]
+      return [
+        "placement": "paywallResponseLoadStart", "triggeredEventName": triggeredEventName ?? "",
+      ]
     case .paywallResponseLoadNotFound(let triggeredEventName):
-      return ["event": "paywallResponseLoadNotFound", "triggeredEventName": triggeredEventName ?? ""]
+      return [
+        "placement": "paywallResponseLoadNotFound", "triggeredEventName": triggeredEventName ?? "",
+      ]
     case .paywallResponseLoadFail(let triggeredEventName):
-      return ["event": "paywallResponseLoadFail", "triggeredEventName": triggeredEventName ?? ""]
+      return [
+        "placement": "paywallResponseLoadFail", "triggeredEventName": triggeredEventName ?? "",
+      ]
     case .paywallResponseLoadComplete(let triggeredEventName, let paywallInfo):
-      return ["event": "paywallResponseLoadComplete", "triggeredEventName": triggeredEventName ?? "", "paywallInfo": paywallInfo.toJson()]
+      return [
+        "placement": "paywallResponseLoadComplete", "triggeredEventName": triggeredEventName ?? "",
+        "paywallInfo": paywallInfo.toJson(),
+      ]
     case .paywallWebviewLoadStart(let paywallInfo):
-      return ["event": "paywallWebviewLoadStart", "paywallInfo": paywallInfo.toJson()]
+      return ["placement": "paywallWebviewLoadStart", "paywallInfo": paywallInfo.toJson()]
     case .paywallWebviewLoadFail(let paywallInfo):
-      return ["event": "paywallWebviewLoadFail", "paywallInfotoJson": paywallInfo.toJson()]
+      return ["placement": "paywallWebviewLoadFail", "paywallInfotoJson": paywallInfo.toJson()]
     case .paywallWebviewLoadComplete(let paywallInfo):
-      return ["event": "paywallWebviewLoadComplete", "paywallInfo": paywallInfo.toJson()]
+      return ["placement": "paywallWebviewLoadComplete", "paywallInfo": paywallInfo.toJson()]
     case .paywallWebviewLoadTimeout(let paywallInfo):
-      return ["event": "paywallWebviewLoadTimeout", "paywallInfo": paywallInfo.toJson()]
-    case .paywallWebviewLoadFallback(paywallInfo: let paywallInfo):
-      return ["event": "paywallWebviewLoadFallback", "paywallInfo": paywallInfo.toJson()]
+      return ["placement": "paywallWebviewLoadTimeout", "paywallInfo": paywallInfo.toJson()]
+    case .paywallWebviewLoadFallback(let paywallInfo):
+      return ["placement": "paywallWebviewLoadFallback", "paywallInfo": paywallInfo.toJson()]
     case .paywallProductsLoadStart(let triggeredEventName, let paywallInfo):
-      return ["event": "paywallProductsLoadStart", "triggeredEventName": triggeredEventName ?? "", "paywallInfo": paywallInfo.toJson()]
+      return [
+        "placement": "paywallProductsLoadStart", "triggeredEventName": triggeredEventName ?? "",
+        "paywallInfo": paywallInfo.toJson(),
+      ]
     case .paywallProductsLoadFail(let triggeredEventName, let paywallInfo):
-      return ["event": "paywallProductsLoadFail", "triggeredEventName": triggeredEventName ?? "", "paywallInfo": paywallInfo.toJson()]
+      return [
+        "placement": "paywallProductsLoadFail", "triggeredEventName": triggeredEventName ?? "",
+        "paywallInfo": paywallInfo.toJson(),
+      ]
     case .paywallProductsLoadComplete(let triggeredEventName):
-      return ["event": "paywallProductsLoadComplete", "triggeredEventName": triggeredEventName ?? ""]
+      return [
+        "placement": "paywallProductsLoadComplete", "triggeredEventName": triggeredEventName ?? "",
+      ]
     case let .paywallProductsLoadRetry(triggeredEventName, paywallInfo, attempt):
       return [
-        "event": "paywallProductsLoadRetry",
+        "placement": "paywallProductsLoadRetry",
         "triggeredEventName": triggeredEventName ?? "",
         "paywallInfo": paywallInfo.toJson(),
-        "attempt": attempt
+        "attempt": attempt,
       ]
     case .surveyResponse(let survey, let selectedOption, let customResponse, let paywallInfo):
-      return ["event": "surveyResponse", "survey": survey.toJson(), "selectedOption": selectedOption.toJson(), "customResponse": customResponse ?? "", "paywallInfo": paywallInfo.toJson()]
+      return [
+        "placement": "surveyResponse", "survey": survey.toJson(),
+        "selectedOption": selectedOption.toJson(), "customResponse": customResponse ?? "",
+        "paywallInfo": paywallInfo.toJson(),
+      ]
     case .paywallPresentationRequest(let status, let reason):
-      var json: [String: Any] = ["event": "paywallPresentationRequest", "status": status.toJson()]
+      var json: [String: Any] = [
+        "placement": "paywallPresentationRequest", "status": status.toJson(),
+      ]
       let reasonJson = reason?.toJson()
       if let reasonJson {
         json["reason"] = reasonJson
       }
       return json
     case .touchesBegan:
-      return ["event": "touchesBegan"]
+      return ["placement": "touchesBegan"]
     case .surveyClose:
-      return ["event": "surveyClose"]
+      return ["placement": "surveyClose"]
     case .restoreStart:
-      return ["event": "restoreStart"]
+      return ["placement": "restoreStart"]
     case .restoreComplete:
-      return ["event": "restoreComplete"]
-    case .restoreFail(message: let message):
-      return ["event": "restoreFail", "message": message]
-    case .customPlacement(name: let name, params: let params, paywallInfo: let paywallInfo):
+      return ["placement": "restoreComplete"]
+    case .restoreFail(let message):
+      return ["placement": "restoreFail", "message": message]
+    case .customPlacement(let name, let params, let paywallInfo):
       return [
-        "event": "customPlacement",
+        "placement": "customPlacement",
         "name": name,
         "params": params,
-        "paywallInfo": paywallInfo.toJson()
+        "paywallInfo": paywallInfo.toJson(),
       ]
     case .configAttributes:
-      return ["event": "configAttributes"]
+      return ["placement": "configAttributes"]
     case .confirmAllAssignments:
-      return ["event": "confirmAllAssignments"]
+      return ["placement": "confirmAllAssignments"]
     case .configFail:
-      return ["event": "configFail"]
+      return ["placement": "configFail"]
     case .adServicesTokenRequestStart:
-      return ["event": "adServicesTokenRequestStart"]
-    case .adServicesTokenRequestFail(error: let error):
-      return ["event": "adServicesTokenRequestFail", "error": error.localizedDescription]
-    case .adServicesTokenRequestComplete(token: let token):
-      return ["event": "adServicesTokenRequestComplete", "token": token]
+      return ["placement": "adServicesTokenRequestStart"]
+    case .adServicesTokenRequestFail(let error):
+      return ["placement": "adServicesTokenRequestFail", "error": error.localizedDescription]
+    case .adServicesTokenRequestComplete(let token):
+      return ["placement": "adServicesTokenRequestComplete", "token": token]
     case .shimmerViewStart:
-      return ["event": "shimmerViewStart"]
+      return ["placement": "shimmerViewStart"]
     case .shimmerViewComplete:
-      return ["event": "shimmerViewComplete"]
+      return ["placement": "shimmerViewComplete"]
     }
   }
 }

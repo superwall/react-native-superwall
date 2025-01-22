@@ -11,7 +11,6 @@ export class PaywallInfo {
   name: string;
   url: string;
   experiment?: Experiment;
-  triggerSessionId?: string;
   products: Product[];
   productIds: string[];
   presentedByEventWithName?: string;
@@ -44,7 +43,6 @@ export class PaywallInfo {
     name,
     url,
     experiment,
-    triggerSessionId,
     products,
     productIds,
     presentedByEventWithName,
@@ -76,7 +74,6 @@ export class PaywallInfo {
     name: string,
     url: string,
     experiment?: Experiment,
-    triggerSessionId?: string,
     products: Product[],
     productIds: string[],
     presentedByEventWithName?: string,
@@ -108,7 +105,6 @@ export class PaywallInfo {
     this.name = name;
     this.url = url;
     this.experiment = experiment;
-    this.triggerSessionId = triggerSessionId;
     this.products = products;
     this.productIds = productIds;
     this.presentedByEventWithName = presentedByEventWithName;
@@ -145,7 +141,6 @@ export class PaywallInfo {
       experiment: json.experiment
         ? Experiment.fromJson(json.experiment)
         : undefined,
-      triggerSessionId: json.triggerSessionId,
       products: json.products.map((p: any) => Product.fromJson(p)),
       productIds: json.productIds,
       presentedByEventWithName: json.presentedByEventWithName,

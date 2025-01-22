@@ -4,16 +4,17 @@ import { SuperwallOptions } from './public/SuperwallOptions';
 import { PaywallPresentationHandler } from './public/PaywallPresentationHandler';
 import { PaywallInfo } from './public/PaywallInfo';
 import { PaywallSkippedReason } from './public/PaywallSkippedReason';
-import { SubscriptionStatus } from './public/SubscriptionStatus';
+import { EntitlementStatus } from './public/EntitlementStatus';
 import { InterfaceStyle } from './public/InterfaceStyle';
 import { SuperwallDelegate } from './public/SuperwallDelegate';
-import { SuperwallEventInfo } from './public/SuperwallEventInfo';
+import { SuperwallPlacementInfo } from './public/SuperwallPlacementInfo';
 import { NativeEventEmitter } from 'react-native';
 import { IdentityOptions } from './public/IdentityOptions';
 import { EventEmitter } from 'events';
 import { ConfigurationStatus } from './public/ConfigurationStatus';
 import { ConfirmedAssignment } from './public/ConfirmedAssigments';
 import type { PresentationResult } from './public/PresentationResult';
+import { EntitlementsInfo } from './public/EntitlementsInfo';
 const { version } = require('../package.json');
 
 const LINKING_ERROR =
@@ -53,12 +54,15 @@ export {
   PurchaseResultRestored,
 } from './public/PurchaseResult';
 export { RestorationResult } from './public/RestorationResult';
-export { SubscriptionStatus } from './public/SubscriptionStatus';
+export { EntitlementStatus } from './public/EntitlementStatus';
 export { InterfaceStyle } from './public/InterfaceStyle';
 export { ConfigurationStatus } from './public/ConfigurationStatus';
 //export { Superwall } from './Superwall';
 export { SuperwallDelegate } from './public/SuperwallDelegate';
-export { SuperwallEventInfo, EventType } from './public/SuperwallEventInfo';
+export {
+  SuperwallPlacementInfo,
+  PlacementType,
+} from './public/SuperwallPlacementInfo';
 export { SuperwallOptions } from './public/SuperwallOptions';
 export { Survey } from './public/Survey';
 export { TriggerResult } from './public/TriggerResult';
@@ -70,9 +74,9 @@ export { PaywallPresentationHandler } from './public/PaywallPresentationHandler'
 export { PaywallPresentationRequestStatus } from './public/PaywallPresentationRequestStatus';
 export {
   PaywallSkippedReason,
-  PaywallSkippedReasonEventNotFound,
+  PaywallSkippedReasonPlacementNotFound,
   PaywallSkippedReasonHoldout,
-  PaywallSkippedReasonNoRuleMatch,
+  PaywallSkippedReasonNoAudienceMatch,
   PaywallSkippedReasonUserIsSubscribed,
 } from './public/PaywallSkippedReason';
 export { RestoreType } from './public/RestoreType';
@@ -184,17 +188,17 @@ export default class Superwall {
 
     // MARK: - SuperwallDelegate Listeners
     this.eventEmitter.addListener(
-      'subscriptionStatusDidChange',
+      'entitlementStatusDidChange',
       async (data) => {
-        const subscriptionStatus = SubscriptionStatus.fromString(
-          data.subscriptionStatus
-        );
-        Superwall.delegate?.subscriptionStatusDidChange(subscriptionStatus);
-      });
+        const from = EntitlementStatus.fromString(data.from);
+        const to = EntitlementStatus.fromString(data.to);
+        Superwall.delegate?.entitlementStatusDidChange(from, to);
+      }
+    );
 
-    this.eventEmitter.addListener('handleSuperwallEvent', async (data) => {
-      const eventInfo = SuperwallEventInfo.fromJson(data.eventInfo);
-      Superwall.delegate?.handleSuperwallEvent(eventInfo);
+    this.eventEmitter.addListener('handleSuperwallPlacement', async (data) => {
+      const placementInfo = SuperwallPlacementInfo.fromJson(data.placementInfo);
+      Superwall.delegate?.handleSuperwallPlacement(placementInfo);
     });
 
     this.eventEmitter.addListener('handleCustomPaywallAction', async (data) => {
@@ -297,7 +301,7 @@ export default class Superwall {
   }
 
   async register(
-    event: string,
+    placement: string,
     params?: Map<String, any>,
     handler?: PaywallPresentationHandler,
     feature?: () => void
@@ -316,7 +320,7 @@ export default class Superwall {
       paramsObject = Object.fromEntries(params);
     }
 
-    await SuperwallReactNative.register(event, paramsObject, handlerId).then(
+    await SuperwallReactNative.register(placement, paramsObject, handlerId).then(
       () => {
         if (feature) feature();
       }
@@ -332,7 +336,7 @@ export default class Superwall {
   }
 
   async getPresentationResult(
-    event: String,
+    placement: String,
     params?: Map<String, any>
   ): Promise<PresentationResult> {
     await this.awaitConfig();
@@ -341,7 +345,7 @@ export default class Superwall {
       paramsObject = Object.fromEntries(params);
     }
     return await SuperwallReactNative.getPresentationResult(
-      event,
+      placement,
       paramsObject
     );
   }
@@ -352,16 +356,18 @@ export default class Superwall {
     return ConfigurationStatus.fromString(configurationStatusString);
   }
 
-  async getSubscriptionStatus(): Promise<SubscriptionStatus> {
+  async getEntitlements(): Promise<EntitlementsInfo> {
     await this.awaitConfig();
-    const subscriptionStatusString =
-      await SuperwallReactNative.getSubscriptionStatus();
-    return SubscriptionStatus.fromString(subscriptionStatusString);
+    const entitlementsJson = await SuperwallReactNative.getEntitlements();
+    return EntitlementsInfo.fromObject(entitlementsJson);
   }
 
-  async setSubscriptionStatus(status: SubscriptionStatus) {
+  async setEntitlementsStatus(
+    status: EntitlementStatus,
+    entitlements: Array<Map<String, any>>
+  ) {
     await this.awaitConfig();
-    await SuperwallReactNative.setSubscriptionStatus(status.toString());
+    await SuperwallReactNative.setEntitlementsStatus(status, entitlements);
   }
 
   async setInterfaceStyle(style: InterfaceStyle) {
@@ -386,9 +392,9 @@ export default class Superwall {
     await SuperwallReactNative.preloadAllPaywalls();
   }
 
-  async preloadPaywalls(eventNames: Set<string>) {
+  async preloadPaywalls(placementNames: Set<string>) {
     await this.awaitConfig();
-    await SuperwallReactNative.preloadPaywalls(Array.from(eventNames));
+    await SuperwallReactNative.preloadPaywalls(Array.from(placementNames));
   }
 
   async setUserAttributes(userAttributes: UserAttributes) {

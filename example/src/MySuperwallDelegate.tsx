@@ -1,29 +1,34 @@
 import {
   PaywallInfo,
-  SubscriptionStatus,
+  EntitlementStatus,
   SuperwallDelegate,
-  SuperwallEventInfo,
-  EventType,
+  SuperwallPlacementInfo,
+  PlacementType,
 } from '@superwall/react-native-superwall';
 
 export class MySuperwallDelegate extends SuperwallDelegate {
-  subscriptionStatusDidChange(newValue: SubscriptionStatus): void {
-    console.log('Subscription status changed to', newValue);
+  entitlementStatusDidChange(
+    from: EntitlementStatus,
+    to: EntitlementStatus
+  ): void {
+    console.log('Entitlement status changed from', from, 'to', to);
   }
 
-  handleSuperwallEvent(eventInfo: SuperwallEventInfo) {
-    console.log('Handling Superwall event:', eventInfo);
+  handleSuperwallPlacement(placementInfo: SuperwallPlacementInfo) {
+    console.log('Handling Superwall placement:', placementInfo);
 
-    switch (eventInfo.event.type) {
-      case EventType.appOpen:
-        console.log("appOpen event");
+    switch (placementInfo.placement) {
+      case PlacementType.appOpen:
+        console.log("appOpen placement");
         break; // Don't forget to add break statements to prevent fall-through
-      case EventType.deviceAttributes:
-        console.log(`deviceAttributes event: ${eventInfo.event.deviceAttributes}`);
+      case PlacementType.deviceAttributes:
+        console.log(
+          `deviceAttributes placement: ${placementInfo.placement.deviceAttributes}`
+        );
         break;
-      case EventType.paywallOpen:
-        const paywallInfo = eventInfo.event.paywallInfo;
-        console.log(`paywallOpen event: ${paywallInfo}`);
+      case PlacementType.paywallOpen:
+        const paywallInfo = placementInfo.placement.paywallInfo;
+        console.log(`paywallOpen placement: ${paywallInfo}`);
 
         if (paywallInfo !== null) {
           console.log(`paywallInfo.identifier: ${paywallInfo.identifier}`);

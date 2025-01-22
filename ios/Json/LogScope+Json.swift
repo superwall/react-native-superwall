@@ -32,7 +32,7 @@ extension LogScope {
       case "storeKitManager":
         return .storeKitManager
       case "events":
-        return .events
+        return .placements
       case "receipts":
         return .receipts
       case "superwallCore":
@@ -40,7 +40,7 @@ extension LogScope {
       case "paywallPresentation":
         return .paywallPresentation
       case "paywallTransactions":
-        return .paywallTransactions
+      return .transactions
       case "paywallViewController":
         return .paywallViewController
       case "cache":

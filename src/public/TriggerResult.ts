@@ -2,7 +2,7 @@ import { Experiment } from './Experiment';
 
 export enum TriggerResultType {
   eventNotFound,
-  noRuleMatch,
+  noAudienceMatch,
   paywall,
   holdout,
   error,
@@ -28,8 +28,8 @@ export class TriggerResult {
     return new TriggerResult(TriggerResultType.eventNotFound);
   }
 
-  static noRuleMatch(): TriggerResult {
-    return new TriggerResult(TriggerResultType.noRuleMatch);
+  static noAudienceMatch(): TriggerResult {
+    return new TriggerResult(TriggerResultType.noAudienceMatch);
   }
 
   static paywall(experiment: Experiment): TriggerResult {
@@ -48,8 +48,8 @@ export class TriggerResult {
     switch (json.result) {
       case 'eventNotFound':
         return TriggerResult.eventNotFound();
-      case 'noRuleMatch':
-        return TriggerResult.noRuleMatch();
+      case 'noAudienceMatch':
+        return TriggerResult.noAudienceMatch();
       case 'paywall':
         return TriggerResult.paywall(Experiment.fromJson(json.experiment));
       case 'holdout':

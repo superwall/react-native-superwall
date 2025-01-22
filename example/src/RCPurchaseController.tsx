@@ -3,7 +3,7 @@ import Superwall, {
   PurchaseController,
   PurchaseResult,
   RestorationResult,
-  SubscriptionStatus,
+  EntitlementStatus,
   PurchaseResultCancelled,
   PurchaseResultFailed,
   PurchaseResultPending,
@@ -25,20 +25,25 @@ export class RCPurchaseController extends PurchaseController {
     Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
     const apiKey =
       Platform.OS === 'ios'
-        ? 'appl_XmYQBWbTAFiwLeWrBJOeeJJtTql'
+        ? 'appl_PpUWCgFONlxwztRfNgEdvyGHiAG'
         : 'goog_DCSOujJzRNnPmxdgjOwdOOjwilC';
     Purchases.configure({ apiKey });
   }
 
-  syncSubscriptionStatus() {
+  syncEntitlements() {
     // Listen for changes
     Purchases.addCustomerInfoUpdateListener((customerInfo) => {
-      const hasActiveEntitlementOrSubscription =
-        this.hasActiveEntitlementOrSubscription(customerInfo);
-      Superwall.shared.setSubscriptionStatus(
-        hasActiveEntitlementOrSubscription
-          ? SubscriptionStatus.ACTIVE
-          : SubscriptionStatus.INACTIVE
+      // TODO: extract entitlements here and then set entitlementsStatus. Remember to add entitlements to products from RC.
+      const entitlements = Object.keys(customerInfo.entitlements.active).map(
+        (id) => ({
+          id,
+        })
+      );
+      Superwall.shared.setEntitlementsStatus(
+        entitlements.length === 0
+          ? EntitlementStatus.INACTIVE
+          : EntitlementStatus.ACTIVE,
+        entitlements
       );
     });
   }

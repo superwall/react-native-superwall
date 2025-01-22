@@ -17,27 +17,29 @@ extension PaywallInfo {
     if let experiment = self.experiment {
       map["experiment"] = experiment.toJson()
     }
-    map["triggerSessionId"] = triggerSessionId
 
     let productsArray: [[String: Any]] = self.products.map { product in
-      [
-        "type": product.type.description,
+      var dictionary: [String: Any] = [
         "id": product.id
       ]
+      if let name = product.name {
+        dictionary["name"] = name
+      }
+      return dictionary
     }
     map["products"] = productsArray
 
     let productIdsArray = self.productIds
     map["productIds"] = productIdsArray
 
-    if let presentedByEventWithName = self.presentedByEventWithName {
-      map["presentedByEventWithName"] = presentedByEventWithName
+    if let presentedByPlacementWithName = self.presentedByPlacementWithName {
+      map["presentedByEventWithName"] = presentedByPlacementWithName
     }
-    if let presentedByEventWithId = self.presentedByEventWithId {
-      map["presentedByEventWithId"] = presentedByEventWithId
+    if let presentedByPlacementWithId = self.presentedByPlacementWithId {
+      map["presentedByEventWithId"] = presentedByPlacementWithId
     }
-    if let presentedByEventAt = self.presentedByEventAt {
-      map["presentedByEventAt"] = presentedByEventAt
+    if let presentedByPlacementAt = self.presentedByPlacementAt {
+      map["presentedByEventAt"] = presentedByPlacementAt
     }
     map["presentedBy"] = self.presentedBy
     if let presentationSourceType = self.presentationSourceType {
@@ -90,10 +92,11 @@ extension PaywallInfo {
       map["paywalljsVersion"] = paywalljsVersion
     }
 
-    let computedPropertyRequestsArray: [[String: Any]] = self.computedPropertyRequests.map { request in
+    let computedPropertyRequestsArray: [[String: Any]] = self.computedPropertyRequests.map {
+      request in
       [
-        "eventName": request.eventName,
-        "type": request.type.rawValue
+        "placementName": request.placementName,
+        "type": request.type.rawValue,
       ]
     }
     map["computedPropertyRequests"] = computedPropertyRequestsArray
@@ -107,13 +110,13 @@ extension PaywallInfo {
         "includeCloseOption": survey.includeCloseOption,
         "includeOtherOption": survey.includeOtherOption,
         "presentationProbability": survey.presentationProbability,
-        "presentationCondition": survey.presentationCondition.toJson()
+        "presentationCondition": survey.presentationCondition.toJson(),
       ]
 
       let optionsArray: [[String: Any]] = survey.options.map { option in
         [
           "id": option.id,
-          "title": option.title
+          "title": option.title,
         ]
       }
       surveyMap["options"] = optionsArray
@@ -127,7 +130,7 @@ extension PaywallInfo {
         "title": notification.title,
         "body": notification.body,
         "type": notification.type.toJson(),
-        "delay": notification.delay
+        "delay": notification.delay,
       ]
     }
     map["localNotifications"] = localNotificationsArray
