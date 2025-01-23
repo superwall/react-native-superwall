@@ -2,7 +2,11 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
-## 1.4.5
+## 2.0.0-alpha.1
+
+### Breaking Changes
+
+// TODO: Fill in the changes etc here
 
 ### Fixes
 
