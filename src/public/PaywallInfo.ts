@@ -1,10 +1,13 @@
-import { ComputedPropertyRequest } from "./ComputedPropertyRequest";
-import { Experiment } from "./Experiment";
-import { FeatureGatingBehavior, featureGatingBehaviorFromJson } from "./FeatureGatingBehavior";
-import { LocalNotification } from "./LocalNotification";
-import { PaywallCloseReason } from "./PaywallCloseReason";
-import { Product } from "./Product";
-import { Survey } from "./Survey";
+import { ComputedPropertyRequest } from './ComputedPropertyRequest';
+import { Experiment } from './Experiment';
+import {
+  FeatureGatingBehavior,
+  featureGatingBehaviorFromJson,
+} from './FeatureGatingBehavior';
+import { LocalNotification } from './LocalNotification';
+import { PaywallCloseReason } from './PaywallCloseReason';
+import { Product } from './Product';
+import { Survey } from './Survey';
 
 export class PaywallInfo {
   identifier: string;
