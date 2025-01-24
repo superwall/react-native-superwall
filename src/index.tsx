@@ -362,12 +362,12 @@ export default class Superwall {
     return EntitlementsInfo.fromObject(entitlementsJson);
   }
 
-  async setEntitlementsStatus(
+  async setEntitlementStatus(
     status: EntitlementStatus,
     entitlements: Array<Map<String, any>>
   ) {
     await this.awaitConfig();
-    await SuperwallReactNative.setEntitlementsStatus(status, entitlements);
+    await SuperwallReactNative.setEntitlementStatus(status, entitlements);
   }
 
   async setInterfaceStyle(style: InterfaceStyle) {

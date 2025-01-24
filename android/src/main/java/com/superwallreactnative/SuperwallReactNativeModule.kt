@@ -203,7 +203,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   }
 
   @ReactMethod
-  fun setEntitlementsStatus(
+  fun setEntitlementStatus(
     status: String,
     entitlements: List<Map<String, Any>>
   ) {

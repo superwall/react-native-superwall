@@ -155,8 +155,8 @@ class SuperwallReactNative: RCTEventEmitter {
     resolve(entitlements)
   }
 
-  @objc(setEntitlementsStatus:entitlements:)
-  func setEntitlementsStatus(
+  @objc(setEntitlementStatus:entitlements:)
+  func setEntitlementStatus(
     status: String,
     entitlements: [[String: Any]]
   ) {

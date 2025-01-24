@@ -33,13 +33,13 @@ export class RCPurchaseController extends PurchaseController {
   syncEntitlements() {
     // Listen for changes
     Purchases.addCustomerInfoUpdateListener((customerInfo) => {
-      // TODO: extract entitlements here and then set entitlementsStatus. Remember to add entitlements to products from RC.
+      // TODO: extract entitlements here and then set entitlementStatus. Remember to add entitlements to products from RC.
       const entitlements = Object.keys(customerInfo.entitlements.active).map(
         (id) => ({
           id,
         })
       );
-      Superwall.shared.setEntitlementsStatus(
+      Superwall.shared.setEntitlementStatus(
         entitlements.length === 0
           ? EntitlementStatus.INACTIVE
           : EntitlementStatus.ACTIVE,
