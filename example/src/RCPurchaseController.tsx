@@ -8,7 +8,6 @@ import Superwall, {
   PurchaseResultFailed,
   PurchaseResultPending,
   PurchaseResultPurchased,
-  PurchaseResultRestored,
 } from '@superwall/react-native-superwall';
 import Purchases, {
   type CustomerInfo,
@@ -214,9 +213,6 @@ export class RCPurchaseController extends PurchaseController {
     performPurchase: () => Promise<MakePurchaseResult>
   ): Promise<PurchaseResult> {
     try {
-      // Store the current purchase date to later determine if this is a new purchase or restore
-      const purchaseDate = new Date();
-
       // Perform the purchase using the function provided
       const makePurchaseResult = await performPurchase();
 
@@ -224,23 +220,7 @@ export class RCPurchaseController extends PurchaseController {
       if (
         this.hasActiveEntitlementOrSubscription(makePurchaseResult.customerInfo)
       ) {
-        const latestTransactionPurchaseDate = new Date(
-          makePurchaseResult.transaction.purchaseDate
-        );
-
-        // If no latest transaction date is found, consider it as a new purchase.
-        const isNewPurchase = latestTransactionPurchaseDate === null;
-
-        // If the current date (`purchaseDate`) is after the latestTransactionPurchaseDate,
-        const purchaseHappenedInThePast = latestTransactionPurchaseDate
-          ? purchaseDate > latestTransactionPurchaseDate
-          : false;
-
-        if (!isNewPurchase && purchaseHappenedInThePast) {
-          return new PurchaseResultRestored();
-        } else {
-          return new PurchaseResultPurchased();
-        }
+        return new PurchaseResultPurchased();
       } else {
         return new PurchaseResultFailed('No active subscriptions found.');
       }
