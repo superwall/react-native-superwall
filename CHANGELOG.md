@@ -11,6 +11,7 @@ The changelog for `Superwall`. Also see the [releases](https://github.com/superw
 ### Fixes
 
 - Removes unnecessary date comparison from PurchaseController example code.
+- Adds a StoreKit configuration file to the iOS expo example app.
 
 ## 1.4.4
 
