@@ -1,20 +1,21 @@
+import { EntitlementStatus } from 'superwall-react-native';
 import type { Entitlement } from './Entitlement';
 
-export enum EntitlementStatus {
+export enum SubscriptionStatus {
   UNKNOWN = 'UNKNOWN',
   INACTIVE = 'INACTIVE',
   ACTIVE = 'ACTIVE',
 }
 
-export namespace EntitlementStatus {
+export namespace SubscriptionStatus {
   export function fromString(
     value: string,
     entitlements: Entitlement[]
-  ): { status: EntitlementStatus; entitlements: Entitlement[] } {
+  ): { status: SubscriptionStatus; entitlements: Entitlement[] } {
     switch (value) {
       case 'ACTIVE':
         return {
-          status: EntitlementStatus.ACTIVE,
+          status: SubscriptionStatus.ACTIVE,
           entitlements,
         };
       case 'INACTIVE':
@@ -32,24 +33,24 @@ export namespace EntitlementStatus {
   }
 
   export function fromJson(json: any): {
-    status: EntitlementStatus;
+    status: SubscriptionStatus;
     entitlements: Entitlement[];
   } {
     switch (json.status) {
       case 'ACTIVE':
         return {
-          status: EntitlementStatus.ACTIVE,
+          status: SubscriptionStatus.ACTIVE,
           entitlements: json.entitlements,
         };
       case 'INACTIVE':
         return {
-          status: EntitlementStatus.INACTIVE,
+          status: SubscriptionStatus.INACTIVE,
           entitlements: [],
         };
       case 'UNKNOWN':
       default:
         return {
-          status: EntitlementStatus.UNKNOWN,
+          status: SubscriptionStatus.UNKNOWN,
           entitlements: [],
         };
     }

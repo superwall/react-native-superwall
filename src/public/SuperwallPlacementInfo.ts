@@ -1,5 +1,5 @@
 import type { Entitlement } from './Entitlement';
-import { EntitlementStatus } from './EntitlementStatus';
+import { EntitlementStatus } from './SubscriptionStatus';
 import { PaywallInfo } from "./PaywallInfo";
 import { PaywallPresentationRequestStatus, PaywallPresentationRequestStatusReason } from "./PaywallPresentationRequestStatus";
 import { RestoreType } from "./RestoreType";

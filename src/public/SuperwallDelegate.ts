@@ -1,11 +1,11 @@
 import { PaywallInfo } from './PaywallInfo';
-import { EntitlementStatus } from './EntitlementStatus';
+import { SubscriptionStatus } from './SubscriptionStatus';
 import { SuperwallPlacementInfo } from './SuperwallPlacementInfo';
 
 export abstract class SuperwallDelegate {
-  abstract entitlementStatusDidChange(
-    from: EntitlementStatus,
-    to: EntitlementStatus
+  abstract subscriptionStatusDidChange(
+    from: SubscriptionStatus,
+    to: SubscriptionStatus
   ): void;
   abstract handleSuperwallPlacement(
     placementInfo: SuperwallPlacementInfo

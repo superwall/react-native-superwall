@@ -1,5 +1,5 @@
 import type { Entitlement } from './Entitlement';
-import { EntitlementStatus } from './EntitlementStatus';
+import { EntitlementStatus } from './SubscriptionStatus';
 
 export interface EntitlementsInfo {
   status: { status: EntitlementStatus; entitlements: Entitlement[] };

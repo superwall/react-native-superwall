@@ -1,5 +1,6 @@
 package com.superwallreactnative
 
+import android.app.Application
 import android.net.Uri
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
@@ -14,6 +15,8 @@ import com.superwall.sdk.identity.identify
 import com.superwall.sdk.identity.setUserAttributes
 import com.superwall.sdk.misc.ActivityProvider
 import com.superwall.sdk.misc.sdkVersion
+import com.superwall.sdk.models.entitlements.SubscriptionStatus
+import com.superwall.sdk.models.entitlements.Entitlement
 import com.superwall.sdk.paywall.presentation.PaywallPresentationHandler
 import com.superwall.sdk.paywall.presentation.dismiss
 import com.superwall.sdk.paywall.presentation.get_presentation_result.getPresentationResult
@@ -23,7 +26,6 @@ import com.superwallreactnative.models.IdentityOptions
 import com.superwallreactnative.models.PaywallSkippedReason
 import com.superwallreactnative.models.PurchaseResult
 import com.superwallreactnative.models.RestorationResult
-import com.superwallreactnative.models.SubscriptionStatus
 import com.superwallreactnative.models.InterfaceStyle
 import com.superwallreactnative.models.SuperwallOptions
 import com.superwallreactnative.models.convertMapToReadableMap
@@ -60,7 +62,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
 
     if (usingPurchaseController) {
       Superwall.configure(
-        applicationContext = reactContext,
+        applicationContext = reactContext.applicationContext as Application,
         apiKey = apiKey,
         options = options,
         activityProvider = activityProvider,
@@ -71,7 +73,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
       )
     } else  {
       Superwall.configure(
-        applicationContext = reactContext,
+        applicationContext = reactContext.applicationContext as Application,
         apiKey = apiKey,
         options = options,
         activityProvider = activityProvider,
@@ -203,24 +205,24 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   }
 
   @ReactMethod
-  fun setEntitlementStatus(
+  fun setSubscriptionStatus(
     status: String,
     entitlements: List<Map<String, Any>>
   ) {
-    val entitlementStatus: EntitlementStatus = when (status.uppercase()) {
-      "UNKNOWN" -> EntitlementStatus.UNKNOWN
-      "INACTIVE" -> EntitlementStatus.INACTIVE
+    val subscriptionStatus: SubscriptionStatus = when (status.uppercase()) {
+      "UNKNOWN" -> SubscriptionStatus.Unknown
+      "INACTIVE" -> SubscriptionStatus.Inactive
       "ACTIVE" -> {
         val entitlementsSet = entitlements.mapNotNull { dict ->
           val id = dict["id"] as? String
           id?.let { Entitlement(it) }
         }.toSet()
-        EntitlementStatus.ACTIVE(entitlementsSet)
+        SubscriptionStatus.Active(entitlementsSet)
       }
-      else -> EntitlementStatus.UNKNOWN
+      else -> SubscriptionStatus.Unknown
     }
 
-    Superwall.instance.entitlements.status = entitlementStatus
+    Superwall.instance.setSubscriptionStatus(subscriptionStatus)
   }
 
   @ReactMethod

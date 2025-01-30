@@ -113,19 +113,19 @@ class SuperwallPlacement {
         }
         is SuperwallPlacement.PaywallResponseLoadStart -> {
           map.putString("placement", "paywallResponseLoadStart")
-          map.putString("triggeredEventName", superwallPlacement.triggeredEventName ?: "")
+          map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
         }
         is SuperwallPlacement.PaywallResponseLoadNotFound -> {
           map.putString("placement", "paywallResponseLoadNotFound")
-          map.putString("triggeredEventName", superwallPlacement.triggeredEventName ?: "")
+          map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
         }
         is SuperwallPlacement.PaywallResponseLoadFail -> {
           map.putString("placement", "paywallResponseLoadFail")
-          map.putString("triggeredEventName", superwallPlacement.triggeredEventName ?: "")
+          map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
         }
         is SuperwallPlacement.PaywallResponseLoadComplete -> {
           map.putString("placement", "paywallResponseLoadComplete")
-          map.putString("triggeredEventName", superwallPlacement.triggeredEventName ?: "")
+          map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
         is SuperwallPlacement.PaywallWebviewLoadStart -> {
@@ -146,17 +146,17 @@ class SuperwallPlacement {
         }
         is SuperwallPlacement.PaywallProductsLoadStart -> {
           map.putString("placement", "paywallProductsLoadStart")
-          map.putString("triggeredEventName", superwallPlacement.triggeredEventName ?: "")
+          map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
         is SuperwallPlacement.PaywallProductsLoadFail -> {
           map.putString("placement", "paywallProductsLoadFail")
-          map.putString("triggeredEventName", superwallPlacement.triggeredEventName ?: "")
+          map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
         is SuperwallPlacement.PaywallProductsLoadComplete -> {
           map.putString("placement", "paywallProductsLoadComplete")
-          map.putString("triggeredEventName", superwallPlacement.triggeredEventName ?: "")
+          map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
         }
         is SuperwallPlacement.SurveyResponse -> {
           map.putString("placement", "surveyResponse")

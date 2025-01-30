@@ -1,15 +1,15 @@
 import {
   PaywallInfo,
-  EntitlementStatus,
+  SubscriptionStatus,
   SuperwallDelegate,
   SuperwallPlacementInfo,
   PlacementType,
 } from '@superwall/react-native-superwall';
 
 export class MySuperwallDelegate extends SuperwallDelegate {
-  entitlementStatusDidChange(
-    from: EntitlementStatus,
-    to: EntitlementStatus
+  subscriptionStatusDidChange(
+    from: SubscriptionStatus,
+    to: SubscriptionStatus
   ): void {
     console.log('Entitlement status changed from', from, 'to', to);
   }

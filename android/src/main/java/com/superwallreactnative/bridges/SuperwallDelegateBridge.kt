@@ -16,18 +16,16 @@ import android.net.Uri
 class SuperwallDelegateBridge(
   private val reactContext: ReactContext
 ): SuperwallDelegate {
-  override fun entitlementStatusDidChange(
-    from: EntitlementStatus
-    to: EntitlementStatus
+  override fun subscriptionStatusDidChange(
+    to: SubscriptionStatus
   ) {
     val data = Arguments.createMap().apply {
-      putString("from", from.toString())
       putString("to", to.toString())
     }
 
     reactContext
       .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-      .emit("entitlementStatusDidChange", data)
+      .emit("subscriptionStatusDidChange", data)
   }
 
   override fun handleSuperwallPlacement(placementInfo: SuperwallPlacementInfo) {

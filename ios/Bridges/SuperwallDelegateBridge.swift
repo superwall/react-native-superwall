@@ -8,15 +8,15 @@
 import SuperwallKit
 
 final class SuperwallDelegateBridge: SuperwallDelegate {
-  func entitlementStatusDidChange(
-    from oldValue: EntitlementStatus,
-    to newValue: EntitlementStatus
+  func subscriptionStatusDidChange  (
+    from oldValue: SubscriptionStatus,
+    to newValue: SubscriptionStatus
   ) {
     let data: [String: Any] = [
       "from": oldValue.toJson(),
       "to": newValue.toJson(),
     ]
-    sendEvent(withName: "entitlementStatusDidChange", body: data)
+    sendEvent(withName: "subscriptionStatusDidChange", body: data)
   }
 
   func handleSuperwallPlacement(withInfo placementInfo: SuperwallPlacementInfo) {

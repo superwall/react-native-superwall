@@ -4,7 +4,7 @@ import { SuperwallOptions } from './public/SuperwallOptions';
 import { PaywallPresentationHandler } from './public/PaywallPresentationHandler';
 import { PaywallInfo } from './public/PaywallInfo';
 import { PaywallSkippedReason } from './public/PaywallSkippedReason';
-import { EntitlementStatus } from './public/EntitlementStatus';
+import { SubscriptionStatus } from './public/SubscriptionStatus';
 import { InterfaceStyle } from './public/InterfaceStyle';
 import { SuperwallDelegate } from './public/SuperwallDelegate';
 import { SuperwallPlacementInfo } from './public/SuperwallPlacementInfo';
@@ -54,7 +54,6 @@ export {
   PurchaseResultRestored,
 } from './public/PurchaseResult';
 export { RestorationResult } from './public/RestorationResult';
-export { EntitlementStatus } from './public/EntitlementStatus';
 export { InterfaceStyle } from './public/InterfaceStyle';
 export { ConfigurationStatus } from './public/ConfigurationStatus';
 //export { Superwall } from './Superwall';
@@ -188,11 +187,11 @@ export default class Superwall {
 
     // MARK: - SuperwallDelegate Listeners
     this.eventEmitter.addListener(
-      'entitlementStatusDidChange',
+      'subscriptionStatusDidChange',
       async (data) => {
-        const from = EntitlementStatus.fromString(data.from);
-        const to = EntitlementStatus.fromString(data.to);
-        Superwall.delegate?.entitlementStatusDidChange(from, to);
+        const from = SubscriptionStatus.fromString(data.from);
+        const to = SubscriptionStatus.fromString(data.to);
+        Superwall.delegate?.subscriptionStatusDidChange(from, to);
       }
     );
 
