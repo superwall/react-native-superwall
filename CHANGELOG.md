@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 1.4.7
+
+### Enhancements
+
+- Upgrades iOS SDK to 3.12.4 [View iOS SDK release notes](https://github.com/superwall-me/Superwall-iOS/releases/tag/3.12.4).
+
 ## 1.4.6
 
 ### Enhancements
