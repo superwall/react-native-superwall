@@ -8,6 +8,20 @@ The changelog for `Superwall`. Also see the [releases](https://github.com/superw
 
 // TODO: Fill in the changes etc here
 
+## 1.4.7
+
+### Enhancements
+
+- Upgrades iOS SDK to 3.12.4 [View iOS SDK release notes](https://github.com/superwall-me/Superwall-iOS/releases/tag/3.12.4).
+
+## 1.4.6
+
+### Enhancements
+
+- Upgrades iOS SDK to 3.12.3 [View iOS SDK release notes](https://github.com/superwall-me/Superwall-iOS/releases/tag/3.12.3).
+
+## 1.4.5
+
 ### Fixes
 
 - Removes unnecessary date comparison from PurchaseController example code.
