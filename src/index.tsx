@@ -45,6 +45,7 @@ export { PaywallCloseReason } from './public/PaywallCloseReason';
 export { PaywallInfo } from './public/PaywallInfo';
 export { Product } from './public/Product';
 export { PurchaseController } from './public/PurchaseController';
+export { SubscriptionStatus } from './public/SubscriptionStatus';
 export { PurchaseResult } from './public/PurchaseResult';
 export {
   PurchaseResultPurchased,
@@ -361,12 +362,12 @@ export default class Superwall {
     return EntitlementsInfo.fromObject(entitlementsJson);
   }
 
-  async setEntitlementStatus(
-    status: EntitlementStatus,
+  async setSubscriptionStatus(
+    status: SubscriptionStatus,
     entitlements: Array<Map<String, any>>
   ) {
     await this.awaitConfig();
-    await SuperwallReactNative.setEntitlementStatus(status, entitlements);
+    await SuperwallReactNative.setSubscriptionStatus(status, entitlements);
   }
 
   async setInterfaceStyle(style: InterfaceStyle) {

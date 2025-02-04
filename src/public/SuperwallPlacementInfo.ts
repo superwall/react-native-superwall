@@ -1,7 +1,10 @@
 import type { Entitlement } from './Entitlement';
-import { EntitlementStatus } from './SubscriptionStatus';
+import { SubscriptionStatus } from './SubscriptionStatus';
 import { PaywallInfo } from "./PaywallInfo";
-import { PaywallPresentationRequestStatus, PaywallPresentationRequestStatusReason } from "./PaywallPresentationRequestStatus";
+import {
+  PaywallPresentationRequestStatus,
+  PaywallPresentationRequestStatusReason,
+} from './PaywallPresentationRequestStatus';
 import { RestoreType } from "./RestoreType";
 import { StoreProduct } from "./StoreProduct";
 import { StoreTransaction } from "./StoreTransaction";
@@ -34,7 +37,7 @@ export enum PlacementType {
   appInstall = "appInstall",
   sessionStart = "sessionStart",
   deviceAttributes = "deviceAttributes",
-  entitlementStatusDidChange = "entitlementStatusDidChange",
+  subscriptionStatusDidChange = "subscriptionStatusDidChange",
   appClose = "appClose",
   deepLink = "deepLink",
   triggerFire = "triggerFire",
@@ -127,8 +130,8 @@ export class SuperwallPlacement {
     name?: string;
     params?: Record<string, any>;
     token?: string;
-    from?: { status: EntitlementStatus; entitlements: Entitlement[] };
-    to?: { status: EntitlementStatus; entitlements: Entitlement[] };
+    from?: { status: SubscriptionStatus; entitlements: Entitlement[] };
+    to?: { status: SubscriptionStatus; entitlements: Entitlement[] };
   }) {
     Object.assign(this, options);
   }
@@ -159,7 +162,7 @@ export class SuperwallPlacement {
       case PlacementType.confirmAllAssignments:
       case PlacementType.shimmerViewStart:
       case PlacementType.shimmerViewComplete:
-      case PlacementType.entitlementStatusDidChange:
+      case PlacementType.subscriptionStatusDidChange:
         return new SuperwallPlacement({ type: placementType });
       case PlacementType.restoreFail:
         return new SuperwallPlacement({

@@ -14,7 +14,6 @@ extension EntitlementsInfo {
     map["all"] = all.map { $0.toJson() }
     map["inactive"] = inactive.map { $0.toJson() }
     map["active"] = active.map { $0.toJson() }
-    map["status"] = status.toJson()
 
     return map
   }

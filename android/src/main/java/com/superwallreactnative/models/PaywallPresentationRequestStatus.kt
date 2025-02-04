@@ -30,7 +30,7 @@ fun PaywallPresentationRequestStatusReason.toJson(): ReadableMap {
     is PaywallPresentationRequestStatusReason.NoPaywallView -> map.putString("reason", "noPaywallViewController")
     is PaywallPresentationRequestStatusReason.NoPresenter -> map.putString("reason", "noPresenter")
     is PaywallPresentationRequestStatusReason.NoConfig -> map.putString("reason", "noConfig")
-    is PaywallPresentationRequestStatusReason.EntitlementStatusTimeout -> map.putString("reason", "entitlementsTimeout")
+    is PaywallPresentationRequestStatusReason.SubscriptionStatusTimeout -> map.putString("reason", "subscriptionStatusTimeout")
   }
   return map
 }

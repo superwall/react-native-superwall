@@ -30,7 +30,7 @@ class SuperwallPlacement {
           // Assuming this.attributes is a Map<String, Any>
           map.putMap("attributes", convertMapToReadableMap(superwallPlacement.attributes))
         }
-        is SuperwallPlacement.EntitlementStatusDidChange -> map.putString("placement", "entitlementStatusDidChange")
+        is SuperwallPlacement.SubscriptionStatusDidChange -> map.putString("placement", "subscriptionStatusDidChange")
         is SuperwallPlacement.AppClose -> map.putString("placement", "appClose")
         is SuperwallPlacement.DeepLink -> {
           map.putString("placement", "deepLink")

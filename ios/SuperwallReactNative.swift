@@ -18,7 +18,7 @@ class SuperwallReactNative: RCTEventEmitter {
       "paywallWillOpenURL",
       "restore",
       "paywallPresentationHandler",
-      "entitlementStatusDidChange",
+      "subscriptionStatusDidChange",
       "handleSuperwallPlacement",
       "handleCustomPaywallAction",
       "willDismissPaywall",
@@ -155,12 +155,12 @@ class SuperwallReactNative: RCTEventEmitter {
     resolve(entitlements)
   }
 
-  @objc(setEntitlementStatus:entitlements:)
-  func setEntitlementStatus(
+  @objc(setSubscriptionStatus:entitlements:)
+  func setSubscriptionStatus(
     status: String,
     entitlements: [[String: Any]]
   ) {
-    Superwall.shared.entitlements.status = EntitlementStatus.from(
+    Superwall.shared.subscriptionStatus = SubscriptionStatus.from(
       status: status,
       entitlements: entitlements
     )

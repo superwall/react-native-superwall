@@ -1,6 +1,6 @@
 import SuperwallKit
 
-extension EntitlementStatus {
+extension SubscriptionStatus {
   func toJson() -> [String: Any] {
     switch self {
     case .unknown:
@@ -18,7 +18,7 @@ extension EntitlementStatus {
   static func from(
     status: String,
     entitlements: [[String: Any]]
-  ) -> EntitlementStatus {
+  ) -> SubscriptionStatus {
     switch status {
     case "UNKNOWN":
       return .unknown

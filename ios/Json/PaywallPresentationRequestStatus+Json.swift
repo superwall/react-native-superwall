@@ -32,8 +32,8 @@ extension PaywallPresentationRequestStatusReason {
       return ["reason": "noPresenter"]
     case .noConfig:
       return ["reason": "noConfig"]
-    case .entitlementsTimeout:
-      return ["reason": "entitlementsTimeout"]
+    case .subscriptionStatusTimeout:
+      return ["reason": "subscriptionStatusTimeout"]
     }
   }
 }

@@ -1,4 +1,3 @@
-import { EntitlementStatus } from 'superwall-react-native';
 import type { Entitlement } from './Entitlement';
 
 export enum SubscriptionStatus {
@@ -20,13 +19,13 @@ export namespace SubscriptionStatus {
         };
       case 'INACTIVE':
         return {
-          status: EntitlementStatus.INACTIVE,
+          status: SubscriptionStatus.INACTIVE,
           entitlements: [],
         };
       case 'UNKNOWN':
       default:
         return {
-          status: EntitlementStatus.UNKNOWN,
+          status: SubscriptionStatus.UNKNOWN,
           entitlements: [],
         };
     }

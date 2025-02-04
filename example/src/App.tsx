@@ -25,7 +25,7 @@ export default function App() {
       Superwall.shared.identify('abc');
       Superwall.shared.setDelegate(delegate);
       Superwall.shared.setUserAttributes({ test: "abc" });
-      purchaseController.syncEntitlements();
+      purchaseController.syncSubscriptionStatus();
     };
 
     setupSuperwall();
