@@ -164,7 +164,6 @@
     ]
   },
   "dependencies": {
-    "events": "^3.3.0",
-    "react-native-purchases": "^8.5.2"
+    "events": "^3.3.0"
   }
 }
