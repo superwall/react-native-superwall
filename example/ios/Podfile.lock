@@ -73,8 +73,8 @@ PODS:
   - hermes-engine/Pre-built (0.73.4)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
-  - PurchasesHybridCommon (9.7.2):
-    - RevenueCat (= 4.36.3)
+  - PurchasesHybridCommon (13.16.2):
+    - RevenueCat (= 5.15.0)
   - RCT-Folly (2022.05.16.00):
     - boost
     - DoubleConversion
@@ -1115,7 +1115,7 @@ PODS:
     - React-jsi (= 0.73.4)
     - React-logger (= 0.73.4)
     - React-perflogger (= 0.73.4)
-  - RevenueCat (4.36.3)
+  - RevenueCat (5.15.0)
   - RNCMaskedView (0.3.2):
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -1124,8 +1124,8 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - RNPurchases (7.21.1):
-    - PurchasesHybridCommon (= 9.7.2)
+  - RNPurchases (8.5.2):
+    - PurchasesHybridCommon (= 13.16.2)
     - React-Core
   - RNReanimated (3.16.7):
     - glog
@@ -1407,7 +1407,7 @@ SPEC CHECKSUMS:
   hermes-engine: b2669ce35fc4ac14f523b307aff8896799829fe2
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
-  PurchasesHybridCommon: 9250db8073ad8ad7e84e4544c1f7b8ef6cd969af
+  PurchasesHybridCommon: 9fbb4c76f20b8e9b74f13b9045c6ed90727f935b
   RCT-Folly: 7169b2b1c44399c76a47b5deaaba715eeeb476c0
   RCTRequired: ab7f915c15569f04a49669e573e6e319a53f9faa
   RCTTypeSafety: 63b97ced7b766865057e7154db0e81ce4ee6cf1e
@@ -1450,10 +1450,10 @@ SPEC CHECKSUMS:
   React-runtimescheduler: ed48e5faac6751e66ee1261c4bd01643b436f112
   React-utils: 6e5ad394416482ae21831050928ae27348f83487
   ReactCommon: 840a955d37b7f3358554d819446bffcf624b2522
-  RevenueCat: 7be0d7bde9efb2fc1ebd1888522c55bb4f9feb18
+  RevenueCat: 90e7642834cabc3e04e396117776bfb3f50debbf
   RNCMaskedView: 1611be41c9f78f5ecbcff2360b0891593c1c0ce1
   RNGestureHandler: e4c24bb1c7d3b365a4aa09a442236021350b077a
-  RNPurchases: 06957eb2f35bd7bb336d32fccf3534d45a3fda8a
+  RNPurchases: 27a69e9187b651d4d84af7558d6f392e38c11810
   RNReanimated: 69c281d0f6a57c22675914581b72ac67f294b0c2
   RNScreens: bdc4581a9928e7d8f51bdf20b12891e3b23572ae
   RNVectorIcons: 48aa8b1a17c7f82461df43783b0818cad38a2bcf

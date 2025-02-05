@@ -16,7 +16,7 @@
     "react": "18.2.0",
     "react-native": "0.73.4",
     "react-native-gesture-handler": "^2.22.0",
-    "react-native-purchases": "^7.20.0",
+    "react-native-purchases": "^8.5.2",
     "react-native-reanimated": "^3.16.7",
     "react-native-safe-area-context": "^5.1.0",
     "react-native-screens": "^4.5.0",
