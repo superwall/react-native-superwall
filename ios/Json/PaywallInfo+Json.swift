@@ -18,16 +18,17 @@ extension PaywallInfo {
       map["experiment"] = experiment.toJson()
     }
 
-    let productsArray: [[String: Any]] = self.products.map { product in
+    let products = products.map({ product in
       var dictionary: [String: Any] = [
-        "id": product.id
+        "id": product.id,
+        "entitlements": product.entitlements.map { $0.toJson() },
       ]
       if let name = product.name {
         dictionary["name"] = name
       }
       return dictionary
-    }
-    map["products"] = productsArray
+    })
+    map["products"] = products
 
     let productIdsArray = self.productIds
     map["productIds"] = productIdsArray
