@@ -33,9 +33,7 @@ RCT_EXTERN_METHOD(getEntitlements
                   : (RCTPromiseResolveBlock)resolve withRejecter
                   : (RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(setSubscriptionStatus
-                  : (NSString *)status entitlements
-                  : (NSArray<NSDictionary *> *)entitlementsArray)
+RCT_EXTERN_METHOD(setSubscriptionStatus : (NSDictionary)status)
 
 RCT_EXTERN_METHOD(setInterfaceStyle : (NSString *)style)
 

@@ -155,15 +155,38 @@ class SuperwallReactNative: RCTEventEmitter {
     resolve(entitlements)
   }
 
-  @objc(setSubscriptionStatus:entitlements:)
-  func setSubscriptionStatus(
-    status: String,
-    entitlements: [[String: Any]]
-  ) {
-    Superwall.shared.subscriptionStatus = SubscriptionStatus.from(
-      status: status,
-      entitlements: entitlements
-    )
+  @objc(setSubscriptionStatus:)
+  func setSubscriptionStatus(status: NSDictionary) {
+    guard  let statusDict = status as? [String: Any] else {
+      return
+    }
+    let statusString = (statusDict["status"] as? String)?.uppercased() ?? "UNKNOWN"
+    let subscriptionStatus: SubscriptionStatus
+
+    switch statusString {
+    case "UNKNOWN":
+      subscriptionStatus = .unknown
+    case "INACTIVE":
+      subscriptionStatus = .inactive
+    case "ACTIVE":
+      if let entitlementsArray = statusDict["entitlements"] as? [[String: Any]] {
+        let entitlementsSet: Set<Entitlement> = Set(
+          entitlementsArray.compactMap { item in
+            if let id = item["id"] as? String {
+              return Entitlement(id: id)
+            }
+            return nil
+          }
+        )
+        subscriptionStatus = .active(entitlementsSet)
+      } else {
+        subscriptionStatus = .inactive
+      }
+    default:
+      subscriptionStatus = .unknown
+    }
+
+    Superwall.shared.subscriptionStatus = subscriptionStatus
   }
 
   @objc(setInterfaceStyle:)
