@@ -208,23 +208,24 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   @ReactMethod
   fun setSubscriptionStatus(status: ReadableMap) {
     val statusString = status.getString("status") ?: "UNKNOWN"
+
     val subscriptionStatus: SubscriptionStatus = when (statusString.uppercase()) {
-      "UNKNOWN" -> SubscriptionStatus.Unknown
-      "INACTIVE" -> SubscriptionStatus.Inactive
-      "ACTIVE" -> {
-        val entitlements = status.getArray("entitlements")
-        val entitlementsSet = entitlements?.toArrayList()?.mapNotNull { item ->
-          when (item) {
-            is ReadableMap -> {
-              val id = item.getString("id")
-              id?.let { Entitlement(it) }
-            }
-            else -> null
-          }
-        }?.toSet() ?: emptySet()
-        SubscriptionStatus.Active(entitlementsSet)
-      }
-      else -> SubscriptionStatus.Unknown
+        "UNKNOWN" -> SubscriptionStatus.Unknown
+        "INACTIVE" -> SubscriptionStatus.Inactive
+        "ACTIVE" -> {
+            val entitlements = status.getArray("entitlements")
+            val entitlementsSet = entitlements?.toArrayList()?.mapNotNull { item ->
+                when (item) {
+                    is HashMap<*, *> -> {  // Change from ReadableMap to HashMap
+                        val id = (item["id"] as? String)
+                        id?.let { Entitlement(it) }
+                    }
+                    else -> null
+                }
+            }?.toSet() ?: emptySet()
+            SubscriptionStatus.Active(entitlementsSet)
+        }
+        else -> SubscriptionStatus.Unknown
     }
 
     Superwall.instance.setSubscriptionStatus(subscriptionStatus)
