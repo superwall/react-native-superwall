@@ -520,14 +520,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.25.9, @babel/parser@npm:^7.26.5":
-  version: 7.26.5
-  resolution: "@babel/parser@npm:7.26.5"
+"@babel/parser@npm:^7.25.9, @babel/parser@npm:^7.26.5, @babel/parser@npm:^7.26.7":
+  version: 7.26.7
+  resolution: "@babel/parser@npm:7.26.7"
   dependencies:
-    "@babel/types": ^7.26.5
+    "@babel/types": ^7.26.7
   bin:
     parser: ./bin/babel-parser.js
-  checksum: 663aebf27c1dc04813e6c1d6e8e8fcb2954163ec297a95bdb3f1d0c2a0f04b504bddc09588fe4b176b43fad28c8a4b2914838a1edffdd426537a42f3ac644f1e
+  checksum: 22aafd7a6fb9ae577cf192141e5b879477fc087872b8953df0eed60ab7e2397d01aa8d92690eb7ba406f408035dd27c86fbf9967c9a37abd9bf4b1d7cf46a823
   languageName: node
   linkType: hard
 
@@ -1730,8 +1730,8 @@ __metadata:
   linkType: hard
 
 "@babel/plugin-transform-typescript@npm:^7.25.9":
-  version: 7.26.5
-  resolution: "@babel/plugin-transform-typescript@npm:7.26.5"
+  version: 7.26.7
+  resolution: "@babel/plugin-transform-typescript@npm:7.26.7"
   dependencies:
     "@babel/helper-annotate-as-pure": ^7.25.9
     "@babel/helper-create-class-features-plugin": ^7.25.9
@@ -1740,7 +1740,7 @@ __metadata:
     "@babel/plugin-syntax-typescript": ^7.25.9
   peerDependencies:
     "@babel/core": ^7.0.0-0
-  checksum: d022c1ca9ee5a420c374efb209eaca4f94c06851edeea2b3577dad52ea6692b6b33d00217b33a74d91bd62381ace471e26cc6153bbc681b3af1b1436431ff9c0
+  checksum: c0a20ed69f70135237c903d33291efc6023c99ac5e0aee29b480248f41cc3f24d5b09810368fe8b4804cf52cffb967012ea952ca7df03bf401351ed67aca8247
   languageName: node
   linkType: hard
 
@@ -2037,17 +2037,17 @@ __metadata:
   linkType: hard
 
 "@babel/traverse@npm:^7.25.9, @babel/traverse@npm:^7.26.5":
-  version: 7.26.5
-  resolution: "@babel/traverse@npm:7.26.5"
+  version: 7.26.7
+  resolution: "@babel/traverse@npm:7.26.7"
   dependencies:
     "@babel/code-frame": ^7.26.2
     "@babel/generator": ^7.26.5
-    "@babel/parser": ^7.26.5
+    "@babel/parser": ^7.26.7
     "@babel/template": ^7.25.9
-    "@babel/types": ^7.26.5
+    "@babel/types": ^7.26.7
     debug: ^4.3.1
     globals: ^11.1.0
-  checksum: 28f28037ec6bb72ded695b2bd79c373f13dc993a408c6037c3d46a1234360342a688c031f9ed4fc8528183892a63b54edce0b516e723fb3dffd606da75496cdc
+  checksum: 22ea8aed130e51db320ff7b3b1555f7dfb82fa860669e593e62990bff004cf09d3dca6fecb8afbac5e51973b703d0cdebf1dc0f6c0021901506f90443c40271b
   languageName: node
   linkType: hard
 
@@ -2073,13 +2073,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.25.9, @babel/types@npm:^7.26.5":
-  version: 7.26.5
-  resolution: "@babel/types@npm:7.26.5"
+"@babel/types@npm:^7.25.9, @babel/types@npm:^7.26.5, @babel/types@npm:^7.26.7":
+  version: 7.26.7
+  resolution: "@babel/types@npm:7.26.7"
   dependencies:
     "@babel/helper-string-parser": ^7.25.9
     "@babel/helper-validator-identifier": ^7.25.9
-  checksum: 65dc14aa32ace22655c5edadeb99df80776c09cd93c105feaf49cc0583f3116aff0581b7eab630888c39ba61151f251c1399ec982b93585b0d1d1bf4a45b54f9
+  checksum: cfb12e8794ebda6c95c92f3b90f14a9ec87ab532a247d887233068f72f8c287c0fa2e8d3d6ed5a4e512729844f7f73a613cb87d86077ae60a63a2e870e697307
   languageName: node
   linkType: hard
 
@@ -3410,7 +3410,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-masked-view/masked-view@npm:^0.3.2":
+"@react-native-masked-view/masked-view@npm:0.3.2":
   version: 0.3.2
   resolution: "@react-native-masked-view/masked-view@npm:0.3.2"
   peerDependencies:
@@ -3719,7 +3719,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/native@npm:^7.0.14":
+"@react-navigation/native@npm:7.0.14":
   version: 7.0.14
   resolution: "@react-navigation/native@npm:7.0.14"
   dependencies:
@@ -3744,7 +3744,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/stack@npm:^7.1.1":
+"@react-navigation/stack@npm:7.1.1":
   version: 7.1.1
   resolution: "@react-navigation/stack@npm:7.1.1"
   dependencies:
@@ -3775,10 +3775,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-typescript-internal@npm:13.16.2":
-  version: 13.16.2
-  resolution: "@revenuecat/purchases-typescript-internal@npm:13.16.2"
-  checksum: 34946b2c02fb9f6cc34636b1037ab4ff842557d82b92eed49aee2c47bf64a8c41de03c816c4d317dbdd8fb02dc1298b41b76d897fe775364568e4967d83fcc4f
+"@revenuecat/purchases-typescript-internal@npm:13.17.0":
+  version: 13.17.0
+  resolution: "@revenuecat/purchases-typescript-internal@npm:13.17.0"
+  checksum: 2cc0116ebbb4ac2a679917883d10e9f2c14c5c6ef87114cb495849663a2a416649437aac751281c924f26ddbfbefd3eb12b197db4c15cb09d37513013618910f
   languageName: node
   linkType: hard
 
@@ -5220,9 +5220,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001688":
-  version: 1.0.30001695
-  resolution: "caniuse-lite@npm:1.0.30001695"
-  checksum: 97729756cc19e9a93d46061ff11690d9a7d2facdb9c275111b19548adcba29d29638339bd6e659b7ddcb3649f17926a66a4cfb407605232f21918b70650a40be
+  version: 1.0.30001698
+  resolution: "caniuse-lite@npm:1.0.30001698"
+  checksum: 00a9b833ce2fe1bfe6a84a4c966b7825cee5504913a12834c2cbf34d26151e106719158640b2e503842c7bba261337877ebebaac91e82fb04d8b837e22c73f26
   languageName: node
   linkType: hard
 
@@ -6420,9 +6420,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.73":
-  version: 1.5.84
-  resolution: "electron-to-chromium@npm:1.5.84"
-  checksum: 4bdf445aa4fd970cef45cbeec2d20ce609f746b78a0e2e0a053ac01126b3901827877e770b2a841333458a2967017796a67a28e1c9dafc4d35002e32178e4d39
+  version: 1.5.95
+  resolution: "electron-to-chromium@npm:1.5.95"
+  checksum: 909d90e1b8191cabd76aff884e756d35d878683e267c39e1168388fe35c7009e44ef681a163c95ed6a5968bbb08eff29e0e6ed78373cd27779ee300b3ed4fac0
   languageName: node
   linkType: hard
 
@@ -11924,33 +11924,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:^2.22.0":
-  version: 2.22.0
-  resolution: "react-native-gesture-handler@npm:2.22.0"
+"react-native-gesture-handler@npm:2.18.0":
+  version: 2.18.0
+  resolution: "react-native-gesture-handler@npm:2.18.0"
   dependencies:
     "@egjs/hammerjs": ^2.0.17
     hoist-non-react-statics: ^3.3.0
     invariant: ^2.2.4
+    prop-types: ^15.7.2
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: ad4ada2221d16ce56ecff0c5ab1d4a0220937e9e408c85729d9150b2eb3fdc0c5a92597bd4068a9b3e1b951380c28691f5e401071cc257c69008d39c9269f0d4
+  checksum: 98529b672751d20ee470d368b64ceb8c829e66eb6d7c61724cd84500a76efec52c0b7d67a76ce3bac9bece1d7575ee3e9bb3c66044458ae2fd0ef3000e94e60b
   languageName: node
   linkType: hard
 
-"react-native-purchases@npm:^8.5.2":
-  version: 8.5.2
-  resolution: "react-native-purchases@npm:8.5.2"
+"react-native-purchases@npm:>=7.20.2":
+  version: 8.5.3
+  resolution: "react-native-purchases@npm:8.5.3"
   dependencies:
-    "@revenuecat/purchases-typescript-internal": 13.16.2
+    "@revenuecat/purchases-typescript-internal": 13.17.0
   peerDependencies:
     react: ">= 16.6.3"
     react-native: "*"
-  checksum: 100fd6d8f82ac7339a1a185d25d6e0f73f0ed51f543af91df4f31ac02080114492808f3e8d579bd994cf0b5ee71f353889542e64a430693bcc3020d8de576573
+  checksum: 34ce4cf4b9653ef9657d84c73645da941ce3cae07e0440caaf2a99f09a04a3f39b730ee93936283f27d138574f80ebb2fa472b2f6a5d37c83cf1cdd04dec5cfd
   languageName: node
   linkType: hard
 
-"react-native-reanimated@npm:^3.16.7":
+"react-native-reanimated@npm:3.16.7":
   version: 3.16.7
   resolution: "react-native-reanimated@npm:3.16.7"
   dependencies:
@@ -11973,30 +11974,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "react-native-safe-area-context@npm:5.1.0"
+"react-native-safe-area-context@npm:4.9.0":
+  version: 4.9.0
+  resolution: "react-native-safe-area-context@npm:4.9.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: b03663c8567f24ff9e0fd96f0b06b8b4e3aebb77dd93995cc661996aa6e70f8e96588e78006696277b7c213b65ac9515604d57bd0321b96e42b0a055b3b49f7e
+  checksum: 120aefb77766a37e81c5a844d7e1493afea35461c30df5ca903c6b6e2fc6694e2496d433550a2eda872ef8384a36ecf8529a617cb19acbeebd37d78d7aa7b17e
   languageName: node
   linkType: hard
 
-"react-native-screens@npm:^4.5.0":
-  version: 4.5.0
-  resolution: "react-native-screens@npm:4.5.0"
+"react-native-screens@npm:>=4.0.0 <4.5.0":
+  version: 4.4.0
+  resolution: "react-native-screens@npm:4.4.0"
   dependencies:
     react-freeze: ^1.0.0
     warn-once: ^0.1.0
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 866dbc4803980ce589a212c1a8b15f8cdf428f39895b00edfcc9aaf5f658c8fce0ddf37e7f8d259e4f7385909485c0720209ca6fc5f8ebd8531a7b2ec07fc658
+  checksum: 6e90539e8eb79ba4b3fd23f6c27b943e3595c9c275b3002e6b376eb0a1c17521bde9b05d0b2c4c7ab67042f20bdbec87c3d1e3d182a531b7e3115a2dace0e912
   languageName: node
   linkType: hard
 
-"react-native-vector-icons@npm:^10.2.0":
+"react-native-vector-icons@npm:10.2.0":
   version: 10.2.0
   resolution: "react-native-vector-icons@npm:10.2.0"
   dependencies:
@@ -13464,22 +13465,22 @@ __metadata:
     "@babel/core": ^7.20.0
     "@babel/preset-env": ^7.20.0
     "@babel/runtime": ^7.20.0
-    "@react-native-masked-view/masked-view": ^0.3.2
+    "@react-native-masked-view/masked-view": 0.3.2
     "@react-native/babel-preset": 0.73.21
     "@react-native/metro-config": 0.73.5
     "@react-native/typescript-config": 0.73.1
-    "@react-navigation/native": ^7.0.14
-    "@react-navigation/stack": ^7.1.1
+    "@react-navigation/native": 7.0.14
+    "@react-navigation/stack": 7.1.1
     babel-plugin-module-resolver: ^5.0.0
     pod-install: ^0.1.0
     react: 18.2.0
     react-native: 0.73.4
-    react-native-gesture-handler: ^2.22.0
-    react-native-purchases: ^8.5.2
-    react-native-reanimated: ^3.16.7
-    react-native-safe-area-context: ^5.1.0
-    react-native-screens: ^4.5.0
-    react-native-vector-icons: ^10.2.0
+    react-native-gesture-handler: 2.18.0
+    react-native-purchases: ">=7.20.2"
+    react-native-reanimated: 3.16.7
+    react-native-safe-area-context: 4.9.0
+    react-native-screens: ">=4.0.0 <4.5.0"
+    react-native-vector-icons: 10.2.0
   languageName: unknown
   linkType: soft
 

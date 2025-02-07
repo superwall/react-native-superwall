@@ -41,11 +41,11 @@ export enum PaywallPresentationRequestStatusReasonType {
   userIsSubscribed = 'userIsSubscribed',
   holdout = 'holdout',
   noAudienceMatch = 'noAudienceMatch',
-  eventNotFound = 'eventNotFound',
+  placementNotFound = 'placementNotFound',
   noPaywallViewController = 'noPaywallViewController',
   noPresenter = 'noPresenter',
   noConfig = 'noConfig',
-  entitlementsTimeout = 'entitlementsTimeout',
+  subscriptionStatusTimeout = 'subscriptionStatusTimeout',
 }
 
 export class PaywallPresentationRequestStatusReason {
@@ -85,9 +85,9 @@ export class PaywallPresentationRequestStatusReason {
         return new PaywallPresentationRequestStatusReason(
           PaywallPresentationRequestStatusReasonType.noAudienceMatch
         );
-      case 'eventNotFound':
+      case 'placementNotFound':
         return new PaywallPresentationRequestStatusReason(
-          PaywallPresentationRequestStatusReasonType.eventNotFound
+          PaywallPresentationRequestStatusReasonType.placementNotFound
         );
       case 'noPaywallViewController':
         return new PaywallPresentationRequestStatusReason(
@@ -101,9 +101,9 @@ export class PaywallPresentationRequestStatusReason {
         return new PaywallPresentationRequestStatusReason(
           PaywallPresentationRequestStatusReasonType.noConfig
         );
-      case 'entitlementsTimeout':
+      case 'subscriptionStatusTimeout':
         return new PaywallPresentationRequestStatusReason(
-          PaywallPresentationRequestStatusReasonType.entitlementsTimeout
+          PaywallPresentationRequestStatusReasonType.subscriptionStatusTimeout
         );
       default:
         throw new Error('Invalid PaywallPresentationRequestStatusReason type');

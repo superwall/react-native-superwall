@@ -1,6 +1,7 @@
 package com.superwallreactnative
 
 import android.app.Application
+import android.util.Log
 import android.net.Uri
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
@@ -205,18 +206,22 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   }
 
   @ReactMethod
-  fun setSubscriptionStatus(
-    status: String,
-    entitlements: List<Map<String, Any>>
-  ) {
-    val subscriptionStatus: SubscriptionStatus = when (status.uppercase()) {
+  fun setSubscriptionStatus(status: ReadableMap) {
+    val statusString = status.getString("status") ?: "UNKNOWN"
+    val subscriptionStatus: SubscriptionStatus = when (statusString.uppercase()) {
       "UNKNOWN" -> SubscriptionStatus.Unknown
       "INACTIVE" -> SubscriptionStatus.Inactive
       "ACTIVE" -> {
-        val entitlementsSet = entitlements.mapNotNull { dict ->
-          val id = dict["id"] as? String
-          id?.let { Entitlement(it) }
-        }.toSet()
+        val entitlements = status.getArray("entitlements")
+        val entitlementsSet = entitlements?.toArrayList()?.mapNotNull { item ->
+          when (item) {
+            is ReadableMap -> {
+              val id = item.getString("id")
+              id?.let { Entitlement(it) }
+            }
+            else -> null
+          }
+        }?.toSet() ?: emptySet()
         SubscriptionStatus.Active(entitlementsSet)
       }
       else -> SubscriptionStatus.Unknown

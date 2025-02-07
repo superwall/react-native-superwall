@@ -40,9 +40,13 @@ export class RCPurchaseController extends PurchaseController {
       );
       Superwall.shared.setSubscriptionStatus(
         entitlements.length === 0
-          ? SubscriptionStatus.INACTIVE
-          : SubscriptionStatus.ACTIVE,
-        entitlements
+          ? {
+              status: 'INACTIVE',
+            }
+          : {
+              status: 'ACTIVE',
+              entitlements,
+            }
       );
     });
   }

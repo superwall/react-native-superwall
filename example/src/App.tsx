@@ -8,6 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './Home';
 import LaunchedFeature from './LaunchedFeature';
+import { SuperwallOptions } from '@superwall/react-native-superwall';
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -21,10 +22,18 @@ export default function App() {
           : 'pk_d1f0959f70c761b1d55bb774a03e22b2b6ed290ce6561f85';
 
       const purchaseController = new RCPurchaseController();
-      Superwall.configure(apiKey, null, purchaseController);
+      Superwall.configure(
+        apiKey,
+        new SuperwallOptions({
+          paywalls: {
+            shouldPreload: false,
+          },
+        }),
+        purchaseController
+      );
       Superwall.shared.identify('abc');
       Superwall.shared.setDelegate(delegate);
-      Superwall.shared.setUserAttributes({ test: "abc" });
+      Superwall.shared.setUserAttributes({ test: 'abc' });
       purchaseController.syncSubscriptionStatus();
     };
 

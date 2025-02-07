@@ -367,8 +367,7 @@ export default class Superwall {
 
   async setSubscriptionStatus(status: SubscriptionStatus) {
     await this.awaitConfig();
-    let entitlements = status.status === 'ACTIVE' ? status.entitlements : [];
-    await SuperwallReactNative.setSubscriptionStatus(status, entitlements);
+    await SuperwallReactNative.setSubscriptionStatus(status);
   }
 
   async setInterfaceStyle(style: InterfaceStyle) {

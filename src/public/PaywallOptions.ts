@@ -24,7 +24,7 @@ export class PaywallOptions {
   isHapticFeedbackEnabled: boolean = true;
   restoreFailed: RestoreFailed = new RestoreFailed();
   shouldShowPurchaseFailureAlert: boolean = true;
-  shouldPreload: boolean = true;
+  shouldPreload: boolean = false;
   automaticallyDismiss: boolean = true;
   transactionBackgroundView: TransactionBackgroundView =
     TransactionBackgroundView.spinner;
