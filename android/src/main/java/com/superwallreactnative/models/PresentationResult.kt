@@ -27,10 +27,6 @@ fun PresentationResult.toJson(): ReadableMap {
       map.putString("type", "PlacementNotFound")
     }
 
-    is PresentationResult.UserIsSubscribed -> {
-      map.putString("type", "UserIsSubscribed")
-    }
-
     is PresentationResult.PaywallNotAvailable -> {
       map.putString("type", "PaywallNotAvailable")
     }

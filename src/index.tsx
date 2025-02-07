@@ -144,13 +144,13 @@ export default class Superwall {
     );
 
     this.eventEmitter.addListener('restore', async () => {
-        var restorationResult =
-          await Superwall.purchaseController?.restorePurchases();
-        if (restorationResult == null) {
-          return;
-        }
-        await SuperwallReactNative.didRestore(restorationResult.toJson());
-      });
+      var restorationResult =
+        await Superwall.purchaseController?.restorePurchases();
+      if (restorationResult == null) {
+        return;
+      }
+      await SuperwallReactNative.didRestore(restorationResult.toJson());
+    });
 
     this.eventEmitter.addListener('paywallPresentationHandler', (data) => {
       var handler = this.presentationHandlers.get(data.handlerId);
@@ -190,8 +190,11 @@ export default class Superwall {
     this.eventEmitter.addListener(
       'subscriptionStatusDidChange',
       async (data) => {
-        const from = SubscriptionStatus.fromString(data.from);
-        const to = SubscriptionStatus.fromString(data.to);
+        const from = SubscriptionStatus.fromString(
+          data.from,
+          data.entitlements
+        );
+        const to = SubscriptionStatus.fromString(data.to, data.entitlements);
         Superwall.delegate?.subscriptionStatusDidChange(from, to);
       }
     );
@@ -252,14 +255,12 @@ export default class Superwall {
     return this._superwall;
   }
 
-    /**
-    apiKey: String,
-    purchaseController: PurchaseController? = nil,
-    options: SuperwallOptions? = nil,
-    completion: (() -> Void)?
-  ) {
-     * @param options
-     */
+  /**
+   * @param apiKey: String,
+   * @param purchaseController: PurchaseController? = nil,
+   * @param options: SuperwallOptions? = nil,
+   * @param completion: (() -> Void)?
+   */
   static async configure(
     apiKey: string,
     options?: SuperwallOptions,
@@ -320,11 +321,13 @@ export default class Superwall {
       paramsObject = Object.fromEntries(params);
     }
 
-    await SuperwallReactNative.register(placement, paramsObject, handlerId).then(
-      () => {
-        if (feature) feature();
-      }
-    );
+    await SuperwallReactNative.register(
+      placement,
+      paramsObject,
+      handlerId
+    ).then(() => {
+      if (feature) feature();
+    });
   }
 
   async confirmAllAssignments(): Promise<ConfirmedAssignment[]> {
@@ -362,11 +365,9 @@ export default class Superwall {
     return EntitlementsInfo.fromObject(entitlementsJson);
   }
 
-  async setSubscriptionStatus(
-    status: SubscriptionStatus,
-    entitlements: Array<Map<String, any>>
-  ) {
+  async setSubscriptionStatus(status: SubscriptionStatus) {
     await this.awaitConfig();
+    let entitlements = status.status === 'ACTIVE' ? status.entitlements : [];
     await SuperwallReactNative.setSubscriptionStatus(status, entitlements);
   }
 

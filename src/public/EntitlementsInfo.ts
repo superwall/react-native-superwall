@@ -2,7 +2,7 @@ import type { Entitlement } from './Entitlement';
 import { SubscriptionStatus } from './SubscriptionStatus';
 
 export interface EntitlementsInfo {
-  status: { status: SubscriptionStatus; entitlements: Entitlement[] };
+  status: SubscriptionStatus;
   active: Entitlement[];
   all: Entitlement[];
   inactive: Entitlement[];

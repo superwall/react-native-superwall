@@ -4,7 +4,7 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.superwall.sdk.analytics.superwall.SuperwallPlacementInfo
-import com.superwall.sdk.delegate.SubscriptionStatus
+import com.superwall.sdk.models.entitlements.SubscriptionStatus
 import com.superwall.sdk.delegate.SuperwallDelegate
 import com.superwall.sdk.paywall.presentation.PaywallInfo
 import com.superwallreactnative.models.SuperwallPlacement
@@ -17,9 +17,11 @@ class SuperwallDelegateBridge(
   private val reactContext: ReactContext
 ): SuperwallDelegate {
   override fun subscriptionStatusDidChange(
+    from: SubscriptionStatus,
     to: SubscriptionStatus
   ) {
     val data = Arguments.createMap().apply {
+      putString("from", from.toString())
       putString("to", to.toString())
     }
 

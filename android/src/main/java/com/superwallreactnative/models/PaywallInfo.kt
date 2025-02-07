@@ -18,7 +18,7 @@ fun PaywallInfo.toJson(): ReadableMap {
   this.products.forEach { product ->
     val productMap = Arguments.createMap()
     productMap.putString("type", product.type.toString())
-    productMap.putString("id", product.id)
+    productMap.putString("id", product.fullProductId)
     productsArray.pushMap(productMap)
   }
   map.putArray("products", productsArray)
@@ -58,7 +58,7 @@ fun PaywallInfo.toJson(): ReadableMap {
   val computedPropertyRequestsArray = Arguments.createArray()
   this.computedPropertyRequests.forEach { request ->
     val computedPropertyRequestsMap = Arguments.createMap()
-    computedPropertyRequestsMap.putString("eventName", request.eventName)
+    computedPropertyRequestsMap.putString("placementName", request.placementName)
     computedPropertyRequestsMap.putString("type", request.type.toString())
     computedPropertyRequestsArray.pushMap(computedPropertyRequestsMap)
   }
