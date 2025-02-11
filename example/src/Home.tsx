@@ -8,31 +8,22 @@ const Home = () => {
   const navigation = useNavigation();
 
   const nonGated = () => {
-    Superwall.shared.register({
-      placement: 'non_gated',
-      feature: () => {
-        navigation.navigate('LaunchedFeature', {
-          value: 'Non-gated feature launched',
-        });
-      },
+    Superwall.shared.register({ placement: 'non_gated' }).then(() => {
+      navigation.navigate('LaunchedFeature', {
+        value: 'Non-gated feature launched',
+      });
     });
   };
 
   const pro = () => {
-    Superwall.shared.register({
-      placement: 'pro',
-      feature: () => {
-        navigation.navigate('LaunchedFeature', { value: 'Pro feature launched' });
-      },
+    Superwall.shared.register({ placement: 'pro' }).then(() => {
+      navigation.navigate('LaunchedFeature', { value: 'Pro feature launched' });
     });
   };
 
   const diamond = () => {
-    Superwall.shared.register({
-      placement: 'diamond',
-      feature: () => {
-        navigation.navigate('LaunchedFeature', { value: 'Diamond feature launched' });
-      },
+    Superwall.shared.register({ placement: 'diamond' }).then(() => {
+      navigation.navigate('LaunchedFeature', { value: 'Diamond feature launched' });
     });
   };
 

@@ -347,15 +347,15 @@ export default class Superwall {
   }
 
   /**
-   * Registers a placement to access a feature. When the placement is added to a campaign on the [Superwall Dashboard](https://superwall.com/dashboard),
-   * it can trigger a paywall.
+   * Registers a placement to access a feature.
    *
-   * The paywall will be presented when:
-   *  - The provided placement is included in a campaign on the Superwall Dashboard;
-   *  - The user matches an audience filter defined in the campaign; and
-   *  - The user does not have an active subscription.
+   * When the placement is added to a campaign on the [Superwall Dashboard](https://superwall.com/dashboard),
+   * it can trigger a paywall if the following conditions are met:
+   * - The provided placement is included in a campaign on the Superwall Dashboard.
+   * - The user matches an audience filter defined in the campaign.
+   * - The user does not have an active subscription.
    *
-   * Before using this method, you must create a campaign and add the placement to the campaign on the
+   * Before using this method, ensure you have created a campaign and added the placement on the
    * [Superwall Dashboard](https://superwall.com/dashboard).
    *
    * The displayed paywall is determined by the audience filters set in the campaign.
@@ -363,32 +363,45 @@ export default class Superwall {
    * you remove it from the audience or reset the paywall assignments.
    *
    * @param {Object} options - The options for registering a placement.
-   * @param {string} options.placement - The name of the placement you wish to register.
+   * @param {string} options.placement - The name of the placement to register.
    * @param {Record<string, any>} [options.params] - Optional parameters to pass with your placement.
    *   These parameters can be referenced within the audience filters of your campaign. Keys beginning with `$`
-   *   are reserved for Superwall and will be omitted. Values can be any JSON encodable value, URLs, or Dates.
-   *   Arrays and dictionaries as values are not supported at this time and will be dropped.
+   *   are reserved for Superwall and will be omitted. Values can be any JSON-encodable value, URL, or Date.
+   *   Arrays and dictionaries are not supported and will be dropped.
    * @param {PaywallPresentationHandler} [options.handler] - An optional handler that receives status updates
    *   about the paywall presentation.
-   * @param {() => void} options.feature - A callback function representing the feature you wish to paywall.
-   *   This callback is remotely configurable via the [Superwall Dashboard](https://superwall.com/dashboard).
-   *   - For _Non Gated_ paywalls, this is called when the paywall is dismissed or if the user is already paying.
-   *   - For _Gated_ paywalls, this is called only if the user is already paying or if they begin paying.
-   *   - If no paywall is configured, this callback is executed immediately.
-   *   Note: This callback will not be invoked in the event of an error, which you can detect via the `handler`.
    *
-   * @returns {Promise<void>} A promise that resolves once the placement registration process is complete.
+   *  @returns {Promise<void>} A promise that resolves when register completes successfully,
+   * indicating that it is safe to execute your feature logic in a subsequent `.then()` block.
+   *
+   * @remarks
+   * To execute your feature logic, chain a `.then()` block onto the returned promise. Your callback in the
+   * `.then()` block acts as the feature block — that is, the code representing the feature you wish to paywall.
+   * This behavior is remotely configurable via the [Superwall Dashboard](https://superwall.com/dashboard):
+   *
+   * - For _Non Gated_ paywalls, the feature block is executed when the paywall is dismissed or if the user is already paying.
+   * - For _Gated_ paywalls, the feature block is executed only if the user is already paying or if they begin paying.
+   * - If no paywall is configured, the feature block is executed immediately.
+   *
+   * Note: The feature block will not be executed if an error occurs during registration. Such errors can be detected via the
+   * `handler`.
+   *
+   * @example
+   * // Chaining feature logic after registration:
+   * Superwall.register({ placement: "somePlacement" })
+   *   .then(() => {
+   *     // Execute your feature logic here after registration.
+   *     console.log("Placement registered, now executing feature logic.");
+   *   })
    */
   async register({
     placement,
     params,
     handler,
-    feature,
   }: {
     placement: string;
-    params?: Map<String, any>;
+    params?: Map<string, any>;
     handler?: PaywallPresentationHandler;
-    feature?: () => void;
   }): Promise<void> {
     await this.awaitConfig();
     let handlerId: string | null = null;
@@ -404,13 +417,8 @@ export default class Superwall {
       paramsObject = Object.fromEntries(params);
     }
 
-    await SuperwallReactNative.register(
-      placement,
-      paramsObject,
-      handlerId
-    ).then(() => {
-      if (feature) feature();
-    });
+    // This promise resolves once the registration process has been initiated.
+    await SuperwallReactNative.register(placement, paramsObject, handlerId);
   }
 
   /**
