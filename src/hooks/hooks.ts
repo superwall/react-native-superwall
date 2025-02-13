@@ -288,3 +288,38 @@ export const useSuperwall = (config: {
 
   return result;
 };
+
+/**
+ * Hook to retrieve the shared and configured Superwall instance.
+ *
+ * This hook returns the shared instance of Superwall that has been configured via
+ * {@link Superwall.configure}. If Superwall has not been configured yet, the hook
+ * throws an error to alert you to initialize it first.
+ *
+ * @returns {Superwall} The configured Superwall shared instance.
+ *
+ * @throws {Error} If Superwall has not been configured.
+ *
+ * @example
+ * function SomeComponent() {
+ *   // Ensure that Superwall.configure has been called (and successfully initialized)
+ *   const superwall = useSuperwallInstance();
+ *
+ *   // Now you can use the instance to interact with Superwall directly.
+ *   // For example, dismiss a paywall:
+ *   const dismissPaywall = async () => {
+ *     await superwall.dismiss();
+ *   };
+ *
+ *   return <button onClick={dismissPaywall}>Dismiss Paywall</button>;
+ * }
+ */
+export function useSuperwallInstance(): Superwall {
+  // Using a type assertion (as any) to bypass TypeScript's private member restriction.
+  if (!(Superwall as any).didConfigure) {
+    throw new Error(
+      '[Superwall] Superwall is not configured yet. Please call Superwall.configure() before using useSuperwallInstance.'
+    );
+  }
+  return Superwall.shared;
+}
