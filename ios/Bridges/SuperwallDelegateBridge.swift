@@ -8,14 +8,20 @@
 import SuperwallKit
 
 final class SuperwallDelegateBridge: SuperwallDelegate {
-  func subscriptionStatusDidChange(to newValue: SubscriptionStatus) {
-    let data: [String: Any] = ["subscriptionStatus": newValue.rawValue]
+  func subscriptionStatusDidChange  (
+    from oldValue: SubscriptionStatus,
+    to newValue: SubscriptionStatus
+  ) {
+    let data: [String: Any] = [
+      "from": oldValue.toJson(),
+      "to": newValue.toJson(),
+    ]
     sendEvent(withName: "subscriptionStatusDidChange", body: data)
   }
 
-  func handleSuperwallEvent(withInfo eventInfo: SuperwallEventInfo) {
-    let data: [String: Any] = ["eventInfo": eventInfo.toJson()]
-    sendEvent(withName: "handleSuperwallEvent", body: data)
+  func handleSuperwallPlacement(withInfo placementInfo: SuperwallPlacementInfo) {
+    let data: [String: Any] = ["placementInfo": placementInfo.toJson()]
+    sendEvent(withName: "handleSuperwallPlacement", body: data)
   }
 
   func handleCustomPaywallAction(withName name: String) {
@@ -65,7 +71,7 @@ final class SuperwallDelegateBridge: SuperwallDelegate {
       "scope": scope,
       "message": message,
       "info": info,
-      "error": error?.localizedDescription
+      "error": error?.localizedDescription,
     ]
     sendEvent(withName: "handleLog", body: data)
   }

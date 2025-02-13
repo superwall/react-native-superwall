@@ -30,10 +30,13 @@ export class SuperwallOptions {
   collectAdServicesAttribution: boolean = false;
   passIdentifiersToPlayStore: boolean = false;
 
-  // Optionally, add a constructor for customization or methods for manipulation
   constructor(init?: Partial<SuperwallOptions>) {
     if (init) {
-      Object.assign(this, init);
+      if (init.paywalls) {
+        this.paywalls = new PaywallOptions();
+        Object.assign(this.paywalls, init.paywalls);
+      }
+      Object.assign(this, { ...init, paywalls: this.paywalls });
     }
   }
 

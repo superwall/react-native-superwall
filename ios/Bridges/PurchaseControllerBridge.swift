@@ -9,7 +9,7 @@ final class PurchaseControllerBridge: PurchaseController {
 
   private init() {}
 
-  func purchase(product: SKProduct) async -> PurchaseResult {
+  func purchase(product: StoreProduct) async -> PurchaseResult {
     SuperwallReactNative.emitter.sendEvent(
       withName: "purchaseFromAppStore",
       body: ["productId": product.productIdentifier]

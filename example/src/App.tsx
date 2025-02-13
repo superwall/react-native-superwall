@@ -1,79 +1,48 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Platform, Button, Linking } from 'react-native';
+import { Platform, Linking, Text } from 'react-native';
 import Superwall from '@superwall/react-native-superwall';
 import { RCPurchaseController } from './RCPurchaseController';
 import { MySuperwallDelegate } from './MySuperwallDelegate';
-import { InterfaceStyle } from '@superwall/react-native-superwall';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './Home';
+import LaunchedFeature from './LaunchedFeature';
+import { useSuperwall } from '@superwall/react-native-superwall';
+const Stack = createStackNavigator();
 
 export default function App() {
-  const delegate = new MySuperwallDelegate();
+  const result = useSuperwall({
+    apiKey:
+      Platform.OS === 'ios'
+        ? 'pk_e361c8a9662281f4249f2fa11d1a63854615fa80e15e7a4d'
+        : 'pk_d1f0959f70c761b1d55bb774a03e22b2b6ed290ce6561f85',
+    purchaseController: new RCPurchaseController(),
+    completion: (superwall: Superwall) => {
+      superwall.delegate = new MySuperwallDelegate();
+    },
+  });
 
-  React.useEffect(() => {
-    const setupSuperwall = async () => {
-      const apiKey =
-        Platform.OS === 'ios'
-          ? 'pk_5f6d9ae96b889bc2c36ca0f2368de2c4c3d5f6119aacd3d2'
-          : 'pk_d1f0959f70c761b1d55bb774a03e22b2b6ed290ce6561f85';
+  if (result.status === 'error') {
+    return <Text>Error initializing Superwall</Text>;
+  }
 
-      const purchaseController = new RCPurchaseController();
-      Superwall.configure(apiKey, null, purchaseController);
-      Superwall.shared.identify('abc');
-      Superwall.shared.setDelegate(delegate);
-      Superwall.shared.setUserAttributes({ test: "abc" });
-      purchaseController.syncSubscriptionStatus();
-    };
+  if (result.status === 'loading') {
+    return <Text>Loading...</Text>;
+  }
 
-    setupSuperwall();
-
-    // Get the initial URL if the app was launched from a link
-    Linking.getInitialURL().then((url) => {
-      if (url) {
-        Superwall.shared.handleDeepLink(url);
-      }
-    });
-
-    // Listen for URL events
-    const linkingListener = Linking.addEventListener('url', (event) => {
-      Superwall.shared.handleDeepLink(event.url);
-    });
-
-    // Clean up the event listener
-    return () => {
-      linkingListener.remove();
-    };
-  }, []);
-
-  const register = () => {
-    Superwall.shared.register('flutter');
-  };
-
-  const identify = () => {
-    Superwall.shared.identify('abc');
-  };
-
-  const reset = () => {
-    Superwall.shared.reset();
-  };
-
-  return (
-    <View style={styles.container}>
-      <Button title="Register Event" onPress={register} />
-      <Button title="Identify" onPress={identify} />
-      <Button title="Reset" onPress={reset} />
-    </View>
-  );
+  if (result.status === 'initialized') {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen
+            name="LaunchedFeature"
+            component={LaunchedFeature}
+            options={{ title: 'Launched Feature' }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});

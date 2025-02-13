@@ -16,26 +16,24 @@ extension PaywallPresentationRequestStatus {
 extension PaywallPresentationRequestStatusReason {
   func toJson() -> [String: Any?] {
     switch self {
-      case .debuggerPresented:
-        return ["reason": "debuggerPresented"]
-      case .paywallAlreadyPresented:
-        return ["reason": "paywallAlreadyPresented"]
-      case .userIsSubscribed:
-        return ["reason": "userIsSubscribed"]
-      case .holdout(let experiment):
+    case .debuggerPresented:
+      return ["reason": "debuggerPresented"]
+    case .paywallAlreadyPresented:
+      return ["reason": "paywallAlreadyPresented"]
+    case .holdout(let experiment):
       return ["reason": "holdout", "experiment": experiment.toJson()]
-      case .noRuleMatch:
-        return ["reason": "noRuleMatch"]
-      case .eventNotFound:
-        return ["reason": "eventNotFound"]
-      case .noPaywallViewController:
-        return ["reason": "noPaywallViewController"]
-      case .noPresenter:
-        return ["reason": "noPresenter"]
-      case .noConfig:
-        return ["reason": "noConfig"]
-      case .subscriptionStatusTimeout:
-        return ["reason": "subscriptionStatusTimeout"]
+    case .noAudienceMatch:
+      return ["reason": "noAudienceMatch"]
+    case .placementNotFound:
+      return ["reason": "placementNotFound"]
+    case .noPaywallViewController:
+      return ["reason": "noPaywallViewController"]
+    case .noPresenter:
+      return ["reason": "noPresenter"]
+    case .noConfig:
+      return ["reason": "noConfig"]
+    case .subscriptionStatusTimeout:
+      return ["reason": "subscriptionStatusTimeout"]
     }
   }
 }

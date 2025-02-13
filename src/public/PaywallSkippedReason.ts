@@ -11,10 +11,10 @@ export abstract class PaywallSkippedReason extends Error {
       case 'Holdout':
         const experiment = Experiment.fromJson(json.experiment);
         return new PaywallSkippedReasonHoldout(experiment);
-      case 'NoRuleMatch':
-        return new PaywallSkippedReasonNoRuleMatch();
-      case 'EventNotFound':
-        return new PaywallSkippedReasonEventNotFound();
+      case 'NoAudienceMatch':
+        return new PaywallSkippedReasonNoAudienceMatch();
+      case 'PlacementNotFound':
+        return new PaywallSkippedReasonPlacementNotFound();
       case 'UserIsSubscribed':
         return new PaywallSkippedReasonUserIsSubscribed();
       default:
@@ -33,15 +33,15 @@ export class PaywallSkippedReasonHoldout extends PaywallSkippedReason {
   }
 }
 
-export class PaywallSkippedReasonNoRuleMatch extends PaywallSkippedReason {
+export class PaywallSkippedReasonNoAudienceMatch extends PaywallSkippedReason {
   constructor() {
-    super('NoRuleMatch');
+    super('NoAudienceMatch');
   }
 }
 
-export class PaywallSkippedReasonEventNotFound extends PaywallSkippedReason {
+export class PaywallSkippedReasonPlacementNotFound extends PaywallSkippedReason {
   constructor() {
-    super('EventNotFound');
+    super('PlacementNotFound');
   }
 }
 

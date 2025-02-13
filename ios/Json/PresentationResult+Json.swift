@@ -14,12 +14,10 @@ extension PresentationResult {
         "type": "Paywall",
         "experiment": experiment.toJson(),
       ]
-    case .noRuleMatch:
-      return ["type": "NoRuleMatch"]
-    case .eventNotFound:
-      return ["type": "EventNotFound"]
-    case .userIsSubscribed:
-      return ["type": "UserIsSubscribed"]
+    case .noAudienceMatch:
+      return ["type": "NoAudienceMatch"]
+    case .placementNotFound:
+      return ["type": "PlacementNotFound"]
     case .paywallNotAvailable:
       return ["type": "PaywallNotAvailable"]
     }

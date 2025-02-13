@@ -9,11 +9,11 @@ class TriggerResult {
     fun toJson(triggerResult: TriggerResult): ReadableMap {
       val map = Arguments.createMap()
       when (triggerResult) {
-        is TriggerResult.EventNotFound -> {
-          map.putString("result", "eventNotFound")
+        is TriggerResult.PlacementNotFound -> {
+          map.putString("result", "placementNotFound")
         }
-        is TriggerResult.NoRuleMatch -> {
-          map.putString("result", "noRuleMatch")
+        is TriggerResult.NoAudienceMatch -> {
+          map.putString("result", "noAudienceMatch")
         }
         is TriggerResult.Paywall -> {
           map.putString("result", "paywall")
