@@ -17,6 +17,7 @@ export default function App() {
       Platform.OS === 'ios'
         ? 'pk_e361c8a9662281f4249f2fa11d1a63854615fa80e15e7a4d'
         : 'pk_d1f0959f70c761b1d55bb774a03e22b2b6ed290ce6561f85',
+    purchaseController: new RCPurchaseController(),
     completion: (superwall: Superwall) => {
       superwall.delegate = new MySuperwallDelegate();
     },
