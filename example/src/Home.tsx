@@ -3,38 +3,34 @@ import * as React from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import Superwall from '@superwall/react-native-superwall';
 import { useNavigation } from '@react-navigation/native';
+import { useSubscriptionStatus } from '@superwall/react-native-superwall';
+import { useEntitlements } from '@superwall/react-native-superwall';
+import { Text } from 'react-native';
+import { useRegister } from '@superwall/react-native-superwall';
 
 const Home = () => {
   const navigation = useNavigation();
 
-  const nonGated = () => {
-    Superwall.shared.register({
-      placement: 'non_gated',
-      feature: () => {
-        navigation.navigate('LaunchedFeature', {
-          value: 'Non-gated feature launched',
-        });
-      },
-    });
-  };
+  const { subscriptionStatus, setSubscriptionStatus } = useSubscriptionStatus();
+  const { entitlements, setEntitlements } = useEntitlements();
 
-  const pro = () => {
-    Superwall.shared.register({
-      placement: 'pro',
-      feature: () => {
-        navigation.navigate('LaunchedFeature', { value: 'Pro feature launched' });
-      },
+  const nonGated = useRegister('non_gated', () => {
+    navigation.navigate('LaunchedFeature', {
+      value: 'Non-gated feature launched',
     });
-  };
+  });
 
-  const diamond = () => {
-    Superwall.shared.register({
-      placement: 'diamond',
-      feature: () => {
-        navigation.navigate('LaunchedFeature', { value: 'Diamond feature launched' });
-      },
+  const pro = useRegister('pro', () => {
+    navigation.navigate('LaunchedFeature', {
+      value: 'Pro feature launched',
     });
-  };
+  });
+
+  const diamond = useRegister('diamond', () => {
+    navigation.navigate('LaunchedFeature', {
+      value: 'Diamond feature launched',
+    });
+  });
 
   const identify = () => {
     Superwall.shared.identify('abc');
@@ -46,6 +42,29 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
+      <Text>Subscription Status: {subscriptionStatus.status}</Text>
+      <Text>Entitlements: {JSON.stringify(entitlements)}</Text>
+      <Button
+        title="Set Subscription Status to ACTIVE"
+        onPress={() =>
+          setSubscriptionStatus({
+            status: 'ACTIVE',
+            entitlements: [{ id: 'pro' }],
+          })
+        }
+      />
+      <Button
+        title="Set Subscription Status to INACTIVE"
+        onPress={() => setSubscriptionStatus({ status: 'INACTIVE' })}
+      />
+      <Button
+        title="Set Entitlements to []"
+        onPress={() => setEntitlements([])}
+      />
+      <Button
+        title="Set Entitlements to [{ id: 'pro'}]"
+        onPress={() => setEntitlements([{ id: 'pro' }])}
+      />
       <Button title="Launch Non-Gated Feature" onPress={nonGated} />
       <Button title="Launch Pro Feature" onPress={pro} />
       <Button title="Launch Diamond Feature" onPress={diamond} />
@@ -53,7 +72,7 @@ const Home = () => {
       <Button title="Reset" onPress={reset} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

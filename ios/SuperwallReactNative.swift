@@ -288,4 +288,15 @@ class SuperwallReactNative: RCTEventEmitter {
   func preloadAllPaywalls() {
     Superwall.shared.preloadAllPaywalls()
   }
+
+  @objc(observeSubscriptionStatus:withRejecter:)
+  func observeSubscriptionStatus(
+    resolve: @escaping RCTPromiseResolveBlock,
+    reject: @escaping RCTPromiseRejectBlock
+  ) {
+    Superwall.shared.subscriptionStatusDidChange = { [weak self] status in
+      self?.sendEvent(withName: "subscriptionStatusChanged", body: status.toJson())
+    }
+    resolve(nil)
+  }
 }

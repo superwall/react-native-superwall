@@ -1,4 +1,4 @@
-import type { Entitlement } from './Entitlement';
+import { Entitlement } from './Entitlement';
 
 export type SubscriptionStatus =
   | SubscriptionStatus.Active
@@ -19,25 +19,37 @@ export namespace SubscriptionStatus {
     status: `UNKNOWN`;
   };
 
+  export function Active(entitlements: Entitlement[]): Active {
+    return {
+      status: 'ACTIVE',
+      entitlements,
+    };
+  }
+
+  export function Inactive(): Inactive {
+    return {
+      status: 'INACTIVE',
+    };
+  }
+
+  export function Unknown(): Unknown {
+    return {
+      status: 'UNKNOWN',
+    };
+  }
+
   export function fromString(
     value: string,
     entitlements: Entitlement[]
   ): SubscriptionStatus {
     switch (value) {
       case 'ACTIVE':
-        return {
-          status: 'ACTIVE',
-          entitlements,
-        };
+        return Active(entitlements);
       case 'INACTIVE':
-        return {
-          status: 'INACTIVE',
-        };
+        return Inactive();
       case 'UNKNOWN':
       default:
-        return {
-          status: 'UNKNOWN',
-        };
+        return Unknown();
     }
   }
 
@@ -46,7 +58,9 @@ export namespace SubscriptionStatus {
       case 'ACTIVE':
         return {
           status: 'ACTIVE',
-          entitlements: json.entitlements,
+          entitlements: json.entitlements.map((entitlement: any) =>
+            Entitlement.fromJson(entitlement)
+          ),
         };
       case 'INACTIVE':
         return {
