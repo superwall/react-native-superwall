@@ -15,7 +15,7 @@
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
     "react-native": "0.73.4",
-    "react-native-purchases": "^7.21.1"
+    "react-native-purchases": "^8.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

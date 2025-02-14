@@ -40,8 +40,8 @@ export enum PaywallPresentationRequestStatusReasonType {
   paywallAlreadyPresented = 'paywallAlreadyPresented',
   userIsSubscribed = 'userIsSubscribed',
   holdout = 'holdout',
-  noRuleMatch = 'noRuleMatch',
-  eventNotFound = 'eventNotFound',
+  noAudienceMatch = 'noAudienceMatch',
+  placementNotFound = 'placementNotFound',
   noPaywallViewController = 'noPaywallViewController',
   noPresenter = 'noPresenter',
   noConfig = 'noConfig',
@@ -81,13 +81,13 @@ export class PaywallPresentationRequestStatusReason {
           PaywallPresentationRequestStatusReasonType.holdout,
           Experiment.fromJson(json.experiment)
         );
-      case 'noRuleMatch':
+      case 'noAudienceMatch':
         return new PaywallPresentationRequestStatusReason(
-          PaywallPresentationRequestStatusReasonType.noRuleMatch
+          PaywallPresentationRequestStatusReasonType.noAudienceMatch
         );
-      case 'eventNotFound':
+      case 'placementNotFound':
         return new PaywallPresentationRequestStatusReason(
-          PaywallPresentationRequestStatusReasonType.eventNotFound
+          PaywallPresentationRequestStatusReasonType.placementNotFound
         );
       case 'noPaywallViewController':
         return new PaywallPresentationRequestStatusReason(

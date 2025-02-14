@@ -103,8 +103,8 @@ PODS:
     - hermes-engine/Pre-built (= 0.73.4)
   - hermes-engine/Pre-built (0.73.4)
   - libevent (2.1.12)
-  - PurchasesHybridCommon (11.1.1):
-    - RevenueCat (= 4.43.2)
+  - PurchasesHybridCommon (13.16.2):
+    - RevenueCat (= 5.15.0)
   - RCT-Folly (2022.05.16.00):
     - boost
     - DoubleConversion
@@ -1143,9 +1143,9 @@ PODS:
     - React-jsi (= 0.73.4)
     - React-logger (= 0.73.4)
     - React-perflogger (= 0.73.4)
-  - RevenueCat (4.43.2)
-  - RNPurchases (7.28.1):
-    - PurchasesHybridCommon (= 11.1.1)
+  - RevenueCat (5.15.0)
+  - RNPurchases (8.5.2):
+    - PurchasesHybridCommon (= 13.16.2)
     - React-Core
   - SocketRocket (0.6.1)
   - superwall-react-native (1.2.6):
@@ -1384,7 +1384,7 @@ SPEC CHECKSUMS:
   glog: c5d68082e772fa1c511173d6b30a9de2c05a69a2
   hermes-engine: b2669ce35fc4ac14f523b307aff8896799829fe2
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  PurchasesHybridCommon: 73f4f2c6e4ec3487b4219bf60e1661100fb85da3
+  PurchasesHybridCommon: 9fbb4c76f20b8e9b74f13b9045c6ed90727f935b
   RCT-Folly: 7169b2b1c44399c76a47b5deaaba715eeeb476c0
   RCTRequired: ab7f915c15569f04a49669e573e6e319a53f9faa
   RCTTypeSafety: 63b97ced7b766865057e7154db0e81ce4ee6cf1e
@@ -1426,8 +1426,8 @@ SPEC CHECKSUMS:
   React-runtimescheduler: ed48e5faac6751e66ee1261c4bd01643b436f112
   React-utils: 6e5ad394416482ae21831050928ae27348f83487
   ReactCommon: 840a955d37b7f3358554d819446bffcf624b2522
-  RevenueCat: 3d934653b7e8b09af88fd47e9e84cfaf5d0a89ba
-  RNPurchases: 4305de02b902d3c1e56a50295dc0a6e758b73095
+  RevenueCat: 90e7642834cabc3e04e396117776bfb3f50debbf
+  RNPurchases: 27a69e9187b651d4d84af7558d6f392e38c11810
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   superwall-react-native: 848721fbae82a23bc8b9fd801071a2d9fb50fcbd
   SuperwallKit: 3ff5d6783715428752d2bff9580897f2c74f7b2c

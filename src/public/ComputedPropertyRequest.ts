@@ -1,20 +1,20 @@
 // TypeScript class for the request to compute a device property
 export class ComputedPropertyRequest {
   type: ComputedPropertyRequestType;
-  eventName: string;
+  placementName: string;
 
-  constructor(type: ComputedPropertyRequestType, eventName: string) {
+  constructor(type: ComputedPropertyRequestType, placementName: string) {
     this.type = type;
-    this.eventName = eventName;
+    this.placementName = placementName;
   }
 
   // Static method to create an instance from a JSON object
   static fromJson(json: {
     type: string;
-    eventName: string;
+    placementName: string;
   }): ComputedPropertyRequest {
     const type = ComputedPropertyRequestType.fromJson(json.type);
-    return new ComputedPropertyRequest(type, json.eventName);
+    return new ComputedPropertyRequest(type, json.placementName);
   }
 }
 

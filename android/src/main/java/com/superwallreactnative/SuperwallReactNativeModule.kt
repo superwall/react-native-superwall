@@ -1,5 +1,7 @@
 package com.superwallreactnative
 
+import android.app.Application
+import android.util.Log
 import android.net.Uri
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
@@ -14,6 +16,8 @@ import com.superwall.sdk.identity.identify
 import com.superwall.sdk.identity.setUserAttributes
 import com.superwall.sdk.misc.ActivityProvider
 import com.superwall.sdk.misc.sdkVersion
+import com.superwall.sdk.models.entitlements.SubscriptionStatus
+import com.superwall.sdk.models.entitlements.Entitlement
 import com.superwall.sdk.paywall.presentation.PaywallPresentationHandler
 import com.superwall.sdk.paywall.presentation.dismiss
 import com.superwall.sdk.paywall.presentation.get_presentation_result.getPresentationResult
@@ -23,7 +27,6 @@ import com.superwallreactnative.models.IdentityOptions
 import com.superwallreactnative.models.PaywallSkippedReason
 import com.superwallreactnative.models.PurchaseResult
 import com.superwallreactnative.models.RestorationResult
-import com.superwallreactnative.models.SubscriptionStatus
 import com.superwallreactnative.models.InterfaceStyle
 import com.superwallreactnative.models.SuperwallOptions
 import com.superwallreactnative.models.convertMapToReadableMap
@@ -60,7 +63,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
 
     if (usingPurchaseController) {
       Superwall.configure(
-        applicationContext = reactContext,
+        applicationContext = reactContext.applicationContext as Application,
         apiKey = apiKey,
         options = options,
         activityProvider = activityProvider,
@@ -71,7 +74,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
       )
     } else  {
       Superwall.configure(
-        applicationContext = reactContext,
+        applicationContext = reactContext.applicationContext as Application,
         apiKey = apiKey,
         options = options,
         activityProvider = activityProvider,
@@ -203,8 +206,28 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   }
 
   @ReactMethod
-  fun setSubscriptionStatus(status: String) {
-    val subscriptionStatus = SubscriptionStatus.fromString(status)
+  fun setSubscriptionStatus(status: ReadableMap) {
+    val statusString = status.getString("status") ?: "UNKNOWN"
+
+    val subscriptionStatus: SubscriptionStatus = when (statusString.uppercase()) {
+        "UNKNOWN" -> SubscriptionStatus.Unknown
+        "INACTIVE" -> SubscriptionStatus.Inactive
+        "ACTIVE" -> {
+            val entitlements = status.getArray("entitlements")
+            val entitlementsSet = entitlements?.toArrayList()?.mapNotNull { item ->
+                when (item) {
+                    is HashMap<*, *> -> {  // Change from ReadableMap to HashMap
+                        val id = (item["id"] as? String)
+                        id?.let { Entitlement(it) }
+                    }
+                    else -> null
+                }
+            }?.toSet() ?: emptySet()
+            SubscriptionStatus.Active(entitlementsSet)
+        }
+        else -> SubscriptionStatus.Unknown
+    }
+
     Superwall.instance.setSubscriptionStatus(subscriptionStatus)
   }
 

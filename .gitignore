@@ -63,6 +63,7 @@ android/app/libs
 android/keystores/debug.keystore
 
 # Yarn
+expo-example/.yarn/*
 .yarn/*
 !.yarn/patches
 !.yarn/plugins

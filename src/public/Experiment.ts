@@ -1,9 +1,9 @@
 export class Experiment {
-  id: String;
+  id: string;
   groupId: string;
   variant: Variant;
 
-  constructor(id: String, groupId: string, variant: Variant) {
+  constructor(id: string, groupId: string, variant: Variant) {
     this.id = id;
     this.groupId = groupId;
     this.variant = variant;
