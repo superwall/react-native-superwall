@@ -1,4 +1,5 @@
 import SuperwallKit
+import Combine
 
 @objc(SuperwallReactNative)
 class SuperwallReactNative: RCTEventEmitter {
@@ -294,9 +295,14 @@ class SuperwallReactNative: RCTEventEmitter {
     resolve: @escaping RCTPromiseResolveBlock,
     reject: @escaping RCTPromiseRejectBlock
   ) {
-    Superwall.shared.subscriptionStatusDidChange = { [weak self] status in
-      self?.sendEvent(withName: "subscriptionStatusChanged", body: status.toJson())
-    }
+    Superwall.shared.$subscriptionStatus
+      .receive(on: DispatchQueue.main)
+      .subscribe(Subscribers.Sink(
+        receiveCompletion: { _ in },
+        receiveValue: { [weak self] status in
+          self?.sendEvent(withName: "subscriptionStatusChanged", body: status.toJson())
+        })
+      )
     resolve(nil)
   }
 }
