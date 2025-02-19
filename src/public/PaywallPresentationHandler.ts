@@ -1,10 +1,11 @@
 import { PaywallInfo } from './PaywallInfo';
 import { PaywallSkippedReason } from './PaywallSkippedReason';
+import type { PaywallResult } from './PaywallResult';
 
 export class PaywallPresentationHandler {
   // Handlers for various events
   onPresentHandler?: (info: PaywallInfo) => void;
-  onDismissHandler?: (info: PaywallInfo) => void;
+  onDismissHandler?: (info: PaywallInfo, result: PaywallResult) => void;
   onErrorHandler?: (error: string) => void;
   onSkipHandler?: (reason: PaywallSkippedReason) => void;
 
@@ -13,7 +14,7 @@ export class PaywallPresentationHandler {
     this.onPresentHandler = handler;
   }
 
-  onDismiss(handler: (info: PaywallInfo) => void): void {
+  onDismiss(handler: (info: PaywallInfo, result: PaywallResult) => void): void {
     this.onDismissHandler = handler;
   }
 

@@ -86,7 +86,7 @@ interface UserAttributes {
 }
 
 export default class Superwall {
-  private static purchaseController?: PurchaseController;
+  static purchaseController?: PurchaseController;
   private static delegate?: SuperwallDelegate;
   private static _superwall = new Superwall();
   private eventEmitter = new NativeEventEmitter(SuperwallReactNative);
@@ -94,6 +94,7 @@ export default class Superwall {
   private static didConfigure = false;
   private presentationHandlers: Map<string, PaywallPresentationHandler> =
     new Map();
+  subscriptionStatusEmitter = new EventEmitter();
 
   private static setDidConfigure(didConfigure: boolean) {
     this.didConfigure = didConfigure;
@@ -250,6 +251,13 @@ export default class Superwall {
     });
   }
 
+  private async observeSubscriptionStatus() {
+    await SuperwallReactNative.observeSubscriptionStatus();
+    this.eventEmitter.addListener('subscriptionStatusChanged', async (data) => {
+      const status = SubscriptionStatus.fromJson(data);
+      this.subscriptionStatusEmitter.emit('change', status);
+    });
+  }
   /**
    * Returns the configured shared instance of `Superwall`.
    *
@@ -293,7 +301,7 @@ export default class Superwall {
     completion?: () => void;
   }): Promise<Superwall> {
     this.purchaseController = purchaseController;
-
+    Superwall.purchaseController = purchaseController;
     await SuperwallReactNative.configure(
       apiKey,
       options?.toJson(),
@@ -301,6 +309,7 @@ export default class Superwall {
       version
     ).then(() => {
       if (completion) completion();
+      Superwall.shared.observeSubscriptionStatus();
     });
 
     this.setDidConfigure(true);

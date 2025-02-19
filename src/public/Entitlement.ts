@@ -7,14 +7,25 @@ export class Entitlement {
   /**
    * Creates an instance of Entitlement.
    * @param id - The entitlement's identifier.
-   * @param type - The entitlement's type.
    */
-  constructor(id: string, type: string) {
+  constructor(id: string) {
     this.id = id;
-    this.type = type;
+    this.type = 'SERVICE_LEVEL';
   }
 
   static fromJson(json: any): Entitlement {
-    return new Entitlement(json.id, json.type);
+    return Entitlement.create(json.id, json.type);
+  }
+
+  /**
+   * Creates an Entitlement instance from id and type strings.
+   * @param id - The entitlement's identifier.
+   * @param type - The entitlement's type.
+   * @returns A new Entitlement instance.
+   */
+  static create(id: string, type: string): Entitlement {
+    let e = new Entitlement(id);
+    e.type = type;
+    return e;
   }
 }

@@ -1,7 +1,6 @@
 package com.superwallreactnative
 
 import android.app.Application
-import android.util.Log
 import android.net.Uri
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
@@ -206,6 +205,35 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   }
 
   @ReactMethod
+  fun getEntitlements(promise: Promise) {
+    val entitlements = Superwall.instance.entitlements
+    val map = Arguments.createMap().apply {
+      putArray("all", Arguments.createArray().apply {
+        entitlements.all.forEach { entitlement ->
+          pushMap(Arguments.createMap().apply {
+            putString("id", entitlement.id)
+          })
+        }
+      })
+      putArray("inactive", Arguments.createArray().apply {
+        entitlements.inactive.forEach { entitlement ->
+          pushMap(Arguments.createMap().apply {
+            putString("id", entitlement.id)
+          })
+        }
+      })
+      putArray("active", Arguments.createArray().apply {
+        entitlements.active.forEach { entitlement ->
+          pushMap(Arguments.createMap().apply {
+            putString("id", entitlement.id)
+          })
+        }
+      })
+    }
+    promise.resolve(map)
+  }
+
+  @ReactMethod
   fun setSubscriptionStatus(status: ReadableMap) {
     val statusString = status.getString("status") ?: "UNKNOWN"
 
@@ -324,5 +352,25 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   fun preloadAllPaywalls(promise: Promise) {
     Superwall.instance.preloadAllPaywalls()
     promise.resolve(null)
+  }
+
+  @ReactMethod
+  fun observeSubscriptionStatus(promise: Promise) {
+    val scope = CoroutineScope(Dispatchers.IO)
+    val mainScope = CoroutineScope(Dispatchers.Main)
+    scope.launch {
+      Superwall.instance.subscriptionStatus.collect {
+        mainScope.launch {
+          sendEvent(reactContext, "subscriptionStatusChanged", it.toJson())
+        }
+      }
+    }
+    promise.resolve(null)
+  }
+
+  private fun sendEvent(reactContext: ReactApplicationContext, eventName: String, params: ReadableMap) {
+    reactContext
+      .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+      .emit(eventName, params)
   }
 }
