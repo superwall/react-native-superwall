@@ -62,6 +62,12 @@ function useSubscriptionStatusInternal<
     };
 
     Superwall.shared.subscriptionStatusEmitter.addListener('change', listener);
+    return () => {
+      Superwall.shared.subscriptionStatusEmitter.removeListener(
+        'change',
+        listener
+      );
+    };
   }, []);
 
   const setSubscriptionStatus = useCallback(
@@ -105,25 +111,43 @@ function useEntitlementsInternal<
   const [entitlements, innerSetEntitlements] = useState<Entitlement[]>([]);
 
   useEffect(() => {
-    Superwall.shared.subscriptionStatusEmitter.addListener(
-      'change',
-      (status) => {
-        switch (status.status) {
-          case 'ACTIVE':
-            innerSetEntitlements(status.entitlements);
-            break;
-          default:
-            innerSetEntitlements([]);
-            break;
-        }
+    let mounted = true; // Track mounted state
+
+    const listener = (status: SubscriptionStatus) => {
+      switch (status.status) {
+        case 'ACTIVE':
+          innerSetEntitlements(status.entitlements);
+          break;
+        default:
+          innerSetEntitlements([]);
+          break;
       }
-    );
+    };
+
+    Superwall.shared.subscriptionStatusEmitter.addListener('change', listener);
 
     const getInitialEntitlements = async () => {
-      const currentEntitlements = await Superwall.shared.getEntitlements();
-      innerSetEntitlements(currentEntitlements.active);
+      try {
+        const currentEntitlements = await Superwall.shared.getEntitlements();
+        if (mounted) {
+          innerSetEntitlements(currentEntitlements.active);
+        }
+      } catch (error) {
+        if (mounted) {
+          innerSetEntitlements([]);
+        }
+      }
     };
+
     getInitialEntitlements();
+
+    return () => {
+      mounted = false;
+      Superwall.shared.subscriptionStatusEmitter.removeListener(
+        'change',
+        listener
+      );
+    };
   }, []);
 
   const setEntitlements = async (newEntitlements: Entitlement[]) => {
@@ -198,7 +222,7 @@ export const useRegister = (
 ) => {
   return useCallback(async () => {
     await Superwall.shared.register({
-      placement,
+      placement: placement,
       params: options?.params,
       handler: options?.handler,
       feature,

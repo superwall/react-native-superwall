@@ -7,6 +7,8 @@ import { useSubscriptionStatus } from '@superwall/react-native-superwall';
 import { useEntitlements } from '@superwall/react-native-superwall';
 import { Text } from 'react-native';
 import { useRegister } from '@superwall/react-native-superwall';
+import { SubscriptionStatus } from 'superwall-react-native';
+import { Entitlement } from '../../src/public/Entitlement';
 
 const Home = () => {
   const navigation = useNavigation();
@@ -47,10 +49,9 @@ const Home = () => {
       <Button
         title="Set Subscription Status to ACTIVE"
         onPress={() =>
-          setSubscriptionStatus({
-            status: 'ACTIVE',
-            entitlements: [{ id: 'pro' }],
-          })
+          setSubscriptionStatus(
+            SubscriptionStatus.Active([new Entitlement('pro')])
+          )
         }
       />
       <Button
