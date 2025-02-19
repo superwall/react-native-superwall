@@ -58,7 +58,7 @@ fun PaywallInfo.toJson(): ReadableMap {
   val computedPropertyRequestsArray = Arguments.createArray()
   this.computedPropertyRequests.forEach { request ->
     val computedPropertyRequestsMap = Arguments.createMap()
-    computedPropertyRequestsMap.putString("placementName", request.placementName)
+    computedPropertyRequestsMap.putString("placementName", request.eventName)
     computedPropertyRequestsMap.putString("type", request.type.toString())
     computedPropertyRequestsArray.pushMap(computedPropertyRequestsMap)
   }

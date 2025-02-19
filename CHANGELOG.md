@@ -2,11 +2,17 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
-## 2.0.0-alpha.1
+## 2.0.0
 
 ### Breaking Changes
 
-// TODO: Fill in the changes etc here
+- Updated API for `Superwall.shared.configure` to now receive an object
+- Updated API for `Superwall.shared.register` to now receive an object
+- Updated API for `Superwall.shared.setSubscriptionStatus` to now receive a `SubscriptionStatus` type with an `Entitlements` array in case of `SubscriptionStatus.Active`
+- Added a `subscriptionStatusEmitter` you can subscribe to using the `change`listener
+- Upgrades iOS SDK to 4.0.0 [View iOS SDK release notes](https://github.com/superwall-me/Superwall-iOS/releases/tag/4.0.0).
+- Upgrades Android SDK to 2.0.0 [View Android SDK release notes](https://github.com/superwall-me/Superwall-Android/releases/tag/2.0.0)
+- View more changes in our [migration guide](https://superwall.com/docs/migrating-to-v2-react-native)
 
 ## 1.4.7
 

@@ -23,6 +23,7 @@ import com.superwall.sdk.paywall.presentation.get_presentation_result.getPresent
 import com.superwall.sdk.paywall.presentation.register
 import com.superwallreactnative.bridges.SuperwallDelegateBridge
 import com.superwallreactnative.models.IdentityOptions
+import com.superwallreactnative.models.PaywallResult
 import com.superwallreactnative.models.PaywallSkippedReason
 import com.superwallreactnative.models.PurchaseResult
 import com.superwallreactnative.models.RestorationResult
@@ -118,11 +119,12 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
           .emit("paywallPresentationHandler", data)
       }
 
-      handler.onDismiss {
+      handler.onDismiss { it, result ->
         val data = Arguments.createMap().apply {
           putMap("paywallInfoJson", it.toJson()) // Implement this method
           putString("method", "onDismiss")
           putString("handlerId", handlerId)
+          putMap("result", PaywallResult.toJson(result))
         }
 
         reactContext
@@ -156,7 +158,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
     }
 
     Superwall.instance.register(
-      event = event,
+      placement = event,
       params = params?.toHashMap(),
       handler = handler,
       feature = {
