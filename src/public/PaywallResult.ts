@@ -1,10 +1,11 @@
-import { Product } from './Product';
-
-export type PaywallResult = {
-  type: 'purchased';
-  product: Product;
-} | {
-  type: 'declined';
-} | {
-  type: 'restored';
-};
+export type PaywallResult =
+  | {
+      type: 'purchased';
+      productId: string;
+    }
+  | {
+      type: 'declined';
+    }
+  | {
+      type: 'restored';
+    };

@@ -80,12 +80,6 @@ export {
   PaywallSkippedReasonUserIsSubscribed,
 } from './public/PaywallSkippedReason';
 export { RestoreType } from './public/RestoreType';
-export {
-  useSuperwall,
-  useSubscriptionStatus,
-  useEntitlements,
-  useRegister,
-} from './hooks/hooks';
 
 interface UserAttributes {
   [key: string]: any;
