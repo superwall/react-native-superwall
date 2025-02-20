@@ -14,10 +14,10 @@ export abstract class PresentationResult {
       case 'Paywall':
         if (!experiment) throw new Error('Paywall requires an experiment');
         return new PresentationResultPaywall(experiment);
-      case 'NoRuleMatch':
-        return new PresentationResultNoRuleMatch();
-      case 'EventNotFound':
-        return new PresentationResultEventNotFound();
+      case 'NoAudienceMatch':
+        return new PresentationResultNoAudienceMatch();
+      case 'PlacementNotFound':
+        return new PresentationResultPlacementNotFound();
       case 'UserIsSubscribed':
         return new PresentationResultUserIsSubscribed();
       case 'PaywallNotAvailable':
@@ -29,9 +29,9 @@ export abstract class PresentationResult {
 }
 
 // Derived classes
-export class PresentationResultEventNotFound extends PresentationResult {}
+export class PresentationResultPlacementNotFound extends PresentationResult {}
 
-export class PresentationResultNoRuleMatch extends PresentationResult {}
+export class PresentationResultNoAudienceMatch extends PresentationResult {}
 
 export class PresentationResultUserIsSubscribed extends PresentationResult {}
 

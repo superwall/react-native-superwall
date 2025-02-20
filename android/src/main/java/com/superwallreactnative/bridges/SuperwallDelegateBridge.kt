@@ -3,11 +3,11 @@ package com.superwallreactnative.bridges
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.modules.core.DeviceEventManagerModule
-import com.superwall.sdk.analytics.superwall.SuperwallEventInfo
-import com.superwall.sdk.delegate.SubscriptionStatus
+import com.superwall.sdk.analytics.superwall.SuperwallPlacementInfo
+import com.superwall.sdk.models.entitlements.SubscriptionStatus
 import com.superwall.sdk.delegate.SuperwallDelegate
 import com.superwall.sdk.paywall.presentation.PaywallInfo
-import com.superwallreactnative.models.SuperwallEvent
+import com.superwallreactnative.models.SuperwallPlacement
 import com.superwallreactnative.models.convertMapToReadableMap
 import com.superwallreactnative.models.toJson
 import java.net.URI
@@ -16,9 +16,13 @@ import android.net.Uri
 class SuperwallDelegateBridge(
   private val reactContext: ReactContext
 ): SuperwallDelegate {
-  override fun subscriptionStatusDidChange(to: SubscriptionStatus) {
+  override fun subscriptionStatusDidChange(
+    from: SubscriptionStatus,
+    to: SubscriptionStatus
+  ) {
     val data = Arguments.createMap().apply {
-      putString("subscriptionStatus", to.toString())
+      putString("from", from.toString())
+      putString("to", to.toString())
     }
 
     reactContext
@@ -26,14 +30,14 @@ class SuperwallDelegateBridge(
       .emit("subscriptionStatusDidChange", data)
   }
 
-  override fun handleSuperwallEvent(eventInfo: SuperwallEventInfo) {
+  override fun handleSuperwallPlacement(placementInfo: SuperwallPlacementInfo) {
     val data = Arguments.createMap().apply {
-      putMap("eventInfo", eventInfo.toJson())
+      putMap("placementInfo", placementInfo.toJson())
     }
 
     reactContext
       .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-      .emit("handleSuperwallEvent", data)
+      .emit("handleSuperwallPlacement", data)
   }
 
   override fun handleCustomPaywallAction(withName: String) {

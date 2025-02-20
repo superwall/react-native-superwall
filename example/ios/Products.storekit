@@ -1,4 +1,14 @@
 {
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
   "identifier" : "AD417988",
   "nonRenewingSubscriptions" : [
 
@@ -7,6 +17,9 @@
 
   ],
   "settings" : {
+    "_compatibilityTimeRate" : {
+      "3" : 6
+    },
     "_failTransactionsEnabled" : false,
     "_locale" : "en_US",
     "_storefront" : "USA",
@@ -56,7 +69,8 @@
         "enabled" : false,
         "name" : "Offer Code Redeem Sheet"
       }
-    ]
+    ],
+    "_timeRate" : 1003
   },
   "subscriptionGroups" : [
     {
@@ -64,7 +78,7 @@
       "localizations" : [
 
       ],
-      "name" : "Group 1",
+      "name" : "Example Subscription Group",
       "subscriptions" : [
         {
           "adHocOffers" : [
@@ -73,48 +87,26 @@
           "codeOffers" : [
 
           ],
-          "displayPrice" : "4.99",
+          "displayPrice" : "89.99",
           "familyShareable" : false,
           "groupNumber" : 1,
-          "internalID" : "A9D5A208",
+          "internalID" : "872A8D3C",
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "",
-              "displayName" : "",
+              "description" : "Access to diamond features",
+              "displayName" : "Diamond Subscription",
               "locale" : "en_US"
             }
           ],
-          "productID" : "com.ui_tests.monthly",
-          "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "com.ui_tests.monthly",
-          "subscriptionGroupID" : "4F31BE19",
-          "type" : "RecurringSubscription"
-        },
-        {
-          "adHocOffers" : [
-
-          ],
-          "codeOffers" : [
-
-          ],
-          "displayPrice" : "29.99",
-          "familyShareable" : false,
-          "groupNumber" : 1,
-          "internalID" : "9F6F1FA6",
-          "introductoryOffer" : null,
-          "localizations" : [
-            {
-              "description" : "",
-              "displayName" : "",
-              "locale" : "en_US"
-            }
-          ],
-          "productID" : "com.ui_tests.annual",
+          "productID" : "superwall_diamond_8999",
           "recurringSubscriptionPeriod" : "P1Y",
-          "referenceName" : "com.ui_tests.annual",
+          "referenceName" : "Diamond",
           "subscriptionGroupID" : "4F31BE19",
-          "type" : "RecurringSubscription"
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
         },
         {
           "adHocOffers" : [
@@ -123,83 +115,32 @@
           "codeOffers" : [
 
           ],
-          "displayPrice" : "99.99",
+          "displayPrice" : "39.99",
           "familyShareable" : false,
-          "groupNumber" : 1,
-          "internalID" : "83B37E75",
+          "groupNumber" : 2,
+          "internalID" : "CD9420DD",
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "",
-              "displayName" : "",
+              "description" : "Access to pro features",
+              "displayName" : "Pro Subscription",
               "locale" : "en_US"
             }
           ],
-          "productID" : "com.ui_tests.custom_annual",
+          "productID" : "superwall_pro_3999",
           "recurringSubscriptionPeriod" : "P1Y",
-          "referenceName" : "com.ui_tests.custom_annual",
+          "referenceName" : "Pro",
           "subscriptionGroupID" : "4F31BE19",
-          "type" : "RecurringSubscription"
-        },
-        {
-          "adHocOffers" : [
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
 
-          ],
-          "codeOffers" : [
-
-          ],
-          "displayPrice" : "12.99",
-          "familyShareable" : false,
-          "groupNumber" : 1,
-          "internalID" : "B95207CF",
-          "introductoryOffer" : null,
-          "localizations" : [
-            {
-              "description" : "",
-              "displayName" : "",
-              "locale" : "en_US"
-            }
-          ],
-          "productID" : "com.ui_tests.custom_monthly",
-          "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "com.ui_tests.custom_monthly",
-          "subscriptionGroupID" : "4F31BE19",
-          "type" : "RecurringSubscription"
-        },
-        {
-          "adHocOffers" : [
-
-          ],
-          "codeOffers" : [
-
-          ],
-          "displayPrice" : "59.99",
-          "familyShareable" : false,
-          "groupNumber" : 1,
-          "internalID" : "5F8D699D",
-          "introductoryOffer" : {
-            "internalID" : "43282E70",
-            "paymentMode" : "free",
-            "subscriptionPeriod" : "P1W"
-          },
-          "localizations" : [
-            {
-              "description" : "",
-              "displayName" : "",
-              "locale" : "en_US"
-            }
-          ],
-          "productID" : "com.ui_tests.free_trial_annual",
-          "recurringSubscriptionPeriod" : "P1Y",
-          "referenceName" : "com.ui_tests.free_trial_annual",
-          "subscriptionGroupID" : "4F31BE19",
-          "type" : "RecurringSubscription"
+          ]
         }
       ]
     }
   ],
   "version" : {
-    "major" : 3,
+    "major" : 4,
     "minor" : 0
   }
 }

@@ -10,7 +10,6 @@ class PurchaseResult {
         "cancelled" -> PurchaseResult.Cancelled()
         "purchased" -> PurchaseResult.Purchased()
         "pending" -> PurchaseResult.Pending()
-        "restored" -> PurchaseResult.Restored()
         "failed" -> {
           // Assuming there's an error message for failed purchases
           val errorMessage = json.getString("error") ?: "Unknown error"

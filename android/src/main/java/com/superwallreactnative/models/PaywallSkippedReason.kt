@@ -15,12 +15,12 @@ class PaywallSkippedReason {
           map.putMap("experiment", Experiment.toJson(skippedReason.experiment))
         }
 
-        is PaywallSkippedReason.NoRuleMatch -> {
-          map.putString("type", "NoRuleMatch")
+        is PaywallSkippedReason.NoAudienceMatch -> {
+          map.putString("type", "NoAudienceMatch")
         }
 
-        is PaywallSkippedReason.EventNotFound -> {
-          map.putString("type", "EventNotFound")
+        is PaywallSkippedReason.PlacementNotFound -> {
+          map.putString("type", "PlacementNotFound")
         }
 
         is PaywallSkippedReason.UserIsSubscribed -> {

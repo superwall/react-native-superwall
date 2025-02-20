@@ -1,6 +1,6 @@
 {
   "name": "@superwall/react-native-superwall",
-  "version": "1.4.7",
+  "version": "2.0.0",
   "description": "The React Native package for Superwall",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -164,7 +164,6 @@
     ]
   },
   "dependencies": {
-    "events": "^3.3.0",
-    "react-native-purchases": "^7.21.1"
+    "events": "^3.3.0"
   }
 }

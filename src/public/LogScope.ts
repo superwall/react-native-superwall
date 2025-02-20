@@ -13,7 +13,7 @@ export enum LogScope {
   PaywallEvents = "paywallEvents",
   ProductsManager = "productsManager",
   StoreKitManager = "storeKitManager",
-  Events = "events",
+  Placements = "placements",
   Receipts = "receipts",
   SuperwallCore = "superwallCore",
   PaywallPresentation = "paywallPresentation",

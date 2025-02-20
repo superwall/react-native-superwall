@@ -18,8 +18,6 @@ extension PurchaseResult {
       return  PurchaseResult.cancelled
     case "purchased":
       return PurchaseResult.purchased
-    case "restored":
-      return PurchaseResult.restored
     case "pending":
       return PurchaseResult.pending
     case "failed":

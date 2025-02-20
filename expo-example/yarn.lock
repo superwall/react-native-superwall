@@ -2710,6 +2710,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@revenuecat/purchases-typescript-internal@npm:13.16.2":
+  version: 13.16.2
+  resolution: "@revenuecat/purchases-typescript-internal@npm:13.16.2"
+  checksum: 34946b2c02fb9f6cc34636b1037ab4ff842557d82b92eed49aee2c47bf64a8c41de03c816c4d317dbdd8fb02dc1298b41b76d897fe775364568e4967d83fcc4f
+  languageName: node
+  linkType: hard
+
 "@segment/loosely-validate-event@npm:^2.0.0":
   version: 2.0.0
   resolution: "@segment/loosely-validate-event@npm:2.0.0"
@@ -2768,16 +2775,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@superwall/react-native-superwall@npm:^1.2.6":
-  version: 1.2.6
-  resolution: "@superwall/react-native-superwall@npm:1.2.6"
+"@superwall/react-native-superwall@npm:^1.4.7":
+  version: 1.4.7
+  resolution: "@superwall/react-native-superwall@npm:1.4.7"
   dependencies:
     events: ^3.3.0
     react-native-purchases: ^7.21.1
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 34071e6b50c466c474b653bc989798879ca1d653ff8a6f08d86e07da4373c94621761cabee5656202ae4e61152658628ff657a2bd7e142a5f1a12f235b890b6e
+  checksum: 8300457ae51466808d1a8d16eb315650d0e79f713d76f370f46c1b63647844054b8b7d523e9d74df6e8bb8415126e32402ed8a186f1215dceacb2f3969d7b3e4
   languageName: node
   linkType: hard
 
@@ -7892,6 +7899,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-purchases@npm:^8.5.2":
+  version: 8.5.2
+  resolution: "react-native-purchases@npm:8.5.2"
+  dependencies:
+    "@revenuecat/purchases-typescript-internal": 13.16.2
+  peerDependencies:
+    react: ">= 16.6.3"
+    react-native: "*"
+  checksum: 100fd6d8f82ac7339a1a185d25d6e0f73f0ed51f543af91df4f31ac02080114492808f3e8d579bd994cf0b5ee71f353889542e64a430693bcc3020d8de576573
+  languageName: node
+  linkType: hard
+
 "react-native@npm:0.73.4":
   version: 0.73.4
   resolution: "react-native@npm:0.73.4"
@@ -8895,14 +8914,14 @@ __metadata:
   resolution: "superapp@workspace:."
   dependencies:
     "@babel/core": ^7.20.0
-    "@superwall/react-native-superwall": ^1.2.6
+    "@superwall/react-native-superwall": ^1.4.7
     expo: ~50.0.6
     expo-build-properties: ~0.11.1
     expo-dev-client: ~3.3.11
     expo-status-bar: ~1.11.1
     react: 18.2.0
     react-native: 0.73.4
-    react-native-purchases: ^7.21.1
+    react-native-purchases: ^8.5.2
   languageName: unknown
   linkType: soft
 

@@ -1,4 +1,5 @@
 import SuperwallKit
+import Combine
 
 @objc(SuperwallReactNative)
 class SuperwallReactNative: RCTEventEmitter {
@@ -19,7 +20,7 @@ class SuperwallReactNative: RCTEventEmitter {
       "restore",
       "paywallPresentationHandler",
       "subscriptionStatusDidChange",
-      "handleSuperwallEvent",
+      "handleSuperwallPlacement",
       "handleCustomPaywallAction",
       "willDismissPaywall",
       "willPresentPaywall",
@@ -75,7 +76,7 @@ class SuperwallReactNative: RCTEventEmitter {
 
   @objc(register:params:handlerId:withResolver:withRejecter:)
   func register(
-    event: String,
+    placement: String,
     params: [String: Any]?,
     handlerId: String?,
     resolve: RCTPromiseResolveBlock?,
@@ -96,10 +97,11 @@ class SuperwallReactNative: RCTEventEmitter {
         self?.sendEvent(withName: "paywallPresentationHandler", body: data)
       }
 
-      handler?.onDismiss { [weak self] paywallInfo in
+      handler?.onDismiss { [weak self] paywallInfo, result in
         let data =
           [
             "paywallInfoJson": paywallInfo.toJson(),
+            "result": result.toJson(),
             "method": "onDismiss",
             "handlerId": handlerId,
           ] as [String: Any]
@@ -128,7 +130,7 @@ class SuperwallReactNative: RCTEventEmitter {
     }
 
     Superwall.shared.register(
-      event: event,
+      placement: placement,
       params: params,
       handler: handler
     ) {
@@ -145,18 +147,46 @@ class SuperwallReactNative: RCTEventEmitter {
     resolve(configurationStatus)
   }
 
-  @objc(getSubscriptionStatus:withRejecter:)
-  func getSubscriptionStatus(
+  @objc(getEntitlements:withRejecter:)
+  func getEntitlements(
     resolve: @escaping RCTPromiseResolveBlock,
     reject: @escaping RCTPromiseRejectBlock
   ) {
-    let subscriptionStatus = Superwall.shared.subscriptionStatus.toString()
-    resolve(subscriptionStatus)
+    let entitlements = Superwall.shared.entitlements.toJson()
+    resolve(entitlements)
   }
 
   @objc(setSubscriptionStatus:)
-  func setSubscriptionStatus(status: String) {
-    let subscriptionStatus = SubscriptionStatus.fromString(subscriptionStatus: status)
+  func setSubscriptionStatus(status: NSDictionary) {
+    guard  let statusDict = status as? [String: Any] else {
+      return
+    }
+    let statusString = (statusDict["status"] as? String)?.uppercased() ?? "UNKNOWN"
+    let subscriptionStatus: SubscriptionStatus
+
+    switch statusString {
+    case "UNKNOWN":
+      subscriptionStatus = .unknown
+    case "INACTIVE":
+      subscriptionStatus = .inactive
+    case "ACTIVE":
+      if let entitlementsArray = statusDict["entitlements"] as? [[String: Any]] {
+        let entitlementsSet: Set<Entitlement> = Set(
+          entitlementsArray.compactMap { item in
+            if let id = item["id"] as? String {
+              return Entitlement(id: id)
+            }
+            return nil
+          }
+        )
+        subscriptionStatus = .active(entitlementsSet)
+      } else {
+        subscriptionStatus = .inactive
+      }
+    default:
+      subscriptionStatus = .unknown
+    }
+
     Superwall.shared.subscriptionStatus = subscriptionStatus
   }
 
@@ -240,23 +270,39 @@ class SuperwallReactNative: RCTEventEmitter {
 
   @objc(getPresentationResult:params:withResolver:withRejecter:)
   func getPresentationResult(
-    event: String,
+    placement: String,
     params: [String: Any]?,
     resolve: @escaping RCTPromiseResolveBlock,
     reject: @escaping RCTPromiseRejectBlock
   ) {
-    Superwall.shared.getPresentationResult(forEvent: event, params: params) { result in
+    Superwall.shared.getPresentationResult(forPlacement: placement, params: params) { result in
       resolve(result.toJson())
     }
   }
 
   @objc(preloadPaywalls:)
-  func preloadPaywalls(forEvents eventNames: [String]) {
-    Superwall.shared.preloadPaywalls(forEvents: Set(eventNames))
+  func preloadPaywalls(forPlacements placementNames: [String]) {
+    Superwall.shared.preloadPaywalls(forPlacements: Set(placementNames))
   }
 
   @objc(preloadAllPaywalls)
   func preloadAllPaywalls() {
     Superwall.shared.preloadAllPaywalls()
+  }
+
+  @objc(observeSubscriptionStatus:withRejecter:)
+  func observeSubscriptionStatus(
+    resolve: @escaping RCTPromiseResolveBlock,
+    reject: @escaping RCTPromiseRejectBlock
+  ) {
+    Superwall.shared.$subscriptionStatus
+      .receive(on: DispatchQueue.main)
+      .subscribe(Subscribers.Sink(
+        receiveCompletion: { _ in },
+        receiveValue: { [weak self] status in
+          self?.sendEvent(withName: "subscriptionStatusChanged", body: status.toJson())
+        })
+      )
+    resolve(nil)
   }
 }

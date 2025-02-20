@@ -25,7 +25,7 @@ export class RCPurchaseController extends PurchaseController {
     Purchases.setLogLevel(Purchases.LOG_LEVEL.DEBUG);
     const apiKey =
       Platform.OS === 'ios'
-        ? 'appl_XmYQBWbTAFiwLeWrBJOeeJJtTql'
+        ? 'appl_PpUWCgFONlxwztRfNgEdvyGHiAG'
         : 'goog_DCSOujJzRNnPmxdgjOwdOOjwilC';
     Purchases.configure({ apiKey });
   }
@@ -33,12 +33,20 @@ export class RCPurchaseController extends PurchaseController {
   syncSubscriptionStatus() {
     // Listen for changes
     Purchases.addCustomerInfoUpdateListener((customerInfo) => {
-      const hasActiveEntitlementOrSubscription =
-        this.hasActiveEntitlementOrSubscription(customerInfo);
+      const entitlements = Object.keys(customerInfo.entitlements.active).map(
+        (id) => ({
+          id,
+        })
+      );
       Superwall.shared.setSubscriptionStatus(
-        hasActiveEntitlementOrSubscription
-          ? SubscriptionStatus.ACTIVE
-          : SubscriptionStatus.INACTIVE
+        entitlements.length === 0
+          ? {
+              status: 'INACTIVE',
+            }
+          : {
+              status: 'ACTIVE',
+              entitlements,
+            }
       );
     });
   }
