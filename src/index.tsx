@@ -14,6 +14,7 @@ import { EventEmitter } from 'events';
 import { ConfigurationStatus } from './public/ConfigurationStatus';
 import { ConfirmedAssignment } from './public/ConfirmedAssigments';
 import type { PresentationResult } from './public/PresentationResult';
+import { fromJson as paywallResultFromJson } from './public/PaywallResult';
 import { EntitlementsInfo } from './public/EntitlementsInfo';
 const { version } = require('../package.json');
 
@@ -168,7 +169,8 @@ export default class Superwall {
         case 'onDismiss':
           if (handler.onDismissHandler) {
             const paywallInfo = PaywallInfo.fromJson(data.paywallInfoJson);
-            handler.onDismissHandler(paywallInfo);
+            const result = paywallResultFromJson(data.result);
+            handler.onDismissHandler(paywallInfo, result);
           }
           break;
         case 'onError':
