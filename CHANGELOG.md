@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 2.0.1
+
+### Fixes
+
+- Fixes the issue `TypeError: SuperwallReactNative.observeSubscriptionStatus is not a function`.
+
 ## 2.0.0
 
 ### Breaking Changes

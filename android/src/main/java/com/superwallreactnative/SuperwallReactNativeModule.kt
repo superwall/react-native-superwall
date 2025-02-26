@@ -363,7 +363,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
     scope.launch {
       Superwall.instance.subscriptionStatus.collect {
         mainScope.launch {
-          sendEvent(reactContext, "subscriptionStatusChanged", it.toJson())
+          sendEvent(reactContext, "observeSubscriptionStatus", it.toJson())
         }
       }
     }
