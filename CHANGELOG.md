@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 2.0.2
+
+### Fixes
+
+- Readds `handleDeepLink(url:)` to `Superwall`.
+
 ## 2.0.1
 
 ### Fixes
