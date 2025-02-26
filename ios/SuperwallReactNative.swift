@@ -1,5 +1,5 @@
-import SuperwallKit
 import Combine
+import SuperwallKit
 
 @objc(SuperwallReactNative)
 class SuperwallReactNative: RCTEventEmitter {
@@ -20,6 +20,7 @@ class SuperwallReactNative: RCTEventEmitter {
       "restore",
       "paywallPresentationHandler",
       "subscriptionStatusDidChange",
+      "observeSubscriptionStatus",
       "handleSuperwallPlacement",
       "handleCustomPaywallAction",
       "willDismissPaywall",
@@ -158,7 +159,7 @@ class SuperwallReactNative: RCTEventEmitter {
 
   @objc(setSubscriptionStatus:)
   func setSubscriptionStatus(status: NSDictionary) {
-    guard  let statusDict = status as? [String: Any] else {
+    guard let statusDict = status as? [String: Any] else {
       return
     }
     let statusString = (statusDict["status"] as? String)?.uppercased() ?? "UNKNOWN"
@@ -297,11 +298,12 @@ class SuperwallReactNative: RCTEventEmitter {
   ) {
     Superwall.shared.$subscriptionStatus
       .receive(on: DispatchQueue.main)
-      .subscribe(Subscribers.Sink(
-        receiveCompletion: { _ in },
-        receiveValue: { [weak self] status in
-          self?.sendEvent(withName: "subscriptionStatusChanged", body: status.toJson())
-        })
+      .subscribe(
+        Subscribers.Sink(
+          receiveCompletion: { _ in },
+          receiveValue: { [weak self] status in
+            self?.sendEvent(withName: "observeSubscriptionStatus", body: status.toJson())
+          })
       )
     resolve(nil)
   }

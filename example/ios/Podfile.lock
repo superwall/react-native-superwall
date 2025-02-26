@@ -73,7 +73,7 @@ PODS:
   - hermes-engine/Pre-built (0.73.4)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
-  - PurchasesHybridCommon (13.17.1):
+  - PurchasesHybridCommon (13.18.1):
     - RevenueCat (= 5.16.1)
   - RCT-Folly (2022.05.16.00):
     - boost
@@ -1124,8 +1124,8 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - RNPurchases (8.5.4):
-    - PurchasesHybridCommon (= 13.17.1)
+  - RNPurchases (8.6.1):
+    - PurchasesHybridCommon (= 13.18.1)
     - React-Core
   - RNReanimated (3.16.7):
     - glog
@@ -1161,7 +1161,7 @@ PODS:
     - React-Core
   - SocketRocket (0.6.1)
   - Superscript (0.1.17)
-  - superwall-react-native (2.0.0):
+  - superwall-react-native (2.0.1):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
@@ -1407,7 +1407,7 @@ SPEC CHECKSUMS:
   hermes-engine: b2669ce35fc4ac14f523b307aff8896799829fe2
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
-  PurchasesHybridCommon: 7ee74fefbad7fa42a74ff6e339af46fac3af4640
+  PurchasesHybridCommon: bcc204d982166d7fcece10eb98e2ee7c0b0ea668
   RCT-Folly: cd21f1661364f975ae76b3308167ad66b09f53f5
   RCTRequired: ab7f915c15569f04a49669e573e6e319a53f9faa
   RCTTypeSafety: 63b97ced7b766865057e7154db0e81ce4ee6cf1e
@@ -1453,13 +1453,13 @@ SPEC CHECKSUMS:
   RevenueCat: d38c56d5e1058f955ee7fce4ea7b18d126235e64
   RNCMaskedView: 1d506a5e6c2a15715b9e344694f404f526ec28d1
   RNGestureHandler: c8dee734571c2ec651caab39597b9fddd5d883dc
-  RNPurchases: 90327de05486e29e8facae445a2e0d64f6f026c2
+  RNPurchases: 7861b5166d56a1507d931b9143430cbd9a2b6cc7
   RNReanimated: 73b45aa4fd62e53e60e34889d7a76ef780542b39
   RNScreens: 341431a90028837cd3cb58baef68efef21ee9b3b
   RNVectorIcons: 36b9fb776f0d0722582af7c5cbde94a4157c6914
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Superscript: 9854c733dd673a2cbc5dd9f919bf31e2b50345b1
-  superwall-react-native: 788e5a06a82210185ea99d0bd43ccd81347e2909
+  superwall-react-native: 3bac5e6ac1cddce1059840e1b76248be226d6f53
   SuperwallKit: 4ef491d2d0ad623b72d9525710cb42bf6147ccb2
   Yoga: 1b901a6d6eeba4e8a2e8f308f708691cdb5db312
 

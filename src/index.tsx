@@ -255,7 +255,7 @@ export default class Superwall {
 
   private async observeSubscriptionStatus() {
     await SuperwallReactNative.observeSubscriptionStatus();
-    this.eventEmitter.addListener('subscriptionStatusChanged', async (data) => {
+    this.eventEmitter.addListener('observeSubscriptionStatus', async (data) => {
       const status = SubscriptionStatus.fromJson(data);
       this.subscriptionStatusEmitter.emit('change', status);
     });

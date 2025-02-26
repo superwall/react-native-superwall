@@ -60,6 +60,10 @@ RCT_EXTERN_METHOD(confirmAllAssignments
                   : (RCTPromiseResolveBlock)resolve withRejecter
                   : (RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(observeSubscriptionStatus
+                  : (RCTPromiseResolveBlock)resolve withRejecter
+                  : (RCTPromiseRejectBlock)reject)
+
 RCT_EXTERN_METHOD(getPresentationResult
                   : (NSString *)event params
                   : (NSDictionary *)options withResolver
