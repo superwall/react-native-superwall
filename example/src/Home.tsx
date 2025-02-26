@@ -1,11 +1,19 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Button } from 'react-native';
-import Superwall from '@superwall/react-native-superwall';
+import Superwall from '../../src';
 import { useNavigation } from '@react-navigation/native';
+import type { StackNavigationProp } from '@react-navigation/stack';
+
+type RootStackParamList = {
+  Home: undefined;
+  LaunchedFeature: { value: string };
+};
+
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const Home = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const nonGated = () => {
     Superwall.shared.register({ placement: 'non_gated' }).then(() => {
@@ -23,12 +31,14 @@ const Home = () => {
 
   const diamond = () => {
     Superwall.shared.register({ placement: 'diamond' }).then(() => {
-      navigation.navigate('LaunchedFeature', { value: 'Diamond feature launched' });
+      navigation.navigate('LaunchedFeature', {
+        value: 'Diamond feature launched',
+      });
     });
   };
 
   const identify = () => {
-    Superwall.shared.identify('abc');
+    Superwall.shared.identify({ userId: 'abc' });
   };
 
   const reset = () => {
@@ -44,7 +54,7 @@ const Home = () => {
       <Button title="Reset" onPress={reset} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

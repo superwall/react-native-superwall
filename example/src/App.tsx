@@ -25,7 +25,7 @@ export default function App() {
         apiKey: apiKey,
         purchaseController: purchaseController,
       });
-      Superwall.shared.identify('abc');
+      Superwall.shared.identify({ userId: 'abc' });
       Superwall.shared.setDelegate(delegate);
       Superwall.shared.setUserAttributes({ test: 'abc' });
       purchaseController.syncSubscriptionStatus();
@@ -49,7 +49,7 @@ export default function App() {
     return () => {
       linkingListener.remove();
     };
-  }, []);
+  });
 
   return (
     <NavigationContainer>

@@ -4,7 +4,7 @@ import {
   SuperwallDelegate,
   SuperwallPlacementInfo,
   PlacementType,
-} from '@superwall/react-native-superwall';
+} from '../../src';
 
 export class MySuperwallDelegate extends SuperwallDelegate {
   subscriptionStatusDidChange(
@@ -17,10 +17,10 @@ export class MySuperwallDelegate extends SuperwallDelegate {
   handleSuperwallPlacement(placementInfo: SuperwallPlacementInfo) {
     console.log('Handling Superwall placement:', placementInfo);
 
-    switch (placementInfo.placement) {
+    switch (placementInfo.placement.type) {
       case PlacementType.appOpen:
-        console.log("appOpen placement");
-        break; // Don't forget to add break statements to prevent fall-through
+        console.log('appOpen placement');
+        break;
       case PlacementType.deviceAttributes:
         console.log(
           `deviceAttributes placement: ${placementInfo.placement.deviceAttributes}`
@@ -30,7 +30,7 @@ export class MySuperwallDelegate extends SuperwallDelegate {
         const paywallInfo = placementInfo.placement.paywallInfo;
         console.log(`paywallOpen placement: ${paywallInfo}`);
 
-        if (paywallInfo !== null) {
+        if (paywallInfo && paywallInfo !== null) {
           console.log(`paywallInfo.identifier: ${paywallInfo.identifier}`);
           console.log(`paywallInfo.productIds: ${paywallInfo.productIds}`);
         }
