@@ -358,6 +358,17 @@ export default class Superwall {
   }
 
   /**
+   * Handles a deep link.
+   *
+   * @param {string} url - The deep link to handle.
+   * @returns {Promise<Boolean>} A promise that resolves to a boolean indicating whether the deep link was handled.
+   */
+  async handleDeepLink(url: string): Promise<Boolean> {
+    await this.awaitConfig();
+    return await SuperwallReactNative.handleDeepLink(url);
+  }
+
+  /**
    * Registers a placement to access a feature.
    *
    * When the placement is added to a campaign on the [Superwall Dashboard](https://superwall.com/dashboard),
