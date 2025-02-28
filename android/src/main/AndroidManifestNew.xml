@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
   <application>
     <activity
-      android:name="com.superwall.sdk.paywall.vc.SuperwallPaywallActivity"
+      android:name="com.superwall.sdk.paywall.view.SuperwallPaywallActivity"
       android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
       android:configChanges="orientation|screenSize|keyboardHidden">
     </activity>
