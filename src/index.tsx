@@ -385,7 +385,7 @@ export default class Superwall {
    * you remove it from the audience or reset the paywall assignments.
    *
    * @param {string} placement - The name of the placement to register.
-   * @param {Map<string, any>} [params] - Optional parameters to pass with your placement.
+   * @param {Map<string, any> | Record<string, any>} [params] - Optional parameters to pass with your placement.
    *   These parameters can be referenced within the audience filters of your campaign. Keys beginning with `$`
    *   are reserved for Superwall and will be omitted. Values can be any JSON-encodable value, URL, or Date.
    *   Arrays and dictionaries are not supported and will be dropped.
@@ -395,7 +395,7 @@ export default class Superwall {
    *   If provided, this callback will be executed after the registration process completes successfully.
    *   If not provided, you can chain a `.then()` block to the returned promise to execute your feature logic.
    *
-   * @returns {Promise<void>} A promise that resolves when register completes successfully.
+   * @returns {Promise<void>} if [feature] is provided this promise resolves when register is executed, otherwise a promise that resolves when register completes successfully after which you can chain a `.then()` block to execute your feature logic.
    *
    * @remarks
    * This behavior is remotely configurable via the [Superwall Dashboard](https://superwall.com/dashboard):
@@ -426,7 +426,7 @@ export default class Superwall {
    */
   async register(params: {
     placement: string;
-    params?: Map<string, any>;
+    params?: Map<string, any> | Record<string, any>;
     handler?: PaywallPresentationHandler;
     feature?: () => void;
   }): Promise<void> {
@@ -441,7 +441,10 @@ export default class Superwall {
 
     let paramsObject = {};
     if (params.params) {
-      paramsObject = Object.fromEntries(params.params);
+      paramsObject =
+        params.params instanceof Map
+          ? Object.fromEntries(params.params)
+          : params.params;
     }
 
     if (params.feature) {
