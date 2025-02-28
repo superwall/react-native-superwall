@@ -3,45 +3,31 @@ on:
   push:
     branches:
       - main
-    paths:
-      - '**.js'
-      - '**.jsx'
-      - '**.ts'
-      - '**.tsx'
-      - '**.json'
-      - '**.lock'
-      - '**.gradle'
-      - '**.properties'
-      - '**.pbxproj'
-      - '**.plist'
-      - '**.xcworkspace/**'
-      - '**.podspec'
-      - '**.swift'
-      - '**.java'
-      - '**.kt'
-      - '**.xml'
-      - '.github/workflows/**'
+    paths-ignore:
+      - '**.md'
+      - '**.txt'
+      - 'docs/**'
+      - 'LICENSE'
+      - '.gitignore'
+      - '**.png'
+      - '**.jpg'
+      - '**.jpeg'
+      - '**.gif'
+      - '**.svg'
   pull_request:
     branches:
       - main
-    paths:
-      - '**.js'
-      - '**.jsx'
-      - '**.ts'
-      - '**.tsx'
-      - '**.json'
-      - '**.lock'
-      - '**.gradle'
-      - '**.properties'
-      - '**.pbxproj'
-      - '**.plist'
-      - '**.xcworkspace/**'
-      - '**.podspec'
-      - '**.swift'
-      - '**.java'
-      - '**.kt'
-      - '**.xml'
-      - '.github/workflows/**'
+    paths-ignore:
+      - '**.md'
+      - '**.txt'
+      - 'docs/**'
+      - 'LICENSE'
+      - '.gitignore'
+      - '**.png'
+      - '**.jpg'
+      - '**.jpeg'
+      - '**.gif'
+      - '**.svg'
 
 jobs:
   #  lint:
@@ -60,11 +46,6 @@ jobs:
   #        run: yarn typecheck
 
   test:
-    if: |
-      !contains(github.event.head_commit.message, 'docs:') &&
-      !contains(github.event.head_commit.message, 'chore:') &&
-      !contains(github.event.head_commit.message, 'docs(') &&
-      !contains(github.event.head_commit.message, 'chore(')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -77,11 +58,6 @@ jobs:
         run: yarn test --maxWorkers=2 --coverage
 
   build-library:
-    if: |
-      !contains(github.event.head_commit.message, 'docs:') &&
-      !contains(github.event.head_commit.message, 'chore:') &&
-      !contains(github.event.head_commit.message, 'docs(') &&
-      !contains(github.event.head_commit.message, 'chore(')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -94,11 +70,6 @@ jobs:
         run: yarn prepare
 
   build-android:
-    if: |
-      !contains(github.event.head_commit.message, 'docs:') &&
-      !contains(github.event.head_commit.message, 'chore:') &&
-      !contains(github.event.head_commit.message, 'docs(') &&
-      !contains(github.event.head_commit.message, 'chore(')
     runs-on: ubuntu-latest
     env:
       TURBO_CACHE_DIR: .turbo/android
@@ -153,11 +124,6 @@ jobs:
           yarn turbo run build:android --cache-dir="${{ env.TURBO_CACHE_DIR }}"
 
   build-ios:
-    if: |
-      !contains(github.event.head_commit.message, 'docs:') &&
-      !contains(github.event.head_commit.message, 'chore:') &&
-      !contains(github.event.head_commit.message, 'docs(') &&
-      !contains(github.event.head_commit.message, 'chore(')
     runs-on: macos-latest
     env:
       TURBO_CACHE_DIR: .turbo/ios
