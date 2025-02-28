@@ -8,7 +8,7 @@ import Superwall, {
   PurchaseResultFailed,
   PurchaseResultPending,
   PurchaseResultPurchased,
-} from '@superwall/react-native-superwall';
+} from '../../src';
 import Purchases, {
   type CustomerInfo,
   PRODUCT_CATEGORY,
@@ -33,20 +33,11 @@ export class RCPurchaseController extends PurchaseController {
   syncSubscriptionStatus() {
     // Listen for changes
     Purchases.addCustomerInfoUpdateListener((customerInfo) => {
-      const entitlements = Object.keys(customerInfo.entitlements.active).map(
-        (id) => ({
-          id,
-        })
-      );
+      const entitlementIds = Object.keys(customerInfo.entitlements.active);
       Superwall.shared.setSubscriptionStatus(
-        entitlements.length === 0
-          ? {
-              status: 'INACTIVE',
-            }
-          : {
-              status: 'ACTIVE',
-              entitlements,
-            }
+        entitlementIds.length === 0
+          ? SubscriptionStatus.Inactive()
+          : SubscriptionStatus.Active(entitlementIds)
       );
     });
   }

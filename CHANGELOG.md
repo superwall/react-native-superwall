@@ -2,6 +2,19 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 2.0.3
+
+### Enhancements
+
+- Updates `SubscriptionStatus.Active` to accept either a list of strings or a list of `Entitlement` objects.
+- Updates how feature block is passed in and used in `register` call
+- Removes the need for params to be a `Map`, the parameter now supports a `Record`
+- Upgrades Android SDK to `2.0.1` [View Android SDK release notes](https://github.com/superwall-me/Superwall-Android/releases/tag/2.0.1)
+
+### Fixes
+
+- Example project fixes.
+
 ## 2.0.2
 
 ### Fixes

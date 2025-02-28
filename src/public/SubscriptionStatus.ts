@@ -19,10 +19,15 @@ export namespace SubscriptionStatus {
     status: `UNKNOWN`;
   };
 
-  export function Active(entitlements: Entitlement[]): Active {
+  export function Active(input: Entitlement[] | string[]): Active {
     return {
-      status: 'ACTIVE',
-      entitlements,
+      status: `ACTIVE`,
+      entitlements:
+        input.length === 0
+          ? []
+          : typeof input[0] === 'string'
+          ? (input as string[]).map((id) => new Entitlement(id))
+          : (input as Entitlement[]),
     };
   }
 
