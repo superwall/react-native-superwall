@@ -384,15 +384,14 @@ export default class Superwall {
    * Once a user is assigned a paywall within an audience, that paywall will continue to be shown unless
    * you remove it from the audience or reset the paywall assignments.
    *
-   * @param {RegisterParams} params - The options for registering a placement.
-   * @param {string} params.placement - The name of the placement to register.
-   * @param {Record<string, any>} [params.params] - Optional parameters to pass with your placement.
+   * @param {string} placement - The name of the placement to register.
+   * @param {Map<string, any>} [params] - Optional parameters to pass with your placement.
    *   These parameters can be referenced within the audience filters of your campaign. Keys beginning with `$`
    *   are reserved for Superwall and will be omitted. Values can be any JSON-encodable value, URL, or Date.
    *   Arrays and dictionaries are not supported and will be dropped.
-   * @param {PaywallPresentationHandler} [options.handler] - An optional handler that receives status updates
+   * @param {PaywallPresentationHandler} [handler] - An optional handler that receives status updates
    *   about the paywall presentation.
-   * @param {() => void} [options.feature] - An optional callback that will be executed after registration completes.
+   * @param {() => void} [feature] - An optional callback that will be executed after registration completes.
    *   If provided, this callback will be executed after the registration process completes successfully.
    *   If not provided, you can chain a `.then()` block to the returned promise to execute your feature logic.
    *
@@ -404,7 +403,8 @@ export default class Superwall {
    * - For _Non Gated_ paywalls, the feature block is executed when the paywall is dismissed or if the user is already paying.
    * - For _Gated_ paywalls, the feature block is executed only if the user is already paying or if they begin paying.
    * - If no paywall is configured, the feature block is executed immediately.
-   *
+   * - If no feature block is provided, the returned promise will resolve when registration completes.
+   * - If a feature block is provided, the returned promise will always resolve after the feature block is executed.
    * Note: The feature block will not be executed if an error occurs during registration. Such errors can be detected via the
    * `handler`.
    *
@@ -424,7 +424,12 @@ export default class Superwall {
    *     console.log("Placement registered, now executing feature logic.");
    *   })
    */
-  async register(params: RegisterParams): Promise<void> {
+  async register(params: {
+    placement: string;
+    params?: Map<string, any>;
+    handler?: PaywallPresentationHandler;
+    feature?: () => void;
+  }): Promise<void> {
     await this.awaitConfig();
     let handlerId: string | null = null;
 
@@ -664,33 +669,3 @@ export default class Superwall {
     await SuperwallReactNative.dismiss();
   }
 }
-
-/**
- * Base options for registering a placement
- */
-export type RegisterBaseParams = {
-  placement: string;
-  params?: Map<string, any>;
-  handler?: PaywallPresentationHandler;
-};
-
-/**
- * Options for registering a placement with a feature callback
- */
-export type RegisterWithFeatureParams = RegisterBaseParams & {
-  feature: () => void;
-};
-
-/**
- * Options for registering a placement without a feature callback
- */
-export type RegisterWithoutFeatureParams = RegisterBaseParams & {
-  feature?: undefined;
-};
-
-/**
- * Combined options type for the register function
- */
-export type RegisterParams =
-  | RegisterWithFeatureParams
-  | RegisterWithoutFeatureParams;
