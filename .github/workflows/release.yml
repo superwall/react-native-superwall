@@ -66,13 +66,13 @@ jobs:
             echo "::set-output name=status::false"
           fi
 
-      - name: slack-send
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          payload: |
-            {
-              "text": "Please create a new React Native Release! https://github.com/superwall-me/react-native-superwall/releases/new?tag=${{steps.version.outputs.prop}}&prerelease=${{steps.prerelease.outputs.status}}"
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+      # - name: slack-send
+      #   uses: slackapi/slack-github-action@v1.24.0
+      #   with:
+      #     payload: |
+      #       {
+      #         "text": "Please create a new React Native Release! https://github.com/superwall-me/react-native-superwall/releases/new?tag=${{steps.version.outputs.prop}}&prerelease=${{steps.prerelease.outputs.status}}"
+      #       }
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+      #     SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
