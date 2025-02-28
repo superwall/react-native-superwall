@@ -384,14 +384,14 @@ export default class Superwall {
    * Once a user is assigned a paywall within an audience, that paywall will continue to be shown unless
    * you remove it from the audience or reset the paywall assignments.
    *
-   * @param {string} placement - The name of the placement to register.
-   * @param {Map<string, any> | Record<string, any>} [params] - Optional parameters to pass with your placement.
+   * @param {string} [params.placement] - The name of the placement to register.
+   * @param {Map<string, any> | Record<string, any>} [params.params] - Optional parameters to pass with your placement.
    *   These parameters can be referenced within the audience filters of your campaign. Keys beginning with `$`
    *   are reserved for Superwall and will be omitted. Values can be any JSON-encodable value, URL, or Date.
    *   Arrays and dictionaries are not supported and will be dropped.
-   * @param {PaywallPresentationHandler} [handler] - An optional handler that receives status updates
+   * @param {PaywallPresentationHandler} [params.handler] - An optional handler that receives status updates
    *   about the paywall presentation.
-   * @param {() => void} [feature] - An optional callback that will be executed after registration completes.
+   * @param {() => void} [params.feature] - An optional callback that will be executed after registration completes.
    *   If provided, this callback will be executed after the registration process completes successfully.
    *   If not provided, you can chain a `.then()` block to the returned promise to execute your feature logic.
    *
