@@ -384,63 +384,84 @@ export default class Superwall {
    * Once a user is assigned a paywall within an audience, that paywall will continue to be shown unless
    * you remove it from the audience or reset the paywall assignments.
    *
-   * @param {Object} options - The options for registering a placement.
-   * @param {string} options.placement - The name of the placement to register.
-   * @param {Record<string, any>} [options.params] - Optional parameters to pass with your placement.
+   * @param {string} [params.placement] - The name of the placement to register.
+   * @param {Map<string, any> | Record<string, any>} [params.params] - Optional parameters to pass with your placement.
    *   These parameters can be referenced within the audience filters of your campaign. Keys beginning with `$`
    *   are reserved for Superwall and will be omitted. Values can be any JSON-encodable value, URL, or Date.
    *   Arrays and dictionaries are not supported and will be dropped.
-   * @param {PaywallPresentationHandler} [options.handler] - An optional handler that receives status updates
+   * @param {PaywallPresentationHandler} [params.handler] - An optional handler that receives status updates
    *   about the paywall presentation.
+   * @param {() => void} [params.feature] - An optional callback that will be executed after registration completes.
+   *   If provided, this callback will be executed after the registration process completes successfully.
+   *   If not provided, you can chain a `.then()` block to the returned promise to execute your feature logic.
    *
-   *  @returns {Promise<void>} A promise that resolves when register completes successfully,
-   * indicating that it is safe to execute your feature logic in a subsequent `.then()` block.
+   * @returns {Promise<void>} if [feature] is provided this promise resolves when register is executed, otherwise a promise that resolves when register completes successfully after which you can chain a `.then()` block to execute your feature logic.
    *
    * @remarks
-   * To execute your feature logic, chain a `.then()` block onto the returned promise. Your callback in the
-   * `.then()` block acts as the feature block — that is, the code representing the feature you wish to paywall.
    * This behavior is remotely configurable via the [Superwall Dashboard](https://superwall.com/dashboard):
    *
    * - For _Non Gated_ paywalls, the feature block is executed when the paywall is dismissed or if the user is already paying.
    * - For _Gated_ paywalls, the feature block is executed only if the user is already paying or if they begin paying.
    * - If no paywall is configured, the feature block is executed immediately.
-   *
+   * - If no feature block is provided, the returned promise will resolve when registration completes.
+   * - If a feature block is provided, the returned promise will always resolve after the feature block is executed.
    * Note: The feature block will not be executed if an error occurs during registration. Such errors can be detected via the
    * `handler`.
    *
    * @example
-   * // Chaining feature logic after registration:
+   * // Using the feature callback:
+   * Superwall.register({
+   *   placement: "somePlacement",
+   *   feature: () => {
+   *     console.log("Feature logic executed after registration");
+   *   }
+   * });
+   *
+   * // Alternatively, chaining feature logic after registration:
    * Superwall.register({ placement: "somePlacement" })
    *   .then(() => {
    *     // Execute your feature logic here after registration.
    *     console.log("Placement registered, now executing feature logic.");
    *   })
    */
-  async register({
-    placement,
-    params,
-    handler,
-  }: {
+  async register(params: {
     placement: string;
-    params?: Map<string, any>;
+    params?: Map<string, any> | Record<string, any>;
     handler?: PaywallPresentationHandler;
+    feature?: () => void;
   }): Promise<void> {
     await this.awaitConfig();
     let handlerId: string | null = null;
 
-    if (handler) {
+    if (params.handler) {
       const uuid = (+new Date() * Math.random()).toString(36);
-      this.presentationHandlers.set(uuid, handler);
+      this.presentationHandlers.set(uuid, params.handler);
       handlerId = uuid;
     }
 
     let paramsObject = {};
-    if (params) {
-      paramsObject = Object.fromEntries(params);
+    if (params.params) {
+      paramsObject =
+        params.params instanceof Map
+          ? Object.fromEntries(params.params)
+          : params.params;
     }
 
-    // This promise resolves once the registration process has been initiated.
-    await SuperwallReactNative.register(placement, paramsObject, handlerId);
+    if (params.feature) {
+      return await SuperwallReactNative.register(
+        params.placement,
+        paramsObject,
+        handlerId
+      ).then(() => {
+        params.feature!();
+      });
+    } else {
+      return SuperwallReactNative.register(
+        params.placement,
+        paramsObject,
+        handlerId
+      );
+    }
   }
 
   /**
