@@ -6,7 +6,7 @@ The changelog for `Superwall`. Also see the [releases](https://github.com/superw
 
 ### Enhancements
 
-- Upgrades Android SDK to 2.0.2 [View iOS SDK release notes](https://github.com/superwall/Superwall-Android/releases/tag/2.0.2).
+- Upgrades Android SDK to 2.0.2 [View Android SDK release notes](https://github.com/superwall/Superwall-Android/releases/tag/2.0.2).
 
 ## 2.0.4
 
