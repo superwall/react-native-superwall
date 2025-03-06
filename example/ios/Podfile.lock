@@ -73,8 +73,8 @@ PODS:
   - hermes-engine/Pre-built (0.73.4)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
-  - PurchasesHybridCommon (13.18.1):
-    - RevenueCat (= 5.16.1)
+  - PurchasesHybridCommon (13.21.0):
+    - RevenueCat (= 5.18.0)
   - RCT-Folly (2022.05.16.00):
     - boost
     - DoubleConversion
@@ -1115,7 +1115,7 @@ PODS:
     - React-jsi (= 0.73.4)
     - React-logger (= 0.73.4)
     - React-perflogger (= 0.73.4)
-  - RevenueCat (5.16.1)
+  - RevenueCat (5.18.0)
   - RNCMaskedView (0.3.2):
     - glog
     - RCT-Folly (= 2022.05.16.00)
@@ -1124,8 +1124,8 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - RNPurchases (8.6.1):
-    - PurchasesHybridCommon (= 13.18.1)
+  - RNPurchases (8.7.0):
+    - PurchasesHybridCommon (= 13.21.0)
     - React-Core
   - RNReanimated (3.16.7):
     - glog
@@ -1161,12 +1161,12 @@ PODS:
     - React-Core
   - SocketRocket (0.6.1)
   - Superscript (0.1.17)
-  - superwall-react-native (2.0.3):
+  - superwall-react-native (2.0.4):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-    - SuperwallKit (= 4.0.0)
-  - SuperwallKit (4.0.0):
+    - SuperwallKit (= 4.0.1)
+  - SuperwallKit (4.0.1):
     - Superscript (= 0.1.17)
   - Yoga (1.14.0)
 
@@ -1407,7 +1407,7 @@ SPEC CHECKSUMS:
   hermes-engine: b2669ce35fc4ac14f523b307aff8896799829fe2
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
-  PurchasesHybridCommon: bcc204d982166d7fcece10eb98e2ee7c0b0ea668
+  PurchasesHybridCommon: 9691d74a051f30858360d78936d59dc14575014e
   RCT-Folly: cd21f1661364f975ae76b3308167ad66b09f53f5
   RCTRequired: ab7f915c15569f04a49669e573e6e319a53f9faa
   RCTTypeSafety: 63b97ced7b766865057e7154db0e81ce4ee6cf1e
@@ -1450,17 +1450,17 @@ SPEC CHECKSUMS:
   React-runtimescheduler: ceaeeb19e75912958625f72883d240640e8f40da
   React-utils: 8439db27c3745f6de9d67eb61f5600c8d624274c
   ReactCommon: cc18bd33c0fab03c67620da6a602dcc1704e66b4
-  RevenueCat: d38c56d5e1058f955ee7fce4ea7b18d126235e64
+  RevenueCat: e825836f5d6baa870c53d7281be25a5fd91abd91
   RNCMaskedView: 1d506a5e6c2a15715b9e344694f404f526ec28d1
   RNGestureHandler: c8dee734571c2ec651caab39597b9fddd5d883dc
-  RNPurchases: 7861b5166d56a1507d931b9143430cbd9a2b6cc7
+  RNPurchases: 2c8780f3b7be8af8cd6f3f3740ba4176465d1d0a
   RNReanimated: 73b45aa4fd62e53e60e34889d7a76ef780542b39
   RNScreens: 341431a90028837cd3cb58baef68efef21ee9b3b
   RNVectorIcons: 36b9fb776f0d0722582af7c5cbde94a4157c6914
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Superscript: 9854c733dd673a2cbc5dd9f919bf31e2b50345b1
-  superwall-react-native: c9dd1aaf327e7367c2b7b40e8a6d0e3e7cda26d4
-  SuperwallKit: 4ef491d2d0ad623b72d9525710cb42bf6147ccb2
+  superwall-react-native: c7fdf7f9f67196dd65c4f6b387800bae0abfd6d7
+  SuperwallKit: 0171e8ab6597b1b079a652515bc0447a7f54675f
   Yoga: 1b901a6d6eeba4e8a2e8f308f708691cdb5db312
 
 PODFILE CHECKSUM: fb57b6044ea1421798c2b147f60b274ece1d0a66
