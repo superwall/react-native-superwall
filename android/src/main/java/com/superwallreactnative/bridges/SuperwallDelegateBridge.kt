@@ -3,11 +3,11 @@ package com.superwallreactnative.bridges
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.modules.core.DeviceEventManagerModule
-import com.superwall.sdk.analytics.superwall.SuperwallPlacementInfo
+import com.superwall.sdk.analytics.superwall.SuperwallEventInfo
 import com.superwall.sdk.models.entitlements.SubscriptionStatus
 import com.superwall.sdk.delegate.SuperwallDelegate
 import com.superwall.sdk.paywall.presentation.PaywallInfo
-import com.superwallreactnative.models.SuperwallPlacement
+import com.superwallreactnative.models.SuperwallEvent
 import com.superwallreactnative.models.convertMapToReadableMap
 import com.superwallreactnative.models.toJson
 import java.net.URI
@@ -30,7 +30,7 @@ class SuperwallDelegateBridge(
       .emit("subscriptionStatusDidChange", data)
   }
 
-  override fun handleSuperwallPlacement(placementInfo: SuperwallPlacementInfo) {
+  override fun handleSuperwallEvent(placementInfo: SuperwallEventInfo) {
     val data = Arguments.createMap().apply {
       putMap("eventInfo", placementInfo.toJson())
     }

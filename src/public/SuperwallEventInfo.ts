@@ -10,7 +10,6 @@ import { StoreProduct } from "./StoreProduct";
 import { StoreTransaction } from "./StoreTransaction";
 import { Survey, SurveyOption } from "./Survey";
 import { TriggerResult } from "./TriggerResult";
-
 export class SuperwallEventInfo {
   event: SuperwallEvent;
   params?: Record<string, any>;
@@ -300,3 +299,6 @@ export class SuperwallEvent {
     }
   }
 }
+
+export type SuperwallPlacementInfo = SuperwallEventInfo;
+export type SuperwallPlacement = SuperwallEvent;
