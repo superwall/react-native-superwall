@@ -21,7 +21,7 @@ class SuperwallReactNative: RCTEventEmitter {
       "paywallPresentationHandler",
       "subscriptionStatusDidChange",
       "observeSubscriptionStatus",
-      "handleSuperwallPlacement",
+      "handleSuperwallEvent",
       "handleCustomPaywallAction",
       "willDismissPaywall",
       "willPresentPaywall",

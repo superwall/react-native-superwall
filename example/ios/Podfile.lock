@@ -1160,14 +1160,14 @@ PODS:
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
   - SocketRocket (0.6.1)
-  - Superscript (0.1.17)
-  - superwall-react-native (2.0.4):
+  - Superscript (0.1.18)
+  - superwall-react-native (2.0.5):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-    - SuperwallKit (= 4.0.1)
-  - SuperwallKit (4.0.1):
-    - Superscript (= 0.1.17)
+    - SuperwallKit (= 4.0.3)
+  - SuperwallKit (4.0.3):
+    - Superscript (= 0.1.18)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -1458,9 +1458,9 @@ SPEC CHECKSUMS:
   RNScreens: 341431a90028837cd3cb58baef68efef21ee9b3b
   RNVectorIcons: 36b9fb776f0d0722582af7c5cbde94a4157c6914
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
-  Superscript: 9854c733dd673a2cbc5dd9f919bf31e2b50345b1
-  superwall-react-native: c7fdf7f9f67196dd65c4f6b387800bae0abfd6d7
-  SuperwallKit: 0171e8ab6597b1b079a652515bc0447a7f54675f
+  Superscript: 88a0e5e467fc986289f99e20e383232513c41ea9
+  superwall-react-native: 100d9ba6354c26bad98813d6e52c81dcc5753ebd
+  SuperwallKit: 26895fd3e65b94391ff3b32f4a93a01fcb49f18c
   Yoga: 1b901a6d6eeba4e8a2e8f308f708691cdb5db312
 
 PODFILE CHECKSUM: fb57b6044ea1421798c2b147f60b274ece1d0a66

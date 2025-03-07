@@ -6,7 +6,7 @@ import com.superwall.sdk.analytics.superwall.SuperwallPlacementInfo
 
 fun SuperwallPlacementInfo.toJson(): ReadableMap {
   val map = Arguments.createMap()
-  map.putMap("placement", SuperwallPlacement.toJson(this.placement))
+  map.putMap("event", SuperwallPlacement.toJson(this.placement))
   map.putMap("params", convertMapToReadableMap(this.params))
   return map
 }

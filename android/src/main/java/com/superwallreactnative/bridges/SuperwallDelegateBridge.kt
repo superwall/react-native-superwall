@@ -32,12 +32,12 @@ class SuperwallDelegateBridge(
 
   override fun handleSuperwallPlacement(placementInfo: SuperwallPlacementInfo) {
     val data = Arguments.createMap().apply {
-      putMap("placementInfo", placementInfo.toJson())
+      putMap("eventInfo", placementInfo.toJson())
     }
 
     reactContext
       .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-      .emit("handleSuperwallPlacement", data)
+      .emit("handleSuperwallEvent", data)
   }
 
   override fun handleCustomPaywallAction(withName: String) {

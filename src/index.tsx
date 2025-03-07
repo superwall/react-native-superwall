@@ -7,7 +7,7 @@ import { PaywallSkippedReason } from './public/PaywallSkippedReason';
 import { SubscriptionStatus } from './public/SubscriptionStatus';
 import { InterfaceStyle } from './public/InterfaceStyle';
 import { SuperwallDelegate } from './public/SuperwallDelegate';
-import { SuperwallPlacementInfo } from './public/SuperwallPlacementInfo';
+import { SuperwallEventInfo } from './public/SuperwallEventInfo';
 import { NativeEventEmitter } from 'react-native';
 import { IdentityOptions } from './public/IdentityOptions';
 import { EventEmitter } from 'events';
@@ -60,10 +60,7 @@ export { InterfaceStyle } from './public/InterfaceStyle';
 export { ConfigurationStatus } from './public/ConfigurationStatus';
 //export { Superwall } from './Superwall';
 export { SuperwallDelegate } from './public/SuperwallDelegate';
-export {
-  SuperwallPlacementInfo,
-  PlacementType,
-} from './public/SuperwallPlacementInfo';
+export { SuperwallEventInfo, EventType } from './public/SuperwallEventInfo';
 export { SuperwallOptions } from './public/SuperwallOptions';
 export { Survey } from './public/Survey';
 export { TriggerResult } from './public/TriggerResult';
@@ -202,9 +199,9 @@ export default class Superwall {
       }
     );
 
-    this.eventEmitter.addListener('handleSuperwallPlacement', async (data) => {
-      const placementInfo = SuperwallPlacementInfo.fromJson(data.placementInfo);
-      Superwall.delegate?.handleSuperwallPlacement(placementInfo);
+    this.eventEmitter.addListener('handleSuperwallEvent', async (data) => {
+      const eventInfo = SuperwallEventInfo.fromJson(data.eventInfo);
+      Superwall.delegate?.handleSuperwallEvent(eventInfo);
     });
 
     this.eventEmitter.addListener('handleCustomPaywallAction', async (data) => {
@@ -467,7 +464,7 @@ export default class Superwall {
   /**
    * Confirms all experiment assignments and returns them in an array.
    *
-   * This method tracks the {@link SuperwallPlacement.confirmAllAssignments} event in the delegate.
+   * This method tracks the {@link SuperwallEvent.confirmAllAssignments} event in the delegate.
    *
    * Note that the assignments may differ when a placement is registered due to changes
    * in user, placement, or device parameters used in audience filters.
