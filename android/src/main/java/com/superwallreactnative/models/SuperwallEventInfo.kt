@@ -2,11 +2,11 @@ package com.superwallreactnative.models
 
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
-import com.superwall.sdk.analytics.superwall.SuperwallPlacementInfo
+import com.superwall.sdk.analytics.superwall.SuperwallEventInfo
 
-fun SuperwallPlacementInfo.toJson(): ReadableMap {
+fun SuperwallEventInfo.toJson(): ReadableMap {
   val map = Arguments.createMap()
-  map.putMap("placement", SuperwallPlacement.toJson(this.placement))
+  map.putMap("event", SuperwallEvent.toJson(this.event))
   map.putMap("params", convertMapToReadableMap(this.params))
   return map
 }

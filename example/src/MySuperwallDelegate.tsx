@@ -2,8 +2,8 @@ import {
   PaywallInfo,
   SubscriptionStatus,
   SuperwallDelegate,
-  SuperwallPlacementInfo,
-  PlacementType,
+  SuperwallEventInfo,
+  EventType,
 } from '../../src';
 
 export class MySuperwallDelegate extends SuperwallDelegate {
@@ -14,21 +14,21 @@ export class MySuperwallDelegate extends SuperwallDelegate {
     console.log('Entitlement status changed from', from, 'to', to);
   }
 
-  handleSuperwallPlacement(placementInfo: SuperwallPlacementInfo) {
-    console.log('Handling Superwall placement:', placementInfo);
+  handleSuperwallEvent(eventInfo: SuperwallEventInfo) {
+    console.log('Handling Superwall event:', eventInfo);
 
-    switch (placementInfo.placement.type) {
-      case PlacementType.appOpen:
+    switch (eventInfo.event.type) {
+      case EventType.appOpen:
         console.log('appOpen placement');
         break;
-      case PlacementType.deviceAttributes:
+      case EventType.deviceAttributes:
         console.log(
-          `deviceAttributes placement: ${placementInfo.placement.deviceAttributes}`
+          `deviceAttributes placement: ${eventInfo.event.deviceAttributes}`
         );
         break;
-      case PlacementType.paywallOpen:
-        const paywallInfo = placementInfo.placement.paywallInfo;
-        console.log(`paywallOpen placement: ${paywallInfo}`);
+      case EventType.paywallOpen:
+        const paywallInfo = eventInfo.event.paywallInfo;
+        console.log(`paywallOpen event: ${paywallInfo}`);
 
         if (paywallInfo && paywallInfo !== null) {
           console.log(`paywallInfo.identifier: ${paywallInfo.identifier}`);

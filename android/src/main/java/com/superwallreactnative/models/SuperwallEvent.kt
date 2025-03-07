@@ -3,76 +3,76 @@ package com.superwallreactnative.models
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.ReadableType
-import com.superwall.sdk.analytics.superwall.SuperwallPlacement
+import com.superwall.sdk.analytics.superwall.SuperwallEvent
 import com.superwall.sdk.store.abstractions.transactions.StoreTransaction
 
-class SuperwallPlacement {
+class SuperwallEvent {
   companion object {
-    fun toJson(superwallPlacement: SuperwallPlacement): ReadableMap {
+    fun toJson(superwallPlacement: SuperwallEvent): ReadableMap {
       val map = Arguments.createMap()
       when (superwallPlacement) {
-        is SuperwallPlacement.FirstSeen -> map.putString("placement", "firstSeen")
-        is SuperwallPlacement.Reset -> map.putString("placement", "reset")
-        is SuperwallPlacement.Restore.Start -> map.putString("placement", "restoreStart")
-        is SuperwallPlacement.Restore.Complete -> map.putString("placement", "restoreComplete")
-        is SuperwallPlacement.ConfigRefresh -> map.putString("placement", "configRefresh")
-        is SuperwallPlacement.Restore.Fail -> {
-          map.putString("placement", "restoreFail")
+        is SuperwallEvent.FirstSeen -> map.putString("event", "firstSeen")
+        is SuperwallEvent.Reset -> map.putString("event", "reset")
+        is SuperwallEvent.Restore.Start -> map.putString("event", "restoreStart")
+        is SuperwallEvent.Restore.Complete -> map.putString("event", "restoreComplete")
+        is SuperwallEvent.ConfigRefresh -> map.putString("event", "configRefresh")
+        is SuperwallEvent.Restore.Fail -> {
+          map.putString("event", "restoreFail")
           map.putString("message", superwallPlacement.reason)
         }
-        is SuperwallPlacement.AppOpen -> map.putString("placement", "appOpen")
-        is SuperwallPlacement.AppLaunch -> map.putString("placement", "appLaunch")
-        is SuperwallPlacement.IdentityAlias -> map.putString("placement", "identityAlias")
-        is SuperwallPlacement.AppInstall -> map.putString("placement", "appInstall")
-        is SuperwallPlacement.SessionStart -> map.putString("placement", "sessionStart")
-        is SuperwallPlacement.DeviceAttributes -> {
-          map.putString("placement", "deviceAttributes")
+        is SuperwallEvent.AppOpen -> map.putString("event", "appOpen")
+        is SuperwallEvent.AppLaunch -> map.putString("event", "appLaunch")
+        is SuperwallEvent.IdentityAlias -> map.putString("event", "identityAlias")
+        is SuperwallEvent.AppInstall -> map.putString("event", "appInstall")
+        is SuperwallEvent.SessionStart -> map.putString("event", "sessionStart")
+        is SuperwallEvent.DeviceAttributes -> {
+          map.putString("event", "deviceAttributes")
           // Assuming this.attributes is a Map<String, Any>
           map.putMap("attributes", convertMapToReadableMap(superwallPlacement.attributes))
         }
-        is SuperwallPlacement.SubscriptionStatusDidChange -> map.putString("placement", "subscriptionStatusDidChange")
-        is SuperwallPlacement.AppClose -> map.putString("placement", "appClose")
-        is SuperwallPlacement.DeepLink -> {
-          map.putString("placement", "deepLink")
+        is SuperwallEvent.SubscriptionStatusDidChange -> map.putString("event", "subscriptionStatusDidChange")
+        is SuperwallEvent.AppClose -> map.putString("event", "appClose")
+        is SuperwallEvent.DeepLink -> {
+          map.putString("event", "deepLink")
           map.putString("url", superwallPlacement.uri.toString())
         }
-        is SuperwallPlacement.TriggerFire -> {
-          map.putString("placement", "triggerFire")
+        is SuperwallEvent.TriggerFire -> {
+          map.putString("event", "triggerFire")
           map.putString("placementName", superwallPlacement.placementName)
           // Assuming result.toJson() returns Map<String, Any>
           val triggerResult = TriggerResult.toJson(superwallPlacement.result)
           map.putMap("result", triggerResult)
         }
-        is SuperwallPlacement.PaywallOpen -> {
-          map.putString("placement", "paywallOpen")
+        is SuperwallEvent.PaywallOpen -> {
+          map.putString("event", "paywallOpen")
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.PaywallClose -> {
-          map.putString("placement", "paywallClose")
+        is SuperwallEvent.PaywallClose -> {
+          map.putString("event", "paywallClose")
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.PaywallDecline -> {
-          map.putString("placement", "paywallDecline")
+        is SuperwallEvent.PaywallDecline -> {
+          map.putString("event", "paywallDecline")
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.TransactionStart -> {
-          map.putString("placement", "transactionStart")
+        is SuperwallEvent.TransactionStart -> {
+          map.putString("event", "transactionStart")
           map.putMap("product", superwallPlacement.product.toJson())
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.TransactionFail -> {
-          map.putString("placement", "transactionFail")
+        is SuperwallEvent.TransactionFail -> {
+          map.putString("event", "transactionFail")
           map.putString("error", superwallPlacement.error.localizedMessage ?: "Error message unavailable")
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.TransactionAbandon -> {
-          map.putString("placement", "transactionAbandon")
+        is SuperwallEvent.TransactionAbandon -> {
+          map.putString("event", "transactionAbandon")
           // Assuming this.product.toJson() returns a Map<String, Any>
           map.putMap("product", superwallPlacement.product.toJson())
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.TransactionComplete -> {
-          map.putString("placement", "transactionComplete")
+        is SuperwallEvent.TransactionComplete -> {
+          map.putString("event", "transactionComplete")
           // Assuming this.product.toJson() returns a Map<String, Any>
           map.putMap("product", superwallPlacement.product.toJson())
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
@@ -83,129 +83,129 @@ class SuperwallPlacement {
             map.putMap("transaction", it)
           }
         }
-        is SuperwallPlacement.SubscriptionStart -> {
-          map.putString("placement", "subscriptionStart")
+        is SuperwallEvent.SubscriptionStart -> {
+          map.putString("event", "subscriptionStart")
           map.putMap("product", superwallPlacement.product.toJson())
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.FreeTrialStart -> {
-          map.putString("placement", "freeTrialStart")
+        is SuperwallEvent.FreeTrialStart -> {
+          map.putString("event", "freeTrialStart")
           map.putMap("product", superwallPlacement.product.toJson())
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.TransactionRestore -> {
-          map.putString("placement", "transactionRestore")
+        is SuperwallEvent.TransactionRestore -> {
+          map.putString("event", "transactionRestore")
           map.putMap("restoreType", superwallPlacement.restoreType.toJson())
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.TransactionTimeout -> {
-          map.putString("placement", "transactionTimeout")
+        is SuperwallEvent.TransactionTimeout -> {
+          map.putString("event", "transactionTimeout")
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.UserAttributes -> {
-          map.putString("placement", "userAttributes")
+        is SuperwallEvent.UserAttributes -> {
+          map.putString("event", "userAttributes")
           map.putMap("attributes", convertMapToReadableMap(superwallPlacement.attributes))
         }
-        is SuperwallPlacement.NonRecurringProductPurchase -> {
-          map.putString("placement", "nonRecurringProductPurchase")
+        is SuperwallEvent.NonRecurringProductPurchase -> {
+          map.putString("event", "nonRecurringProductPurchase")
           map.putMap("product", superwallPlacement.product.toJson())
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.PaywallResponseLoadStart -> {
-          map.putString("placement", "paywallResponseLoadStart")
+        is SuperwallEvent.PaywallResponseLoadStart -> {
+          map.putString("event", "paywallResponseLoadStart")
           map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
         }
-        is SuperwallPlacement.PaywallResponseLoadNotFound -> {
-          map.putString("placement", "paywallResponseLoadNotFound")
+        is SuperwallEvent.PaywallResponseLoadNotFound -> {
+          map.putString("event", "paywallResponseLoadNotFound")
           map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
         }
-        is SuperwallPlacement.PaywallResponseLoadFail -> {
-          map.putString("placement", "paywallResponseLoadFail")
+        is SuperwallEvent.PaywallResponseLoadFail -> {
+          map.putString("event", "paywallResponseLoadFail")
           map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
         }
-        is SuperwallPlacement.PaywallResponseLoadComplete -> {
-          map.putString("placement", "paywallResponseLoadComplete")
-          map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
-          map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
-        }
-        is SuperwallPlacement.PaywallWebviewLoadStart -> {
-          map.putString("placement", "paywallWebviewLoadStart")
-          map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
-        }
-        is SuperwallPlacement.PaywallWebviewLoadFail -> {
-          map.putString("placement", "paywallWebviewLoadFail")
-          map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
-        }
-        is SuperwallPlacement.PaywallWebviewLoadComplete -> {
-          map.putString("placement", "paywallWebviewLoadComplete")
-          map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
-        }
-        is SuperwallPlacement.PaywallWebviewLoadTimeout -> {
-          map.putString("placement", "paywallWebviewLoadTimeout")
-          map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
-        }
-        is SuperwallPlacement.PaywallProductsLoadStart -> {
-          map.putString("placement", "paywallProductsLoadStart")
+        is SuperwallEvent.PaywallResponseLoadComplete -> {
+          map.putString("event", "paywallResponseLoadComplete")
           map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.PaywallProductsLoadFail -> {
-          map.putString("placement", "paywallProductsLoadFail")
+        is SuperwallEvent.PaywallWebviewLoadStart -> {
+          map.putString("event", "paywallWebviewLoadStart")
+          map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
+        }
+        is SuperwallEvent.PaywallWebviewLoadFail -> {
+          map.putString("event", "paywallWebviewLoadFail")
+          map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
+        }
+        is SuperwallEvent.PaywallWebviewLoadComplete -> {
+          map.putString("event", "paywallWebviewLoadComplete")
+          map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
+        }
+        is SuperwallEvent.PaywallWebviewLoadTimeout -> {
+          map.putString("event", "paywallWebviewLoadTimeout")
+          map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
+        }
+        is SuperwallEvent.PaywallProductsLoadStart -> {
+          map.putString("event", "paywallProductsLoadStart")
           map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.PaywallProductsLoadComplete -> {
-          map.putString("placement", "paywallProductsLoadComplete")
+        is SuperwallEvent.PaywallProductsLoadFail -> {
+          map.putString("event", "paywallProductsLoadFail")
+          map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
+          map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
+        }
+        is SuperwallEvent.PaywallProductsLoadComplete -> {
+          map.putString("event", "paywallProductsLoadComplete")
           map.putString("triggeredPlacementName", superwallPlacement.triggeredPlacementName ?: "")
         }
-        is SuperwallPlacement.SurveyResponse -> {
-          map.putString("placement", "surveyResponse")
+        is SuperwallEvent.SurveyResponse -> {
+          map.putString("event", "surveyResponse")
           // Assuming survey.toJson() and selectedOption.toJson() return Map<String, Any>
           map.putMap("survey", superwallPlacement.survey.toJson())
           map.putMap("selectedOption", superwallPlacement.selectedOption.toJson())
           map.putString("customResponse", superwallPlacement.customResponse ?: "")
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.PaywallPresentationRequest -> {
-          map.putString("placement", "paywallPresentationRequest")
+        is SuperwallEvent.PaywallPresentationRequest -> {
+          map.putString("event", "paywallPresentationRequest")
           // Assuming status.toJson() returns Map<String, Any>
           map.putMap("status", superwallPlacement.status.toJson())
           superwallPlacement.reason?.toJson()?.let {
             map.putMap("reason", it)
           }
         }
-        is SuperwallPlacement.SurveyClose -> {
-          map.putString("placement", "surveyClose")
+        is SuperwallEvent.SurveyClose -> {
+          map.putString("event", "surveyClose")
         }
-        is SuperwallPlacement.ConfigAttributes -> {
-          map.putString("placement", "configAttributes")
+        is SuperwallEvent.ConfigAttributes -> {
+          map.putString("event", "configAttributes")
         }
-        is SuperwallPlacement.CustomPlacement -> {
-          map.putString("placement", "customPlacement")
+        is SuperwallEvent.CustomPlacement -> {
+          map.putString("event", "customPlacement")
           map.putString("name", superwallPlacement.placementName)
           map.putMap("params", convertMapToReadableMap(superwallPlacement.params))
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.PaywallWebviewLoadFallback -> {
-          map.putString("placement", "paywallWebviewLoadFallback")
+        is SuperwallEvent.PaywallWebviewLoadFallback -> {
+          map.putString("event", "paywallWebviewLoadFallback")
           map.putMap("paywallInfo", superwallPlacement.paywallInfo.toJson())
         }
-        is SuperwallPlacement.ConfigFail -> {
-          map.putString("placement", "configFail")
+        is SuperwallEvent.ConfigFail -> {
+          map.putString("event", "configFail")
         }
-        is SuperwallPlacement.ConfirmAllAssignments -> {
-          map.putString("placement", "confirmAllAssignments")
+        is SuperwallEvent.ConfirmAllAssignments -> {
+          map.putString("event", "confirmAllAssignments")
         }
-        is SuperwallPlacement.PaywallResourceLoadFail -> {
-          map.putString("placement", "paywallResourceLoadFail")
+        is SuperwallEvent.PaywallResourceLoadFail -> {
+          map.putString("event", "paywallResourceLoadFail")
           map.putString("url", superwallPlacement.url.toString())
           map.putString("error", superwallPlacement.error)
         }
-        is SuperwallPlacement.ShimmerViewComplete -> {
-          map.putString("placement", "shimmerViewComplete")
+        is SuperwallEvent.ShimmerViewComplete -> {
+          map.putString("event", "shimmerViewComplete")
         }
-        is SuperwallPlacement.ShimmerViewStart -> {
-          map.putString("placement", "shimmerViewStart")
+        is SuperwallEvent.ShimmerViewStart -> {
+          map.putString("event", "shimmerViewStart")
         }
         else -> {}
       }

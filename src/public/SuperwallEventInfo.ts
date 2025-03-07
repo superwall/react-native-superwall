@@ -10,25 +10,24 @@ import { StoreProduct } from "./StoreProduct";
 import { StoreTransaction } from "./StoreTransaction";
 import { Survey, SurveyOption } from "./Survey";
 import { TriggerResult } from "./TriggerResult";
-
-export class SuperwallPlacementInfo {
-  placement: SuperwallPlacement;
+export class SuperwallEventInfo {
+  event: SuperwallEvent;
   params?: Record<string, any>;
 
-  constructor(placement: SuperwallPlacement, params?: Record<string, any>) {
-    this.placement = placement;
+  constructor(event: SuperwallEvent, params?: Record<string, any>) {
+    this.event = event;
     this.params = params;
   }
 
-  static fromJson(json: any): SuperwallPlacementInfo {
-    return new SuperwallPlacementInfo(
-      SuperwallPlacement.fromJson(json.placement),
+  static fromJson(json: any): SuperwallEventInfo {
+    return new SuperwallEventInfo(
+      SuperwallEvent.fromJson(json.event),
       json.params
     );
   }
 }
 
-export enum PlacementType {
+export enum EventType {
   firstSeen = "firstSeen",
   configRefresh = "configRefresh",
   appOpen = "appOpen",
@@ -87,8 +86,8 @@ export enum PlacementType {
   shimmerViewComplete = "shimmerViewComplete"
 }
 
-export class SuperwallPlacement {
-  type: PlacementType | undefined;
+export class SuperwallEvent {
+  type: EventType | undefined;
   placementName?: string;
   deviceAttributes?: Record<string, any>;
   deepLinkUrl?: string;
@@ -108,7 +107,7 @@ export class SuperwallPlacement {
   userAttributes?: Record<string, any>;
 
   private constructor(options: {
-    type: PlacementType;
+    type: EventType;
     placementName?: string;
     deviceAttributes?: Record<string, any>;
     deepLinkUrl?: string;
@@ -136,168 +135,170 @@ export class SuperwallPlacement {
     Object.assign(this, options);
   }
 
-  static fromJson(json: any): SuperwallPlacement {
-    let placementType =
-      PlacementType[json.placement as keyof typeof PlacementType];
+  static fromJson(json: any): SuperwallEvent {
+    let eventType = EventType[json.event as keyof typeof EventType];
 
     // Example for one case, replicate logic for other cases as needed
-    switch (placementType) {
-      case PlacementType.configRefresh:
-      case PlacementType.firstSeen:
-      case PlacementType.appOpen:
-      case PlacementType.appLaunch:
-      case PlacementType.identityAlias:
-      case PlacementType.appInstall:
-      case PlacementType.sessionStart:
-      case PlacementType.appClose:
-      case PlacementType.touchesBegan:
-      case PlacementType.surveyClose:
-      case PlacementType.reset:
-      case PlacementType.restoreStart:
-      case PlacementType.restoreComplete:
-      case PlacementType.configAttributes:
-      case PlacementType.configFail:
-      case PlacementType.adServicesTokenRequestStart:
-      case PlacementType.errorThrown:
-      case PlacementType.confirmAllAssignments:
-      case PlacementType.shimmerViewStart:
-      case PlacementType.shimmerViewComplete:
-      case PlacementType.subscriptionStatusDidChange:
-        return new SuperwallPlacement({ type: placementType });
-      case PlacementType.restoreFail:
-        return new SuperwallPlacement({
-          type: placementType,
+    switch (eventType) {
+      case EventType.configRefresh:
+      case EventType.firstSeen:
+      case EventType.appOpen:
+      case EventType.appLaunch:
+      case EventType.identityAlias:
+      case EventType.appInstall:
+      case EventType.sessionStart:
+      case EventType.appClose:
+      case EventType.touchesBegan:
+      case EventType.surveyClose:
+      case EventType.reset:
+      case EventType.restoreStart:
+      case EventType.restoreComplete:
+      case EventType.configAttributes:
+      case EventType.configFail:
+      case EventType.adServicesTokenRequestStart:
+      case EventType.errorThrown:
+      case EventType.confirmAllAssignments:
+      case EventType.shimmerViewStart:
+      case EventType.shimmerViewComplete:
+      case EventType.subscriptionStatusDidChange:
+        return new SuperwallEvent({ type: eventType });
+      case EventType.restoreFail:
+        return new SuperwallEvent({
+          type: eventType,
           message: json.message,
         });
-      case PlacementType.deviceAttributes:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.deviceAttributes:
+        return new SuperwallEvent({
+          type: eventType,
           deviceAttributes: json.attributes,
         });
-      case PlacementType.deepLink:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.deepLink:
+        return new SuperwallEvent({
+          type: eventType,
           deepLinkUrl: json.url,
         });
-      case PlacementType.triggerFire:
-        return new SuperwallPlacement({
-          type: placementType,
-          placementName: placementType,
+      case EventType.triggerFire:
+        return new SuperwallEvent({
+          type: eventType,
+          placementName: eventType,
           result: TriggerResult.fromJson(json.result),
         });
-      case PlacementType.paywallOpen:
-      case PlacementType.paywallClose:
-      case PlacementType.paywallDecline:
-      case PlacementType.transactionRestore:
-      case PlacementType.paywallWebviewLoadStart:
-      case PlacementType.paywallWebviewLoadFail:
-      case PlacementType.paywallWebviewLoadComplete:
-      case PlacementType.paywallWebviewLoadTimeout:
-      case PlacementType.paywallWebviewLoadFallback:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.paywallOpen:
+      case EventType.paywallClose:
+      case EventType.paywallDecline:
+      case EventType.transactionRestore:
+      case EventType.paywallWebviewLoadStart:
+      case EventType.paywallWebviewLoadFail:
+      case EventType.paywallWebviewLoadComplete:
+      case EventType.paywallWebviewLoadTimeout:
+      case EventType.paywallWebviewLoadFallback:
+        return new SuperwallEvent({
+          type: eventType,
           paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
         });
-      case PlacementType.transactionStart:
-      case PlacementType.transactionAbandon:
-      case PlacementType.subscriptionStart:
-      case PlacementType.freeTrialStart:
-      case PlacementType.nonRecurringProductPurchase:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.transactionStart:
+      case EventType.transactionAbandon:
+      case EventType.subscriptionStart:
+      case EventType.freeTrialStart:
+      case EventType.nonRecurringProductPurchase:
+        return new SuperwallEvent({
+          type: eventType,
           product: StoreProduct.fromJson(json.product),
           paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
         });
-      case PlacementType.transactionFail:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.transactionFail:
+        return new SuperwallEvent({
+          type: eventType,
           error: json.error,
           paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
         });
-      case PlacementType.transactionComplete:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.transactionComplete:
+        return new SuperwallEvent({
+          type: eventType,
           transaction: json.transaction
             ? StoreTransaction.fromJson(json.transaction)
             : undefined,
           product: StoreProduct.fromJson(json.product),
           paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
         });
-      case PlacementType.transactionRestore:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.transactionRestore:
+        return new SuperwallEvent({
+          type: eventType,
           restoreType: RestoreType.fromJson(json.restoreType),
           paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
         });
-      case PlacementType.userAttributes:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.userAttributes:
+        return new SuperwallEvent({
+          type: eventType,
           userAttributes: json.attributes,
         });
-      case PlacementType.paywallResponseLoadStart:
-      case PlacementType.paywallResponseLoadNotFound:
-      case PlacementType.paywallResponseLoadFail:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.paywallResponseLoadStart:
+      case EventType.paywallResponseLoadNotFound:
+      case EventType.paywallResponseLoadFail:
+        return new SuperwallEvent({
+          type: eventType,
           triggeredEventName: json.triggeredEventName,
         });
-      case PlacementType.paywallResponseLoadComplete:
-      case PlacementType.paywallProductsLoadStart:
-      case PlacementType.paywallProductsLoadFail:
-      case PlacementType.paywallProductsLoadComplete:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.paywallResponseLoadComplete:
+      case EventType.paywallProductsLoadStart:
+      case EventType.paywallProductsLoadFail:
+      case EventType.paywallProductsLoadComplete:
+        return new SuperwallEvent({
+          type: eventType,
           triggeredEventName: json.triggeredEventName,
         });
-      case PlacementType.paywallProductsLoadRetry:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.paywallProductsLoadRetry:
+        return new SuperwallEvent({
+          type: eventType,
           paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
           triggeredEventName: json.triggeredEventName,
           attempt: json.attempt,
         });
-      case PlacementType.surveyResponse:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.surveyResponse:
+        return new SuperwallEvent({
+          type: eventType,
           survey: Survey.fromJson(json.survey),
           selectedOption: SurveyOption.fromJson(json.selectedOption),
           customResponse: json.customResponse,
           paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
         });
-      case PlacementType.paywallPresentationRequest:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.paywallPresentationRequest:
+        return new SuperwallEvent({
+          type: eventType,
           status: PaywallPresentationRequestStatus.fromJson(json.status),
           reason: json.reason
             ? PaywallPresentationRequestStatusReason.fromJson(json.reason)
             : undefined,
         });
-      case PlacementType.customPlacement:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.customPlacement:
+        return new SuperwallEvent({
+          type: eventType,
           name: json.name,
           params: json.params,
           paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
         });
-      case PlacementType.adServicesTokenRequestFail:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.adServicesTokenRequestFail:
+        return new SuperwallEvent({
+          type: eventType,
           error: json.error,
         });
-      case PlacementType.adServicesTokenRequestComplete:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.adServicesTokenRequestComplete:
+        return new SuperwallEvent({
+          type: eventType,
           token: json.token,
         });
-      case PlacementType.transactionTimeout:
-        return new SuperwallPlacement({
-          type: placementType,
+      case EventType.transactionTimeout:
+        return new SuperwallEvent({
+          type: eventType,
           paywallInfo: PaywallInfo.fromJson(json.paywallInfo),
         });
       // Further cases would follow a similar pattern, handling additional properties as needed
       // For complex nested objects like 'result', 'paywallInfo', etc., you would use the corresponding fromJson methods
       default:
-        throw new Error('Invalid placement type');
+        throw new Error('Invalid event type');
     }
   }
 }
+
+export type SuperwallPlacementInfo = SuperwallEventInfo;
+export type SuperwallPlacement = SuperwallEvent;

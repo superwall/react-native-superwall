@@ -1,15 +1,13 @@
 import { PaywallInfo } from './PaywallInfo';
 import { SubscriptionStatus } from './SubscriptionStatus';
-import { SuperwallPlacementInfo } from './SuperwallPlacementInfo';
+import { SuperwallEventInfo } from './SuperwallEventInfo';
 
 export abstract class SuperwallDelegate {
   abstract subscriptionStatusDidChange(
     from: SubscriptionStatus,
     to: SubscriptionStatus
   ): void;
-  abstract handleSuperwallPlacement(
-    placementInfo: SuperwallPlacementInfo
-  ): void;
+  abstract handleSuperwallEvent(eventInfo: SuperwallEventInfo): void;
   abstract handleCustomPaywallAction(name: string): void;
   abstract willDismissPaywall(paywallInfo: PaywallInfo): void;
   abstract willPresentPaywall(paywallInfo: PaywallInfo): void;

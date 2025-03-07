@@ -2,11 +2,19 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 2.0.6
+
+### Enhancements
+
+- Upgrades Android SDK to 2.0.3 [View Android SDK release notes](https://github.com/superwall/Superwall-Android/releases/tag/2.0.3).
+- Upgrades Android SDK to 4.0.3 [View iOS SDK release notes](https://github.com/superwall/Superwall-iOS/releases/tag/4.0.3).
+- Updates `SuperwallPlacement` naming to `SuperwallEvent`
+
 ## 2.0.5
 
 ### Enhancements
 
-- Upgrades Android SDK to 2.0.2 [View iOS SDK release notes](https://github.com/superwall/Superwall-Android/releases/tag/2.0.2).
+- Upgrades Android SDK to 2.0.2 [View Android SDK release notes](https://github.com/superwall/Superwall-Android/releases/tag/2.0.2).
 
 ## 2.0.4
 
