@@ -53,7 +53,7 @@ class MainApplication : Application(), ReactApplication {
       load()
     }
     if (BuildConfig.DEBUG) {
-//      ReactNativeFlipper.initializeFlipper(this, reactNativeHost.reactInstanceManager)
+      ReactNativeFlipper.initializeFlipper(this, reactNativeHost.reactInstanceManager)
     }
     ApplicationLifecycleDispatcher.onApplicationCreate(this)
   }
