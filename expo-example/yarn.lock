@@ -2703,13 +2703,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@revenuecat/purchases-typescript-internal@npm:11.1.1":
-  version: 11.1.1
-  resolution: "@revenuecat/purchases-typescript-internal@npm:11.1.1"
-  checksum: bff464c45656c444cd9c54bfeb4d24f45739f81c980b35a7f4f2a70ad473fb5a22b3b7409a07c1c2ffe12ae981c1c4c97a018d868779d598c24e52b29ac206b2
-  languageName: node
-  linkType: hard
-
 "@revenuecat/purchases-typescript-internal@npm:13.16.2":
   version: 13.16.2
   resolution: "@revenuecat/purchases-typescript-internal@npm:13.16.2"
@@ -2775,16 +2768,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@superwall/react-native-superwall@npm:^1.4.7":
-  version: 1.4.7
-  resolution: "@superwall/react-native-superwall@npm:1.4.7"
+"@superwall/react-native-superwall@npm:^2.0.6":
+  version: 2.0.6
+  resolution: "@superwall/react-native-superwall@npm:2.0.6"
   dependencies:
     events: ^3.3.0
-    react-native-purchases: ^7.21.1
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 8300457ae51466808d1a8d16eb315650d0e79f713d76f370f46c1b63647844054b8b7d523e9d74df6e8bb8415126e32402ed8a186f1215dceacb2f3969d7b3e4
+  checksum: 7e16480e7d436226326d5024d0420169cb56e7a76d46576b1f79cced2fbcd475c5dc7d083be61924c2c28f188b6f1a4ca664ceb41648fa412404ae664242d766
   languageName: node
   linkType: hard
 
@@ -7887,18 +7879,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-purchases@npm:^7.21.1":
-  version: 7.28.1
-  resolution: "react-native-purchases@npm:7.28.1"
-  dependencies:
-    "@revenuecat/purchases-typescript-internal": 11.1.1
-  peerDependencies:
-    react: ">= 16.6.3"
-    react-native: "*"
-  checksum: 7e321254f74ab03f6a888304d7be78862b73a9e4d05a9d73237b8f3cfa2fcebf4b5577e6f3225264effa7cd038855d64827f44effee983a5117645d63b6abb52
-  languageName: node
-  linkType: hard
-
 "react-native-purchases@npm:^8.5.2":
   version: 8.5.2
   resolution: "react-native-purchases@npm:8.5.2"
@@ -8914,7 +8894,7 @@ __metadata:
   resolution: "superapp@workspace:."
   dependencies:
     "@babel/core": ^7.20.0
-    "@superwall/react-native-superwall": ^1.4.7
+    "@superwall/react-native-superwall": ^2.0.6
     expo: ~50.0.6
     expo-build-properties: ~0.11.1
     expo-dev-client: ~3.3.11
