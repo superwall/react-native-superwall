@@ -279,7 +279,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
     promise: Promise
   ) {
     val url = Uri.parse(url)
-    promise.resolve(Superwall.instance.handleDeepLink(url))
+    promise.resolve(Superwall.instance.handleDeepLink(url).getOrNull()?:false)
   }
 
   @ReactMethod

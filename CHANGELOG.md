@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 2.0.7
+
+## Fixes
+
+- Fixes issue when hanling deep links
+
 ## 2.0.6
 
 ### Enhancements
