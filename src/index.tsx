@@ -553,6 +553,14 @@ export default class Superwall {
     await SuperwallReactNative.setSubscriptionStatus(status);
   }
 
+  async getSubscriptionStatus(): Promise<SubscriptionStatus> {
+    await this.awaitConfig();
+    const subscriptionStatusData =
+      await SuperwallReactNative.getSubscriptionStatus();
+    return SubscriptionStatus.fromJson(
+      subscriptionStatusData.subscriptionStatus
+    );
+  }
   /**
    * Sets the user interface style, which overrides the system setting.
    *
