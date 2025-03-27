@@ -157,6 +157,17 @@ class SuperwallReactNative: RCTEventEmitter {
     resolve(entitlements)
   }
 
+  @objc(getSubscriptionStatus:withRejecter:)
+  func getSubscriptionStatus(
+    resolve: @escaping RCTPromiseResolveBlock,
+    reject: @escaping RCTPromiseRejectBlock
+  ) {
+    let subscriptionStatus = Superwall.shared.subscriptionStatus.toString()
+    resolve([
+      "subscriptionStatus": subscriptionStatus.toJson(),
+    ])
+  }
+
   @objc(setSubscriptionStatus:)
   func setSubscriptionStatus(status: NSDictionary) {
     guard let statusDict = status as? [String: Any] else {

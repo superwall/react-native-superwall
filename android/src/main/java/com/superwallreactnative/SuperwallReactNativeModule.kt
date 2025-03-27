@@ -203,7 +203,11 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
 
   @ReactMethod
   fun getSubscriptionStatus(promise: Promise) {
-    promise.resolve(Superwall.instance.subscriptionStatus.value.toString())
+    val subscriptionStatus = Superwall.instance.subscriptionStatus.value.toJson()
+    val result = Arguments.createMap().apply {
+      putMap("subscriptionStatus", subscriptionStatus)
+    }
+    promise.resolve(result)
   }
 
   @ReactMethod
@@ -279,7 +283,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
     promise: Promise
   ) {
     val url = Uri.parse(url)
-    promise.resolve(Superwall.instance.handleDeepLink(url))
+    promise.resolve(Superwall.instance.handleDeepLink(url).getOrNull()?:false)
   }
 
   @ReactMethod
