@@ -35,6 +35,10 @@ RCT_EXTERN_METHOD(getEntitlements
 
 RCT_EXTERN_METHOD(setSubscriptionStatus : (NSDictionary)status)
 
+RCT_EXTERN_METHOD(getSubscriptionStatus
+                  : (RCTPromiseResolveBlock)resolve withRejecter
+                  : (RCTPromiseRejectBlock)reject)
+
 RCT_EXTERN_METHOD(setInterfaceStyle : (NSString *)style)
 
 RCT_EXTERN_METHOD(getUserAttributes

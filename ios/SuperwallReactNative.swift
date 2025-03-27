@@ -164,7 +164,7 @@ class SuperwallReactNative: RCTEventEmitter {
   ) {
     let subscriptionStatus = Superwall.shared.subscriptionStatus
     resolve([
-      "subscriptionStatus": subscriptionStatus.toJson(),
+      "subscriptionStatus": subscriptionStatus.toJson()
     ])
   }
 
