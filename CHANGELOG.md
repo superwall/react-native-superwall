@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 2.0.9
+
+### Fixes
+
+- Fixes issue with `getSubscriptionStatus` on iOS.
+
 ## 2.0.8
 
 ### Enhancements
