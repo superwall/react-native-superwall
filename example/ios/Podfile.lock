@@ -1161,7 +1161,7 @@ PODS:
     - React-Core
   - SocketRocket (0.6.1)
   - Superscript (0.1.18)
-  - superwall-react-native (2.0.8):
+  - superwall-react-native (2.0.9):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
@@ -1459,7 +1459,7 @@ SPEC CHECKSUMS:
   RNVectorIcons: 36b9fb776f0d0722582af7c5cbde94a4157c6914
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Superscript: 88a0e5e467fc986289f99e20e383232513c41ea9
-  superwall-react-native: 441f0e57c44fd4b24b5f6ef3451e553f499439c1
+  superwall-react-native: d434ec2e101a2e4d4f60f5e49a9dde0c6cc80604
   SuperwallKit: ebe52e658a01481f2ed39c70f997019ae3711cd5
   Yoga: 1b901a6d6eeba4e8a2e8f308f708691cdb5db312
 
