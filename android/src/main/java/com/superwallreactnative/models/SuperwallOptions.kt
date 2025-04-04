@@ -32,9 +32,11 @@ class SuperwallOptions {
       if (scopesArray != null) {
         for (i in 0 until scopesArray.size()) {
           val scopeStr = scopesArray.getString(i)
-          try {
-            scopes.add(enumValueOf<LogScope>(scopeStr))
-          } catch (e: IllegalArgumentException) {}
+          if (scopeStr != null) {
+            try {
+              scopes.add(enumValueOf<LogScope>(scopeStr))
+            } catch (e: IllegalArgumentException) {}
+          }
         }
       }
 

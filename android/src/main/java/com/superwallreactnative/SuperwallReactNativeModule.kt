@@ -159,7 +159,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
 
     Superwall.instance.register(
       placement = event,
-      params = params?.toHashMap(),
+      params = params?.toHashMap() as? Map<String, Any>,
       handler = handler,
       feature = {
         feature?.resolve(null)
@@ -338,13 +338,15 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
     promise: Promise
   ) {
     CoroutineScope(Dispatchers.IO).launch {
-      Superwall.instance.getPresentationResult(event, params?.toHashMap()).fold({
-        launch(Dispatchers.Main) {
-          promise.resolve(it.toJson())
-        }
-      },{
-        promise.reject("Error", it.message)
-      })
+      // TODO: Superwall.instance.getPresentationResult is internal. Find a public API alternative.
+      promise.reject("NotImplemented", "getPresentationResult is currently not available on Android.")
+      // Superwall.instance.getPresentationResult(event, params?.toHashMap()).fold({
+      //   launch(Dispatchers.Main) {
+      //     promise.resolve(it.toJson())
+      //   }
+      // }, {
+      //   promise.reject("Error", it.message)
+      // })
     }
   }
 
