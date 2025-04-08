@@ -2,6 +2,16 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 2.0.10
+
+### Enhancements
+
+- Upgrades iOS SDK to 4.0.6 [View iOS SDK release notes](https://github.com/superwall/Superwall-iOS/releases/tag/4.0.6).
+
+### Fixes
+
+- Fixes `productId` not being available in the `PurchaseResult`.
+
 ## 2.0.9
 
 ### Fixes
@@ -13,7 +23,7 @@ The changelog for `Superwall`. Also see the [releases](https://github.com/superw
 ### Enhancements
 
 - Upgrades Android SDK to 2.0.5 [View Android SDK release notes](https://github.com/superwall/Superwall-Android/releases/tag/2.0.5).
-- Upgrades Android SDK to 4.0.5 [View iOS SDK release notes](https://github.com/superwall/Superwall-iOS/releases/tag/4.0.5).
+- Upgrades iOS SDK to 4.0.5 [View iOS SDK release notes](https://github.com/superwall/Superwall-iOS/releases/tag/4.0.5).
 - Adds back `getSubscriptonStatus`
 
 ## 2.0.7

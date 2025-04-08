@@ -6,7 +6,7 @@ extension PaywallResult {
     case .purchased(let product):
       return [
         "type": "purchased",
-        "product": product.toJson(),
+        "productId": product.productIdentifier,
       ]
     case .declined:
       return [
