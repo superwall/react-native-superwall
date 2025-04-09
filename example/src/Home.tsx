@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Button } from 'react-native';
-import Superwall from '../../src';
+import Superwall, { PaywallPresentationHandler } from '../../src';
 import { useNavigation } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
 
@@ -16,24 +16,35 @@ const Home = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const nonGated = () => {
-    Superwall.shared.register({ placement: 'non_gated' }).then(() => {
-      navigation.navigate('LaunchedFeature', {
-        value: 'Non-gated feature launched',
-      });
+    Superwall.shared.register({
+      placement: 'non_gated',
+      feature: () => {
+        navigation.navigate('LaunchedFeature', {
+          value: 'Non-gated feature launched',
+        });
+      },
     });
   };
 
   const pro = () => {
-    Superwall.shared.register({ placement: 'pro' }).then(() => {
-      navigation.navigate('LaunchedFeature', { value: 'Pro feature launched' });
+    Superwall.shared.register({
+      placement: 'pro',
+      feature: () => {
+        navigation.navigate('LaunchedFeature', {
+          value: 'Pro feature launched',
+        });
+      },
     });
   };
 
   const diamond = () => {
-    Superwall.shared.register({ placement: 'diamond' }).then(() => {
-      navigation.navigate('LaunchedFeature', {
-        value: 'Diamond feature launched',
-      });
+    Superwall.shared.register({
+      placement: 'diamond',
+      feature: () => {
+        navigation.navigate('LaunchedFeature', {
+          value: 'Diamond feature launched',
+        });
+      },
     });
   };
 

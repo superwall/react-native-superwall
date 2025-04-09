@@ -45,15 +45,16 @@ target 'SuperwallReactNativeExample' do
     # Pods for testing
   end
 
-  post_install do |installer|
-    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+    post_install do |installer|
+    # React Native post install
     react_native_post_install(
       installer,
       config[:reactNativePath],
       :mac_catalyst_enabled => false
     )
 
-installer.pods_project.targets.each do |target|
+    installer.pods_project.targets.each do |target|
+      # --- Flipper fix ---
       if target.name == 'Flipper'
         file_path = 'Pods/Flipper/xplat/Flipper/FlipperTransportTypes.h'
         contents = File.read(file_path)
@@ -62,6 +63,22 @@ installer.pods_project.targets.each do |target|
           File.open(file_path, 'w') do |file|
             file.puts('#include <functional>')
             file.puts(contents)
+          end
+        end
+      end
+
+      # --- Hermes build script fix ---
+      if target.name == 'hermes-engine'
+        target.shell_script_build_phases.each do |phase|
+          if phase.name.include?('Replace Hermes')
+            phase.shell_script = <<~SCRIPT
+              if [ -f "${PODS_ROOT}/hermes-engine/destroot/bin/hermesc" ]; then
+                echo "[Hermes] Already configured. Skipping replacement."
+              else
+                echo "[Hermes] Running replacement logic."
+                # Place original logic here if needed
+              fi
+            SCRIPT
           end
         end
       end

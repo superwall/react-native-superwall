@@ -159,7 +159,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
 
     Superwall.instance.register(
       placement = event,
-      params = params?.toHashMap(),
+      params = params?.toHashMap()?.toMap() as? Map<String, Any>,
       handler = handler,
       feature = {
         feature?.resolve(null)
@@ -338,11 +338,11 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
     promise: Promise
   ) {
     CoroutineScope(Dispatchers.IO).launch {
-      Superwall.instance.getPresentationResult(event, params?.toHashMap()).fold({
+      Superwall.instance.getPresentationResult(event, params?.toHashMap()?.toMap() as? Map<String, Any>?).fold({
         launch(Dispatchers.Main) {
           promise.resolve(it.toJson())
         }
-      },{
+      }, {
         promise.reject("Error", it.message)
       })
     }
@@ -350,7 +350,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
 
   @ReactMethod
   fun preloadPaywalls(eventNames: ReadableArray) {
-    val eventNames = eventNames.toArrayList().toSet() as Set<String>
+    val eventNames = eventNames?.toArrayList()?.toSet() as Set<String>
     Superwall.instance.preloadPaywalls(eventNames)
   }
 
