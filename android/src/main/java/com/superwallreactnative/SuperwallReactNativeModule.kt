@@ -159,7 +159,7 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
 
     Superwall.instance.register(
       placement = event,
-      params = params?.toHashMap() as? Map<String, Any>,
+      params = params?.toHashMap()?.toMap() as? Map<String, Any>,
       handler = handler,
       feature = {
         feature?.resolve(null)
@@ -338,21 +338,19 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
     promise: Promise
   ) {
     CoroutineScope(Dispatchers.IO).launch {
-      // TODO: Superwall.instance.getPresentationResult is internal. Find a public API alternative.
-      promise.reject("NotImplemented", "getPresentationResult is currently not available on Android.")
-      // Superwall.instance.getPresentationResult(event, params?.toHashMap()).fold({
-      //   launch(Dispatchers.Main) {
-      //     promise.resolve(it.toJson())
-      //   }
-      // }, {
-      //   promise.reject("Error", it.message)
-      // })
+      Superwall.instance.getPresentationResult(event, params?.toHashMap()?.toMap() as? Map<String, Any>?).fold({
+        launch(Dispatchers.Main) {
+          promise.resolve(it.toJson())
+        }
+      }, {
+        promise.reject("Error", it.message)
+      })
     }
   }
 
   @ReactMethod
   fun preloadPaywalls(eventNames: ReadableArray) {
-    val eventNames = eventNames.toArrayList().toSet() as Set<String>
+    val eventNames = eventNames?.toArrayList()?.toSet() as Set<String>
     Superwall.instance.preloadPaywalls(eventNames)
   }
 
