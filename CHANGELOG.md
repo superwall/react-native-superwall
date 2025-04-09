@@ -11,6 +11,7 @@ The changelog for `Superwall`. Also see the [releases](https://github.com/superw
 ### Fixes
 
 - Fixes `productId` not being available in the `PurchaseResult` on iOS.
+- Fixes issues for Kotlin 2.0 users on Android
 
 ## 2.0.9
 
