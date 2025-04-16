@@ -1827,7 +1827,7 @@ PODS:
     - Yoga
   - SocketRocket (0.7.1)
   - Superscript (0.2.4)
-  - superwall-react-native (2.0.11):
+  - superwall-react-native (2.0.12):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2159,7 +2159,7 @@ SPEC CHECKSUMS:
   RNVectorIcons: 3bf5f38dcb1aaf587c4101e9f3fcad5c8f5a88b2
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Superscript: ede1cf73124c02ba1e120fbe5e15d3c4b12020a0
-  superwall-react-native: 7944eb42ed46f913423cb5e1f64d8be8ce7657c0
+  superwall-react-native: fbda6b4e60a83daa599879ca17caaca0ab9064f0
   SuperwallKit: 251deebb67abfea37c21f8439571658ae63cf3e4
   Yoga: feb4910aba9742cfedc059e2b2902e22ffe9954a
 
