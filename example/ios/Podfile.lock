@@ -8,8 +8,8 @@ PODS:
   - hermes-engine (0.76.9):
     - hermes-engine/Pre-built (= 0.76.9)
   - hermes-engine/Pre-built (0.76.9)
-  - PurchasesHybridCommon (13.21.0):
-    - RevenueCat (= 5.18.0)
+  - PurchasesHybridCommon (13.28.0):
+    - RevenueCat (= 5.21.0)
   - RCT-Folly (2024.10.14.00):
     - boost
     - DoubleConversion
@@ -1626,7 +1626,7 @@ PODS:
     - React-logger
     - React-perflogger
     - React-utils (= 0.76.9)
-  - RevenueCat (5.18.0)
+  - RevenueCat (5.21.0)
   - RNCMaskedView (0.3.2):
     - DoubleConversion
     - glog
@@ -1669,8 +1669,8 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNPurchases (8.7.0):
-    - PurchasesHybridCommon (= 13.21.0)
+  - RNPurchases (8.9.4):
+    - PurchasesHybridCommon (= 13.28.0)
     - React-Core
   - RNReanimated (3.16.7):
     - DoubleConversion
@@ -2092,7 +2092,7 @@ SPEC CHECKSUMS:
   fmt: 01b82d4ca6470831d1cc0852a1af644be019e8f6
   glog: 08b301085f15bcbb6ff8632a8ebaf239aae04e6a
   hermes-engine: 9e868dc7be781364296d6ee2f56d0c1a9ef0bb11
-  PurchasesHybridCommon: 9691d74a051f30858360d78936d59dc14575014e
+  PurchasesHybridCommon: f0d344e7073314988b3d98fbb9da69db85aaff38
   RCT-Folly: ea9d9256ba7f9322ef911169a9f696e5857b9e17
   RCTDeprecation: ebe712bb05077934b16c6bf25228bdec34b64f83
   RCTRequired: ca91e5dd26b64f577b528044c962baf171c6b716
@@ -2150,10 +2150,10 @@ SPEC CHECKSUMS:
   React-utils: ed818f19ab445000d6b5c4efa9d462449326cc9f
   ReactCodegen: f853a20cc9125c5521c8766b4b49375fec20648b
   ReactCommon: 300d8d9c5cb1a6cd79a67cf5d8f91e4d477195f9
-  RevenueCat: e825836f5d6baa870c53d7281be25a5fd91abd91
+  RevenueCat: 57028a8673201fdaacd1354065e8adbcba5739a4
   RNCMaskedView: b3aee2f4fa81807ec035be51c057aa2eed166173
   RNGestureHandler: 036aa1f3fd919a8ff990b5b7cd4da6ea45162ad2
-  RNPurchases: 2c8780f3b7be8af8cd6f3f3740ba4176465d1d0a
+  RNPurchases: 6fdd1000ce7cf8168ed6407d4f9166068906d2f2
   RNReanimated: 2e5069649cbab2c946652d3b97589b2ae0526220
   RNScreens: 362f4c861dd155f898908d5035d97b07a3f1a9d1
   RNVectorIcons: 3bf5f38dcb1aaf587c4101e9f3fcad5c8f5a88b2
@@ -2165,4 +2165,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 4ef42ec436400fc9633ae647093f4155e97ca356
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2
