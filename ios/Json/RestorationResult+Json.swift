@@ -13,7 +13,7 @@ extension RestorationResult {
     case "restored":
       return RestorationResult.restored
     case "failed":
-      guard let message = dictionary["error"] as? String else {
+      guard let message = dictionary["errorMessage"] as? String else {
         return nil
       }
       return RestorationResult.failed(RestorationResultError(message: message))
