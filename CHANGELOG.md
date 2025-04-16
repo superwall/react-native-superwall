@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 2.0.12
+
+### Fixes
+
+- Bug fixes for running the example app on Xcode 16.4
+
 ## 2.0.11
 
 ### Enhancements

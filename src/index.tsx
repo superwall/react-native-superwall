@@ -16,6 +16,7 @@ import { ConfirmedAssignment } from './public/ConfirmedAssigments';
 import type { PresentationResult } from './public/PresentationResult';
 import { fromJson as paywallResultFromJson } from './public/PaywallResult';
 import { EntitlementsInfo } from './public/EntitlementsInfo';
+import type { LogLevel } from './public/LogLevel';
 const { version } = require('../package.json');
 
 const LINKING_ERROR =
@@ -675,5 +676,9 @@ export default class Superwall {
    */
   async dismiss(): Promise<void> {
     await SuperwallReactNative.dismiss();
+  }
+
+  async setLogLevel(level: LogLevel): Promise<void> {
+    await SuperwallReactNative.setLogLevel(level.toString());
   }
 }
