@@ -79,10 +79,6 @@
   "resolutions": {
     "@types/react": "17.0.21"
   },
-  "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
-  },
   "workspaces": [
     "example"
   ],
@@ -164,6 +160,7 @@
     ]
   },
   "dependencies": {
+    "@react-native-community/cli": "^18.0.0",
     "events": "^3.3.0"
   }
 }

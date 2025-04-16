@@ -302,6 +302,14 @@ class SuperwallReactNative: RCTEventEmitter {
     Superwall.shared.preloadAllPaywalls()
   }
 
+  @objc(setLogLevel:)
+  func setLogLevel(level: String) {
+    let logLevel = LogLevel.fromJson(level)
+    if let logLevel = logLevel {
+      Superwall.shared.logLevel = logLevel
+    }
+  }
+
   @objc(observeSubscriptionStatus:withRejecter:)
   func observeSubscriptionStatus(
     resolve: @escaping RCTPromiseResolveBlock,
