@@ -1826,8 +1826,8 @@ PODS:
     - ReactCommon/turbomodule/core
     - Yoga
   - SocketRocket (0.7.1)
-  - Superscript (0.1.18)
-  - superwall-react-native (2.0.10):
+  - Superscript (0.2.4)
+  - superwall-react-native (2.0.11):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1847,10 +1847,10 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - SuperwallKit (= 4.0.6)
+    - SuperwallKit (= 4.2.0)
     - Yoga
-  - SuperwallKit (4.0.6):
-    - Superscript (= 0.1.18)
+  - SuperwallKit (4.2.0):
+    - Superscript (= 0.2.4)
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -2158,9 +2158,9 @@ SPEC CHECKSUMS:
   RNScreens: 362f4c861dd155f898908d5035d97b07a3f1a9d1
   RNVectorIcons: 3bf5f38dcb1aaf587c4101e9f3fcad5c8f5a88b2
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
-  Superscript: 88a0e5e467fc986289f99e20e383232513c41ea9
-  superwall-react-native: 2f2f2e27d24f9e54facd30d3eb7a338a06e801d3
-  SuperwallKit: 18a4588702d5369880563d5a17cb967423f94c89
+  Superscript: ede1cf73124c02ba1e120fbe5e15d3c4b12020a0
+  superwall-react-native: 7944eb42ed46f913423cb5e1f64d8be8ce7657c0
+  SuperwallKit: 251deebb67abfea37c21f8439571658ae63cf3e4
   Yoga: feb4910aba9742cfedc059e2b2902e22ffe9954a
 
 PODFILE CHECKSUM: 4ef42ec436400fc9633ae647093f4155e97ca356
