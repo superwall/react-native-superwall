@@ -2,6 +2,16 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 2.0.11
+
+### Enhancements
+
+- Upgrades iOS SDK to 4.2.0 [View iOS SDK release notes](https://github.com/superwall/Superwall-iOS/releases/tag/4.2.0).
+
+### Fixes
+
+- Fixes an issue preventing `RestorationResult.failed` from deserializing, which caused failed Restore Purchases attempts to get stuck with the loading indicator shown.
+
 ## 2.0.10
 
 ### Enhancements
