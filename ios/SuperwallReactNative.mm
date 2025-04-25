@@ -50,6 +50,9 @@ RCT_EXTERN_METHOD(didRestore : (NSDictionary *)result)
 RCT_EXTERN_METHOD(dismiss : (RCTPromiseResolveBlock)
                       resolve withRejecter : (RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(getAssignments : (RCTPromiseResolveBlock)
+                      resolve withRejecter : (RCTPromiseRejectBlock)reject)
+
 RCT_EXTERN_METHOD(confirmAllAssignments : (RCTPromiseResolveBlock)
                       resolve withRejecter : (RCTPromiseRejectBlock)reject)
 

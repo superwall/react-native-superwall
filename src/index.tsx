@@ -12,7 +12,7 @@ import { NativeEventEmitter } from 'react-native';
 import { IdentityOptions } from './public/IdentityOptions';
 import { EventEmitter } from 'events';
 import { ConfigurationStatus } from './public/ConfigurationStatus';
-import { ConfirmedAssignment } from './public/ConfirmedAssigments';
+import { Assignment } from './public/Assigments';
 import type { PresentationResult } from './public/PresentationResult';
 import { fromJson as paywallResultFromJson } from './public/PaywallResult';
 import { EntitlementsInfo } from './public/EntitlementsInfo';
@@ -465,18 +465,34 @@ export default class Superwall {
   /**
    * Confirms all experiment assignments and returns them in an array.
    *
-   * This method tracks the {@link SuperwallEvent.confirmAllAssignments} event in the delegate.
+   * Note that the assignments may differ when a placement is registered due to changes
+   * in user, placement, or device parameters used in audience filters.
+   *
+   * @returns {Promise<Assignment[]>} A promise that resolves to an array of {@link Assignment} objects.
+   */
+  async confirmAllAssignments(): Promise<Assignment[]> {
+    await this.awaitConfig();
+    const assignments = await SuperwallReactNative.confirmAllAssignments();
+    return assignments.map((assignment: any) =>
+      Assignment.fromJson(assignment)
+    );
+  }
+
+  /**
+   * Gets all the experiment assignments and returns them in an array.
+   *
+   * This method tracks the {@link SuperwallEvent.getAssignments} event in the delegate.
    *
    * Note that the assignments may differ when a placement is registered due to changes
    * in user, placement, or device parameters used in audience filters.
    *
-   * @returns {Promise<ConfirmedAssignment[]>} A promise that resolves to an array of {@link ConfirmedAssignment} objects.
+   * @returns {Promise<Assignment[]>} A promise that resolves to an array of {@link Assignment} objects.
    */
-  async confirmAllAssignments(): Promise<ConfirmedAssignment[]> {
+  async getAssignments(): Promise<Assignment[]> {
     await this.awaitConfig();
-    const assignments = await SuperwallReactNative.confirmAllAssignments();
+    const assignments = await SuperwallReactNative.getAssignments();
     return assignments.map((assignment: any) =>
-      ConfirmedAssignment.fromJson(assignment)
+      Assignment.fromJson(assignment)
     );
   }
 

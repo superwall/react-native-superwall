@@ -333,6 +333,23 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
   }
 
   @ReactMethod
+  fun getAssignments(promise: Promise) {
+    CoroutineScope(Dispatchers.IO).launch {
+      Superwall.instance.getAssignments().fold({
+        launch(Dispatchers.Main) {
+          val array = Arguments.createArray()
+          it.forEach { assignment ->
+            array.pushMap(assignment.toJson())
+          }
+          promise.resolve(array)
+        }
+      },{
+        promise.reject("Error", it.message)
+      })
+    }
+  }
+
+  @ReactMethod
   fun getPresentationResult(
     event: String,
     params: ReadableMap?,
