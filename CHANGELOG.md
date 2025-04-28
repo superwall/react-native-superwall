@@ -7,7 +7,7 @@ The changelog for `Superwall`. Also see the [releases](https://github.com/superw
 ### Enhancements
 
 - Adds `getAssignments`.
-- Upgrades iOS SDK to 4.2.2 [View iOS SDK release notes](https://github.com/superwall/Superwall-iOS/releases/tag/4.2.2).
+- Upgrades iOS SDK to 4.3.0 [View iOS SDK release notes](https://github.com/superwall/Superwall-iOS/releases/tag/4.3.0).
 
 ## 2.0.12
 
