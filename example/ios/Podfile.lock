@@ -1847,9 +1847,9 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - SuperwallKit (= 4.2.2)
+    - SuperwallKit (= 4.3.0)
     - Yoga
-  - SuperwallKit (4.2.2):
+  - SuperwallKit (4.3.0):
     - Superscript (= 0.2.4)
   - Yoga (0.0.0)
 
@@ -2159,8 +2159,8 @@ SPEC CHECKSUMS:
   RNVectorIcons: 3bf5f38dcb1aaf587c4101e9f3fcad5c8f5a88b2
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Superscript: ede1cf73124c02ba1e120fbe5e15d3c4b12020a0
-  superwall-react-native: e9b1976f6e91af1caad13133309e037a326eb8f5
-  SuperwallKit: 077f628d7a42af932fb6a1570fc7b6e396b2f1ca
+  superwall-react-native: 4c92dbc94012b68fecf5cdf07eb558b421299c67
+  SuperwallKit: 953b1a572c6fec762727d610926c9b518e553176
   Yoga: feb4910aba9742cfedc059e2b2902e22ffe9954a
 
 PODFILE CHECKSUM: 4ef42ec436400fc9633ae647093f4155e97ca356
