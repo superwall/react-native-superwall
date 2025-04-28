@@ -2,6 +2,13 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 2.0.13
+
+### Enhancements
+
+- Adds `getAssignments`.
+- Upgrades iOS SDK to 4.3.0 [View iOS SDK release notes](https://github.com/superwall/Superwall-iOS/releases/tag/4.3.0).
+
 ## 2.0.12
 
 ### Enhancements

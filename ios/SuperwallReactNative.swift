@@ -148,6 +148,15 @@ class SuperwallReactNative: RCTEventEmitter {
     resolve(configurationStatus)
   }
 
+  @objc(getAssignments:withRejecter:)
+  func getAssignments(
+    resolve: @escaping RCTPromiseResolveBlock,
+    reject: @escaping RCTPromiseRejectBlock
+  ) {
+    let assignments = Superwall.shared.getAssignments()
+    resolve(assignments.map { $0.toJson() })
+  }
+
   @objc(getEntitlements:withRejecter:)
   func getEntitlements(
     resolve: @escaping RCTPromiseResolveBlock,
