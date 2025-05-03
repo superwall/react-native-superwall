@@ -1,4 +1,5 @@
 import { PaywallInfo } from './PaywallInfo';
+import type { RedemptionResult } from './RedemptionResults';
 import { SubscriptionStatus } from './SubscriptionStatus';
 import { SuperwallEventInfo } from './SuperwallEventInfo';
 
@@ -7,6 +8,8 @@ export abstract class SuperwallDelegate {
     from: SubscriptionStatus,
     to: SubscriptionStatus
   ): void;
+  abstract willRedeemLink(): void;
+  abstract didRedeemLink(result: RedemptionResult): void;
   abstract handleSuperwallEvent(eventInfo: SuperwallEventInfo): void;
   abstract handleCustomPaywallAction(name: string): void;
   abstract willDismissPaywall(paywallInfo: PaywallInfo): void;
