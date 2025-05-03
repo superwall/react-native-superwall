@@ -5,6 +5,7 @@ import {
   SuperwallEventInfo,
   EventType,
 } from '../../src';
+import type { RedemptionResult } from '../../src/public/RedemptionResults';
 
 export class MySuperwallDelegate extends SuperwallDelegate {
   subscriptionStatusDidChange(
@@ -76,5 +77,13 @@ export class MySuperwallDelegate extends SuperwallDelegate {
     error?: string
   ): void {
     console.log(`[${level}] ${scope}: ${message}`, info, error);
+  }
+
+  willRedeemLink(): void {
+    console.log('Will redeem link');
+  }
+
+  didRedeemLink(result: RedemptionResult): void {
+    console.log('Did redeem link:', result);
   }
 }
