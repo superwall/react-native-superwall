@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 2.1.0 (Beta 2)
+
+### Fixes
+
+- Fixes an issue preventing `SuperwallDelegate.didRedeemLink` from getting called when a Web Checkout link was redeemed.
+
 ## 2.1.0 (Beta 1)
 
 ### Enhancements
