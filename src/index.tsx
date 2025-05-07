@@ -256,7 +256,7 @@ export default class Superwall {
     });
 
     this.eventEmitter.addListener('didRedeemLink', async (data) => {
-      const result = RedemptionResults.fromJson(data.result);
+      const result = RedemptionResults.fromJson(data);
       Superwall.delegate?.didRedeemLink(result);
     });
   }

@@ -84,7 +84,7 @@ final class SuperwallDelegateBridge: SuperwallDelegate {
     sendEvent(withName: "willRedeemLink", body: [:])
   }
 
-  func didRedeemLink(withResult result: RedemptionResult) {
+  func didRedeemLink(result: RedemptionResult) {
     sendEvent(withName: "didRedeemLink", body: result.toJson())
   }
 }
