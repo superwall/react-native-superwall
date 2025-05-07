@@ -193,6 +193,25 @@ extension SuperwallEvent {
       return ["event": "shimmerViewStart"]
     case .shimmerViewComplete:
       return ["event": "shimmerViewComplete"]
+    case .redemptionStart:
+      return ["event": "redemptionStart"]
+    case .redemptionComplete:
+      return ["event": "redemptionComplete"]
+    case .redemptionFail:
+      return ["event": "redemptionFail"]
+    case .enrichmentStart:
+      return ["event": "enrichmentStart"]
+    case .enrichmentComplete(let userEnrichment, let deviceEnrichment):
+      var json: [String: Any] = ["event": "enrichmentComplete"]
+      if let userEnrichment {
+        json["userEnrichment"] = userEnrichment
+      }
+      if let deviceEnrichment {
+        json["deviceEnrichment"] = deviceEnrichment
+      }
+      return json
+    case .enrichmentFail:
+      return ["event": "enrichmentFail"]
     }
   }
 }

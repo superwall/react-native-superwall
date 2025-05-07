@@ -38,6 +38,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.first
 import com.superwall.sdk.config.models.ConfigurationStatus
+import com.superwall.sdk.logger.LogLevel
 
 class SuperwallReactNativeModule(private val reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
@@ -372,6 +373,13 @@ class SuperwallReactNativeModule(private val reactContext: ReactApplicationConte
       }
     }
     promise.resolve(null)
+  }
+
+  @ReactMethod
+  fun setLogLevel(level: String) {
+    val logLevel = LogLevel.values().find { it.toString().equals(level, ignoreCase = true) }
+      ?: LogLevel.warn
+    Superwall.instance.logLevel = logLevel
   }
 
   private fun sendEvent(reactContext: ReactApplicationContext, eventName: String, params: ReadableMap) {

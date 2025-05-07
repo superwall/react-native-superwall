@@ -14,6 +14,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		88C243822B891769006EF7BD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88C243812B891769006EF7BD /* Images.xcassets */; };
 		92F4C0FF6FC6B60B51782EF9 /* libPods-SuperwallReactNativeExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDEF7E54561E658BF82CF4FE /* libPods-SuperwallReactNativeExample.a */; };
+		FA7CE92AC78ECF5FF632454B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2ED84B89354A9B9C3C358188 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SuperwallReactNativeExample/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SuperwallReactNativeExample/main.m; sourceTree = "<group>"; };
 		1FC1085EC1EE6D45CC2ACA3F /* Pods-SuperwallReactNativeExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperwallReactNativeExample.release.xcconfig"; path = "Target Support Files/Pods-SuperwallReactNativeExample/Pods-SuperwallReactNativeExample.release.xcconfig"; sourceTree = "<group>"; };
+		2ED84B89354A9B9C3C358188 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = SuperwallReactNativeExample/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		323EE5B53966D2B2CB668D05 /* Pods-SuperwallReactNativeExample-SuperwallReactNativeExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperwallReactNativeExample-SuperwallReactNativeExampleTests.release.xcconfig"; path = "Target Support Files/Pods-SuperwallReactNativeExample-SuperwallReactNativeExampleTests/Pods-SuperwallReactNativeExample-SuperwallReactNativeExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		38DDFDC93C01975DB4DBCDCC /* Pods-SuperwallReactNativeExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SuperwallReactNativeExample.debug.xcconfig"; path = "Target Support Files/Pods-SuperwallReactNativeExample/Pods-SuperwallReactNativeExample.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SuperwallReactNativeExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				88C243812B891769006EF7BD /* Images.xcassets */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				2ED84B89354A9B9C3C358188 /* PrivacyInfo.xcprivacy */,
 			);
 			name = SuperwallReactNativeExample;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				88C243822B891769006EF7BD /* Images.xcassets in Resources */,
+				FA7CE92AC78ECF5FF632454B /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,6 +594,7 @@
 				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				USE_HERMES = true;
 			};
 			name = Debug;
