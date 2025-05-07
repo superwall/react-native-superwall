@@ -79,4 +79,12 @@ final class SuperwallDelegateBridge: SuperwallDelegate {
   private func sendEvent(withName name: String, body: [String: Any]) {
     SuperwallReactNative.emitter.sendEvent(withName: name, body: body)
   }
+
+  func willRedeemLink() {
+    sendEvent(withName: "willRedeemLink", body: [:])
+  }
+
+  func didRedeemLink(withResult result: RedemptionResult) {
+    sendEvent(withName: "didRedeemLink", body: result.toJson())
+  }
 }

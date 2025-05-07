@@ -17,6 +17,8 @@ class SuperwallReactNative: RCTEventEmitter {
       "purchaseFromAppStore",
       "purchaseFromGooglePlay",
       "paywallWillOpenURL",
+      "willRedeemLink",
+      "didRedeemLink",
       "restore",
       "paywallPresentationHandler",
       "subscriptionStatusDidChange",
