@@ -9,7 +9,8 @@ extension SuperwallOptions {
       let networkEnvironment = NetworkEnvironment.fromJson(networkEnvironmentValue),
       let isExternalDataCollectionEnabled = dictionary["isExternalDataCollectionEnabled"] as? Bool,
       let loggingValue = dictionary["logging"] as? [String: Any],
-      let logging = Logging.fromJson(loggingValue)
+      let logging = Logging.fromJson(loggingValue),
+      let storeKitVersion = dictionary["storeKitVersion"] as? String
     else {
       return nil
     }
@@ -24,6 +25,9 @@ extension SuperwallOptions {
     superwallOptions.localeIdentifier = localeIdentifier
     superwallOptions.isGameControllerEnabled = isGameControllerEnabled
     superwallOptions.logging = logging
+    if let storeKitVersion = storeKitVersion {
+      superwallOptions.storeKitVersion = storeKitVersion == "STOREKIT1" ? .storeKit1 : .storeKit2
+    }
 
     return superwallOptions
   }
