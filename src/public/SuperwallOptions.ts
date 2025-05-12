@@ -29,6 +29,7 @@ export class SuperwallOptions {
   logging: LoggingOptions = new LoggingOptions();
   collectAdServicesAttribution: boolean = false;
   passIdentifiersToPlayStore: boolean = false;
+  storeKitVersion?: "STOREKIT1" | "STOREKIT2";
 
   constructor(init?: Partial<SuperwallOptions>) {
     if (init) {
@@ -52,6 +53,7 @@ export class SuperwallOptions {
       logging: this.logging.toJson(),
       collectAdServicesAttribution: this.collectAdServicesAttribution,
       passIdentifiersToPlayStore: this.passIdentifiersToPlayStore,
+      storeKitVersion: this.storeKitVersion,
     };
   }
 }

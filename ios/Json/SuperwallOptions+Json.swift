@@ -16,6 +16,7 @@ extension SuperwallOptions {
 
     let localeIdentifier = dictionary["localeIdentifier"] as? String
     let isGameControllerEnabled = dictionary["isGameControllerEnabled"] as? Bool ?? false
+    let storeKitVersion = dictionary["storeKitVersion"] as? String
 
     let superwallOptions = SuperwallOptions()
     superwallOptions.paywalls = paywalls
@@ -24,6 +25,9 @@ extension SuperwallOptions {
     superwallOptions.localeIdentifier = localeIdentifier
     superwallOptions.isGameControllerEnabled = isGameControllerEnabled
     superwallOptions.logging = logging
+    if let storeKitVersion = storeKitVersion {
+      superwallOptions.storeKitVersion = storeKitVersion == "STOREKIT1" ? .storeKit1 : .storeKit2
+    }
 
     return superwallOptions
   }

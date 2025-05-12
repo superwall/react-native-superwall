@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 2.1.0 (Beta 3)
+
+### Fixes
+
+- Adds support for `storeKitVersion` in `SuperwallOptions`.
+
 ## 2.1.0 (Beta 2)
 
 ### Fixes
