@@ -9,14 +9,14 @@ extension SuperwallOptions {
       let networkEnvironment = NetworkEnvironment.fromJson(networkEnvironmentValue),
       let isExternalDataCollectionEnabled = dictionary["isExternalDataCollectionEnabled"] as? Bool,
       let loggingValue = dictionary["logging"] as? [String: Any],
-      let logging = Logging.fromJson(loggingValue),
-      let storeKitVersion = dictionary["storeKitVersion"] as? String
+      let logging = Logging.fromJson(loggingValue)
     else {
       return nil
     }
 
     let localeIdentifier = dictionary["localeIdentifier"] as? String
     let isGameControllerEnabled = dictionary["isGameControllerEnabled"] as? Bool ?? false
+    let storeKitVersion = dictionary["storeKitVersion"] as? String
 
     let superwallOptions = SuperwallOptions()
     superwallOptions.paywalls = paywalls
