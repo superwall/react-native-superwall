@@ -10,7 +10,6 @@ import com.superwall.sdk.paywall.presentation.PaywallInfo
 import com.superwallreactnative.models.SuperwallEvent
 import com.superwallreactnative.models.convertMapToReadableMap
 import com.superwallreactnative.models.toJson
-import android.util.Log
 import com.superwall.sdk.models.internal.RedemptionResult
 import java.net.URI
 import android.net.Uri
@@ -73,7 +72,6 @@ class SuperwallDelegateBridge(
   }
 
   override fun didDismissPaywall(withInfo: PaywallInfo) {
-    Log.e("Superwall", "didDismissPaywall")
     val data = Arguments.createMap().apply {
       putMap("info", withInfo.toJson())
     }
@@ -84,7 +82,6 @@ class SuperwallDelegateBridge(
   }
 
   override fun didPresentPaywall(withInfo: PaywallInfo) {
-    Log.e("Superwall", "didPresentPaywall")
     val data = Arguments.createMap().apply {
       putMap("info", withInfo.toJson())
     }
@@ -135,29 +132,23 @@ class SuperwallDelegateBridge(
   }
 
   override fun willRedeemLink(){
-    Log.e("Superwall", "willRedeemLink")
     try {
       reactContext
         .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
         .emit("willRedeemLink", null)
     } catch (e: Exception) {
       e.printStackTrace()
-      Log.e("Superwall", "Error emitting willRedeemLink", e)
     }
-    Log.e("Superwall", "willRedeemLink Done")
   }
 
   override fun didRedeemLink(result: RedemptionResult){
-    Log.e("Superwall", "didRedeemLink")
     val resultJson = result.toJson()
-    Log.e("Superwall", "resultJson: $resultJson")
     try {
       reactContext
         .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
         .emit("didRedeemLink", resultJson)
     } catch (e: Exception) {
       e.printStackTrace()
-      Log.e("Superwall", "Error emitting didRedeemLink", e)
     }
   }
 }
