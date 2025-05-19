@@ -10,6 +10,7 @@ import com.superwall.sdk.paywall.presentation.PaywallInfo
 import com.superwallreactnative.models.SuperwallEvent
 import com.superwallreactnative.models.convertMapToReadableMap
 import com.superwallreactnative.models.toJson
+import com.superwall.sdk.models.internal.RedemptionResult
 import java.net.URI
 import android.net.Uri
 
@@ -128,5 +129,26 @@ class SuperwallDelegateBridge(
     reactContext
       .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
       .emit("handleLog", data)
+  }
+
+  override fun willRedeemLink(){
+    try {
+      reactContext
+        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+        .emit("willRedeemLink", null)
+    } catch (e: Exception) {
+      e.printStackTrace()
+    }
+  }
+
+  override fun didRedeemLink(result: RedemptionResult){
+    val resultJson = result.toJson()
+    try {
+      reactContext
+        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+        .emit("didRedeemLink", resultJson)
+    } catch (e: Exception) {
+      e.printStackTrace()
+    }
   }
 }
