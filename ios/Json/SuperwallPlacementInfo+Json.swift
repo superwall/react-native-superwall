@@ -212,6 +212,8 @@ extension SuperwallEvent {
       return json
     case .enrichmentFail:
       return ["event": "enrichmentFail"]
+    case .networkDecodingFail:
+      return ["event": "networkDecodingFail"]
     }
   }
 }
