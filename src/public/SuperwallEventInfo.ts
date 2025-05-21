@@ -89,7 +89,8 @@ export enum EventType {
   redemptionFail = "redemptionFail",
   enrichmentStart = "enrichmentStart",
   enrichmentComplete = "enrichmentComplete",
-  enrichmentFail = "enrichmentFail"
+  enrichmentFail = "enrichmentFail",
+  networkDecodingFail = "networkDecodingFail"
 }
 
 export class SuperwallEvent {
@@ -167,6 +168,8 @@ export class SuperwallEvent {
       case EventType.shimmerViewStart:
       case EventType.shimmerViewComplete:
       case EventType.subscriptionStatusDidChange:
+      case EventType.enrichmentFail:
+      case EventType.networkDecodingFail:
         return new SuperwallEvent({ type: eventType });
       case EventType.restoreFail:
         return new SuperwallEvent({
@@ -314,8 +317,6 @@ export class SuperwallEvent {
           userAttributes: json.userEnrichment,
           deviceAttributes: json.deviceEnrichment,
         });
-      case EventType.enrichmentFail:
-        return new SuperwallEvent({ type: eventType });
       // Further cases would follow a similar pattern, handling additional properties as needed
       // For complex nested objects like 'result', 'paywallInfo', etc., you would use the corresponding fromJson methods
       default:
