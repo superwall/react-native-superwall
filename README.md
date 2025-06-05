@@ -7,9 +7,6 @@
   <br />
 </p>
 
-[Superwall](https://superwall.com/) lets you remotely configure every aspect of your paywall — helping you find winners quickly.
-
-
 > **⚠️ DEPRECATED**
 > 
 > This sdk is deprecated and no longer maintained. Please use our new and improve expo sdk instead:
