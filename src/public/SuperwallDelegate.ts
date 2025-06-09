@@ -1,28 +1,30 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// @ts-nocheck TS6133: Unused variable
 import { PaywallInfo } from './PaywallInfo';
 import type { RedemptionResult } from './RedemptionResults';
 import { SubscriptionStatus } from './SubscriptionStatus';
 import { SuperwallEventInfo } from './SuperwallEventInfo';
 
-export abstract class SuperwallDelegate {
-  abstract subscriptionStatusDidChange(
+export class SuperwallDelegate {
+  subscriptionStatusDidChange(
     from: SubscriptionStatus,
     to: SubscriptionStatus
-  ): void;
-  abstract willRedeemLink(): void;
-  abstract didRedeemLink(result: RedemptionResult): void;
-  abstract handleSuperwallEvent(eventInfo: SuperwallEventInfo): void;
-  abstract handleCustomPaywallAction(name: string): void;
-  abstract willDismissPaywall(paywallInfo: PaywallInfo): void;
-  abstract willPresentPaywall(paywallInfo: PaywallInfo): void;
-  abstract didDismissPaywall(paywallInfo: PaywallInfo): void;
-  abstract didPresentPaywall(paywallInfo: PaywallInfo): void;
-  abstract paywallWillOpenURL(url: URL): void;
-  abstract paywallWillOpenDeepLink(url: URL): void;
-  abstract handleLog(
+  ): void {}
+  willRedeemLink(): void {}
+  didRedeemLink(result: RedemptionResult): void {}
+  handleSuperwallEvent(eventInfo: SuperwallEventInfo): void {}
+  handleCustomPaywallAction(name: string): void {}
+  willDismissPaywall(paywallInfo: PaywallInfo): void {}
+  willPresentPaywall(paywallInfo: PaywallInfo): void {}
+  didDismissPaywall(paywallInfo: PaywallInfo): void {}
+  didPresentPaywall(paywallInfo: PaywallInfo): void {}
+  paywallWillOpenURL(url: URL): void {}
+  paywallWillOpenDeepLink(url: URL): void {}
+  handleLog(
     level: string,
     scope: string,
     message?: string,
     info?: Map<string, any>,
     error?: string
-  ): void;
+  ): void {}
 }
