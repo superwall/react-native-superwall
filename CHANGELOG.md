@@ -2,6 +2,12 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 2.1.7
+
+### Fixes
+
+- Fixes issue with `enableExperimentalDeviceVariables`.
+
 ## 2.1.6
 
 ### Enhancements
