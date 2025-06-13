@@ -2,12 +2,18 @@
 
 The changelog for `Superwall`. Also see the [releases](https://github.com/superwall/react-native-superwall/releases) on GitHub.
 
+## 2.1.5
+
+### Enhancements
+
+- Exposes the `enableExperimentalDeviceVariables` `SuperwallOption`.
+
 ## 2.1.4
 
+### Enhancements
+
 - Upgrades iOS SDK to 4.4.1 [View iOS SDK release notes](https://github.com/superwall/Superwall-iOS/releases/tag/4.4.1).
-
 - Upgrades Android SDK to 2.1.2 [View Android SDK release notes](https://github.com/superwall/Superwall-Android/releases/tag/2.1.2).
-
 
 ## 2.1.3
 

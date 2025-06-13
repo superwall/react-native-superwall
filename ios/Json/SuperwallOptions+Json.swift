@@ -17,6 +17,8 @@ extension SuperwallOptions {
     let localeIdentifier = dictionary["localeIdentifier"] as? String
     let isGameControllerEnabled = dictionary["isGameControllerEnabled"] as? Bool ?? false
     let storeKitVersion = dictionary["storeKitVersion"] as? String
+    let enableExperimentalDeviceVariables =
+      dictionary["enableExperimentalDeviceVariables"] as? String
 
     let superwallOptions = SuperwallOptions()
     superwallOptions.paywalls = paywalls
@@ -28,6 +30,7 @@ extension SuperwallOptions {
     if let storeKitVersion = storeKitVersion {
       superwallOptions.storeKitVersion = storeKitVersion == "STOREKIT1" ? .storeKit1 : .storeKit2
     }
+    superwallOptions.enableExperimentalDeviceVariables = enableExperimentalDeviceVariables
 
     return superwallOptions
   }
@@ -36,14 +39,14 @@ extension SuperwallOptions {
 extension SuperwallOptions.NetworkEnvironment {
   static func fromJson(_ json: String) -> SuperwallOptions.NetworkEnvironment? {
     switch json {
-      case "release":
-        return .release
-      case "releaseCandidate":
-        return .releaseCandidate
-      case "developer":
-        return .developer
-      default:
-        return nil
+    case "release":
+      return .release
+    case "releaseCandidate":
+      return .releaseCandidate
+    case "developer":
+      return .developer
+    default:
+      return nil
     }
   }
 }
