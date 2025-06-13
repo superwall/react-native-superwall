@@ -1,3 +1,5 @@
+
+
 <p align="center">
   <br />
   <img src=https://user-images.githubusercontent.com/3296904/158817914-144c66d0-572d-43a4-9d47-d7d0b711c6d7.png alt="logo" height="100px" />
@@ -5,7 +7,12 @@
   <br />
 </p>
 
-[Superwall](https://superwall.com/) lets you remotely configure every aspect of your paywall — helping you find winners quickly.
+> **⚠️ DEPRECATED**
+> 
+> This sdk is deprecated and no longer maintained. Please use our new and improve expo sdk instead:
+> 
+> **👉 [superwall-expo](https://github.com/superwall/superwall-expo)**
+>
 
 ## Superwall
 
