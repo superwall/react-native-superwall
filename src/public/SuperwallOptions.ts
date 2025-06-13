@@ -30,6 +30,7 @@ export class SuperwallOptions {
   collectAdServicesAttribution: boolean = false;
   passIdentifiersToPlayStore: boolean = false;
   storeKitVersion?: "STOREKIT1" | "STOREKIT2";
+  enableExperimentalDeviceVariables: boolean = false;
 
   constructor(init?: Partial<SuperwallOptions>) {
     if (init) {
@@ -54,6 +55,7 @@ export class SuperwallOptions {
       collectAdServicesAttribution: this.collectAdServicesAttribution,
       passIdentifiersToPlayStore: this.passIdentifiersToPlayStore,
       storeKitVersion: this.storeKitVersion,
+      enableExperimentalDeviceVariables: this.enableExperimentalDeviceVariables,
     };
   }
 }
