@@ -18,7 +18,7 @@ extension SuperwallOptions {
     let isGameControllerEnabled = dictionary["isGameControllerEnabled"] as? Bool ?? false
     let storeKitVersion = dictionary["storeKitVersion"] as? String
     let enableExperimentalDeviceVariables =
-      dictionary["enableExperimentalDeviceVariables"] as? Bool
+      dictionary["enableExperimentalDeviceVariables"] as? Bool ?? false
 
     let superwallOptions = SuperwallOptions()
     superwallOptions.paywalls = paywalls
