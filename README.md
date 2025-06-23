@@ -13,6 +13,8 @@
 > 
 > **👉 [superwall-expo](https://github.com/superwall/superwall-expo)**
 >
+> If you are not able to upgrade to Expo >= 53, this SDK is still the best way to get started with Superwall!
+>
 
 ## Superwall
 
